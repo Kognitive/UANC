@@ -1,0 +1,48 @@
+\documentclass[]{article}
+
+\usepackage{listings}
+
+%opening
+\title{Building from Source}
+\author{}
+
+\begin{document}
+
+
+\section{Libraries}
+
+We are using the following libraries in the project:
+
+\begin{enumerate}
+	\item \textbf{Aquilla} - Can be used for FFT and WAVE reading as well as saving. There are some other functions like invert, which can be useful in the context of our project.
+	
+	\item \textbf{Boost} - General purpose library, contains a function for nearly every function. So if there is a special function needed first check this library.
+	
+	\item \textbf{QT5} - This will be used as a GUI framework. Hence we will publish our software under the GPL License, we can use this framework in our project.
+	
+	\item \textbf{QCustomPlot} - As a requirement the software has to deal with plotting some kind of function, e.g. a simple wave signal. To display the results, we will use this library.
+	
+\end{enumerate}
+
+\section{Software/Tools}
+
+\begin{enumerate}
+		
+	\item \textbf{CppLint} - In order to enforce the same coding style to every developer, we use cpplint, to do some static style checking.
+		
+	\item \textbf{Doxygen} - We want to automatically extract the documentation from the source code. Therefore we will use the well-known doxygen. As a consequence we have to follow some rules for producing the documentation. Please consult the documentation of doxygen for more details.
+	
+	\item \textbf{ArgoUML} - If you want to create a uml diagram, you can simply use the argouml software, which can be used for free.
+\end{enumerate}
+
+\section{Installation}
+
+Most of the libraries mentioned above are included directly in the source tree. But you have to install Boost and QT5 by yourself locally on your system.
+\\\\
+If you use a Debian based system, you can simply use the following commands
+
+\begin{lstlisting}[frame=single]
+# apt-get install qt5 libboost-all-dev
+\end{lstlisting}
+
+\end{document}
