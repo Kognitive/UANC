@@ -1,0 +1,15 @@
+//
+// Created by markus on 11/12/16.
+//
+
+#ifndef ACTIVENOISECANCELLING_DATA_CONTROLLER_H
+#define ACTIVENOISECANCELLING_DATA_CONTROLLER_H
+
+
+
+class data_controller {
+
+};
+
+
+#endif //ACTIVENOISECANCELLING_DATA_CONTROLLER_H
