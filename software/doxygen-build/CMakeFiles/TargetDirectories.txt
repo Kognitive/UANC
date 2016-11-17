@@ -1,7 +1,0 @@
-/home/markus/Daten/University/BP/understanding-active-noise-cancelling/software/doxygen-build/src/CMakeFiles/_doxygen.dir
-/home/markus/Daten/University/BP/understanding-active-noise-cancelling/software/doxygen-build/src/CMakeFiles/doxycfg.dir
-/home/markus/Daten/University/BP/understanding-active-noise-cancelling/software/doxygen-build/src/CMakeFiles/doxygen.dir
-/home/markus/Daten/University/BP/understanding-active-noise-cancelling/software/doxygen-build/libmd5/CMakeFiles/md5.dir
-/home/markus/Daten/University/BP/understanding-active-noise-cancelling/software/doxygen-build/qtools/CMakeFiles/qtools.dir
-/home/markus/Daten/University/BP/understanding-active-noise-cancelling/software/doxygen-build/testing/CMakeFiles/tests.dir
-/home/markus/Daten/University/BP/understanding-active-noise-cancelling/software/doxygen-build/vhdlparser/CMakeFiles/vhdlparser.dir
