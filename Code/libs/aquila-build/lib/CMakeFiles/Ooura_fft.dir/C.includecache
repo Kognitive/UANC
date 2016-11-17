@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/markus/Daten/University/BP/understanding-active-noise-cancelling/Code/libs/aquila-src/lib/ooura/fft4g.c
+math.h
+-
+

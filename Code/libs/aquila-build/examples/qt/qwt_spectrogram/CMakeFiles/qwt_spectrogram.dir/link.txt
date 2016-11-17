@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=gnu++0x    CMakeFiles/qwt_spectrogram.dir/qwt_spectrogram.cpp.o CMakeFiles/qwt_spectrogram.dir/qwt_spectrogram_automoc.cpp.o  -o qwt_spectrogram -rdynamic ../../../libAquila.a /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.3.2 -lqwt ../../../lib/libOoura_fft.a /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.3.2 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.3.2 
