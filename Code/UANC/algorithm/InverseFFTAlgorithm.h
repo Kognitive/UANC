@@ -9,7 +9,7 @@
 
 namespace uanc { namespace algorithm {
 
-class InverseFFTAlgorithm : Algorithm {
+class InverseFFTAlgorithm : public Algorithm {
  public:
 
   /** \brief Represents the execution of the inverse fft algorithm.

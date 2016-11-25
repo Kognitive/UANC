@@ -9,7 +9,7 @@
 
 namespace uanc { namespace algorithm {
 
-class InverseDirectAlgorithm : Algorithm {
+class InverseDirectAlgorithm : public Algorithm {
  public:
   /** \brief Represents the execution of the direct inverse algorithm.
    *
