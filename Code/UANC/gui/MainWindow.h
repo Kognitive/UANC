@@ -6,9 +6,18 @@
 #ifndef CODE_UANC_GUI_MAINWINDOW_H_
 #define CODE_UANC_GUI_MAINWINDOW_H_
 
+#include <string>
+
 #include <QApplication>
+#include<QMenuBar>
 #include <QtWidgets/QMainWindow>
+
 #include <memory>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QLabel>
+
+#include "MainWidget.h"
+#include "Code/libs/aquila/source/SignalSource.h"
 
 namespace uanc {
 namespace gui {
@@ -29,24 +38,39 @@ class MainWindow : public QMainWindow {
    *
    * @return The shared pointer containing the MainWindow
    */
-  static std::shared_ptr<MainWindow> Get(int &, char **);
-
-  /** \brief Show the main window on the screen.
-   *
-   * This method can be used to show the main window. It basically executes the show method
-   * of the QMainWindow and executes the QTContext
-   */
-  void show();
+  static std::shared_ptr<MainWindow> get();
 
  private:
+
+  /** \brief Holds the main widget of the main window.
+   *
+   * This field holds the main widget of the main widget. In detail
+   * that means it gets used as the central widget later.
+   */
+  std::unique_ptr<MainWidget> mainWidget;
+
+  /** \brief Represents the laod action.
+   *
+   * Represents the load action. In detail it is the file open action
+   */
+  std::unique_ptr<QAction> fileOpenAction;
+
+  /** \brief Represents the save action.
+   *
+   * Represents the save action. In detail it is the file save action
+   */
+  std::unique_ptr<QAction> fileSaveAction;
+
+  /** \brief Represents the file menu itself.
+   *
+   * Represents the file menu itself. */
+  std::unique_ptr<QMenu> fileMenu;
 
   /** \brief Private constructor to deny creation outside of the singleton pattern.
    *
    * This constructor takes a QApplication and saves it internally as it context.
-   *
-   * \param context Represents the context in which the window get shown.
    */
-  MainWindow(QApplication *context);
+  MainWindow();
 
   /** \brief Shared pointer of the one and only instance of MainWindow.
    *
@@ -55,12 +79,41 @@ class MainWindow : public QMainWindow {
    */
   static std::shared_ptr<MainWindow> _instance;
 
-  /** \brief This is the context of the application.
+  /** \brief This method will setup the gui appropriately
    *
-   * The MainWindow itself is unique. Therefore we can apply a unique pointer
-   * at this place.
+   * It creates basically a main widget and a menu inside of the main window.
    */
-  std::unique_ptr<QApplication> _context;
+  void setupGUI();
+
+  /** \brief This method creates the appropriate actions and links them accordingely
+   *
+   * Simply link the actions and create them.
+   */
+  void makeActions();
+
+  /** \brief This method creates the top menu
+   *
+   * This method sets up the top menu inside of the application.
+   */
+  void makeMenu();
+
+  /** These simply are the actions taken when you click inside of the menu */
+ private slots:
+
+  /** \brief Loads a file from plate and displays it inside of the gui.
+   *
+   * This method should open a dialog, to let the user select a file. Then
+   * it loads that specified file and in the end it gets drawn to the MainWidget
+   * left plot.
+   */
+  void loadFile();
+
+  /** \brief Saves a file to the hard drive.
+   *
+   * This method displays a file save dialog. Then it saves the right signal to
+   * the hard drive.
+   */
+  void saveFile();
 };
 
 }

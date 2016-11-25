@@ -17,8 +17,10 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 
 # Create the main executable and link the needed libraries
-set(SOURCE_FILES Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h)
-add_executable(UANC ${SOURCE_FILES})
+set(SOURCE_FILES Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h Code/UANC/util/FileActor.h Code/UANC/util/DialogUtil.h)
+set(AQUILA_FILES Code/libs/aquila/*)
+
+add_executable(UANC ${SOURCE_FILES} ${AQUILA_SRC})
 
 # ------------------------------------ QT5 -----------------------------------------
 
@@ -63,4 +65,3 @@ elseif(UNIX)
 else()
     message(SEND_ERROR "You are on an unsupported platform! (Not Win32, Mac OS X or Unix)")
 endif(WIN32)
-
