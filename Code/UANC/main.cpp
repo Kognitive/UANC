@@ -1,6 +1,15 @@
 #include <iostream>
+#include <Code/UANC/gui/MainWindow.h>
 
-int main() {
-    std::cout << "Hello, Wordffs" << std::endl;
+using namespace uanc::gui;
+
+int main(int argc, char **argv) {
+
+    // Create a new QTGuiContext. Afterwards basically execute the desired subwindow
+    auto mainwindow = MainWindow::Get(argc, argv);
+
+    mainwindow->resize(1000, 800);
+    mainwindow->show();
+
     return 0;
 }
