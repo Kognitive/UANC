@@ -17,7 +17,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 
 # Create the main executable and link the needed libraries
-set(SOURCE_FILES Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h Code/UANC/util/FileActor.h Code/UANC/util/DialogUtil.h)
+set(SOURCE_FILES Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h Code/UANC/util/FileActor.h Code/UANC/util/DialogUtil.h Code/UANC/algorithm/Algorithm.h Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h)
 set(AQUILA_FILES Code/libs/aquila/*)
 
 add_executable(UANC ${SOURCE_FILES} ${AQUILA_SRC})
