@@ -8,8 +8,8 @@
 
 #include <string>
 #include <memory>
-#include <Code/libs/aquila/source/SignalSource.h>
-#include <Code/libs/aquila/source/WaveFile.h>
+#include "Code/libs/aquila-src/aquila/source/SignalSource.h"
+#include "Code/libs/aquila-src/aquila/source/WaveFile.h"
 #include "FileActor.h"
 
 namespace uanc { namespace util {
@@ -37,7 +37,7 @@ class SignalFileActor : FileActor<Aquila::SignalSource> {
    */
   std::shared_ptr<Aquila::SignalSource> loadData() {
     auto path = this->getPath();
-    return std::shared_ptr<Aquila::SignalSource>(new Aquila::WaveFile(path));
+
   }
 
   /** \brief This method should save a file to the plate.

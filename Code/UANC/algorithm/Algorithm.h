@@ -7,7 +7,7 @@
 #define UANC_ALGORITHM_H
 
 #include <memory>
-#include "Code/libs/aquila/source/SignalSource.h"
+#include "Code/libs/aquila-src/aquila/source/SignalSource.h"
 
 namespace uanc { namespace algorithm {
 

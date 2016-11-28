@@ -18,7 +18,7 @@ find_package(Qt5Widgets)
 
 # Create the main executable and link the needed libraries
 set(SOURCE_FILES Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h Code/UANC/util/FileActor.h Code/UANC/util/DialogUtil.h Code/UANC/algorithm/Algorithm.h Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h)
-set(AQUILA_FILES Code/libs/aquila/source/SignalSource.h Code/libs/aquila/source/SignalSource.cpp)
+set(AQUILA_FILES Code/libs/aquila-src/aquila/source/SignalSource.h Code/libs/aquila-src/aquila/source/SignalSource.cpp)
 set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp)
 
 add_executable(UANC ${SOURCE_FILES} ${AQUILA_FILES} ${QCUSTOMPLOT_FILES})
