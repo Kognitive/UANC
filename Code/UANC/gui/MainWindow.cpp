@@ -94,12 +94,16 @@ void MainWindow::loadFile() {
   util::DialogUtil dialogUtil(this);
   auto path = dialogUtil.chooseLoadPath();
 
-  // simply load the data
-  util::SignalFileActor fileActor(path);
-  auto signal = fileActor.loadData();
+  // if a path is available
+  if (!path.empty()) {
 
-  // save the signal inside of the main widget
-  this->mainWidget->setSignalInputSource(signal);
+    // simply load the data
+    util::SignalFileActor fileActor(path);
+    auto signal = fileActor.loadData();
+
+    // save the signal inside of the main widget
+    this->mainWidget->setSignalInputSource(signal);
+  }
 }
 
 /** \brief Saves a file to the hard drive.
@@ -113,12 +117,13 @@ void MainWindow::saveFile() {
   util::DialogUtil dialogUtil(this);
   auto path = dialogUtil.chooseSavePath();
 
-  // get the output signal from the main widget.
-  auto signal = this->mainWidget->getSignalOutputSource();
 
-  // simply load the data
-  util::SignalFileActor fileActor(path);
-  fileActor.saveData(signal);
+    // get the output signal from the main widget.
+    auto signal = this->mainWidget->getSignalOutputSource();
+
+    // simply load the data
+    util::SignalFileActor fileActor(path);
+    fileActor.saveData(signal);
 
 }
 

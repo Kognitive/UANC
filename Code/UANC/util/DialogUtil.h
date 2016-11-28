@@ -7,6 +7,7 @@
 #define UANC_DIALOGUTIL_H
 
 #include <string>
+#include <iostream>
 
 namespace uanc { namespace util {
 
@@ -36,8 +37,10 @@ class DialogUtil {
    * @return The path to the choosen file.
    */
   std::string chooseLoadPath() {
-    auto parent = getParent();
-    return "";
+
+    // Simply show a open file dialog
+    auto result = QFileDialog::getOpenFileName(this->getParent(), "Open WAV File", "/home", "WAV Files (*.wav)");
+    return (result == "") ? "" : result.toUtf8().constData();
   }
 
   /** \brief Should basically reutrn a path to an existing or not existent file
@@ -47,8 +50,8 @@ class DialogUtil {
    * @return The choosen path
    */
   std::string chooseSavePath() {
-    //TODO Wave speichern
   }
+
  private:
 
   /** \brief Gives back the parent
