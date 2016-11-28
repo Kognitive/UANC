@@ -117,6 +117,8 @@ void MainWindow::saveFile() {
   util::DialogUtil dialogUtil(this);
   auto path = dialogUtil.chooseSavePath();
 
+  // if a path is available
+  if (!path.empty()) {
 
     // get the output signal from the main widget.
     auto signal = this->mainWidget->getSignalOutputSource();
@@ -124,6 +126,7 @@ void MainWindow::saveFile() {
     // simply load the data
     util::SignalFileActor fileActor(path);
     fileActor.saveData(signal);
+  }
 
 }
 

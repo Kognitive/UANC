@@ -50,6 +50,8 @@ class DialogUtil {
    * @return The choosen path
    */
   std::string chooseSavePath() {
+    auto result = QFileDialog::getSaveFileName(this->getParent(), "Save WAV File", "/home", "WAV Files (*.wav)");
+    return (result == "") ? "" : result.toUtf8().constData();
   }
 
  private:
