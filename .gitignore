@@ -2,3 +2,7 @@ Bin*
 bin*
 cmake-build-debug*
 .idea*
+*.aux
+*.log
+*.pdf
+*.synctex.gz
