@@ -23,15 +23,14 @@ MainWidget::MainWidget() {
  */
 void MainWidget::setupGUI() {
 
-  // create the layout and right and left button
+  // create the layout. Therefore create the apply button
+  // and the corresponding combobox displaying the algorithms
   QVBoxLayout *layout = new QVBoxLayout;
-  auto button = new QPushButton("Direct Inverse");
-  this->_buttonLeft = std::unique_ptr<QPushButton>(new QPushButton("Direct Inverse"));
-  this->_buttonRight = std::unique_ptr<QPushButton>(new QPushButton("FFT Inverse"));
+  this->_buttonApply = std::unique_ptr<QPushButton>(new QPushButton("Apply"));
+  this->_cmbAlgorithm = std::unique_ptr<QComboBox>(new QComboBox());
 
-  // map to the signal slots in the application
-  connect(button, SIGNAL (clicked()),this, SLOT (this->directInverseClicked()));
-  connect(this->_buttonRight.get(), SIGNAL (clicked()),this, SLOT (this->fftInverseClicked()));
+  // connect the handler to the button
+  connect(this->_buttonApply.get(), SIGNAL (clicked()), this, SLOT (applyClicked()));
 
   // create the bottom and top plot
   this->_plotTop = std::unique_ptr<QCustomPlot>(new QCustomPlot());
@@ -39,12 +38,22 @@ void MainWidget::setupGUI() {
   this->_plotTop->addGraph();
   this->_plotBottom->addGraph();
 
+  // register algorithms and add them to the combobox
+  this->registerAlgorithms();
+  this->showAvailableAlgorithms();
+
   // basically create a hbox layout
   QWidget *hbar = new QWidget;
   QHBoxLayout *hlayout = new QHBoxLayout;
-  hlayout->addWidget(button);
-  hlayout->addWidget(this->_buttonRight.get());
+
+  // add subwidgets and set the correct size policies
+  this->_buttonApply.get()->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+  hlayout->addWidget(this->_cmbAlgorithm.get());
+  hlayout->addWidget(this->_buttonApply.get());
+
+  // set the correct layout options
   hbar->setLayout(hlayout);
+  hbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // construct the complete layout
   layout->addWidget(_plotTop.get());
@@ -53,6 +62,43 @@ void MainWidget::setupGUI() {
 
   this->setLayout(layout);
   this->show();
+}
+
+/** \brief This method can be used to register the algorithms inside of the gui
+ *
+ * This method gets used to register the available algorithms.
+ */
+void MainWidget::registerAlgorithms() {
+  using namespace uanc::algorithm;
+
+  this->_algorithmList = std::vector<Algorithm*>();
+
+  // Here you can add further algorithms. If register them here, they
+  // will be included further inside the ecosystem automatically.
+
+  // add first algorithms
+  auto invDirect = new InverseDirectAlgorithm();
+  this->_algorithmList.push_back(invDirect);
+
+  // add second algorithms
+  auto invFFT = new InverseFFTAlgorithm();
+  this->_algorithmList.push_back(invFFT);
+}
+
+/** \brief This method gets used to show the algorithms inside of the combobox
+ *
+ * This method displays the algorithms inside of the combobox.
+ */
+void MainWidget::showAvailableAlgorithms() {
+  using namespace uanc::algorithm;
+
+  // get size of algorithm list
+  auto size = this->_algorithmList.size();
+
+  // now basically iterate over the elements
+  for (auto i = -1; ++i < size; ) {
+    this->_cmbAlgorithm->addItem(QString::fromStdString(this->_algorithmList[i]->getName()));
+  }
 }
 
 /** \brief Basically places an input signal inside of the widget.
@@ -91,22 +137,13 @@ void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotPo
  *
  * Gets fired, whenever a user clicks on the direct inverse button.
  */
-void MainWidget::directInverseClicked() {
-  auto directInverseAlgorithm = new algorithm::InverseDirectAlgorithm();
-  auto generalAlgorithm = dynamic_cast<algorithm::Algorithm*>(directInverseAlgorithm);
-  this->applyAlgorithm(generalAlgorithm);
-  delete directInverseAlgorithm;
-}
+void MainWidget::applyClicked(){
 
-/** \brief This gets fired, when the inverse fft button is clicked
- *
- * This method is fired, whenever a user clicks on the fftinverse button inside of the gui
- */
-void MainWidget::fftInverseClicked() {
-  auto fftInverseAlgorithm = new algorithm::InverseFFTAlgorithm();
-  auto generalAlgorithm = dynamic_cast<algorithm::Algorithm*>(fftInverseAlgorithm);
-  this->applyAlgorithm(generalAlgorithm);
-  delete fftInverseAlgorithm;
+  // get the current index and using that get the correct algorithm
+  // After that simply apply the algorithm
+  auto currentIndex = _cmbAlgorithm->currentIndex();
+  auto algorithm = this->_algorithmList[currentIndex];
+  this->applyAlgorithm(*algorithm);
 }
 
 /** \brief This method can be used to apply an algorithm to the inner data.
@@ -115,14 +152,28 @@ void MainWidget::fftInverseClicked() {
  *
  * @param algorithm The algorithm to use
  */
-void MainWidget::applyAlgorithm(algorithm::Algorithm *algorithm) {
+void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
 
   // basically create the input vector
   std::vector<std::shared_ptr<Aquila::SignalSource>> input(1);
+
+  // check if signal available if not present a messagebox and
+  // ask the user to load a signal.
+  if (this->_signalInputSource == NULL) {
+    QMessageBox msgBox;
+    msgBox.setText("You have to load a signal first. Pleasy use File -> Open File...");
+    msgBox.setWindowTitle("No signal loaded.");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Critical);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
+    return;
+  }
+
   input.push_back(this->_signalInputSource);
 
   // apply the algorithm
-  auto output = algorithm->execute(input);
+  auto output = algorithm.execute(input);
 
   // afterwards save the result internally and plot the graph as well
   this->_signalOutputSource = output.at(0);

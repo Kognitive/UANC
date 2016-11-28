@@ -11,6 +11,16 @@ namespace uanc { namespace algorithm {
 
 class InverseDirectAlgorithm : public Algorithm {
  public:
+
+  /** \brief This should be implemented by the subclasses.
+   *
+   * It should pass back an appropriate Name for this algorithm
+   *
+   * @return the name of this algorithm.
+   *
+   */
+  std::string getName() override { return "Inverse Direct"; };
+
   /** \brief Represents the execution of the direct inverse algorithm.
    *
    * This method should take a vector of size n from the type SignalSource and outputs
