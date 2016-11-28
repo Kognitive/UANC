@@ -37,7 +37,8 @@ class SignalFileActor : FileActor<Aquila::SignalSource> {
    */
   std::shared_ptr<Aquila::SignalSource> loadData() {
     auto path = this->getPath();
-
+    auto wave = new Aquila::WaveFile(path);
+    return std::shared_ptr<Aquila::SignalSource>(wave);
   }
 
   /** \brief This method should save a file to the plate.
