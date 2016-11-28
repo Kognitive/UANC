@@ -1,5 +1,4 @@
-Bin*
-bin*
+Bin/UANC
 cmake-build-debug*
 .idea*
 *.aux
