@@ -19,6 +19,15 @@ class Algorithm {
 
  public:
 
+  /** \brief This should be implemented by the subclasses.
+   *
+   * It should pass back an appropriate Name for this algorithm
+   *
+   * @return the name of this algorithm.
+   *
+   */
+  virtual std::string getName() = 0;
+
   /** \brief Represents the execution of the algorithm.
    *
    * This method must be implemented by deriving algorithms, so it can
@@ -27,7 +36,6 @@ class Algorithm {
    * @return the processed vector itself.
    */
   virtual std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>>) = 0;
-
 };
 
 }}

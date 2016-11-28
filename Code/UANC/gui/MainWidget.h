@@ -60,17 +60,23 @@ class MainWidget : public QWidget {
    */
   std::unique_ptr<QCustomPlot> _plotBottom;
 
-  /** \brief Holds the left bottom
+  /** \brief Holds the apply button
    *
    * This basically holds the left button in the middle
    */
-  std::unique_ptr<QPushButton> _buttonLeft;
+  std::unique_ptr<QPushButton> _buttonApply;
 
   /** \brief Hold the bottom plot
    *
    * This basically holds the right button in the middle
    */
-  std::unique_ptr<QPushButton> _buttonRight;
+  std::unique_ptr<QComboBox> _cmbAlgorithm;
+
+  /** \brief Maps gets used to save algorithms
+   *
+   * Basically create a vector which can hold references to the appropriate algorithms
+   */
+  std::vector<uanc::algorithm::Algorithm*> _algorithmList;
 
   /** \brief This enum contains the available plot positions
    *
@@ -83,6 +89,18 @@ class MainWidget : public QWidget {
    * It creates basically a main widget and a menu inside of the main window.
    */
   void setupGUI();
+
+  /** \brief This method can be used to register the algorithms inside of the gui
+   *
+   * This method gets used to register the available algorithms.
+   */
+  void registerAlgorithms();
+
+  /** \brief This method gets used to show the algorithms inside of the combobox
+   *
+   * This method displays the algorithms inside of the combobox.
+   */
+  void showAvailableAlgorithms();
 
   /** \brief This method should simply plot the signal to the top or bottom plot
    *
@@ -111,22 +129,15 @@ class MainWidget : public QWidget {
    *
    * @param algorithm The algorithm to use
    */
-  void applyAlgorithm(algorithm::Algorithm *algorithm);
+  void applyAlgorithm(algorithm::Algorithm& algorithm);
 
  private slots:
 
-  /** \brief This gets fired, when the direct inverse button is clicked
+  /** \brief This gets fired, when the apply button is clicked
    *
-   * Gets fired, whenever a user clicks on the direct inverse button.
+   * Gets fired, whenever a user clicks on the apply button.
    */
-  void directInverseClicked();
-
-  /** \brief This gets fired, when the inverse fft button is clicked
-   *
-   * This method is fired, whenever a user clicks on the fftinverse button inside of the gui
-   */
-  void fftInverseClicked();
-
+  void applyClicked();
 };
 
 }

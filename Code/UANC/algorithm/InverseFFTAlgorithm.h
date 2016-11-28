@@ -7,10 +7,20 @@
 
 #include "Algorithm.h"
 
-namespace uanc { namespace algorithm {
+namespace uanc {
+namespace algorithm {
 
 class InverseFFTAlgorithm : public Algorithm {
  public:
+
+  /** \brief This should be implemented by the subclasses.
+   *
+   * It should pass back an appropriate Name for this algorithm
+   *
+   * @return the name of this algorithm.
+   *
+   */
+  std::string getName() override { return "Inverse FFT"; };
 
   /** \brief Represents the execution of the inverse fft algorithm.
    *
@@ -26,5 +36,6 @@ class InverseFFTAlgorithm : public Algorithm {
 
 };
 
-}}
+}
+}
 #endif //UANC_INVERSEFFTALGORITHM_H
