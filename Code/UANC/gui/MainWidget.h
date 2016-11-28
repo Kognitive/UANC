@@ -8,7 +8,7 @@
 
 #include <QtWidgets/QWidget>
 #include <memory>
-#include "Code/libs/aquila-src/aquila/source/SignalSource.h"
+#include "Code/libs/aquila/source/SignalSource.h"
 #include "Code/libs/qplot/qcustomplot.h"
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>

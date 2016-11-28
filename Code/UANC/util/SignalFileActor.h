@@ -8,8 +8,8 @@
 
 #include <string>
 #include <memory>
-#include "Code/libs/aquila-src/aquila/source/SignalSource.h"
-#include "Code/libs/aquila-src/aquila/source/WaveFile.h"
+#include "Code/libs/aquila/source/SignalSource.h"
+#include "Code/libs/aquila/source/WaveFile.h"
 #include "FileActor.h"
 
 namespace uanc { namespace util {
