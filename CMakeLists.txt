@@ -22,7 +22,9 @@ set(SOURCE_FILES Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/M
 set(AQUILA_FILES
         Code/libs/aquila/source/SignalSource.h Code/libs/aquila/source/SignalSource.cpp
         Code/libs/aquila/source/WaveFile.h Code/libs/aquila/source/WaveFile.cpp
-        Code/libs/aquila/source/WaveFileHandler.h Code/libs/aquila/source/WaveFileHandler.cpp)
+        Code/libs/aquila/source/WaveFileHandler.h Code/libs/aquila/source/WaveFileHandler.cpp
+        Code/libs/aquila/source/generator/Generator.h Code/libs/aquila/source/generator/Generator.cpp
+        Code/libs/aquila/source/generator/SineGenerator.h Code/libs/aquila/source/generator/SineGenerator.cpp)
 
 set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp)
 

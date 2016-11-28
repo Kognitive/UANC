@@ -9,6 +9,7 @@
 #include <QtWidgets/QWidget>
 #include <memory>
 #include "Code/libs/aquila/source/SignalSource.h"
+#include "Code/libs/aquila/source/generator/SineGenerator.h"
 #include "Code/libs/qplot/qcustomplot.h"
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>

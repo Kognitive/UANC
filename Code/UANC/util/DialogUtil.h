@@ -37,7 +37,7 @@ class DialogUtil {
    */
   std::string chooseLoadPath() {
     auto parent = getParent();
-    // TODO Wave laden
+    return "";
   }
 
   /** \brief Should basically reutrn a path to an existing or not existent file
