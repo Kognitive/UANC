@@ -20,7 +20,7 @@ find_package(Qt5Widgets)
 set(SOURCE_FILES
         Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h
         Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h
-        Code/UANC/util/FileActor.h Code/UANC/util/SignalFileActor.h Code/UANC/util/DummyActor.h
+        Code/UANC/util/FileActor.h Code/UANC/util/SignalFileActor.h
         Code/UANC/util/DialogUtil.h Code/UANC/algorithm/Algorithm.h
         Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h)
 
