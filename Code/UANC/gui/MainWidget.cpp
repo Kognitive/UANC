@@ -59,6 +59,7 @@ void MainWidget::setupGUI() {
 
   layout->addWidget(this->_tabWidget.get());
   layout->addWidget(hbar);
+  layout->addWidget(this->_detailTabWidget.get());
 
   this->setLayout(layout);
   this->show();
