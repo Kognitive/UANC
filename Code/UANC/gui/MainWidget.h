@@ -18,8 +18,12 @@
 #include "Code/UANC/algorithm/InverseDirectAlgorithm.h"
 #include "Code/UANC/algorithm/InverseFFTAlgorithm.h"
 
+#include "Code/UANC/util/SignalManager.h"
+
 namespace uanc {
 namespace gui {
+
+using namespace util;
 
 class MainWidget : public QWidget {
  Q_OBJECT
@@ -31,6 +35,15 @@ class MainWidget : public QWidget {
    * initialization stuff.
    */
   MainWidget();
+
+  /** \brief This method should simply plot the signal to the top or bottom plot
+   *
+   * This should plot the signal to the top and bottom plot
+   *
+   * @param signal The signal which should be used during this
+   * @param position The position of the plot. e.g. Top or bottom.
+   */
+  void plotSignal(std::shared_ptr<Aquila::SignalSource> signal, QCustomPlot* position);
 
   /** \brief Basically places an input signal inside of the widget.
    *
@@ -46,13 +59,14 @@ class MainWidget : public QWidget {
    */
   std::shared_ptr<Aquila::SignalSource> getSignalOutputSource();
 
- private:
-
-  /** \brief Holds the plots
+  /** \brief loads the signal source.
    *
-   * This basically holds the plots
+   * This method loads a signal source in the top tab view.
+   * @param signalSource the signal source to load.
    */
-  std::vector<std::unique_ptr<QCustomPlot>> _plots;
+  void loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSource);
+
+ private:
 
   /** \brief Holds the apply button
    *
@@ -65,6 +79,12 @@ class MainWidget : public QWidget {
    * This basically holds the right button in the middle
    */
   std::unique_ptr<QComboBox> _cmbAlgorithm;
+
+  /** Represents a tab widget displayed in the top region. */
+  std::unique_ptr<QTabWidget> _tabWidget;
+
+  /** Represents a detailed tab widget. */
+  std::unique_ptr<QTabWidget> _detailTabWidget;
 
   /** \brief Maps gets used to save algorithms
    *
@@ -96,27 +116,6 @@ class MainWidget : public QWidget {
    */
   void showAvailableAlgorithms();
 
-  /** \brief This method should simply plot the signal to the top or bottom plot
-   *
-   * This should plot the signal to the top and bottom plot
-   *
-   * @param signal The signal which should be used during this
-   * @param position The position of the plot. e.g. Top or bottom.
-   */
-  void plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotPosition position);
-
-  /** \brief This holds the signalSource field from the input
-   *
-   * Simply holds the signal source field which was set per setInputSignal
-   */
-  std::shared_ptr<Aquila::SignalSource> _signalInputSource;
-
-  /** \brief This holds the signal source field for the processed algorithm.
-   *
-   * This holds the signalsource of the output
-   */
-  std::shared_ptr<Aquila::SignalSource> _signalOutputSource;
-
   /** \brief This method can be used to apply an algorithm to the inner data.
    *
    * This algorithm basically applies the algorithm to the inner data.
@@ -132,6 +131,7 @@ class MainWidget : public QWidget {
    * Gets fired, whenever a user clicks on the apply button.
    */
   void applyClicked();
+
 };
 
 }

@@ -40,8 +40,9 @@ MainWindow::MainWindow() {
  * It creates basically a main widget and a menu inside of the main window.
  */
 void MainWindow::setupGUI() {
-  auto widget = new MainWidget;
+  auto widget = new MainWidget();
   setCentralWidget(widget);
+  this->mainWidget = std::unique_ptr<MainWidget>(widget);
 
   // basically create the top menu
   this->makeActions();
@@ -102,7 +103,8 @@ void MainWindow::loadFile() {
     auto signal = fileActor.loadData();
 
     // save the signal inside of the main widget
-    this->mainWidget->setSignalInputSource(signal);
+    auto id = SignalManager::get()->addSignal(signal);
+    this->mainWidget->loadSignalSource(SignalManager::get()->getSignal(id));
   }
 }
 
@@ -121,7 +123,7 @@ void MainWindow::saveFile() {
   if (!path.empty()) {
 
     // get the output signal from the main widget.
-    auto signal = this->mainWidget->getSignalOutputSource();
+    auto signal = SignalManager::get()->getSignal(0);
 
     // simply load the data
     util::SignalFileActor fileActor(path);

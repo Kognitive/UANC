@@ -18,6 +18,7 @@
 
 #include "MainWidget.h"
 #include "Code/libs/aquila/source/SignalSource.h"
+#include "Code/UANC/util/SignalManager.h"
 
 namespace uanc {
 namespace gui {

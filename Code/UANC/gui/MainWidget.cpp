@@ -32,13 +32,6 @@ void MainWidget::setupGUI() {
   // connect the handler to the button
   connect(this->_buttonApply.get(), SIGNAL (clicked()), this, SLOT (applyClicked()));
 
-  // create the bottom and top plot
-  this->_plots = std::vector<std::unique_ptr<QCustomPlot>>(2);
-  this->_plots[TOP] = std::unique_ptr<QCustomPlot>(new QCustomPlot());
-  this->_plots[BOTTOM] = std::unique_ptr<QCustomPlot>(new QCustomPlot());
-  this->_plots[TOP]->addGraph();
-  this->_plots[BOTTOM]->addGraph();
-
   // register algorithms and add them to the combobox
   this->registerAlgorithms();
   this->showAvailableAlgorithms();
@@ -57,9 +50,15 @@ void MainWidget::setupGUI() {
   hbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // construct the complete layout
-  layout->addWidget(_plots[TOP].get());
+  this->_tabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
+  this->_tabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+
+  // construct the complete layout
+  this->_detailTabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
+  this->_detailTabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+
+  layout->addWidget(this->_tabWidget.get());
   layout->addWidget(hbar);
-  layout->addWidget(_plots[BOTTOM].get());
 
   this->setLayout(layout);
   this->show();
@@ -102,24 +101,6 @@ void MainWidget::showAvailableAlgorithms() {
   }
 }
 
-/** \brief Basically places an input signal inside of the widget.
- *
- * This sets an input signal inside of the widget
- * @param signalSource the signal source to set
- */
-void MainWidget::setSignalInputSource(std::shared_ptr<Aquila::SignalSource> signalSource) {
-  _signalInputSource = signalSource;
-  this->plotSignal(_signalInputSource, PlotPosition::TOP);
-}
-
-/** \brief Gets the output signal of the widget.
- *
- * This method gets the output signal of the method.
- * @return The signal source of the output
- */
-std::shared_ptr<Aquila::SignalSource> MainWidget::getSignalOutputSource() {
-  return _signalOutputSource;
-}
 
 /** \brief This method should simply plot the signal to the top or bottom plot
  *
@@ -130,7 +111,7 @@ std::shared_ptr<Aquila::SignalSource> MainWidget::getSignalOutputSource() {
  * @param signal The signal which should be used during this
  * @param position The position of the plot. e.g. Top or bottom.
  */
-void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotPosition position) {
+void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, QCustomPlot* plot) {
   // convert the signal to a QVector
   auto samplesCount = signal->getSamplesCount();
   QVector<double> x(samplesCount), y(samplesCount);
@@ -140,9 +121,13 @@ void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotPo
   }
 
   // plot the signal
-  this->_plots[position]->graph(0)->setPen(QPen(Qt::blue));
-  this->_plots[position]->graph(0)->setData(x, y);
-  this->_plots[position]->graph(0)->rescaleAxes();
+  auto graph = plot->addGraph();
+
+  graph->setPen(QPen(Qt::blue));
+  graph->setData(x, y);
+  graph->rescaleAxes();
+
+  plot->replot();
 }
 
 /** \brief This gets fired, when the direct inverse button is clicked
@@ -158,6 +143,19 @@ void MainWidget::applyClicked() {
   this->applyAlgorithm(*algorithm);
 }
 
+
+/** \brief loads the signal source.
+ *
+ * This method loads a signal source in the top tab view.
+ * @param signalSource the signal source to load.
+ */
+void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSource) {
+
+  auto widget = new QCustomPlot();
+  this->plotSignal(signalSource, widget);
+  this->_tabWidget->addTab(widget, "s1");
+}
+
 /** \brief This method can be used to apply an algorithm to the inner data.
  *
  * This algorithm basically applies the algorithm to the inner data.
@@ -171,7 +169,9 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
 
   // check if signal available if not present a messagebox and
   // ask the user to load a signal.
-  if (this->_signalInputSource == NULL) {
+  auto signalManager = SignalManager::get();
+  auto signal = signalManager->getSignal(1);
+  if (signal == NULL) {
     QMessageBox msgBox;
     msgBox.setText("You have to load a signal first. Pleasy use File -> Open File...");
     msgBox.setWindowTitle("No signal loaded.");
@@ -182,14 +182,14 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
     return;
   }
 
-  input.push_back(this->_signalInputSource);
+  input.push_back(signal);
 
   // apply the algorithm
   auto output = algorithm.execute(input);
 
   // afterwards save the result internally and plot the graph as well
-  this->_signalOutputSource = output.at(0);
-  this->plotSignal(_signalOutputSource, PlotPosition::BOTTOM);
+  signalManager->addSignal(output.at(0));
+  //this->plotSignal(output.at(0), PlotPosition::BOTTOM);
 }
 }
 }
