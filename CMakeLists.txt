@@ -20,7 +20,7 @@ find_package(Qt5Widgets)
 set(SOURCE_FILES
         Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h
         Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h
-        Code/UANC/util/FileActor.h Code/UANC/util/SignalFileActor.h
+        Code/UANC/util/FileActor.h Code/UANC/util/SignalFileActor.h Code/UANC/util/DummyActor.h
         Code/UANC/util/DialogUtil.h Code/UANC/algorithm/Algorithm.h
         Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h)
 
@@ -29,7 +29,8 @@ set(AQUILA_FILES
         Code/libs/aquila/source/WaveFile.h Code/libs/aquila/source/WaveFile.cpp
         Code/libs/aquila/source/WaveFileHandler.h Code/libs/aquila/source/WaveFileHandler.cpp
         Code/libs/aquila/source/generator/Generator.h Code/libs/aquila/source/generator/Generator.cpp
-        Code/libs/aquila/source/generator/SineGenerator.h Code/libs/aquila/source/generator/SineGenerator.cpp)
+        Code/libs/aquila/source/generator/SineGenerator.h Code/libs/aquila/source/generator/SineGenerator.cpp
+        Code/libs/aquila/source/generator/TriangleGenerator.h Code/libs/aquila/source/generator/TriangleGenerator.cpp)
 
 set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp)
 

@@ -48,17 +48,11 @@ class MainWidget : public QWidget {
 
  private:
 
-  /** \brief Holds the top plot
+  /** \brief Holds the plots
    *
-   * This basically holds the top plot
+   * This basically holds the plots
    */
-  std::unique_ptr<QCustomPlot> _plotTop;
-
-  /** \brief Hold the bottom plot
-   *
-   * This basically holds the bottom plot
-   */
-  std::unique_ptr<QCustomPlot> _plotBottom;
+  std::vector<std::unique_ptr<QCustomPlot>> _plots;
 
   /** \brief Holds the apply button
    *

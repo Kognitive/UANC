@@ -33,10 +33,11 @@ void MainWidget::setupGUI() {
   connect(this->_buttonApply.get(), SIGNAL (clicked()), this, SLOT (applyClicked()));
 
   // create the bottom and top plot
-  this->_plotTop = std::unique_ptr<QCustomPlot>(new QCustomPlot());
-  this->_plotBottom = std::unique_ptr<QCustomPlot>(new QCustomPlot());
-  this->_plotTop->addGraph();
-  this->_plotBottom->addGraph();
+  this->_plots = std::vector<std::unique_ptr<QCustomPlot>>(2);
+  this->_plots[TOP] = std::unique_ptr<QCustomPlot>(new QCustomPlot());
+  this->_plots[BOTTOM] = std::unique_ptr<QCustomPlot>(new QCustomPlot());
+  this->_plots[TOP]->addGraph();
+  this->_plots[BOTTOM]->addGraph();
 
   // register algorithms and add them to the combobox
   this->registerAlgorithms();
@@ -56,9 +57,9 @@ void MainWidget::setupGUI() {
   hbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // construct the complete layout
-  layout->addWidget(_plotTop.get());
+  layout->addWidget(_plots[TOP].get());
   layout->addWidget(hbar);
-  layout->addWidget(_plotBottom.get());
+  layout->addWidget(_plots[BOTTOM].get());
 
   this->setLayout(layout);
   this->show();
@@ -96,7 +97,7 @@ void MainWidget::showAvailableAlgorithms() {
   auto size = this->_algorithmList.size();
 
   // now basically iterate over the elements
-  for (auto i = -1; ++i < size; ) {
+  for (auto i = -1; ++i < size;) {
     this->_cmbAlgorithm->addItem(QString::fromStdString(this->_algorithmList[i]->getName()));
   }
 }
@@ -130,14 +131,25 @@ std::shared_ptr<Aquila::SignalSource> MainWidget::getSignalOutputSource() {
  * @param position The position of the plot. e.g. Top or bottom.
  */
 void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotPosition position) {
-  //TODO Graph plotten
+  // convert the signal to a QVector
+  auto samplesCount = signal->getSamplesCount();
+  QVector<double> x(samplesCount), y(samplesCount);
+  for (std::size_t i = 0; i < samplesCount; ++i) {
+    x[i] = i;
+    y[i] = signal->sample(i);
+  }
+
+  // plot the signal
+  this->_plots[position]->graph(0)->setPen(QPen(Qt::blue));
+  this->_plots[position]->graph(0)->setData(x, y);
+  this->_plots[position]->graph(0)->rescaleAxes();
 }
 
 /** \brief This gets fired, when the direct inverse button is clicked
  *
  * Gets fired, whenever a user clicks on the direct inverse button.
  */
-void MainWidget::applyClicked(){
+void MainWidget::applyClicked() {
 
   // get the current index and using that get the correct algorithm
   // After that simply apply the algorithm
@@ -179,5 +191,5 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
   this->_signalOutputSource = output.at(0);
   this->plotSignal(_signalOutputSource, PlotPosition::BOTTOM);
 }
-
-}}
+}
+}
