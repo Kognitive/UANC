@@ -54,7 +54,7 @@ namespace uanc { namespace util {
     int addSignal(const Aquila::SignalSource& signalSource);
 
     /** Simpel signal counter */
-    int signalCounter;
+    int signalCounter = -1;
 
     /** \brief Adds a signal to the internal map.
      *

@@ -30,8 +30,8 @@ class InverseFFTAlgorithm : public Algorithm {
    *
    * @return the processed vector itself.
    */
-  std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>>) {
-    //TODO FFT Inverse anwenden
+  std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>> in) {
+    return in;
   }
 
 };

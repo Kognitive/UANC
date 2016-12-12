@@ -68,6 +68,9 @@ class MainWidget : public QWidget {
 
  private:
 
+  /** This represents a map between the waves and the algorithms . */
+  std::map<int, std::shared_ptr<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>> _waveAlgorithMapping;
+
   /** \brief Holds the apply button
    *
    * This basically holds the left button in the middle

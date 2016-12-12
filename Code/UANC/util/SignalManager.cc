@@ -13,7 +13,6 @@ namespace uanc { namespace util {
    */
   std::shared_ptr<SignalManager> SignalManager::_instance = NULL;
 
-
   /** \brief Private constructor to deny creation outside of the singleton pattern.
     *
     * This constructor takes a QApplication and saves it internally as it context.

@@ -29,13 +29,51 @@ class Algorithm {
   virtual std::string getName() = 0;
 
   /** \brief Represents the execution of the algorithm.
+  *
+  * This method must be implemented by deriving algorithms, so it can
+  * actually be used in the framework.
+  *
+  * @return the processed vector itself.
+  */
+  std::vector<std::shared_ptr<Aquila::SignalSource>> process() {
+
+    if (!init) {
+      throw std::runtime_error("There was no execution with parameters before");
+    }
+
+    return _result;
+  }
+
+  /** \brief Represents the execution of the algorithm.
    *
    * This method must be implemented by deriving algorithms, so it can
    * actually be used in the framework.
    *
    * @return the processed vector itself.
    */
-  virtual std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>>) = 0;
+   std::vector<std::shared_ptr<Aquila::SignalSource>> process(std::vector<std::shared_ptr<Aquila::SignalSource>> input) {
+
+    if (!init) {
+      _result = this->execute(input);
+      init = true;
+    }
+
+    return _result;
+   }
+
+  /** \brief Represents the execution of the algorithm.
+   *
+   * This method must be implemented by deriving algorithms, so it can
+   * actually be used in the framework.
+   *
+   * @return the processed vector itself.
+   */
+  virtual std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>> input) = 0;
+ private:
+
+  bool init = false;
+
+  std::vector<std::shared_ptr<Aquila::SignalSource>> _result;
 };
 
 }}

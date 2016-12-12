@@ -141,7 +141,24 @@ void MainWidget::applyClicked() {
   // After that simply apply the algorithm
   auto currentIndex = _cmbAlgorithm->currentIndex();
   auto algorithm = this->_algorithmList[currentIndex];
+
   this->applyAlgorithm(*algorithm);
+
+  auto index = this->_tabWidget->currentIndex();
+  if (!this->_waveAlgorithMapping.count(index)) {
+    auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
+    this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
+  }
+
+  // get the mapping list and push back the algorithm save afterwards
+  auto vec = this->_waveAlgorithMapping.at(index);
+  vec->push_back(std::shared_ptr<uanc::algorithm::Algorithm>(algorithm));
+  this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
+
+  // add a new plot
+  auto plot = new QCustomPlot();
+  this->plotSignal(algorithm->process().at(1), plot);
+  this->_detailTabWidget->addTab(plot, QString::fromStdString(algorithm->getName()));
 }
 
 
@@ -171,7 +188,8 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
   // check if signal available if not present a messagebox and
   // ask the user to load a signal.
   auto signalManager = SignalManager::get();
-  auto signal = signalManager->getSignal(1);
+  auto index = this->_tabWidget->currentIndex();
+  auto signal = signalManager->getSignal(index);
   if (signal == NULL) {
     QMessageBox msgBox;
     msgBox.setText("You have to load a signal first. Pleasy use File -> Open File...");
@@ -186,11 +204,7 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
   input.push_back(signal);
 
   // apply the algorithm
-  auto output = algorithm.execute(input);
-
-  // afterwards save the result internally and plot the graph as well
-  signalManager->addSignal(output.at(0));
-  //this->plotSignal(output.at(0), PlotPosition::BOTTOM);
+  auto output = algorithm.process(input);
 }
 }
 }
