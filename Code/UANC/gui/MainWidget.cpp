@@ -56,6 +56,7 @@ void MainWidget::setupGUI() {
   // construct the complete layout
   this->_detailTabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
   this->_detailTabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+  connect(this->_tabWidget.get(), SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
 
   layout->addWidget(this->_tabWidget.get());
   layout->addWidget(hbar);
@@ -116,7 +117,7 @@ void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, QCusto
   // convert the signal to a QVector
   auto samplesCount = signal->getSamplesCount();
   QVector<double> x(samplesCount), y(samplesCount);
-  for (std::size_t i = 0; i < samplesCount; ++i) {
+  for (std::size_t i = 0; i < samplesCount; i = i + 10) {
     x[i] = i;
     y[i] = signal->sample(i);
   }
@@ -140,15 +141,10 @@ void MainWidget::applyClicked() {
   // get the current index and using that get the correct algorithm
   // After that simply apply the algorithm
   auto currentIndex = _cmbAlgorithm->currentIndex();
-  auto algorithm = this->_algorithmList[currentIndex];
+  auto algorithm = this->_algorithmList[currentIndex]->clone();
 
   this->applyAlgorithm(*algorithm);
-
   auto index = this->_tabWidget->currentIndex();
-  if (!this->_waveAlgorithMapping.count(index)) {
-    auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
-    this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
-  }
 
   // get the mapping list and push back the algorithm save afterwards
   auto vec = this->_waveAlgorithMapping.at(index);
@@ -161,6 +157,36 @@ void MainWidget::applyClicked() {
   this->_detailTabWidget->addTab(plot, QString::fromStdString(algorithm->getName()));
 }
 
+bool tabInRun = false;
+
+
+/** \brief Simple signal for a differenct selected tab */
+void MainWidget::tabSelected() {
+
+  if (tabInRun) return;
+
+  // remove all tabs from the detail widget
+  for (int i = this->_detailTabWidget->count() - 1; i >= 0; --i) {
+    this->_detailTabWidget->removeTab(i);
+  }
+
+  // get the list of algorithms
+  auto index = this->_tabWidget->currentIndex();
+
+  // get the mapping list and push back the algorithm save afterwards
+  auto vec = this->_waveAlgorithMapping.at(index);
+
+  // iterate over vector and fill new plots in
+  for(auto it = vec->begin(); it != vec->end(); ++it) {
+
+    // add a new plot
+    auto plot = new QCustomPlot();
+    auto algo = (*it).get();
+    this->plotSignal(algo->process().at(1), plot);
+    this->_detailTabWidget->addTab(plot, QString::fromStdString(algo->getName()));
+    this->_detailTabWidget->update();
+  }
+}
 
 /** \brief loads the signal source.
  *
@@ -171,7 +197,20 @@ void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSo
 
   auto widget = new QCustomPlot();
   this->plotSignal(signalSource, widget);
-  this->_tabWidget->addTab(widget, "s1");
+
+  // Simply add the tab and block the rest
+  tabInRun = true;
+  std::string text = "Standard";
+  auto castedObj = std::dynamic_pointer_cast<Aquila::WaveFile>(signalSource);
+  if (castedObj.get() != nullptr) {
+    text = castedObj->getFilename();
+  }
+
+  auto index =  this->_tabWidget->addTab(widget, QString::fromStdString(text));
+  tabInRun = false;
+
+  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
+  this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
 }
 
 /** \brief This method can be used to apply an algorithm to the inner data.

@@ -32,6 +32,15 @@ class InverseDirectAlgorithm : public Algorithm {
   std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>> in) {
     return in;
   }
+
+  /** \brief Can be used to clone the algorithm.
+   *
+   * This can be used to clone the algorithm
+   * @return The cloned algorithm
+   */
+  Algorithm* clone() {
+    return new InverseDirectAlgorithm();
+  }
 };
 
 }}

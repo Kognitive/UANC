@@ -34,6 +34,14 @@ class InverseFFTAlgorithm : public Algorithm {
     return in;
   }
 
+  /** \brief Can be used to clone the algorithm.
+   *
+   * This can be used to clone the algorithm
+   * @return The cloned algorithm
+   */
+  Algorithm* clone() {
+    new InverseFFTAlgorithm();
+  }
 };
 
 }

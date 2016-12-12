@@ -69,6 +69,14 @@ class Algorithm {
    * @return the processed vector itself.
    */
   virtual std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>> input) = 0;
+
+  /** \brief Can be used to clone the algorithm.
+   *
+   * This can be used to clone the algorithm
+   * @return The cloned algorithm
+   */
+  virtual Algorithm* clone() = 0;
+
  private:
 
   bool init = false;

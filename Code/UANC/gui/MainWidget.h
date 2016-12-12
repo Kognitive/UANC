@@ -135,6 +135,8 @@ class MainWidget : public QWidget {
    */
   void applyClicked();
 
+  /** \brief Simple signal for a differenct selected tab */
+  void tabSelected();
 };
 
 }
