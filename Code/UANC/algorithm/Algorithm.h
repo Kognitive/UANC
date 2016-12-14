@@ -7,7 +7,9 @@
 #define UANC_ALGORITHM_H
 
 #include <memory>
-#include "Code/libs/aquila/source/SignalSource.h"
+#include <Code/libs/aquila/source/SignalSource.h>
+#include <Code/UANC/gui/interfaces/IAlgorithmView.h>
+#include <Code/UANC/gui/views/AlgorithmView.h>
 
 namespace uanc { namespace algorithm {
 
@@ -35,14 +37,7 @@ class Algorithm {
   *
   * @return the processed vector itself.
   */
-  std::vector<std::shared_ptr<Aquila::SignalSource>> process() {
-
-    if (!init) {
-      throw std::runtime_error("There was no execution with parameters before");
-    }
-
-    return _result;
-  }
+  std::shared_ptr<Aquila::SignalSource> process();
 
   /** \brief Represents the execution of the algorithm.
    *
@@ -51,15 +46,7 @@ class Algorithm {
    *
    * @return the processed vector itself.
    */
-   std::vector<std::shared_ptr<Aquila::SignalSource>> process(std::vector<std::shared_ptr<Aquila::SignalSource>> input) {
-
-    if (!init) {
-      _result = this->execute(input);
-      init = true;
-    }
-
-    return _result;
-   }
+   std::shared_ptr<Aquila::SignalSource> process(std::shared_ptr<Aquila::SignalSource> input);
 
   /** \brief Represents the execution of the algorithm.
    *
@@ -68,7 +55,7 @@ class Algorithm {
    *
    * @return the processed vector itself.
    */
-  virtual std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>> input) = 0;
+  virtual std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> input) = 0;
 
   /** \brief Can be used to clone the algorithm.
    *
@@ -77,11 +64,35 @@ class Algorithm {
    */
   virtual Algorithm* clone() = 0;
 
+
+  /** \brief This passes back the algorithm view.
+   *
+   * fills the view with the desired content.
+   */
+  void fillView();
+
+  /** \brief Represents the view itself.
+   *
+   * Represents the view itself
+   * @return The ready created build.
+   */
+  uanc::gui::interfaces::IAlgorithmView* getView();
+
  private:
 
   bool init = false;
 
-  std::vector<std::shared_ptr<Aquila::SignalSource>> _result;
+  std::shared_ptr<Aquila::SignalSource> _result;
+
+  uanc::gui::views::AlgorithmView* _builtView = nullptr;
+
+  uanc::gui::model::AlgorithmModel* _builtModel = nullptr;
+
+ protected:
+
+  virtual uanc::gui::model::AlgorithmModel* constructModel() = 0;
+
+  virtual uanc::gui::views::AlgorithmView* constructView() = 0;
 };
 
 }}

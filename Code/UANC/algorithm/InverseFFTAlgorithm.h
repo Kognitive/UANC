@@ -5,6 +5,7 @@
 #ifndef UANC_INVERSEFFTALGORITHM_H
 #define UANC_INVERSEFFTALGORITHM_H
 
+#include <Code/UANC/gui/model/FFTModel.h>
 #include "Algorithm.h"
 
 namespace uanc {
@@ -30,7 +31,7 @@ class InverseFFTAlgorithm : public Algorithm {
    *
    * @return the processed vector itself.
    */
-  std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>> in) {
+   std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) {
     return in;
   }
 
@@ -41,6 +42,16 @@ class InverseFFTAlgorithm : public Algorithm {
    */
   Algorithm* clone() {
     new InverseFFTAlgorithm();
+  }
+ private:
+  uanc::gui::model::AlgorithmModel* constructModel() {
+    auto model = new uanc::gui::model::FFTModel();
+    return model;
+  }
+
+  uanc::gui::views::AlgorithmView* constructView() {
+    auto view = new uanc::gui::views::AlgorithmView();
+    return view;
   }
 };
 

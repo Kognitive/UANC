@@ -45,20 +45,6 @@ class MainWidget : public QWidget {
    */
   void plotSignal(std::shared_ptr<Aquila::SignalSource> signal, QCustomPlot* position);
 
-  /** \brief Basically places an input signal inside of the widget.
-   *
-   * This sets an input signal inside of the widget
-   * @param signalSource the signal source to set
-   */
-  void setSignalInputSource(std::shared_ptr<Aquila::SignalSource> signalSource);
-
-  /** \brief Gets the output signal of the widget.
-   *
-   * This method gets the output signal of the method.
-   * @return The signal source of the output
-   */
-  std::shared_ptr<Aquila::SignalSource> getSignalOutputSource();
-
   /** \brief loads the signal source.
    *
    * This method loads a signal source in the top tab view.
@@ -67,6 +53,9 @@ class MainWidget : public QWidget {
   void loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSource);
 
  private:
+
+  /** This represents a mapping between the views and
+  std::map<int, std::shared_ptr<std::vector<std::shared_ptr<QWidget>>>> _waveViewMapping;
 
   /** This represents a map between the waves and the algorithms . */
   std::map<int, std::shared_ptr<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>> _waveAlgorithMapping;
@@ -137,6 +126,12 @@ class MainWidget : public QWidget {
 
   /** \brief Simple signal for a differenct selected tab */
   void tabSelected();
+
+  // Definition for the tab control at the top as well as the bottom.
+
+  void waveClosed(const int& index);
+
+  void algorithmClosed(const int& index);
 };
 
 }

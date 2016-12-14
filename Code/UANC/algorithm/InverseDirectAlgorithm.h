@@ -5,6 +5,8 @@
 #ifndef UANC_DIRECTINVERSEALGORITHM_H
 #define UANC_DIRECTINVERSEALGORITHM_H
 
+#include <Code/UANC/gui/model/AlgorithmModel.h>
+#include <Code/UANC/gui/views/AlgorithmView.h>
 #include "Algorithm.h"
 
 namespace uanc { namespace algorithm {
@@ -29,7 +31,7 @@ class InverseDirectAlgorithm : public Algorithm {
    *
    * @return the processed vector itself.
    */
-  std::vector<std::shared_ptr<Aquila::SignalSource>> execute(std::vector<std::shared_ptr<Aquila::SignalSource>> in) {
+  std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) {
     return in;
   }
 
@@ -40,6 +42,16 @@ class InverseDirectAlgorithm : public Algorithm {
    */
   Algorithm* clone() {
     return new InverseDirectAlgorithm();
+  }
+ private:
+  uanc::gui::model::AlgorithmModel* constructModel() {
+    auto model = new uanc::gui::model::AlgorithmModel();
+    return model;
+  }
+
+  uanc::gui::views::AlgorithmView* constructView() {
+    auto view = new uanc::gui::views::AlgorithmView();
+    return view;
   }
 };
 

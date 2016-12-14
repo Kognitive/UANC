@@ -3,6 +3,8 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
+#include <Code/UANC/util/tools/Path.h>
+#include <Code/UANC/util/tools/QCustomPlotAdapter.h>
 #include "MainWidget.h"
 
 namespace uanc {
@@ -52,10 +54,16 @@ void MainWidget::setupGUI() {
   // construct the complete layout
   this->_tabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
   this->_tabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+  this->_tabWidget->setTabsClosable(true);
+  connect(this->_tabWidget.get(), SIGNAL(tabCloseRequested(int)), this, SLOT(waveClosed(int)));
 
   // construct the complete layout
   this->_detailTabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
   this->_detailTabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+  this->_detailTabWidget->setTabsClosable(true);
+  connect(this->_tabWidget.get(), SIGNAL(tabCloseRequested(int)), this, SLOT(algorithmClosed(int)));
+
+  // add new algorithm for a chosen detailTabWidget
   connect(this->_tabWidget.get(), SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
 
   layout->addWidget(this->_tabWidget.get());
@@ -103,35 +111,6 @@ void MainWidget::showAvailableAlgorithms() {
   }
 }
 
-
-/** \brief This method should simply plot the signal to the top or bottom plot
- *
- * This should plot the signal to the top and bottom plot. Please be aware of resizing the plot, so that
- * the signal is good visible. Note that in a later iteration we will add a functionality to scroll the singal,
- * so don't change the method signature, because the subwidget itself has to do the correct resizing.
- *
- * @param signal The signal which should be used during this
- * @param position The position of the plot. e.g. Top or bottom.
- */
-void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, QCustomPlot* plot) {
-  // convert the signal to a QVector
-  auto samplesCount = signal->getSamplesCount();
-  QVector<double> x(samplesCount), y(samplesCount);
-  for (std::size_t i = 0; i < samplesCount; i = i + 10) {
-    x[i] = i;
-    y[i] = signal->sample(i);
-  }
-
-  // plot the signal
-  auto graph = plot->addGraph();
-
-  graph->setPen(QPen(Qt::blue));
-  graph->setData(x, y);
-  graph->rescaleAxes();
-
-  plot->replot();
-}
-
 /** \brief This gets fired, when the direct inverse button is clicked
  *
  * Gets fired, whenever a user clicks on the direct inverse button.
@@ -151,10 +130,11 @@ void MainWidget::applyClicked() {
   vec->push_back(std::shared_ptr<uanc::algorithm::Algorithm>(algorithm));
   this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
 
-  // add a new plot
-  auto plot = new QCustomPlot();
-  this->plotSignal(algorithm->process().at(1), plot);
-  this->_detailTabWidget->addTab(plot, QString::fromStdString(algorithm->getName()));
+  algorithm->process(SignalManager::get()->getSignal(index));
+
+  // we want to simply derive a model a view and combine them
+  this->_detailTabWidget->addTab(algorithm->getView()->getWidget(), QString::fromStdString(algorithm->getName()));
+  algorithm->fillView();
 }
 
 bool tabInRun = false;
@@ -182,8 +162,7 @@ void MainWidget::tabSelected() {
     // add a new plot
     auto plot = new QCustomPlot();
     auto algo = (*it).get();
-    this->plotSignal(algo->process().at(1), plot);
-    this->_detailTabWidget->addTab(plot, QString::fromStdString(algo->getName()));
+    this->_detailTabWidget->addTab(algo->getView()->getWidget(), QString::fromStdString(algo->getName()));
     this->_detailTabWidget->update();
   }
 }
@@ -196,15 +175,16 @@ void MainWidget::tabSelected() {
 void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSource) {
 
   auto widget = new QCustomPlot();
-  this->plotSignal(signalSource, widget);
+  uanc::util::tools::QCustomPlotAdapter::plotSignal(signalSource, widget);
 
   // Simply add the tab and block the rest
   tabInRun = true;
   std::string text = "Standard";
   auto castedObj = std::dynamic_pointer_cast<Aquila::WaveFile>(signalSource);
   if (castedObj.get() != nullptr) {
-    text = castedObj->getFilename();
+    text = uanc::util::Path::getFileName(castedObj->getFilename());
   }
+
 
   auto index =  this->_tabWidget->addTab(widget, QString::fromStdString(text));
   tabInRun = false;
@@ -222,7 +202,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSo
 void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
 
   // basically create the input vector
-  std::vector<std::shared_ptr<Aquila::SignalSource>> input(1);
+  std::shared_ptr<Aquila::SignalSource> input;
 
   // check if signal available if not present a messagebox and
   // ask the user to load a signal.
@@ -240,10 +220,47 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
     return;
   }
 
-  input.push_back(signal);
+  input = signal;
 
   // apply the algorithm
-  auto output = algorithm.process(input);
+  algorithm.process(input);
 }
+
+void MainWidget::waveClosed(const int& index) {
+  if (index == -1) {
+    return;
+  }
+
+  // get tabitem widget
+  QWidget* tabItem = this->_tabWidget->widget(index);
+
+  tabInRun = true;
+  // Removes the tab at position index from this stack of widgets.
+  // The page widget itself is not deleted.
+  this->_tabWidget->removeTab(index);
+  tabInRun = false;
+
+  // delete the tab item
+  delete tabItem;
+  tabItem = nullptr;
+
+  // additionally remove the algorithm from the inner mapping
+  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
+
+  // iterate from closed to end
+  for (int i = index; i < this->_tabWidget->count() - 1; ++i) {
+    this->_waveAlgorithMapping.erase(i);
+    auto vec = this->_waveAlgorithMapping.at(i+1);
+    this->_waveAlgorithMapping.insert(std::make_pair(i, vec));
+  }
+
+  // do the final erase
+  this->_waveAlgorithMapping.erase(this->_tabWidget->count()-1);
+}
+
+void MainWidget::algorithmClosed(const int& index) {
+
+}
+
 }
 }
