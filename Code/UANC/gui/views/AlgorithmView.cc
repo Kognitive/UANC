@@ -1,6 +1,7 @@
 //
 // Created by markus on 12/12/16.
 //
+#include <Code/UANC/gui/PlotWidget.h>
 #include "AlgorithmView.h"
 
 namespace uanc {namespace gui {namespace views {
@@ -23,8 +24,8 @@ namespace uanc {namespace gui {namespace views {
   QWidget* AlgorithmView::buildSharedWidget() {
 
     // intialize the q custom plot and return the pointer to it.
-    this->_qCustomPlot = std::unique_ptr<QCustomPlot>(new QCustomPlot());
-    return _qCustomPlot.get();
+    this->_plotWidget = std::unique_ptr<PlotWidget>(new PlotWidget());
+    return _plotWidget.get();
   }
 
   /** \brief Function to build the uniqueWidget.
@@ -84,7 +85,7 @@ namespace uanc {namespace gui {namespace views {
    * @param data The data to display in the gui.s
    */
   void AlgorithmView::setSharedData(model::AlgorithmModel* data) {
-    uanc::util::tools::QCustomPlotAdapter::plotSignal(data->samples, this->_qCustomPlot.get());
+    this->_plotWidget->setSignal(data->samples);
   }
 
   /** \brief This represents the unique data.

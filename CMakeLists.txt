@@ -22,11 +22,11 @@ set(SOURCE_FILES
         Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h
         Code/UANC/util/FileActor.h Code/UANC/util/SignalFileActor.h
         Code/UANC/util/DialogUtil.h Code/UANC/algorithm/Algorithm.h
-        Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h Code/UANC/gui/SignalPlot.cpp Code/UANC/gui/SignalPlot.h Code/UANC/gui/Control.cpp Code/UANC/gui/Control.h Code/UANC/gui/PlotWidget.cpp Code/UANC/gui/PlotWidget.h)
-        Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h
+        Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h Code/UANC/gui/SignalPlot.cpp Code/UANC/gui/SignalPlot.h Code/UANC/gui/Control.cpp Code/UANC/gui/Control.h Code/UANC/gui/PlotWidget.cpp Code/UANC/gui/PlotWidget.h
         Code/UANC/gui/views/AlgorithmView.cc Code/UANC/gui/views/AlgorithmView.h
         Code/UANC/gui/model/AlgorithmModel.h Code/UANC/algorithm/Algorithm.cc
-        Code/UANC/gui/model/FFTModel.h)
+        Code/UANC/gui/model/FFTModel.h  Code/UANC/gui/views/FFTView.h Code/UANC/gui/interfaces/IAlgorithmView.h
+        Code/UANC/util/tools/Path.h Code/UANC/util/tools/Path.cc)
 
 set(AQUILA_FILES
         Code/libs/aquila/source/SignalSource.h Code/libs/aquila/source/SignalSource.cpp

@@ -60,7 +60,7 @@ void MainWidget::setupGUI() {
   this->_detailTabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
   this->_detailTabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
   this->_detailTabWidget->setTabsClosable(true);
-  connect(this->_tabWidget.get(), SIGNAL(tabCloseRequested(int)), this, SLOT(algorithmClosed(int)));
+  connect(this->_detailTabWidget.get(), SIGNAL(tabCloseRequested(int)), this, SLOT(algorithmClosed(int)));
 
   // add new algorithm for a chosen detailTabWidget
   connect(this->_tabWidget.get(), SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
@@ -158,8 +158,6 @@ void MainWidget::tabSelected() {
   // iterate over vector and fill new plots in
   for(auto it = vec->begin(); it != vec->end(); ++it) {
 
-    // add a new plot
-    auto plot = new PlotWidget();
     auto algo = (*it).get();
     this->_detailTabWidget->addTab(algo->getView()->getWidget(), QString::fromStdString(algo->getName()));
     this->_detailTabWidget->update();
@@ -238,10 +236,6 @@ void MainWidget::waveClosed(const int& index) {
   this->_tabWidget->removeTab(index);
   tabInRun = false;
 
-  // delete the tab item
-  delete tabItem;
-  tabItem = nullptr;
-
   // additionally remove the algorithm from the inner mapping
   auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
 
@@ -253,11 +247,42 @@ void MainWidget::waveClosed(const int& index) {
   }
 
   // do the final erase
-  this->_waveAlgorithMapping.erase(this->_tabWidget->count()-1);
+  this->_waveAlgorithMapping.erase(this->_tabWidget->count());
+
+  // special case occurs, when it was the last tab
+  if (this->_tabWidget->count() > 0) {
+    this->tabSelected();
+  }
+  else {
+    // remove all tabs from the detail widget
+    for (int i = this->_detailTabWidget->count() - 1; i >= 0; --i) {
+      this->_detailTabWidget->removeTab(i);
+    }
+  }
 }
 
 void MainWidget::algorithmClosed(const int& index) {
+  if (index == -1) {
+    return;
+  }
 
+  // get tabitem widget
+  QWidget* tabItem = this->_detailTabWidget->widget(index);
+
+  tabInRun = true;
+  // Removes the tab at position index from this stack of widgets.
+  // The page widget itself is not deleted.
+  this->_detailTabWidget->removeTab(index);
+  tabInRun = false;
+
+  // additionally remove the algorithm from the inner mapping
+  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
+
+  // get the top index
+  auto indexTop = this->_tabWidget->currentIndex();
+
+  auto el = this->_waveAlgorithMapping.at(indexTop);
+  el->erase(el->begin() + index);
 }
 
 }

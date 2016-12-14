@@ -9,9 +9,8 @@
 #include <QtWidgets/QWidget>
 #include <Code/UANC/gui/model/AlgorithmModel.h>
 #include <Code/UANC/gui/interfaces/IAlgorithmView.h>
-#include <Code/libs/qplot/qcustomplot.h>
 #include <Code/UANC/util/tools/Path.h>
-#include <Code/UANC/util/tools/QCustomPlotAdapter.h>
+#include <Code/UANC/gui/PlotWidget.h>
 
 namespace uanc {namespace gui { namespace views {
 
@@ -86,7 +85,7 @@ class AlgorithmView : public  interfaces::IAlgorithmView {
  private:
 
   /** \brief Contains the plot of this algorithm view. */
-  std::unique_ptr<QCustomPlot> _qCustomPlot;
+  std::unique_ptr<PlotWidget> _plotWidget;
 
   /** \brief This represents a weak pointer as an image.
    *

@@ -6,6 +6,7 @@
 #define UANC_INVERSEFFTALGORITHM_H
 
 #include <Code/UANC/gui/model/FFTModel.h>
+#include <Code/UANC/gui/views/FFTView.h>
 #include "Algorithm.h"
 
 namespace uanc {

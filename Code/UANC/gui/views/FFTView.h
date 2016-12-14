@@ -7,7 +7,7 @@
 
 #include "AlgorithmView.h"
 
-namespace uanc {namespace gui { namespace views {
+namespace uanc { namespace gui { namespace views {
 
 /** \brief Represents an algorithm view, which can be used inside
  * of the application.
@@ -46,17 +46,6 @@ class FFTView : public AlgorithmView {
   void setUniqueData(model::AlgorithmModel* data) {
     //TODO fft plots
   }
-
- private:
-
-  /** \brief Contains the plot of this algorithm view. */
-  std::unique_ptr<QCustomPlot> _qCustomPlot;
-
-  /** \brief This represents a weak pointer as an image.
-   *
-   * This can be used as a weak pointer.
-   */
-  QWidget* _widget = nullptr;
 };
 
 }}}
