@@ -60,7 +60,10 @@ void MainWidget::setupGUI() {
   this->_detailTabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
   this->_detailTabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
   this->_detailTabWidget->setTabsClosable(true);
-  connect(this->_detailTabWidget.get(), SIGNAL(tabCloseRequested(int)), this, SLOT(algorithmClosed(int)));
+  connect(this->_detailTabWidget.get(),
+          SIGNAL(tabCloseRequested(int)),
+          this,
+          SLOT(algorithmClosed(int)));
 
   // add new algorithm for a chosen detailTabWidget
   connect(this->_tabWidget.get(), SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
@@ -132,12 +135,12 @@ void MainWidget::applyClicked() {
   algorithm->process(SignalManager::get()->getSignal(index));
 
   // we want to simply derive a model a view and combine them
-  this->_detailTabWidget->addTab(algorithm->getView()->getWidget(), QString::fromStdString(algorithm->getName()));
+  this->_detailTabWidget->addTab(algorithm->getView()->getWidget(),
+                                 QString::fromStdString(algorithm->getName()));
   algorithm->fillView();
 }
 
 bool tabInRun = false;
-
 
 /** \brief Simple signal for a differenct selected tab */
 void MainWidget::tabSelected() {
@@ -156,10 +159,11 @@ void MainWidget::tabSelected() {
   auto vec = this->_waveAlgorithMapping.at(index);
 
   // iterate over vector and fill new plots in
-  for(auto it = vec->begin(); it != vec->end(); ++it) {
+  for (auto it = vec->begin(); it != vec->end(); ++it) {
 
     auto algo = (*it).get();
-    this->_detailTabWidget->addTab(algo->getView()->getWidget(), QString::fromStdString(algo->getName()));
+    this->_detailTabWidget->addTab(algo->getView()->getWidget(),
+                                   QString::fromStdString(algo->getName()));
     this->_detailTabWidget->update();
   }
 }
@@ -182,7 +186,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSo
     text = uanc::util::Path::getFileName(castedObj->getFilename());
   }
 
-  auto index =  this->_tabWidget->addTab(widget, QString::fromStdString(text));
+  auto index = this->_tabWidget->addTab(widget, QString::fromStdString(text));
   tabInRun = false;
 
   auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
@@ -222,13 +226,13 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
   algorithm.process(input);
 }
 
-void MainWidget::waveClosed(const int& index) {
+void MainWidget::waveClosed(const int &index) {
   if (index == -1) {
     return;
   }
 
   // get tabitem widget
-  QWidget* tabItem = this->_tabWidget->widget(index);
+  QWidget *tabItem = this->_tabWidget->widget(index);
 
   tabInRun = true;
   // Removes the tab at position index from this stack of widgets.
@@ -242,7 +246,7 @@ void MainWidget::waveClosed(const int& index) {
   // iterate from closed to end
   for (int i = index; i < this->_tabWidget->count() - 1; ++i) {
     this->_waveAlgorithMapping.erase(i);
-    auto vec = this->_waveAlgorithMapping.at(i+1);
+    auto vec = this->_waveAlgorithMapping.at(i + 1);
     this->_waveAlgorithMapping.insert(std::make_pair(i, vec));
   }
 
@@ -252,8 +256,7 @@ void MainWidget::waveClosed(const int& index) {
   // special case occurs, when it was the last tab
   if (this->_tabWidget->count() > 0) {
     this->tabSelected();
-  }
-  else {
+  } else {
     // remove all tabs from the detail widget
     for (int i = this->_detailTabWidget->count() - 1; i >= 0; --i) {
       this->_detailTabWidget->removeTab(i);
@@ -261,13 +264,13 @@ void MainWidget::waveClosed(const int& index) {
   }
 }
 
-void MainWidget::algorithmClosed(const int& index) {
+void MainWidget::algorithmClosed(const int &index) {
   if (index == -1) {
     return;
   }
 
   // get tabitem widget
-  QWidget* tabItem = this->_detailTabWidget->widget(index);
+  QWidget *tabItem = this->_detailTabWidget->widget(index);
 
   tabInRun = true;
   // Removes the tab at position index from this stack of widgets.
