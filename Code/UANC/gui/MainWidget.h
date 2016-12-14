@@ -6,19 +6,17 @@
 #ifndef UANC_MAINWIDGET_H
 #define UANC_MAINWIDGET_H
 
-#include <QtWidgets/QWidget>
 #include <memory>
-#include "Code/libs/aquila/source/SignalSource.h"
-#include "Code/libs/aquila/source/generator/SineGenerator.h"
-#include "Code/libs/qplot/qcustomplot.h"
+
+#include <QtWidgets/QWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
 
 #include "Code/UANC/algorithm/Algorithm.h"
 #include "Code/UANC/algorithm/InverseDirectAlgorithm.h"
 #include "Code/UANC/algorithm/InverseFFTAlgorithm.h"
-
 #include "Code/UANC/util/SignalManager.h"
+#include "PlotWidget.h"
 
 namespace uanc {
 namespace gui {
@@ -43,7 +41,7 @@ class MainWidget : public QWidget {
    * @param signal The signal which should be used during this
    * @param position The position of the plot. e.g. Top or bottom.
    */
-  void plotSignal(std::shared_ptr<Aquila::SignalSource> signal, QCustomPlot* position);
+  void plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotWidget* position);
 
   /** \brief Basically places an input signal inside of the widget.
    *
@@ -94,12 +92,6 @@ class MainWidget : public QWidget {
    * Basically create a vector which can hold references to the appropriate algorithms
    */
   std::vector<uanc::algorithm::Algorithm*> _algorithmList;
-
-  /** \brief This enum contains the available plot positions
-   *
-   * Holds the available plot position. Basically top and bottom.
-   */
-  enum PlotPosition { TOP, BOTTOM };
 
   /** \brief This method will setup the gui appropriately
    *

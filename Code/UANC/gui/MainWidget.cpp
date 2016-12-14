@@ -73,7 +73,7 @@ void MainWidget::setupGUI() {
 void MainWidget::registerAlgorithms() {
   using namespace uanc::algorithm;
 
-  this->_algorithmList = std::vector<Algorithm*>();
+  this->_algorithmList = std::vector<Algorithm *>();
 
   // Here you can add further algorithms. If register them here, they
   // will be included further inside the ecosystem automatically.
@@ -113,23 +113,8 @@ void MainWidget::showAvailableAlgorithms() {
  * @param signal The signal which should be used during this
  * @param position The position of the plot. e.g. Top or bottom.
  */
-void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, QCustomPlot* plot) {
-  // convert the signal to a QVector
-  auto samplesCount = signal->getSamplesCount();
-  QVector<double> x(samplesCount), y(samplesCount);
-  for (std::size_t i = 0; i < samplesCount; i = i + 10) {
-    x[i] = i;
-    y[i] = signal->sample(i);
-  }
-
-  // plot the signal
-  auto graph = plot->addGraph();
-
-  graph->setPen(QPen(Qt::blue));
-  graph->setData(x, y);
-  graph->rescaleAxes();
-
-  plot->replot();
+void MainWidget::plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotWidget* position) {
+  position->setSignal(signal);
 }
 
 /** \brief This gets fired, when the direct inverse button is clicked
@@ -152,7 +137,7 @@ void MainWidget::applyClicked() {
   this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
 
   // add a new plot
-  auto plot = new QCustomPlot();
+  auto plot = new PlotWidget();
   this->plotSignal(algorithm->process().at(1), plot);
   this->_detailTabWidget->addTab(plot, QString::fromStdString(algorithm->getName()));
 }
@@ -180,7 +165,7 @@ void MainWidget::tabSelected() {
   for(auto it = vec->begin(); it != vec->end(); ++it) {
 
     // add a new plot
-    auto plot = new QCustomPlot();
+    auto plot = new PlotWidget();
     auto algo = (*it).get();
     this->plotSignal(algo->process().at(1), plot);
     this->_detailTabWidget->addTab(plot, QString::fromStdString(algo->getName()));
@@ -195,7 +180,7 @@ void MainWidget::tabSelected() {
  */
 void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSource) {
 
-  auto widget = new QCustomPlot();
+  auto widget = new PlotWidget();
   this->plotSignal(signalSource, widget);
 
   // Simply add the tab and block the rest
