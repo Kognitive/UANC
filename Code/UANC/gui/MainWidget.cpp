@@ -4,7 +4,6 @@
  */
 
 #include <Code/UANC/util/tools/Path.h>
-#include <Code/UANC/util/tools/QCustomPlotAdapter.h>
 #include "MainWidget.h"
 
 namespace uanc {
@@ -81,7 +80,7 @@ void MainWidget::setupGUI() {
 void MainWidget::registerAlgorithms() {
   using namespace uanc::algorithm;
 
-  this->_algorithmList = std::vector<Algorithm*>();
+  this->_algorithmList = std::vector<Algorithm *>();
 
   // Here you can add further algorithms. If register them here, they
   // will be included further inside the ecosystem automatically.
@@ -160,7 +159,7 @@ void MainWidget::tabSelected() {
   for(auto it = vec->begin(); it != vec->end(); ++it) {
 
     // add a new plot
-    auto plot = new QCustomPlot();
+    auto plot = new PlotWidget();
     auto algo = (*it).get();
     this->_detailTabWidget->addTab(algo->getView()->getWidget(), QString::fromStdString(algo->getName()));
     this->_detailTabWidget->update();
@@ -174,8 +173,8 @@ void MainWidget::tabSelected() {
  */
 void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSource) {
 
-  auto widget = new QCustomPlot();
-  uanc::util::tools::QCustomPlotAdapter::plotSignal(signalSource, widget);
+  auto widget = new PlotWidget();
+  widget->setSignal(signalSource);
 
   // Simply add the tab and block the rest
   tabInRun = true;
@@ -184,7 +183,6 @@ void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSo
   if (castedObj.get() != nullptr) {
     text = uanc::util::Path::getFileName(castedObj->getFilename());
   }
-
 
   auto index =  this->_tabWidget->addTab(widget, QString::fromStdString(text));
   tabInRun = false;

@@ -22,6 +22,7 @@ set(SOURCE_FILES
         Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h
         Code/UANC/util/FileActor.h Code/UANC/util/SignalFileActor.h
         Code/UANC/util/DialogUtil.h Code/UANC/algorithm/Algorithm.h
+        Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h Code/UANC/gui/SignalPlot.cpp Code/UANC/gui/SignalPlot.h Code/UANC/gui/Control.cpp Code/UANC/gui/Control.h Code/UANC/gui/PlotWidget.cpp Code/UANC/gui/PlotWidget.h)
         Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h
         Code/UANC/gui/views/AlgorithmView.cc Code/UANC/gui/views/AlgorithmView.h
         Code/UANC/gui/model/AlgorithmModel.h Code/UANC/algorithm/Algorithm.cc
@@ -35,7 +36,7 @@ set(AQUILA_FILES
         Code/libs/aquila/source/generator/SineGenerator.h Code/libs/aquila/source/generator/SineGenerator.cpp
         Code/libs/aquila/source/generator/TriangleGenerator.h Code/libs/aquila/source/generator/TriangleGenerator.cpp)
 
-set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h Code/UANC/util/tools/Path.cc Code/UANC/util/tools/Path.h Code/UANC/util/tools/QCustomPlotAdapter.h Code/UANC/gui/views/FFTView.h Code/UANC/gui/interfaces/IAlgorithmView.h Code/UANC/algorithm/interfaces/IAlgorithm.h)
+set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h)
 
 add_executable(UANC ${SOURCE_FILES} ${AQUILA_FILES} ${QCUSTOMPLOT_FILES})
 
