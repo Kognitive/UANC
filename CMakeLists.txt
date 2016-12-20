@@ -33,7 +33,7 @@ set(AQUILA_TRANSFORM Code/libs/aquila/transform/FftFactory.h Code/libs/aquila/tr
 #Add the FFT library
 set(AQUILA_FFT Code/libs/aquila/fft/fft4g.c)
 
-set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h)
+set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cpp Code/UANC/util/SignalManager.h)
 
 add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES})
 

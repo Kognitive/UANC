@@ -31,7 +31,7 @@ class InverseDirectAlgorithm : public Algorithm {
    *
    * @return the processed vector itself.
    */
-  std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) {
+  std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) override {
     return in;
   }
 
@@ -43,13 +43,13 @@ class InverseDirectAlgorithm : public Algorithm {
   Algorithm* clone() {
     return new InverseDirectAlgorithm();
   }
- private:
-  uanc::gui::model::AlgorithmModel* constructModel() {
+ protected:
+  uanc::gui::model::AlgorithmModel* constructModel() override {
     auto model = new uanc::gui::model::AlgorithmModel();
     return model;
   }
 
-  uanc::gui::views::AlgorithmView* constructView() {
+  uanc::gui::views::AlgorithmView* constructView() override {
     auto view = new uanc::gui::views::AlgorithmView();
     return view;
   }

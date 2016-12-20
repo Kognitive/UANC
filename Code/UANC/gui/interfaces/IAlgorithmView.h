@@ -6,7 +6,6 @@
 #define UANC_IALGORITHMVIEW_H
 
 #include <QtWidgets/QWidget>
-#include "Code/UANC/gui/model/AlgorithmModel.h"
 
 namespace uanc { namespace gui { namespace interfaces {
 
