@@ -12,7 +12,8 @@
 #include "Code/libs/aquila/source/WaveFile.h"
 #include "FileActor.h"
 
-namespace uanc { namespace util {
+namespace uanc {
+namespace util {
 
 /** \brief Basic Signal file loader class.
  *
@@ -27,7 +28,7 @@ class SignalFileActor : FileActor<Aquila::SignalSource> {
    *
    * @param path The path to the acted file
    */
-  SignalFileActor(const std::string& path) : FileActor<Aquila::SignalSource>(path) { }
+  SignalFileActor(const std::string &path) : FileActor<Aquila::SignalSource>(path) {}
 
   /** \brief This method should load the file from the plate.
    *
@@ -50,8 +51,9 @@ class SignalFileActor : FileActor<Aquila::SignalSource> {
    */
   void saveData(std::shared_ptr<Aquila::SignalSource> source) {
     auto path = this->getPath();
-    // TODO Wave speichern
+    Aquila::WaveFile::save(*source, path);
   }
 };
-}}
+}
+}
 #endif //UANC_SIGNALFILEACTOR_H

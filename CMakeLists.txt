@@ -35,8 +35,8 @@ set(AQUILA_FILES
         Code/libs/aquila/source/generator/Generator.h Code/libs/aquila/source/generator/Generator.cpp
         Code/libs/aquila/source/generator/SineGenerator.h Code/libs/aquila/source/generator/SineGenerator.cpp
         Code/libs/aquila/source/generator/TriangleGenerator.h Code/libs/aquila/source/generator/TriangleGenerator.cpp
-        #Code/libs/aquila/transform/FftFactory.h Code/libs/aquila/transform/FftFactory.cpp
-        Code/libs/aquila/transform/AquilaFft.h Code/libs/aquila/transform/AquilaFft.cpp
+        Code/libs/aquila/transform/FftFactory.h Code/libs/aquila/transform/FftFactory.cpp
+        Code/libs/aquila/transform/OouraFft.h Code/libs/aquila/transform/OouraFft.cpp
         Code/libs/aquila/fft/fft8g.c)
 
 set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h)

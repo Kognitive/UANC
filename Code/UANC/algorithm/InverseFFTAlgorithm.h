@@ -12,7 +12,6 @@
 #include <Code/libs/aquila/source/SignalSource.h>
 #include <Code/libs/aquila/transform/FftFactory.h>
 
-
 namespace uanc {
 namespace algorithm {
 
@@ -38,7 +37,8 @@ class InverseFFTAlgorithm : public Algorithm {
    */
   std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) {
     // map the input signal to a valid sample
-    auto SIZE = in->length();
+    const std::size_t SIZE = 524288;
+    //const std::size_t SIZE2 = in->length();
     auto sampleFreq = in->getSampleFrequency();
 
     // choose a fft algorithm
@@ -47,21 +47,21 @@ class InverseFFTAlgorithm : public Algorithm {
     // transform the signal into the fouier space
     Aquila::SpectrumType spectrum = fft->fft(in->toArray());
 
-  /*
     // invert the spectrum
     std::transform(
         spectrum.begin(),
         spectrum.end(),
         spectrum.begin(),
         [](Aquila::ComplexType x) { return (x.operator*=(-1)); });
-  */
 
     // back transformation of signal from fouier space
     double x[SIZE];
     fft->ifft(spectrum, x);
 
     // define output signal
-    std::shared_ptr<Aquila::SignalSource> outputSignal(new Aquila::SignalSource(*x));
+    Aquila::SignalSource *t = new Aquila::SignalSource(x, SIZE);
+    t->setSampleFrequency(sampleFreq);
+    std::shared_ptr<Aquila::SignalSource> outputSignal(new Aquila::SignalSource(*t));
 
     return outputSignal;
   }

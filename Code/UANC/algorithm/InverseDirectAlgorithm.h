@@ -32,7 +32,9 @@ class InverseDirectAlgorithm : public Algorithm {
    * @return the processed vector itself.
    */
   std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) {
-    return in;
+    // multiplies the Signalsource with -1
+    std::shared_ptr<Aquila::SignalSource> out(new Aquila::SignalSource(in->operator*=(-1)));
+    return out;
   }
 
   /** \brief Can be used to clone the algorithm.
