@@ -84,7 +84,7 @@ class Algorithm {
 
   std::shared_ptr<Aquila::SignalSource> _result;
 
-  uanc::gui::views::AlgorithmView* _builtView = nullptr;
+  uanc::gui::interfaces::IAlgorithmView* _builtView = nullptr;
 
   uanc::gui::model::AlgorithmModel* _builtModel = nullptr;
 
@@ -92,7 +92,7 @@ class Algorithm {
 
   virtual uanc::gui::model::AlgorithmModel* constructModel() = 0;
 
-  virtual uanc::gui::views::AlgorithmView* constructView() = 0;
+  virtual uanc::gui::interfaces::IAlgorithmView* constructView() = 0;
 };
 
 }}

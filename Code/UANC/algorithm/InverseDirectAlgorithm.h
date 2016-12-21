@@ -49,7 +49,7 @@ class InverseDirectAlgorithm : public Algorithm {
     return model;
   }
 
-  uanc::gui::views::AlgorithmView* constructView() override {
+  uanc::gui::interfaces::IAlgorithmView* constructView() override {
     auto view = new uanc::gui::views::AlgorithmView();
     return view;
   }
