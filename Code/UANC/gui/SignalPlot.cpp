@@ -12,7 +12,7 @@ SignalPlot::SignalPlot(std::shared_ptr<PlotWidget> parent) {
   _parent = parent;
 
   // set color of graph
-  _graphColor = QColor(43, 140, 190);
+  _graphColor = QColor(26, 107, 179);
 
   // add graph and set it's pen
   addGraph();

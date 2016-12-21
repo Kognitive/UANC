@@ -12,9 +12,9 @@ Control::Control(std::shared_ptr<PlotWidget> parent) {
   _parent = parent;
 
   // set colors
-  _graphColor = QColor(166, 189, 219);
-  _boxBoarderColor = QColor(166, 189, 219);
-  _boxColor = QColor(166, 189, 219, 80);
+  _graphColor = QColor(32, 127, 212); //QColor(26, 140, 255);
+  _boxBoarderColor = QColor(0, 61, 102);
+  _boxColor = QColor(20, 20, 20, 40);
 
   // create graph
   addGraph();
@@ -22,7 +22,7 @@ Control::Control(std::shared_ptr<PlotWidget> parent) {
 
   // hide axes and grids
   axisRect()->setAutoMargins(QCP::msNone);
-  axisRect()->setMargins(QMargins(0, 1, 1, 0));
+  axisRect()->setMargins(QMargins(1, 0, 0, 1));
   this->xAxis->setVisible(false);
   this->yAxis->setVisible(false);
 
