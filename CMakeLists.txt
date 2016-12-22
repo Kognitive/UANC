@@ -13,35 +13,57 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_AUTOMOC ON)
 
-# Find the QtWidgets library
-find_package(Qt5Widgets)
+# Find the Qt libraries
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5PrintSupport REQUIRED)
+find_package(Qt5Test REQUIRED)
 
-# Create the main executable and link the needed libraries
-set(SOURCE_FILES
-        Code/UANC/main.cpp Code/UANC/gui/MainWindow.cpp Code/UANC/gui/MainWindow.h
-        Code/UANC/gui/MainWidget.cpp Code/UANC/gui/MainWidget.h
-        Code/UANC/util/FileActor.h Code/UANC/util/SignalFileActor.h
-        Code/UANC/util/DialogUtil.h Code/UANC/algorithm/Algorithm.h
-        Code/UANC/algorithm/InverseFFTAlgorithm.h Code/UANC/algorithm/InverseDirectAlgorithm.h Code/UANC/gui/SignalPlot.cpp Code/UANC/gui/SignalPlot.h Code/UANC/gui/Control.cpp Code/UANC/gui/Control.h Code/UANC/gui/PlotWidget.cpp Code/UANC/gui/PlotWidget.h
-        Code/UANC/gui/views/AlgorithmView.cc Code/UANC/gui/views/AlgorithmView.h
-        Code/UANC/gui/model/AlgorithmModel.h Code/UANC/algorithm/Algorithm.cc
-        Code/UANC/gui/model/FFTModel.h  Code/UANC/gui/views/FFTView.h Code/UANC/gui/interfaces/IAlgorithmView.h
-        Code/UANC/util/tools/Path.h Code/UANC/util/tools/Path.cc)
+#Find the boost test library
+find_package(Boost COMPONENTS unit_test_framework)
 
-set(AQUILA_FILES
-        Code/libs/aquila/source/SignalSource.h Code/libs/aquila/source/SignalSource.cpp
-        Code/libs/aquila/source/WaveFile.h Code/libs/aquila/source/WaveFile.cpp
-        Code/libs/aquila/source/WaveFileHandler.h Code/libs/aquila/source/WaveFileHandler.cpp
-        Code/libs/aquila/source/generator/Generator.h Code/libs/aquila/source/generator/Generator.cpp
-        Code/libs/aquila/source/generator/SineGenerator.h Code/libs/aquila/source/generator/SineGenerator.cpp
-        Code/libs/aquila/source/generator/TriangleGenerator.h Code/libs/aquila/source/generator/TriangleGenerator.cpp
-        Code/libs/aquila/transform/FftFactory.h Code/libs/aquila/transform/FftFactory.cpp
-        Code/libs/aquila/transform/OouraFft.h Code/libs/aquila/transform/OouraFft.cpp
-        Code/libs/aquila/fft/fft8g.c)
+# Index all source files
+file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_HOME_DIRECTORY}  Code/UANC/*)
 
-set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h Code/UANC/util/SignalManager.cc Code/UANC/util/SignalManager.h)
+#Add the Aquila source files
+file(GLOB_RECURSE AQUILA_SOURCE Code/libs/aquila/source/*)
 
-add_executable(UANC ${SOURCE_FILES} ${AQUILA_FILES} ${QCUSTOMPLOT_FILES})
+#Add Aquila transform files
+set(AQUILA_TRANSFORM Code/libs/aquila/transform/FftFactory.h Code/libs/aquila/transform/FftFactory.cpp Code/libs/aquila/transform/OouraFft.h Code/libs/aquila/transform/OouraFft.cpp)
+
+#Add the FFT library
+set(AQUILA_FFT Code/libs/aquila/fft/fft4g.c)
+
+set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cpp Code/UANC/util/SignalManager.h)
+
+add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES})
+
+#------------------------------------- Tests ---------------------------------------
+
+#Create the test files, if Boost has been found
+if(Qt5Test_FOUND)
+	#Exclude main from the source files of every test, but compile with the other files
+	#TODO: Complile the rest of the program as an library and link against it?
+	set(MAIN "Code/UANC/main.cpp" "Code/UANC/gui/MainWindow.cpp")
+	list(REMOVE_ITEM SOURCE_FILES ${MAIN})
+	#Get all test files and iterate over them
+	file(GLOB_RECURSE TEST_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}  Code/Tests/*)
+	foreach(testSrc ${TEST_FILES})
+		#Get the filename for every testfile in this directory and generate the target with the same name.
+		get_filename_component(testName ${testSrc} NAME_WE)
+		add_executable(${testName} ${testSrc} ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES})
+		target_link_libraries(${testName} ${Boost_LIBRARIES})
+		#Move the testbins to Bin/testbin
+		set_target_properties(${testName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin)
+
+		target_link_libraries(${testName} ${Qt5Widgets_LIBRARIES})
+		target_link_libraries(${testName} ${Qt5PrintSupport_LIBRARIES})
+		target_link_libraries(${testName} ${Qt5Network_LIBRARIES})
+		target_link_libraries(${testName} ${Qt5Test_LIBRARIES})
+		#Add the test to the test target, assumed no arguments are needed
+		add_test(NAME ${testName}   WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/testBin ${testName})
+	endforeach(testSrc)
+
+endif(Qt5Test_FOUND)
 
 # ------------------------------------ QT5 -----------------------------------------
 

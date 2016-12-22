@@ -31,10 +31,7 @@ class FFTView : public AlgorithmView {
    *
    * @return The unique widget, created as a qwidget.
    */
-  QWidget* buildUniqueWidget() {
-    //TODO fft plots
-    return new QWidget();
-  }
+  QWidget* buildUniqueWidget();
 
   /** \brief This represents the unique data.
    *
@@ -43,9 +40,7 @@ class FFTView : public AlgorithmView {
    *
    * @param data The data to apply to this view.
    */
-  void setUniqueData(model::AlgorithmModel* data) {
-    //TODO fft plots
-  }
+  void setUniqueData(model::AlgorithmModel* data);
 };
 
 }}}

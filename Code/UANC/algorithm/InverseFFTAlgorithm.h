@@ -5,9 +5,9 @@
 #ifndef UANC_INVERSEFFTALGORITHM_H
 #define UANC_INVERSEFFTALGORITHM_H
 
+#include "Algorithm.h"
 #include <Code/UANC/gui/model/FFTModel.h>
 #include <Code/UANC/gui/views/FFTView.h>
-#include "Algorithm.h"
 #include <complex>
 #include <Code/libs/aquila/source/SignalSource.h>
 #include <Code/libs/aquila/transform/FftFactory.h>
@@ -35,7 +35,7 @@ class InverseFFTAlgorithm : public Algorithm {
    *
    * @return the processed vector itself.
    */
-  std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) {
+  std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) override {
     // map the input signal to a valid sample
     const std::size_t SIZE = 524288;
     //const std::size_t SIZE2 = in->length();
@@ -71,21 +71,20 @@ class InverseFFTAlgorithm : public Algorithm {
    * This can be used to clone the algorithm
    * @return The cloned algorithm
    */
-  Algorithm *clone() {
+  Algorithm *clone() override {
     new InverseFFTAlgorithm();
   }
  private:
-  uanc::gui::model::AlgorithmModel *constructModel() {
+  uanc::gui::model::AlgorithmModel *constructModel() override {
     auto model = new uanc::gui::model::FFTModel();
     return model;
   }
 
-  uanc::gui::views::AlgorithmView *constructView() {
-    auto view = new uanc::gui::views::AlgorithmView();
+  uanc::gui::interfaces::IAlgorithmView *constructView() override {
+    auto view = new uanc::gui::views::FFTView();
     return view;
   }
 };
 
-}
-}
+}}
 #endif //UANC_INVERSEFFTALGORITHM_H

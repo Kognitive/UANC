@@ -6,7 +6,7 @@
 #define UANC_IALGORITHMVIEW_H
 
 #include <QtWidgets/QWidget>
-#include "Code/UANC/gui/model/AlgorithmModel.h"
+#include <Code/UANC/gui/model/AlgorithmModel.h>
 
 namespace uanc { namespace gui { namespace interfaces {
 
@@ -26,6 +26,14 @@ class IAlgorithmView {
    * @return The ready constructed and loaded widget.
    */
   virtual QWidget* getWidget() = 0;
+
+   /** \brief This method sets the overall data.
+   *
+   * Can be used to set the overall data.
+   *
+   * @param data The data to insert into the system.
+   */
+   virtual void setData(model::AlgorithmModel* data) = 0;
 };
 
 }}}
