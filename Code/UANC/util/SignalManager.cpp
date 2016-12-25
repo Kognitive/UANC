@@ -37,18 +37,18 @@ namespace uanc { namespace util {
     return this->signalCounter;
   }
 
-/** \brief Adds a signal to the internal map.
- *
- * Simply takes a string and a signal source and add them insidie of
- * the map.
- *
- * @param signalSource the signal source to adnamed.
- */
-int SignalManager::addSignal(std::shared_ptr<Aquila::SignalSource> signalSource) {
-  this->signalCounter = this->signalCounter + 1;
-  this->signalsMap.insert(std::make_pair(this->signalCounter, signalSource));
-  return this->signalCounter;
-}
+  /** \brief Adds a signal to the internal map.
+   *
+   * Simply takes a string and a signal source and add them insidie of
+   * the map.
+   *
+   * @param signalSource the signal source to adnamed.
+   */
+  int SignalManager::addSignal(std::shared_ptr<Aquila::SignalSource> signalSource) {
+    this->signalCounter = this->signalCounter + 1;
+    this->signalsMap.insert(std::make_pair(this->signalCounter, signalSource));
+    return this->signalCounter;
+  }
 
   /** \brief This method returns a signal as a weak ptr.
    *
@@ -61,6 +61,9 @@ int SignalManager::addSignal(std::shared_ptr<Aquila::SignalSource> signalSource)
    * the speiciged name.
    */
   std::shared_ptr<Aquila::SignalSource> SignalManager::getSignal(int index) {
+    if ( signalsMap.find(index) == signalsMap.end() ) {
+      return NULL;
+    }
     return this->signalsMap.at(index);
   }
 
