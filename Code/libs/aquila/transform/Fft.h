@@ -20,6 +20,7 @@
 
 #include "../global.h"
 #include <cstddef>
+#include <memory>
 
 namespace Aquila
 {
@@ -61,6 +62,8 @@ namespace Aquila
         {
         }
 
+        virtual std::size_t getStuffedLength();
+
         /**
          * Applies the forward FFT transform to the signal.
          *
@@ -75,7 +78,9 @@ namespace Aquila
          * @param spectrum input spectrum
          * @param x output signal
          */
-        virtual void ifft(SpectrumType spectrum, double x[]) = 0;
+        virtual std::shared_ptr<std::vector<double>> ifft(SpectrumType spectrum) = 0;
+
+
 
     protected:
         /**

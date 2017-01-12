@@ -36,10 +36,16 @@ namespace Aquila
         OouraFft(std::size_t length);
         ~OouraFft();
 
+        virtual std::size_t getStuffedLength();
         virtual SpectrumType fft(const SampleType x[]);
-        virtual void ifft(SpectrumType spectrum, double x[]);
+        virtual std::shared_ptr<std::vector<double>>  ifft(SpectrumType spectrum);
 
     private:
+        /*
+         * The stuffed size of the array, since only FFT`s with a length of pow(2,x) are supported.
+         */
+        std::size_t stuffedLength;
+
         /**
          * Work area for bit reversal.
          */
@@ -49,6 +55,8 @@ namespace Aquila
          * Cos/sin table.
          */
         double* w;
+
+
     };
 }
 
