@@ -33,16 +33,15 @@ class InverseFFTAlgorithm : public Algorithm {
    * a vector of size n, also of type SignalSource. Note that the output should be the inverted
    * signal using fft inverse algorithm
    *
-   * @return the processed vector itself.
    */
-  std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) override {
+  std::shared_ptr<Aquila::SignalSource>  execute(std::shared_ptr<Aquila::SignalSource> in) override {
     // map the input signal to a valid sample
     const std::size_t SIZE = 524288;
-    //const std::size_t SIZE2 = in->length();
-    auto sampleFreq = in->getSampleFrequency();
+    //const std::size_t SIZE2 = ;
+    unsigned int sampleFreq = in->getSampleFrequency();
 
     // choose a fft algorithm
-    auto fft = Aquila::FftFactory::getFft(SIZE);
+    auto fft = Aquila::FftFactory::getFft(in->length());
 
     // transform the signal into the fouier space
     Aquila::SpectrumType spectrum = fft->fft(in->toArray());
@@ -55,14 +54,11 @@ class InverseFFTAlgorithm : public Algorithm {
         [](Aquila::ComplexType x) { return (x.operator*=(-1)); });
 
     // back transformation of signal from fouier space
-    double x[SIZE];
-    fft->ifft(spectrum, x);
+    std::shared_ptr<std::vector<double>>  x = fft->ifft(spectrum);
 
     // define output signal
-    Aquila::SignalSource *t = new Aquila::SignalSource(x, SIZE);
-    t->setSampleFrequency(sampleFreq);
-    std::shared_ptr<Aquila::SignalSource> outputSignal(new Aquila::SignalSource(*t));
-
+    std::shared_ptr<Aquila::SignalSource> outputSignal(
+        new Aquila::SignalSource(&(*x)[0], x->size(), sampleFreq));
     return outputSignal;
   }
 
@@ -76,12 +72,12 @@ class InverseFFTAlgorithm : public Algorithm {
   }
  private:
   uanc::gui::model::AlgorithmModel *constructModel() override {
-    auto model = new uanc::gui::model::FFTModel();
+    auto model = new uanc::gui::model::AlgorithmModel();
     return model;
   }
 
   uanc::gui::interfaces::IAlgorithmView *constructView() override {
-    auto view = new uanc::gui::views::FFTView();
+    auto view = new uanc::gui::views::AlgorithmView();
     return view;
   }
 };

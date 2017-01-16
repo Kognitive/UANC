@@ -1,4 +1,7 @@
-Bin/UANC
+Bin/
+Doc/latex
+Doc/html
+Doc/man
 cmake-build-debug*
 .idea*
 *.aux
