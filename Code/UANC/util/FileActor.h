@@ -18,7 +18,7 @@ namespace uanc { namespace util {
  *
  * @tparam T the type of object the file actor can handle
  */
-template <class T>
+template <typename T>
 class FileActor {
 
  public:

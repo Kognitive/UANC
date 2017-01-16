@@ -5,6 +5,7 @@
 
 #include <Code/UANC/util/tools/Path.h>
 #include <Code/libs/aquila/source/WaveFile.h>
+#include <Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h>
 #include "MainWidget.h"
 
 namespace uanc {
@@ -91,6 +92,9 @@ void MainWidget::registerAlgorithms() {
   // add first algorithms
   auto invDirect = new uanc::amv::anc::algorithm::InverseDirectAlgorithm();
   this->_algorithmList.push_back(invDirect);
+
+  auto invFF = new uanc::amv::anc::algorithm::InverseFFTAlgorithm();
+  this->_algorithmList.push_back(invFF);
 }
 
 /** \brief This method gets used to show the algorithms inside of the combobox

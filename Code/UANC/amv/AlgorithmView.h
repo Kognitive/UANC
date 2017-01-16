@@ -9,7 +9,7 @@
 
 namespace uanc { namespace amv {
 
-template <class model>
+template <typename model>
 class AlgorithmView : public IAlgorithmView {
 
  public:

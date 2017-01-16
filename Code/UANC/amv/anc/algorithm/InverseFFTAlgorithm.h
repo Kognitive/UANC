@@ -42,7 +42,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
   void invert(SignalModel *data) override {
 
     // copy data to in
-    in = data->original;
+    auto in = data->original;
 
     // map the input signal to a valid sample
     const std::size_t SIZE = 524288;
@@ -69,7 +69,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     std::shared_ptr<Aquila::SignalSource> outputSignal(
         new Aquila::SignalSource(&(*x)[0], x->size(), sampleFreq));
 
-    this->getModel()->original = in->original;
+    this->getModel()->original = in;
     this->getModel()->inverted = outputSignal;
   }
 

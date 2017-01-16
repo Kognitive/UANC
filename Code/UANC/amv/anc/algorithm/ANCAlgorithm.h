@@ -9,7 +9,7 @@
 
 namespace uanc { namespace amv { namespace anc { namespace algorithm {
 
-template<class viewmodel, class datamodel>
+template<typename datamodel, typename viewmodel = datamodel>
 class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
 
  protected:
@@ -30,9 +30,6 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
  private:
   datamodel* model;
 };
-
-template<class datamodel>
-class ANCAlgorithm : public ANCAlgorithm<datamodel, datamodel> {};
 
 }}}}
 
