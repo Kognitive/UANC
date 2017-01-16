@@ -9,27 +9,30 @@
 
 namespace uanc { namespace amv { namespace anc { namespace algorithm {
 
-template<class outputmodel>
-class ANCAlgorithm : public uanc::amv::Algorithm<outputmodel> {
+template<class viewmodel, class datamodel>
+class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
 
  protected:
-  outputmodel* execute(uanc::amv::SignalModel* input) final {
+  viewmodel* execute(uanc::amv::SignalModel* input) final {
     this->model = this->createEmptyModel();
     this->invert(input);
+    return this->getModel();
+  }
+
+  datamodel* getModel() {
     return this->model;
   }
 
-  outputmodel* getModel() {
-    return this->model;
-  }
-
-  virtual outputmodel* createEmptyModel() = 0;
+  virtual viewmodel* createEmptyModel() = 0;
 
   virtual void invert(uanc::amv::SignalModel* input) = 0;
 
  private:
-  outputmodel* model;
+  datamodel* model;
 };
+
+template<class datamodel>
+class ANCAlgorithm : public ANCAlgorithm<datamodel, datamodel> {};
 
 }}}}
 
