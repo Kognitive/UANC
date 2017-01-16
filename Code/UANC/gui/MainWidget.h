@@ -79,19 +79,13 @@ class MainWidget : public QWidget {
    *
    * Basically create a vector which can hold references to the appropriate algorithms
    */
-  std::vector<uanc::amv::IAlgorithm*> _algorithmList;
+  std::shared_ptr<std::vector<uanc::amv::IAlgorithm*>> _algorithmList;
 
   /** \brief This method will setup the gui appropriately
    *
    * It creates basically a main widget and a menu inside of the main window.
    */
   void setupGUI();
-
-  /** \brief This method can be used to register the algorithms inside of the gui
-   *
-   * This method gets used to register the available algorithms.
-   */
-  void registerAlgorithms();
 
   /** \brief This method gets used to show the algorithms inside of the combobox
    *

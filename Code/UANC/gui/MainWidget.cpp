@@ -6,6 +6,7 @@
 #include <Code/UANC/util/tools/Path.h>
 #include <Code/libs/aquila/source/WaveFile.h>
 #include <Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h>
+#include <Code/UANC/amv/AlgorithmRegister.h>
 #include "MainWidget.h"
 
 namespace uanc {
@@ -36,7 +37,7 @@ void MainWidget::setupGUI() {
   connect(this->_buttonApply.get(), SIGNAL (clicked()), this, SLOT (applyClicked()));
 
   // register algorithms and add them to the combobox
-  this->registerAlgorithms();
+  this->_algorithmList = uanc::amv::AlgorithmRegister::getAlgorithms();
   this->showAvailableAlgorithms();
 
   // basically create a hbox layout
@@ -78,25 +79,6 @@ void MainWidget::setupGUI() {
   this->show();
 }
 
-/** \brief This method can be used to register the algorithms inside of the gui
- *
- * This method gets used to register the available algorithms.
- */
-void MainWidget::registerAlgorithms() {
-
-  this->_algorithmList = std::vector<uanc::amv::IAlgorithm *>();
-
-  // Here you can add further algorithms. If register them here, they
-  // will be included further inside the ecosystem automatically.
-
-  // add first algorithms
-  auto invDirect = new uanc::amv::anc::algorithm::InverseDirectAlgorithm();
-  this->_algorithmList.push_back(invDirect);
-
-  auto invFF = new uanc::amv::anc::algorithm::InverseFFTAlgorithm();
-  this->_algorithmList.push_back(invFF);
-}
-
 /** \brief This method gets used to show the algorithms inside of the combobox
  *
  * This method displays the algorithms inside of the combobox.
@@ -104,11 +86,11 @@ void MainWidget::registerAlgorithms() {
 void MainWidget::showAvailableAlgorithms() {
 
   // get size of algorithm list
-  auto size = this->_algorithmList.size();
+  auto size = this->_algorithmList->size();
 
   // now basically iterate over the elements
   for (auto i = -1; ++i < size;) {
-    this->_cmbAlgorithm->addItem(QString::fromStdString(this->_algorithmList[i]->getName()));
+    this->_cmbAlgorithm->addItem(QString::fromStdString(this->_algorithmList->at(i)->getName()));
   }
 }
 
@@ -121,7 +103,7 @@ void MainWidget::applyClicked() {
   // get the current index and using that get the correct algorithm
   // After that simply apply the algorithm
   auto currentIndex = _cmbAlgorithm->currentIndex();
-  auto algorithm = this->_algorithmList[currentIndex]->clone();
+  auto algorithm = this->_algorithmList->at(currentIndex)->clone();
 
   this->applyAlgorithm(*algorithm);
   auto index = this->_tabWidget->currentIndex();
