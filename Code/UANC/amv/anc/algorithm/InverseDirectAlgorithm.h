@@ -16,7 +16,7 @@ namespace algorithm {
 
 using namespace uanc::amv::anc;
 
-class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel, model::ANCModel> {
+class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel> {
  public:
 
   /** \brief This should be implemented by the subclasses.

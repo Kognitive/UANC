@@ -15,7 +15,7 @@ namespace uanc { namespace amv {
  *
  * This class can be used to implement an algorithm.
  */
-template<typename outputmodel>
+template<class outputmodel>
 class Algorithm : public IAlgorithm {
 
  public:
