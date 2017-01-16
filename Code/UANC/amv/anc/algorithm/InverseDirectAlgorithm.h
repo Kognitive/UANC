@@ -5,13 +5,18 @@
 #ifndef UANC_DIRECTINVERSEALGORITHM_H
 #define UANC_DIRECTINVERSEALGORITHM_H
 
-#include <Code/UANC/gui/model/AlgorithmModel.h>
-#include <Code/UANC/gui/views/AlgorithmView.h>
-#include "Algorithm.h"
+#include <Code/UANC/amv/anc/model/ANCModel.h>
+#include <Code/UANC/amv/anc/view/ANCView.h>
+#include "ANCAlgorithm.h"
 
-namespace uanc { namespace algorithm {
+namespace uanc {
+namespace amv {
+namespace anc {
+namespace algorithm {
 
-class InverseDirectAlgorithm : public Algorithm {
+using namespace uanc::amv::anc;
+
+class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel> {
  public:
 
   /** \brief This should be implemented by the subclasses.
@@ -31,10 +36,14 @@ class InverseDirectAlgorithm : public Algorithm {
    *
    * @return the processed vector itself.
    */
-  std::shared_ptr<Aquila::SignalSource> execute(std::shared_ptr<Aquila::SignalSource> in) override {
-    // multiplies the Signalsource with -1
-    std::shared_ptr<Aquila::SignalSource> out(new Aquila::SignalSource(in->operator*=(-1)));
-    return out;
+  void invert(SignalModel *in) override {
+
+    // creates a new shared pointer containing the inverted signal
+    auto inverted = new Aquila::SignalSource(in->original->operator*=(-1));
+    std::shared_ptr<Aquila::SignalSource> out(inverted);
+
+    this->getModel()->original = in->original;
+    this->getModel()->inverted = out;
   }
 
   /** \brief Can be used to clone the algorithm.
@@ -42,22 +51,24 @@ class InverseDirectAlgorithm : public Algorithm {
    * This can be used to clone the algorithm
    * @return The cloned algorithm
    */
-  Algorithm* clone() override {
+  Algorithm *clone() override {
     return new InverseDirectAlgorithm();
   }
 
  protected:
-  uanc::gui::model::AlgorithmModel* constructModel() override {
-    auto model = new uanc::gui::model::AlgorithmModel();
-    return model;
+
+  model::ANCModel *createEmptyModel() override {
+    return new model::ANCModel();
   }
 
-  uanc::gui::interfaces::IAlgorithmView* constructView() override {
-    auto view = new uanc::gui::views::AlgorithmView();
-    return view;
+  AlgorithmView<model::ANCModel> *constructView() override {
+    return new view::ANCView();
   }
 };
 
-}}
+}
+}
+}
+}
 
 #endif //UANC_DIRECTINVERSEALGORITHM_H

@@ -4,6 +4,7 @@
  */
 
 #include <Code/UANC/util/tools/Path.h>
+#include <Code/libs/aquila/source/WaveFile.h>
 #include "MainWidget.h"
 
 namespace uanc {
@@ -81,20 +82,15 @@ void MainWidget::setupGUI() {
  * This method gets used to register the available algorithms.
  */
 void MainWidget::registerAlgorithms() {
-  using namespace uanc::algorithm;
 
-  this->_algorithmList = std::vector<Algorithm *>();
+  this->_algorithmList = std::vector<uanc::amv::IAlgorithm *>();
 
   // Here you can add further algorithms. If register them here, they
   // will be included further inside the ecosystem automatically.
 
   // add first algorithms
-  auto invDirect = new InverseDirectAlgorithm();
+  auto invDirect = new uanc::amv::anc::algorithm::InverseDirectAlgorithm();
   this->_algorithmList.push_back(invDirect);
-
-  // add second algorithms
-  auto invFFT = new InverseFFTAlgorithm();
-  this->_algorithmList.push_back(invFFT);
 }
 
 /** \brief This method gets used to show the algorithms inside of the combobox
@@ -102,7 +98,6 @@ void MainWidget::registerAlgorithms() {
  * This method displays the algorithms inside of the combobox.
  */
 void MainWidget::showAvailableAlgorithms() {
-  using namespace uanc::algorithm;
 
   // get size of algorithm list
   auto size = this->_algorithmList.size();
@@ -129,12 +124,10 @@ void MainWidget::applyClicked() {
 
   // get the mapping list and push back the algorithm save afterwards
   auto vec = this->_waveAlgorithMapping.at(index);
-  vec->push_back(std::shared_ptr<uanc::algorithm::Algorithm>(algorithm));
+  vec->push_back(std::shared_ptr<uanc::amv::IAlgorithm>(algorithm));
   this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
 
-  algorithm->process(SignalManager::get()->getSignal(index));
-
-  // we want to simply derive a model a view and combine them
+  // we want to simply derive a anc a view and combine them
   this->_detailTabWidget->addTab(algorithm->getView()->getWidget(),
                                  QString::fromStdString(algorithm->getName()));
   algorithm->fillView();
@@ -189,7 +182,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSo
   auto index = this->_tabWidget->addTab(widget, QString::fromStdString(text));
   tabInRun = false;
 
-  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
+  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>();
   this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
 }
 
@@ -199,7 +192,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSo
  *
  * @param algorithm The algorithm to use
  */
-void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
+void MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
 
   // basically create the input vector
   std::shared_ptr<Aquila::SignalSource> input;
@@ -221,9 +214,11 @@ void MainWidget::applyAlgorithm(algorithm::Algorithm &algorithm) {
   }
 
   input = signal;
+  auto model = new uanc::amv::SignalModel();
+  model->original = input;
 
   // apply the algorithm
-  algorithm.process(input);
+  algorithm.process(model);
 }
 
 void MainWidget::waveClosed(const int &index) {
@@ -241,7 +236,7 @@ void MainWidget::waveClosed(const int &index) {
   tabInRun = false;
 
   // additionally remove the algorithm from the inner mapping
-  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
+  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>();
 
   // iterate from closed to end
   for (int i = index; i < this->_tabWidget->count() - 1; ++i) {
@@ -279,7 +274,7 @@ void MainWidget::algorithmClosed(const int &index) {
   tabInRun = false;
 
   // additionally remove the algorithm from the inner mapping
-  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>();
+  auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>();
 
   // get the top index
   auto indexTop = this->_tabWidget->currentIndex();

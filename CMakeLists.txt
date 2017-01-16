@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.6)
 project(UANC)
 
+set(CMAKE_C_COMPILER "clang")
+set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -v" )
 
 # apply some settings to generate output in Bin folder
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/Bin)
@@ -26,12 +29,6 @@ file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_HOME_DIRECTORY}  Code/UANC/*)
 
 #Add the Aquila source files
 file(GLOB_RECURSE AQUILA_SOURCE Code/libs/aquila/source/*)
-
-#Add Aquila transform files
-set(AQUILA_TRANSFORM Code/libs/aquila/transform/FftFactory.h Code/libs/aquila/transform/FftFactory.cpp Code/libs/aquila/transform/OouraFft.h Code/libs/aquila/transform/OouraFft.cpp)
-
-#Add the FFT library
-set(AQUILA_FFT Code/libs/aquila/fft/fft4g.c)
 
 set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cpp Code/UANC/util/SignalManager.h)
 

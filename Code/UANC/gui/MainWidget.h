@@ -12,9 +12,8 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
 
-#include "Code/UANC/algorithm/Algorithm.h"
-#include "Code/UANC/algorithm/InverseDirectAlgorithm.h"
-#include "Code/UANC/algorithm/InverseFFTAlgorithm.h"
+#include "Code/UANC/amv/Algorithm.h"
+#include "Code/UANC/amv/anc/algorithm/InverseDirectAlgorithm.h"
 #include "Code/UANC/util/SignalManager.h"
 #include "PlotWidget.h"
 
@@ -56,7 +55,7 @@ class MainWidget : public QWidget {
   std::map<int, std::shared_ptr<std::vector<std::shared_ptr<QWidget>>>> _waveViewMapping;
 
   /** This represents a map between the waves and the algorithms . */
-  std::map<int, std::shared_ptr<std::vector<std::shared_ptr<uanc::algorithm::Algorithm>>>> _waveAlgorithMapping;
+  std::map<int, std::shared_ptr<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>> _waveAlgorithMapping;
 
   /** \brief Holds the apply button
    *
@@ -80,7 +79,7 @@ class MainWidget : public QWidget {
    *
    * Basically create a vector which can hold references to the appropriate algorithms
    */
-  std::vector<uanc::algorithm::Algorithm*> _algorithmList;
+  std::vector<uanc::amv::IAlgorithm*> _algorithmList;
 
   /** \brief This method will setup the gui appropriately
    *
@@ -106,7 +105,7 @@ class MainWidget : public QWidget {
    *
    * @param algorithm The algorithm to use
    */
-  void applyAlgorithm(algorithm::Algorithm& algorithm);
+  void applyAlgorithm(uanc::amv::IAlgorithm& algorithm);
 
  private slots:
 

@@ -5,10 +5,11 @@
 #ifndef UANC_SIGNALMANAGER_H
 #define UANC_SIGNALMANAGER_H
 
-#include "Code/libs/aquila/aquila.h"
+#include "Code/libs/aquila/source/SignalSource.h"
 
 #include <list>
 #include <memory>
+#include <map>
 
 namespace uanc { namespace util {
 
