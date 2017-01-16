@@ -8,6 +8,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/Bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/Bin/Lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/Bin/Lib)
 
+#set the documentation properties
+set(DOCUMENTATION_DIRECTORY ${CMAKE_HOME_DIRECTORY}/Docs)
+set(CODE_DOC_ROOT_DIR ${CMAKE_HOME_DIRECTORY}/Code/UANC)
+
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_VERBOSE_MAKEFILE on)
@@ -18,8 +22,8 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
 find_package(Qt5Test REQUIRED)
 
-#Find the boost test library
-find_package(Boost COMPONENTS unit_test_framework)
+#Find the doxygen library
+find_package(Doxygen)
 
 # Index all source files
 file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_HOME_DIRECTORY}  Code/UANC/*)
@@ -89,6 +93,18 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 target_link_libraries(UANC ${Qt5Widgets_LIBRARIES})
 target_link_libraries(UANC ${Qt5PrintSupport_LIBRARIES})
 target_link_libraries(UANC ${Qt5Network_LIBRARIES})
+
+# ------------------------------------ Doxygen -----------------------------------------
+
+# add a target to generate API documentation with Doxygen
+if(DOXYGEN_FOUND)
+	configure_file(${DOCUMENTATION_DIRECTORY}/Doxyfile.in ${DOCUMENTATION_DIRECTORY}/Doxyfile @ONLY)
+	add_custom_target(doc
+	${DOXYGEN_EXECUTABLE} ${DOCUMENTATION_DIRECTORY}/Doxyfile
+	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+	COMMENT "Generating API documentation with Doxygen" VERBATIM
+	)
+endif(DOXYGEN_FOUND)
 
 # ------------------------------------ Multiplattform -----------------------------------------
 
