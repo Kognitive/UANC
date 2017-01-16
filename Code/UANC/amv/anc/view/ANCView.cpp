@@ -2,15 +2,15 @@
 // Created by markus on 12/12/16.
 //
 #include <Code/UANC/gui/PlotWidget.h>
-#include "AlgorithmView.h"
+#include "ANCView.h"
 
-namespace uanc {namespace gui {namespace views {
+namespace uanc { namespace amv { namespace anc { namespace view {
 
   /** \brief Should be publically constructable.
    *
    * Simple constructor for creating such an object.
    */
-  AlgorithmView::AlgorithmView() {
+  ANCView::ANCView() {
 
   }
 
@@ -21,10 +21,10 @@ namespace uanc {namespace gui {namespace views {
    *
    * @return The created shared widget.
    */
-  QWidget* AlgorithmView::buildSharedWidget() {
+  QWidget* ANCView::buildSharedWidget() {
 
     // intialize the q custom plot and return the pointer to it.
-    this->_plotWidget = std::unique_ptr<PlotWidget>(new PlotWidget());
+    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget());
     return _plotWidget.get();
   }
 
@@ -35,7 +35,7 @@ namespace uanc {namespace gui {namespace views {
    *
    * @return The unique widget, created as a qwidget.
    */
-  QWidget* AlgorithmView::buildUniqueWidget() {
+  QWidget* ANCView::buildUniqueWidget() {
     return nullptr;
   }
 
@@ -45,7 +45,7 @@ namespace uanc {namespace gui {namespace views {
    *
    * @return The ready constructed and loaded widget.
    */
-  QWidget* AlgorithmView::getWidget() {
+  QWidget* ANCView::getWidget() {
     if (this->_widget == nullptr) {
       auto unique = this->buildUniqueWidget();
 
@@ -84,8 +84,8 @@ namespace uanc {namespace gui {namespace views {
    *
    * @param data The data to display in the gui.s
    */
-  void AlgorithmView::setSharedData(model::AlgorithmModel* data) {
-    this->_plotWidget->setSignal(data->samples);
+  void ANCView::setSharedData(model::ANCModel* data) {
+    this->_plotWidget->setSignal(data->inverted);
   }
 
   /** \brief This represents the unique data.
@@ -95,7 +95,7 @@ namespace uanc {namespace gui {namespace views {
    *
    * @param data The data to apply to this view.
    */
-  void AlgorithmView::setUniqueData(model::AlgorithmModel* data) {
+  void ANCView::setUniqueData(model::ANCModel* data) {
 
   }
 
@@ -105,8 +105,8 @@ namespace uanc {namespace gui {namespace views {
    *
    * @param data The data to insert into the system.
    */
-  void AlgorithmView::setData(model::AlgorithmModel* data) {
+  void ANCView::setData(model::ANCModel* data) {
     this->setSharedData(data);
     this->setUniqueData(data);
   }
-}}}
+}}}}

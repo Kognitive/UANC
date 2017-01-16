@@ -5,17 +5,21 @@
 #ifndef UANC_INVERSEFFTALGORITHM_H
 #define UANC_INVERSEFFTALGORITHM_H
 
-#include "Algorithm.h"
-#include <Code/UANC/gui/model/FFTModel.h>
-#include <Code/UANC/gui/views/FFTView.h>
 #include <complex>
 #include <Code/libs/aquila/source/SignalSource.h>
 #include <Code/libs/aquila/transform/FftFactory.h>
+#include <Code/UANC/amv/anc/model/ANCModel.h>
+#include <Code/UANC/amv/anc/view/ANCView.h>
+#include "ANCAlgorithm.h"
 
 namespace uanc {
+namespace amv {
+namespace anc {
 namespace algorithm {
 
-class InverseFFTAlgorithm : public Algorithm {
+using namespace uanc::amv::anc;
+
+class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
  public:
 
   /** \brief This should be implemented by the subclasses.
@@ -33,8 +37,13 @@ class InverseFFTAlgorithm : public Algorithm {
    * a vector of size n, also of type SignalSource. Note that the output should be the inverted
    * signal using fft inverse algorithm
    *
+   * @return the processed vector itself.
    */
-  std::shared_ptr<Aquila::SignalSource>  execute(std::shared_ptr<Aquila::SignalSource> in) override {
+  void invert(SignalModel *data) override {
+
+    // copy data to in
+    in = data->original;
+
     // map the input signal to a valid sample
     const std::size_t SIZE = 524288;
     //const std::size_t SIZE2 = ;
@@ -59,7 +68,9 @@ class InverseFFTAlgorithm : public Algorithm {
     // define output signal
     std::shared_ptr<Aquila::SignalSource> outputSignal(
         new Aquila::SignalSource(&(*x)[0], x->size(), sampleFreq));
-    return outputSignal;
+
+    this->getModel()->original = in->original;
+    this->getModel()->inverted = outputSignal;
   }
 
   /** \brief Can be used to clone the algorithm.
@@ -68,19 +79,19 @@ class InverseFFTAlgorithm : public Algorithm {
    * @return The cloned algorithm
    */
   Algorithm *clone() override {
-    new InverseFFTAlgorithm();
-  }
- private:
-  uanc::gui::model::AlgorithmModel *constructModel() override {
-    auto model = new uanc::gui::model::AlgorithmModel();
-    return model;
+    return new InverseFFTAlgorithm();
   }
 
-  uanc::gui::interfaces::IAlgorithmView *constructView() override {
-    auto view = new uanc::gui::views::AlgorithmView();
-    return view;
+ protected:
+
+  model::ANCModel *createEmptyModel() override {
+    return new model::ANCModel();
+  }
+
+  AlgorithmView<model::ANCModel> *constructView() override {
+    return new view::ANCView();
   }
 };
 
-}}
+}}}}
 #endif //UANC_INVERSEFFTALGORITHM_H

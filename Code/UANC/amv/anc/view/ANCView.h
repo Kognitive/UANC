@@ -2,24 +2,25 @@
 // Created by markus on 12/12/16.
 //
 
-#ifndef UANC_ALGORITHMVIEW_H
-#define UANC_ALGORITHMVIEW_H
+#ifndef UANC_ANCVIEW_H
+#define UANC_ANCVIEW_H
 
 #include <memory>
 #include <QtWidgets/QWidget>
-#include <Code/UANC/gui/model/AlgorithmModel.h>
-#include <Code/UANC/gui/interfaces/IAlgorithmView.h>
+#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/AlgorithmView.h>
 #include <Code/UANC/util/tools/Path.h>
 #include <Code/UANC/gui/PlotWidget.h>
+#include <Code/UANC/amv/anc/model/ANCModel.h>
 
-namespace uanc {namespace gui { namespace views {
+namespace uanc { namespace amv { namespace anc { namespace view {
 
 /** \brief Represents an algorithm view, which can be used inside
  * of the application.
  *
  * This represents a algorithm view which can be used with an appropriate model.
  */
-class AlgorithmView : public  interfaces::IAlgorithmView {
+class ANCView : public uanc::amv::AlgorithmView<model::ANCModel> {
 
  public:
 
@@ -27,7 +28,7 @@ class AlgorithmView : public  interfaces::IAlgorithmView {
    *
    * Simple constructor for creating such an object.
    */
-  AlgorithmView();
+  ANCView();
 
   /** \brief Builds the shared widget.
    *
@@ -63,7 +64,7 @@ class AlgorithmView : public  interfaces::IAlgorithmView {
    *
    * @param data The data to display in the gui.s
    */
-  void setSharedData(model::AlgorithmModel* data);
+  void setSharedData(model::ANCModel* data);
 
   /** \brief This represents the unique data.
    *
@@ -72,7 +73,7 @@ class AlgorithmView : public  interfaces::IAlgorithmView {
    *
    * @param data The data to apply to this view.
    */
-  virtual void setUniqueData(model::AlgorithmModel* data);
+  virtual void setUniqueData(model::ANCModel* data);
 
   /** \brief This method sets the overall data.
    *
@@ -80,12 +81,12 @@ class AlgorithmView : public  interfaces::IAlgorithmView {
    *
    * @param data The data to insert into the system.
    */
-   void setData(model::AlgorithmModel* data);
+   void setData(model::ANCModel* data) final;
 
  private:
 
   /** \brief Contains the plot of this algorithm view. */
-  std::unique_ptr<PlotWidget> _plotWidget;
+  std::unique_ptr<uanc::gui::PlotWidget> _plotWidget;
 
   /** \brief This represents a weak pointer as an image.
    *
@@ -94,8 +95,8 @@ class AlgorithmView : public  interfaces::IAlgorithmView {
   QWidget* _widget = nullptr;
 };
 
-}}}
+}}}}
 
 
 
-#endif //UANC_ALGORITHMVIEW_H
+#endif //UANC_ANCVIEW_H
