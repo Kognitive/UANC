@@ -62,7 +62,7 @@ namespace Aquila
         {
         }
 
-        virtual std::size_t getStuffedLength();
+        virtual std::size_t getStuffedLength() = 0;
 
         /**
          * Applies the forward FFT transform to the signal.
