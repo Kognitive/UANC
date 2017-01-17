@@ -7,11 +7,12 @@
 #define UANC_ALGORITHMREGISTER_H
 
 #include <memory>
-#include "anc/algorithm/InverseDirectAlgorithm.h"
-#include "anc/algorithm/InverseFFTAlgorithm.h"
+#include "Code/UANC/amv/anc/algorithm/InverseDirectAlgorithm.h"
+#include "Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h"
 
 namespace uanc {
 namespace amv {
+namespace anc {
 
 // include namespace of the algorithms to support readability.
 using namespace anc::algorithm;
@@ -22,7 +23,7 @@ using namespace anc::algorithm;
  * an algorithm simply register it inside of this class and it will automatically be integrated
  * in the application.
  */
-class AlgorithmRegister {
+class ANCAlgorithmRegister {
  public:
 
   /** \brief Supply all registered algorithms.
@@ -49,6 +50,7 @@ class AlgorithmRegister {
     return lst;
   }
 };
+}
 }
 }
 

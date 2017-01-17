@@ -3,8 +3,8 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-#ifndef UANC_ANCVIEW_H
-#define UANC_ANCVIEW_H
+#ifndef UANC_SIGNALVIEW_H
+#define UANC_SIGNALVIEW_H
 
 #include <memory>
 #include <QtWidgets/QWidget>
@@ -16,15 +16,15 @@
 
 namespace uanc {
 namespace amv {
-namespace anc {
+namespace signal {
 namespace view {
 
-/** \brief Represents an ANCView.
+/** \brief Represents a SignalView.
  *
- * This represents a general ANCView. It operates on an ANCModel. It only displays a simple
- * plot of the the inverted signal. It is a specialization of the more general AlgorithmView.
+ * This represents a general SignalView. It operates on an SignalModel. It basically shows a plot of the
+ * original signal.
  */
-class ANCView : public uanc::amv::AlgorithmView<model::ANCModel> {
+class SignalView : public uanc::amv::AlgorithmView<uanc::amv::SignalModel> {
 
  public:
 
@@ -45,7 +45,7 @@ class ANCView : public uanc::amv::AlgorithmView<model::ANCModel> {
   *
   * @param data The applied data.
   */
-  void setData(model::ANCModel *data) final;
+  void setData(uanc::amv::SignalModel *data) final;
 
  private:
 
@@ -67,4 +67,4 @@ class ANCView : public uanc::amv::AlgorithmView<model::ANCModel> {
 }
 }
 
-#endif //UANC_ANCVIEW_H
+#endif //UANC_SIGNALVIEW_H

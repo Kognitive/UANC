@@ -6,7 +6,7 @@
 #include <Code/UANC/util/tools/Path.h>
 #include <Code/libs/aquila/source/WaveFile.h>
 #include <Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h>
-#include <Code/UANC/amv/AlgorithmRegister.h>
+#include <Code/UANC/amv/anc/ANCAlgorithmRegister.h>
 #include "MainWidget.h"
 
 namespace uanc {
@@ -37,7 +37,7 @@ void MainWidget::setupGUI() {
   connect(this->_buttonApply.get(), SIGNAL (clicked()), this, SLOT (applyClicked()));
 
   // register algorithms and add them to the combobox
-  this->_algorithmList = uanc::amv::AlgorithmRegister::getAlgorithms();
+  this->_algorithmList = uanc::amv::anc::ANCAlgorithmRegister::getAlgorithms();
   this->showAvailableAlgorithms();
 
   // basically create a hbox layout
