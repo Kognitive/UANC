@@ -29,7 +29,7 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
 
   // check if the models are correct and applicable.
   static_assert(std::is_base_of<viewmodel, datamodel>::value, "The data model has to be derived from the view model.");
-  static_assert(std::is_base_of<model::SignalModel, viewmodel>::value,
+  static_assert(std::is_base_of<SignalModel, viewmodel>::value,
                 "The view model has to be derived from SignalModel.");
 
  protected:
@@ -43,7 +43,7 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * \return The created model from the data of the inversion.
    */
-  viewmodel *execute(uanc::amv::SignalModel *input) final {
+  viewmodel *execute(SignalModel *input) final {
     this->model = new viewmodel();
     this->transform(input);
     return this->getModel();
@@ -67,7 +67,7 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * @param input The input model containing the original signal.
    */
-  virtual void transform(uanc::amv::SignalModel *input) = 0;
+  virtual void transform(SignalModel *input) = 0;
 
  private:
 
