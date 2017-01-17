@@ -9,7 +9,8 @@
 #include <string>
 #include <memory>
 
-namespace uanc { namespace util {
+namespace uanc {
+namespace util {
 
 /** \brief Simple FileActor class, which can operate on a file.
  *
@@ -18,7 +19,7 @@ namespace uanc { namespace util {
  *
  * @tparam T the type of object the file actor can handle
  */
-template <typename T>
+template<typename T>
 class FileActor {
 
  public:
@@ -28,7 +29,7 @@ class FileActor {
    *
    * @param path The path to the acted file
    */
-  FileActor(const std::string& path) {
+  FileActor(const std::string &path) {
     this->_path = path;
   }
 
@@ -69,5 +70,6 @@ class FileActor {
    */
   std::string _path;
 };
-}}
+}
+}
 #endif //UANC_FILELOADER_H

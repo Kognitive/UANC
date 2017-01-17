@@ -33,15 +33,6 @@ class MainWidget : public QWidget {
    */
   MainWidget();
 
-  /** \brief This method should simply plot the signal to the top or bottom plot
-   *
-   * This should plot the signal to the top and bottom plot
-   *
-   * @param signal The signal which should be used during this
-   * @param position The position of the plot. e.g. Top or bottom.
-   */
-  void plotSignal(std::shared_ptr<Aquila::SignalSource> signal, PlotWidget* position);
-
   /** \brief loads the signal source.
    *
    * This method loads a signal source in the top tab view.
@@ -79,7 +70,7 @@ class MainWidget : public QWidget {
    *
    * Basically create a vector which can hold references to the appropriate algorithms
    */
-  std::shared_ptr<std::vector<uanc::amv::IAlgorithm*>> _algorithmList;
+  std::shared_ptr<std::vector<uanc::amv::IAlgorithm *>> _algorithmList;
 
   /** \brief This method will setup the gui appropriately
    *
@@ -99,7 +90,7 @@ class MainWidget : public QWidget {
    *
    * @param algorithm The algorithm to use
    */
-  void applyAlgorithm(uanc::amv::IAlgorithm& algorithm);
+  void applyAlgorithm(uanc::amv::IAlgorithm &algorithm);
 
  private slots:
 
@@ -114,9 +105,9 @@ class MainWidget : public QWidget {
 
   // Definition for the tab control at the top as well as the bottom.
 
-  void waveClosed(const int& index);
+  void waveClosed(const int &index);
 
-  void algorithmClosed(const int& index);
+  void algorithmClosed(const int &index);
 };
 
 }

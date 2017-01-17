@@ -28,7 +28,7 @@ find_package(Qt5Test REQUIRED)
 find_package(Doxygen)
 
 # Index all source files
-file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_HOME_DIRECTORY}  Code/UANC/*)
+file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_HOME_DIRECTORY} Code/UANC/*)
 
 #Add the Aquila source files
 file(GLOB_RECURSE AQUILA_SOURCE Code/libs/aquila/source/*)
@@ -46,30 +46,30 @@ add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUIL
 #------------------------------------- Tests ---------------------------------------
 
 #Create the test files, if Boost has been found
-if(Qt5Test_FOUND)
-	#Exclude main from the source files of every test, but compile with the other files
-	#TODO: Complile the rest of the program as an library and link against it?
-	set(MAIN "Code/UANC/main.cpp" "Code/UANC/gui/MainWindow.cpp")
-	list(REMOVE_ITEM SOURCE_FILES ${MAIN})
-	#Get all test files and iterate over them
-	file(GLOB_RECURSE TEST_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}  Code/Tests/*)
-	foreach(testSrc ${TEST_FILES})
-		#Get the filename for every testfile in this directory and generate the target with the same name.
-		get_filename_component(testName ${testSrc} NAME_WE)
-		add_executable(${testName} ${testSrc} ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES})
-		target_link_libraries(${testName} ${Boost_LIBRARIES})
-		#Move the testbins to Bin/testbin
-		set_target_properties(${testName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin)
+if (Qt5Test_FOUND)
+    #Exclude main from the source files of every test, but compile with the other files
+    #TODO: Complile the rest of the program as an library and link against it?
+    set(MAIN "Code/UANC/main.cpp" "Code/UANC/gui/MainWindow.cpp")
+    list(REMOVE_ITEM SOURCE_FILES ${MAIN})
+    #Get all test files and iterate over them
+    file(GLOB_RECURSE TEST_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} Code/Tests/*)
+    foreach (testSrc ${TEST_FILES})
+        #Get the filename for every testfile in this directory and generate the target with the same name.
+        get_filename_component(testName ${testSrc} NAME_WE)
+        add_executable(${testName} ${testSrc} ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES})
+        target_link_libraries(${testName} ${Boost_LIBRARIES})
+        #Move the testbins to Bin/testbin
+        set_target_properties(${testName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin)
 
-		target_link_libraries(${testName} ${Qt5Widgets_LIBRARIES})
-		target_link_libraries(${testName} ${Qt5PrintSupport_LIBRARIES})
-		target_link_libraries(${testName} ${Qt5Network_LIBRARIES})
-		target_link_libraries(${testName} ${Qt5Test_LIBRARIES})
-		#Add the test to the test target, assumed no arguments are needed
-		add_test(NAME ${testName}   WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/testBin ${testName})
-	endforeach(testSrc)
+        target_link_libraries(${testName} ${Qt5Widgets_LIBRARIES})
+        target_link_libraries(${testName} ${Qt5PrintSupport_LIBRARIES})
+        target_link_libraries(${testName} ${Qt5Network_LIBRARIES})
+        target_link_libraries(${testName} ${Qt5Test_LIBRARIES})
+        #Add the test to the test target, assumed no arguments are needed
+        add_test(NAME ${testName} WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/testBin ${testName})
+    endforeach (testSrc)
 
-endif(Qt5Test_FOUND)
+endif (Qt5Test_FOUND)
 
 # ------------------------------------ QT5 -----------------------------------------
 
@@ -99,35 +99,35 @@ target_link_libraries(UANC ${Qt5Network_LIBRARIES})
 # ------------------------------------ Doxygen -----------------------------------------
 
 # add a target to generate API documentation with Doxygen
-if(DOXYGEN_FOUND)
-	configure_file(${DOCUMENTATION_DIRECTORY}/Doxyfile.in ${DOCUMENTATION_DIRECTORY}/Doxyfile @ONLY)
-	add_custom_target(doc
-	${DOXYGEN_EXECUTABLE} ${DOCUMENTATION_DIRECTORY}/Doxyfile
-	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-	COMMENT "Generating API documentation with Doxygen" VERBATIM
-	)
-endif(DOXYGEN_FOUND)
+if (DOXYGEN_FOUND)
+    configure_file(${DOCUMENTATION_DIRECTORY}/Doxyfile.in ${DOCUMENTATION_DIRECTORY}/Doxyfile @ONLY)
+    add_custom_target(doc
+            ${DOXYGEN_EXECUTABLE} ${DOCUMENTATION_DIRECTORY}/Doxyfile
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Generating API documentation with Doxygen" VERBATIM
+            )
+endif (DOXYGEN_FOUND)
 
 # ------------------------------------ Multiplattform -----------------------------------------
 
 # generate proper gui program on specified platform
-if(WIN32) # Check if we are on Windows
-    if(MSVC) # Check if we are using the Visual Studio compiler
+if (WIN32) # Check if we are on Windows
+    if (MSVC) # Check if we are using the Visual Studio compiler
         set_target_properties(${PROJECT_NAME} PROPERTIES
                 WIN32_EXECUTABLE YES
                 LINK_FLAGS "/ENTRY:mainCRTStartup"
                 )
-    elseif(CMAKE_COMPILER_IS_GNUCXX)
+    elseif (CMAKE_COMPILER_IS_GNUCXX)
         # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows") # Not tested
-    else()
+    else ()
         message(SEND_ERROR "You are using an unsupported Windows compiler! (Not MSVC or GCC)")
-    endif(MSVC)
-elseif(APPLE)
+    endif (MSVC)
+elseif (APPLE)
     set_target_properties(${PROJECT_NAME} PROPERTIES
             MACOSX_BUNDLE YES
             )
-elseif(UNIX)
+elseif (UNIX)
     # Nothing special required
-else()
+else ()
     message(SEND_ERROR "You are on an unsupported platform! (Not Win32, Mac OS X or Unix)")
-endif(WIN32)
+endif (WIN32)

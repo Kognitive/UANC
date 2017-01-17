@@ -4,19 +4,21 @@
 
 #include "Path.h"
 
-namespace uanc { namespace util {
+namespace uanc {
+namespace util {
 
-  /** \brief Passes back the filename of the given path */
-  std::string Path::getFileName(std::string path) {
-    char sep = '/';
+/** \brief Passes back the filename of the given path */
+std::string Path::getFileName(std::string path) {
+  char sep = '/';
 
-    #ifdef _WIN32
-        sep = '\\';
-    #endif
+#ifdef _WIN32
+  sep = '\\';
+#endif
 
-    size_t i = path.rfind(sep, path.length());
-    if (i != std::string::npos) {
-      return(path.substr(i+1, path.length() - i));
-    }
+  size_t i = path.rfind(sep, path.length());
+  if (i != std::string::npos) {
+    return (path.substr(i + 1, path.length() - i));
   }
-}}
+}
+}
+}

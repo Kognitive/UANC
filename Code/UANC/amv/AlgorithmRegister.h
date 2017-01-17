@@ -1,6 +1,7 @@
-//
-// Created by markus on 16.01.17.
-//
+/*
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
 
 #ifndef UANC_ALGORITHMREGISTER_H
 #define UANC_ALGORITHMREGISTER_H
@@ -9,7 +10,8 @@
 #include "anc/algorithm/InverseDirectAlgorithm.h"
 #include "anc/algorithm/InverseFFTAlgorithm.h"
 
-namespace uanc { namespace amv {
+namespace uanc {
+namespace amv {
 
 // include namespace of the algorithms to support readability.
 using namespace anc::algorithm;
@@ -30,10 +32,10 @@ class AlgorithmRegister {
    *
    * @return A vector containing a prototype of all algorithms.
    */
-  static std::shared_ptr<std::vector<uanc::amv::IAlgorithm*>> getAlgorithms() {
+  static std::shared_ptr<std::vector<uanc::amv::IAlgorithm *>> getAlgorithms() {
 
     // simply create an empty vector
-    auto lst = std::shared_ptr<std::vector<uanc::amv::IAlgorithm*>>(new std::vector<uanc::amv::IAlgorithm*>());
+    auto lst = std::shared_ptr<std::vector<uanc::amv::IAlgorithm *>>(new std::vector<uanc::amv::IAlgorithm *>());
 
     // --------------------------------------
     // Here you can register your algorithms:
@@ -47,6 +49,7 @@ class AlgorithmRegister {
     return lst;
   }
 };
-}}
+}
+}
 
 #endif //UANC_ALGORITHMREGISTER_H

@@ -17,7 +17,7 @@ class PlotWidget;
 
 class SignalPlot : public QCustomPlot {
 
-  Q_OBJECT
+ Q_OBJECT
 
  public:
   SignalPlot(std::shared_ptr<PlotWidget> parent);
@@ -27,9 +27,9 @@ class SignalPlot : public QCustomPlot {
   void setRange(double lower, double upper);
 
  private slots:
-  void mousePressEvent(QMouseEvent * event) override;
-  void mouseMoveEvent(QMouseEvent * event) override;
-  void mouseReleaseEvent(QMouseEvent * event) override;
+  void mousePressEvent(QMouseEvent *event) override;
+  void mouseMoveEvent(QMouseEvent *event) override;
+  void mouseReleaseEvent(QMouseEvent *event) override;
 
  private:
   /** \brief Holds reference to the parent widget

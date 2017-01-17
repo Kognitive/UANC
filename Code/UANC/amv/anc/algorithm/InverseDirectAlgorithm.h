@@ -1,6 +1,7 @@
-//
-// Created by markus on 11/25/16.
-//
+/*
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
 
 #ifndef UANC_DIRECTINVERSEALGORITHM_H
 #define UANC_DIRECTINVERSEALGORITHM_H
@@ -16,27 +17,31 @@ namespace algorithm {
 
 using namespace uanc::amv::anc;
 
+/** \brief Direct inversion algorithm.
+ *
+ * This class represents a direct inversion algorithm. It simply multiplies every sample
+ * by -1 and outputs the final signal. It uses the simplest working model for ANCAlgorithm (ANCModel)
+ */
 class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel> {
  public:
 
-  /** \brief This should be implemented by the subclasses.
+  /** \brief Returns the name of the algorithm.
    *
-   * It should pass back an appropriate Name for this algorithm
+   * Simply passes back the name of the algorithm.
    *
-   * @return the name of this algorithm.
-   *
+   * @return Name of the algorithm
    */
-  std::string getName() override { return "Inverse Direct"; };
+  std::string getName() final { return "Inverse Direct"; };
 
-  /** \brief Represents the execution of the direct inverse algorithm.
+  /** \brief Inverts the input signal.
    *
-   * This method should take a vector of size n from the type SignalSource and outputs
-   * a vector of size n, also of type SignalSource. Note that the output should be the inverted
-   * signal using the direct inverse algorithm. Which basically means, to mirror the samples
+   * This is actually the heart of an ANC algorithm inside of this application. It takes
+   * an input model and processes it. Besides it should save its data inside the model
+   * using getModel().
    *
-   * @return the processed vector itself.
+   * @param input The input model containing the original signal.
    */
-  void invert(SignalModel *in) override {
+  void invert(SignalModel *in) final {
 
     // creates a new shared pointer containing the inverted signal
     auto inverted = new Aquila::SignalSource(in->original->operator*=(-1));
@@ -46,22 +51,27 @@ class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel> {
     this->getModel()->inverted = out;
   }
 
-  /** \brief Can be used to clone the algorithm.
+  /** \brief Clones the current instance.
    *
-   * This can be used to clone the algorithm
-   * @return The cloned algorithm
+   * This is basically the prototype pattern. It gets used to create
+   * an copy of the current InverseDirectAlgorithm. To do so
+   * it simply creates a new instance.
+   *
+   * @return The cloned algorithm.
    */
-  Algorithm *clone() override {
+  Algorithm *clone() final {
     return new InverseDirectAlgorithm();
   }
 
  protected:
 
-  model::ANCModel *createEmptyModel() override {
-    return new model::ANCModel();
-  }
-
-  AlgorithmView<model::ANCModel> *constructView() override {
+  /** \brief Constructs a view, which can handle an ANCModel.
+   *
+   * This view basically display the standard information of the algorithm.
+   *
+   * @return The created ANCView.
+   */
+  AlgorithmView<model::ANCModel> *constructView() final {
     return new view::ANCView();
   }
 };

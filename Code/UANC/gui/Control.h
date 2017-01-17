@@ -60,7 +60,7 @@ class Control : public QCustomPlot {
   double _mousePressBoxPosLeft = -1.0, _mousePressBoxPosRight = -1.0;
   bool _pressedOnNavBox = false;
 
-  bool cursorOnNavBox(QMouseEvent * event);
+  bool cursorOnNavBox(QMouseEvent *event);
 };
 
 }

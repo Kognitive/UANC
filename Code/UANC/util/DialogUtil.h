@@ -9,7 +9,8 @@
 #include <string>
 #include <iostream>
 
-namespace uanc { namespace util {
+namespace uanc {
+namespace util {
 
 /** \brief This class can be used to access various dialogs
  *
@@ -25,7 +26,7 @@ class DialogUtil {
    *
    * @param parent the parent to use
    */
-  DialogUtil(QWidget* parent = 0) {
+  DialogUtil(QWidget *parent = 0) {
     _parent = parent;
   }
 
@@ -60,7 +61,7 @@ class DialogUtil {
    *
    * This basically gets used to access the parents.
    */
-  QWidget* getParent() {
+  QWidget *getParent() {
     return _parent;
   }
 
@@ -68,9 +69,10 @@ class DialogUtil {
    *
    * This is useful to make a dialog modal.
    */
-  QWidget* _parent;
+  QWidget *_parent;
 };
 
-}}
+}
+}
 
 #endif //UANC_DIALOGUTIL_H

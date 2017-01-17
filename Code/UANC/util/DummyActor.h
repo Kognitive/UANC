@@ -51,7 +51,7 @@ class DummyActor : FileActor<Aquila::SignalSource> {
    */
   void saveData(std::shared_ptr<Aquila::SignalSource> source) {}
 
-  DummyActor* setType(std::string type) {
+  DummyActor *setType(std::string type) {
     if (type == "sine") {
       this->type = type;
       return this;
@@ -62,17 +62,17 @@ class DummyActor : FileActor<Aquila::SignalSource> {
       return NULL;
   }
 
-  DummyActor* setFrequency(Aquila::FrequencyType frequency) {
+  DummyActor *setFrequency(Aquila::FrequencyType frequency) {
     this->freq = frequency;
     return this;
   }
 
-  DummyActor* setAmplitude(Aquila::FrequencyType amplitude) {
+  DummyActor *setAmplitude(Aquila::FrequencyType amplitude) {
     this->amp = amplitude;
     return this;
   }
 
-  DummyActor* setSampleCount(size_t count) {
+  DummyActor *setSampleCount(size_t count) {
     this->samples = count;
     return this;
   }

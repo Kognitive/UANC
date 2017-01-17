@@ -20,7 +20,6 @@
 namespace uanc {
 namespace algorithm {
 
-
 /**
  * Class for the performance measure of algorithms.
  *
@@ -52,12 +51,12 @@ class PerformanceMeasure {
    */
   const std::shared_ptr<PerformanceMeasureNode<durationType> > getRootMeasure() const {
     auto tmpMeasure = currentMeasure;
-    if(!currentMeasure){
+    if (!currentMeasure) {
       return NULL;
     }
 
     while (tmpMeasure->measureParent) {
-      while(tmpMeasure->measureParent){
+      while (tmpMeasure->measureParent) {
         tmpMeasure = tmpMeasure->measureParent;
       }
       tmpMeasure = tmpMeasure->measureParent;
@@ -75,7 +74,7 @@ class PerformanceMeasure {
     if (!currentMeasure) {
       currentMeasure = tempNode;
     }
-    //Add the measurement Node as the subsequent node of the current node
+      //Add the measurement Node as the subsequent node of the current node
     else {
       stop();
       //All subsequent measurements have the same parent, but may have different children
@@ -86,7 +85,6 @@ class PerformanceMeasure {
     }
     currentMeasure->start();
   }
-
 
   /**
    * Restarts the current measurement without creating a new measurement node.

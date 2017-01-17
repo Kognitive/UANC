@@ -95,8 +95,8 @@ void SignalPlot::zoomRange(double press, double release) {
 QCPRange SignalPlot::scaleRange(double factor, double center) {
   QCPRange oldRange = xAxis->range();
   QCPRange newRange;
-  newRange.lower = std::max((oldRange.lower-center)* factor + center, 0.0);
-  newRange.upper = (oldRange.upper-center)* factor + center;
+  newRange.lower = std::max((oldRange.lower - center) * factor + center, 0.0);
+  newRange.upper = (oldRange.upper - center) * factor + center;
   if (QCPRange::validRange(newRange))
     newRange = newRange.sanitizedForLinScale();
   return newRange;

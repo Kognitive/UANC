@@ -36,8 +36,8 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal) {
   double maxSignalAmplitude = std::numeric_limits<double>::min();
   double minSignalAmplitude = std::numeric_limits<double>::max();
   size_t n = _signal->getSamplesCount();
-  QCPDataMap* newDataMain = new QCPDataMap;
-  QCPDataMap* newDataControl = new QCPDataMap;
+  QCPDataMap *newDataMain = new QCPDataMap;
+  QCPDataMap *newDataControl = new QCPDataMap;
   QCPData newDatapoint;
   for (size_t i = 0; i < n; ++i) {
     newDatapoint.key = i;

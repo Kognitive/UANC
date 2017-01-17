@@ -1,6 +1,7 @@
-//
-// Created by markus on 16.01.17.
-//
+/*
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
 
 #ifndef UANC_IALGORITHM_H
 #define UANC_IALGORITHM_H
@@ -8,54 +9,62 @@
 #include "IAlgorithmView.h"
 #include "SignalModel.h"
 
-namespace uanc { namespace amv {
+namespace uanc {
+namespace amv {
 
-/** \brief This can be used to implement an algorithm
+/** \brief General interface for any algorithm.
  *
- * This class can be used to implement an algorithm.
+ * This interface is used in the client code. Therefore it has no
+ * knowledge of the underlying model nor the view. It gets used
+ * for signal views as well as algorithm views.
  */
 class IAlgorithm {
 
  public:
 
-  /** \brief Can be used to clone the algorithm.
+  /** \brief Clones the current instance.
    *
-   * This can be used to clone the algorithm
-   * @return The cloned algorithm
+   * This is basically the prototype pattern. It gets used to create
+   * an exact copy of the current instance.
+   *
+   * @return The cloned algorithm.
    */
   virtual IAlgorithm *clone() = 0;
 
-  /** \brief This passes back the algorithm view.
+  /** \brief Fills the view with the data.
    *
-   * fills the view with the desired content.
+   * This method fills the view with some data. The implementation
+   * itself happens in a subclass.
    */
   virtual void fillView() = 0;
 
-  /** \brief This should be implemented by the subclasses.
+  /** \brief Returns the name of the algorithm.
    *
-   * It should pass back an appropriate Name for this algorithm
+   * Simply passes back the name of the algorithm.
    *
-   * @return the name of this algorithm.
-   *
+   * @return Name of the algorithm
    */
   virtual std::string getName() = 0;
 
-  /** \brief Represents the view itself.
+  /** \brief Gets a reference to the associated view.
    *
-   * Represents the view itself
-   * @return The ready created build.
+   * A view has to be created in this method, or alternatively
+   * an already created view can be returned.
+   *
+   * @return The associated view.
    */
   virtual IAlgorithmView *getView() = 0;
 
-  /** \brief Represents the execution of the algorithm.
+  /** \brief Processes the input signal model.
    *
-   * This method must be implemented by deriving algorithms, so it can
-   * actually be used in the framework.
+   * This method processes the signal model passed into this function.
+   * There might be some created data during the processing stage.
    *
-   * @return the processed vector itself.
+   * \param[in] input The input model of the signal.
    */
   virtual void process(uanc::amv::SignalModel *input) = 0;
 };
-}}
+}
+}
 
 #endif //UANC_IALGORITHM_H

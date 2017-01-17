@@ -1,6 +1,7 @@
-//
-// Created by markus on 12/12/16.
-//
+/*
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
 
 #ifndef UANC_ANCVIEW_H
 #define UANC_ANCVIEW_H
@@ -13,90 +14,57 @@
 #include <Code/UANC/gui/PlotWidget.h>
 #include <Code/UANC/amv/anc/model/ANCModel.h>
 
-namespace uanc { namespace amv { namespace anc { namespace view {
+namespace uanc {
+namespace amv {
+namespace anc {
+namespace view {
 
-/** \brief Represents an algorithm view, which can be used inside
- * of the application.
+/** \brief Represents an ANCView.
  *
- * This represents a algorithm view which can be used with an appropriate model.
+ * This represents a general ANCView. It operates on an ANCModel. It only displays a simple
+ * plot of the the inverted signal. It is a specialization of the more general AlgorithmView.
  */
 class ANCView : public uanc::amv::AlgorithmView<model::ANCModel> {
 
  public:
 
-  /** \brief Should be publically constructable.
+  /** \brief Gets the complete widget.
    *
-   * Simple constructor for creating such an object.
+   * This function is used to retrieve the widget from the view. It gets
+   * used for integration the main application. It creates a Plotwidget inside
+   * of a QWidget and passes this back.
+   *
+   * @return The created widget.
    */
-  ANCView();
+  QWidget *getWidget();
 
-  /** \brief Builds the shared widget.
-   *
-   * The shared widget represents the shared widget, which
-   * is basically the same over all tabs.
-   *
-   * @return The created shared widget.
-   */
-  QWidget* buildSharedWidget();
-
-  /** \brief Function to build the uniqueWidget.
-   *
-   * This has to be overriden in order to build the unique widget. When the standard
-   * implementation is used, there will be no element added.
-   *
-   * @return The unique widget, created as a qwidget.
-   */
-  virtual QWidget* buildUniqueWidget();
-
-  /** \brief gets the complete widget.
-   *
-   * This function is used to retrieve the complete widget.
-   *
-   * @return The ready constructed and loaded widget.
-   */
-  QWidget* getWidget();
-
-  /** \brief Sets the shared data for the algorithm model.
-   *
-   * This can be used to set the shared data in form of an
-   * algorithm model inside of the view. Hence this class
-   * has to keep track which data to apply on which position.
-   *
-   * @param data The data to display in the gui.s
-   */
-  void setSharedData(model::ANCModel* data);
-
-  /** \brief This represents the unique data.
-   *
-   * This has to be overriden in order to display the data in one
-   * specififc way.
-   *
-   * @param data The data to apply to this view.
-   */
-  virtual void setUniqueData(model::ANCModel* data);
-
-  /** \brief This method sets the overall data.
-   *
-   * Can be used to set the overall data.
-   *
-   * @param data The data to insert into the system.
-   */
-   void setData(model::ANCModel* data) final;
+  /** \brief This method applies the model data.
+  *
+  * This method simply takes the passed data and places it inside of the
+  * view at the appropriate places.
+  *
+  * @param data The applied data.
+  */
+  void setData(model::ANCModel *data) final;
 
  private:
 
-  /** \brief Contains the plot of this algorithm view. */
+  /** \brief Holds a reference to the plot widget used inside.
+   *
+   * This field holds a unqiue reference to the internally used plot widget.
+   */
   std::unique_ptr<uanc::gui::PlotWidget> _plotWidget;
 
-  /** \brief This represents a weak pointer as an image.
+  /** \brief This represents a weak pointer to the constructed QWidget.
    *
-   * This can be used as a weak pointer.
+   * This holds a reference to the associated QWidget, if there was one created.
    */
-  QWidget* _widget = nullptr;
+  QWidget *_widget = nullptr;
 };
 
-}}}}
-
-
+}
+}
+}
+}
 
 #endif //UANC_ANCVIEW_H

@@ -52,7 +52,6 @@ void MainWindow::setupGUI() {
   this->setWindowTitle("Understanding Active Noise Cancelling");
 }
 
-
 /** \brief This method creates the appropriate actions and links them accordingely
  *
  * Simply link the actions and create them.
