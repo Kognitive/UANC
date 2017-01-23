@@ -7,6 +7,7 @@
 #define UANC_SIGNALMODEL_H
 
 #include <Code/libs/aquila/source/SignalSource.h>
+#include "PerformanceMeasurementRegister.h"
 #include <memory>
 
 namespace uanc {
@@ -26,6 +27,11 @@ class SignalModel {
    * Holds the original samples, which were read from the hard drive.
    */
   std::shared_ptr<Aquila::SignalSource> original;
+
+  /**
+   *  This member is the container for default and custom performance measurements.
+   */
+  PMRegister::PerformanceMeasurementRegister defaultRegister;
 };
 
 }

@@ -18,7 +18,7 @@
 #include "PerformanceMeasureNode.h"
 
 namespace uanc {
-namespace algorithm {
+namespace util {
 
 /**
  * Class for the performance measure of algorithms.

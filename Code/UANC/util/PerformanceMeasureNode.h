@@ -17,7 +17,7 @@
 #include <memory>
 
 namespace uanc {
-namespace algorithm {
+namespace util {
 
 enum class RunningState {
   running = true,

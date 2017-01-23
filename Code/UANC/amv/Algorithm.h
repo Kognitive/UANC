@@ -67,6 +67,7 @@ class Algorithm : public IAlgorithm {
    * This method processes the signal model passed into this function.
    * It basically ensures that the function gets called only once and that
    * the generated data is saved inside.
+   * It measures the time needed for the execution process.
    *
    * \param[in] input The input model of the signal.
    */
@@ -76,8 +77,9 @@ class Algorithm : public IAlgorithm {
     if (executed) {
       throw new std::runtime_error("Algorithm was already executed. You should only call this function once.");
     }
-
+    this->_builtModel->defaultRegister.startOverallExecutionMeasurement();
     this->_builtModel = this->execute(input);
+    this->_builtModel->defaultRegister.stopOverallExecutionMeasurement();
     executed = true;
   }
 

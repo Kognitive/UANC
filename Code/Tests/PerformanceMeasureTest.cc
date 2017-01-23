@@ -12,10 +12,10 @@
 #include <chrono>
 #include <iostream>
 #include <QCoreApplication>
-#include "../UANC/algorithm/PerformanceMeasure.h"
+#include "../UANC/util/PerformanceMeasure.h"
 #include <QtTest/QtTest>
 
-using namespace uanc::algorithm;
+using namespace uanc::util;
 
 class TestQString: public QObject
 {
