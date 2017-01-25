@@ -44,7 +44,17 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    */
   viewmodel *execute(uanc::amv::SignalModel *input) final {
     this->model = new viewmodel();
+
+#   // start performance measurement
+    auto ancmodel = static_cast<model::ANCModel*>(this->getModel());
+    ancmodel->getMeasurement()->start(this->getName());
+
+    // invert the input signal
     this->invert(input);
+
+    // stop the measurement
+    ancmodel->getMeasurement()->stop();
+
     return this->getModel();
   }
 

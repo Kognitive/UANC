@@ -8,7 +8,9 @@
 
 #include <Code/UANC/amv/anc/model/ANCModel.h>
 #include <Code/UANC/amv/anc/view/ANCView.h>
+#include <Code/UANC/algorithm/PerformanceMeasure.h>
 #include "ANCAlgorithm.h"
+
 
 namespace uanc {
 namespace amv {
@@ -16,6 +18,7 @@ namespace anc {
 namespace algorithm {
 
 using namespace uanc::amv::anc;
+using namespace uanc::algorithm;
 
 /** \brief Direct inversion algorithm.
  *
@@ -43,8 +46,15 @@ class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel> {
    */
   void invert(SignalModel *in) final {
 
+    // Start mesurment for the invertation
+    this->getModel()->getMeasurement()->startSubMeasure(("%s: Inversion", this->getName()));
+
     // creates a new shared pointer containing the inverted signal
     auto inverted = new Aquila::SignalSource(in->original->operator*=(-1));
+
+    // Invertation is done. Stop mesurement
+    this->getModel()->getMeasurement()->stopSubMeasure();
+
     std::shared_ptr<Aquila::SignalSource> out(inverted);
 
     this->getModel()->original = in->original;

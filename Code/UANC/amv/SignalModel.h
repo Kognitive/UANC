@@ -7,7 +7,7 @@
 #define UANC_SIGNALMODEL_H
 
 #include <Code/libs/aquila/source/SignalSource.h>
-#include "PerformanceMeasurementRegister.h"
+#include "Code/UANC/amv/PerformanceMeasurementRegister.h"
 #include <memory>
 
 namespace uanc {
