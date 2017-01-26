@@ -11,8 +11,9 @@ namespace amv {
 namespace signal {
 namespace view {
 
-QWidget *SpectrogramView::getWidget() {
-
+QWidget *SpectrogramView::produceWidget() {
+  // TODO Vladi Just a testlabel
+  return new QLabel("Test");
 }
 
 void SpectrogramView::setData(model::SpectrogramModel *data) {

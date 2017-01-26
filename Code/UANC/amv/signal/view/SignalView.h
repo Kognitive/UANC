@@ -36,7 +36,7 @@ class SignalView : public uanc::amv::AlgorithmView<uanc::amv::SignalModel> {
    *
    * @return The created widget.
    */
-  QWidget *getWidget() final;
+  QWidget *produceWidget() final;
 
   /** \brief This method applies the model data.
   *
@@ -53,13 +53,7 @@ class SignalView : public uanc::amv::AlgorithmView<uanc::amv::SignalModel> {
    *
    * This field holds a unqiue reference to the internally used plot widget.
    */
-  std::unique_ptr<uanc::gui::PlotWidget> _plotWidget;
-
-  /** \brief This represents a weak pointer to the constructed QWidget.
-   *
-   * This holds a reference to the associated QWidget, if there was one created.
-   */
-  QWidget *_widget = nullptr;
+  uanc::gui::PlotWidget *_plotWidget;
 };
 
 }

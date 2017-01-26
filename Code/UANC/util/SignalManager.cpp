@@ -30,9 +30,9 @@ SignalManager::SignalManager() {
  * @param identifier the identifier of the signal.
  * @param signalSource the signal source to adnamed.
  */
-int SignalManager::addSignal(const Aquila::SignalSource &signalSource) {
+int SignalManager::addSignal(const SignalModel &signalSource) {
   this->signalCounter = this->signalCounter + 1;
-  auto weakSignalSource = std::make_shared<Aquila::SignalSource>(signalSource);
+  auto weakSignalSource = std::make_shared<SignalModel>(signalSource);
   this->signalsMap.insert(std::make_pair(this->signalCounter, weakSignalSource));
   return this->signalCounter;
 }
@@ -44,7 +44,7 @@ int SignalManager::addSignal(const Aquila::SignalSource &signalSource) {
  *
  * @param signalSource the signal source to adnamed.
  */
-int SignalManager::addSignal(std::shared_ptr<Aquila::SignalSource> signalSource) {
+int SignalManager::addSignal(std::shared_ptr<SignalModel> signalSource) {
   this->signalCounter = this->signalCounter + 1;
   this->signalsMap.insert(std::make_pair(this->signalCounter, signalSource));
   return this->signalCounter;
@@ -60,7 +60,7 @@ int SignalManager::addSignal(std::shared_ptr<Aquila::SignalSource> signalSource)
  * @return It returns a weak pointer of aquilla sinal osource with
  * the speiciged name.
  */
-std::shared_ptr<Aquila::SignalSource> SignalManager::getSignal(int index) {
+std::shared_ptr<SignalModel> SignalManager::getSignal(int index) {
   if (signalsMap.find(index) == signalsMap.end()) {
     return NULL;
   }

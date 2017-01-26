@@ -20,7 +20,7 @@ namespace view {
  *
  * @return The created widget.
  */
-QWidget *ANCView::getWidget() {
+QWidget *ANCView::produceWidget(){
   if (this->_widget == nullptr) {
     this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget());
     this->_widget = _plotWidget.get();

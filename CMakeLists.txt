@@ -41,7 +41,7 @@ set(AQUILA_FFT Code/libs/aquila/fft/fft4g.c)
 
 set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cpp Code/UANC/util/SignalManager.h)
 
-add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES})
+add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES} Code/UANC/gui/SignalViewWidget.h)
 
 #------------------------------------- Tests ---------------------------------------
 

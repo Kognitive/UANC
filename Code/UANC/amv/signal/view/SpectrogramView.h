@@ -25,7 +25,7 @@ class SpectrogramView : public uanc::amv::AlgorithmView<model::SpectrogramModel>
 
  public:
 
-  QWidget *getWidget() final;
+  QWidget *produceWidget() final;
 
   void setData(model::SpectrogramModel *data) final;
 

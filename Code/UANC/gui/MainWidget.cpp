@@ -8,6 +8,7 @@
 #include <Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h>
 #include <Code/UANC/amv/anc/ANCAlgorithmRegister.h>
 #include "MainWidget.h"
+#include "SignalViewWidget.h"
 
 namespace uanc {
 namespace gui {
@@ -152,15 +153,15 @@ void MainWidget::tabSelected() {
  * This method loads a signal source in the top tab view.
  * @param signalSource the signal source to load.
  */
-void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSource) {
+void MainWidget::loadSignalSource(std::shared_ptr<SignalModel> signalSource) {
 
-  auto widget = new PlotWidget();
-  widget->setSignal(signalSource);
+  auto widget = new SignalViewWidget();
+  widget->setSignalModel(signalSource);
 
   // Simply add the tab and block the rest
   tabInRun = true;
   std::string text = "Standard";
-  auto castedObj = std::dynamic_pointer_cast<Aquila::WaveFile>(signalSource);
+  auto castedObj = std::dynamic_pointer_cast<Aquila::WaveFile>(signalSource->original);
   if (castedObj.get() != nullptr) {
     text = uanc::util::Path::getFileName(castedObj->getFilename());
   }
@@ -180,9 +181,6 @@ void MainWidget::loadSignalSource(std::shared_ptr<Aquila::SignalSource> signalSo
  */
 void MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
 
-  // basically create the input vector
-  std::shared_ptr<Aquila::SignalSource> input;
-
   // check if signal available if not present a messagebox and
   // ask the user to load a signal.
   auto signalManager = SignalManager::get();
@@ -199,12 +197,8 @@ void MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
     return;
   }
 
-  input = signal;
-  auto model = new uanc::amv::SignalModel();
-  model->original = input;
-
   // apply the algorithm
-  algorithm.process(model);
+  algorithm.process(signal.get());
 }
 
 void MainWidget::waveClosed(const int &index) {

@@ -10,12 +10,14 @@
 #include <list>
 #include <memory>
 #include <map>
+#include <Code/UANC/amv/SignalModel.h>
 
 namespace uanc {
 namespace util {
 
 using namespace util;
 using namespace std;
+using namespace uanc::amv;
 
 class SignalManager {
  private:
@@ -23,7 +25,7 @@ class SignalManager {
    *
    * This field gets used to save the signals inside of a map.
    */
-  std::map<int, std::shared_ptr<Aquila::SignalSource>> signalsMap;
+  std::map<int, std::shared_ptr<SignalModel>> signalsMap;
 
  public:
 
@@ -33,12 +35,6 @@ class SignalManager {
    * there are no dangling pointer referring to MainWindow.
    */
   static std::shared_ptr<SignalManager> _instance;
-
-  /**  First of all define an abbreviation for the input signal. */
-  static const std::string INPUT_SIGNAL;
-
-  /** Afterwards define a string for the output signal. */
-  static const std::string OUTPUT_SIGNAL;
 
   /** \brief Private constructor to deny creation outside of the singleton pattern.
     *
@@ -53,7 +49,7 @@ class SignalManager {
    *
    * @param signalSource the signal source to adnamed.
    */
-  int addSignal(const Aquila::SignalSource &signalSource);
+  int addSignal(const SignalModel &signalSource);
 
   /** Simpel signal counter */
   int signalCounter = -1;
@@ -66,7 +62,7 @@ class SignalManager {
    * @param identifier the identifier of the signal.
    * @param signalSource the signal source to adnamed.
    */
-  int addSignal(std::shared_ptr<Aquila::SignalSource> signalSource);
+  int addSignal(std::shared_ptr<SignalModel> signalSource);
 
   /** \brief This method returns a signal as a weak ptr.
    *
@@ -78,7 +74,7 @@ class SignalManager {
    * @return It returns a weak pointer of aquilla sinal osource with
    * the speiciged name.
    */
-  std::shared_ptr<Aquila::SignalSource> getSignal(int name);
+  std::shared_ptr<SignalModel> getSignal(int name);
 
   /** \brief Obtain a reference to the main window.
  *

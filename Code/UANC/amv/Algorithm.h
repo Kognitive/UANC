@@ -74,10 +74,10 @@ class Algorithm : public IAlgorithm {
   void process(uanc::amv::SignalModel *input) final {
 
     // check if the algorithm was executed before
-    if (executed) {
-      throw new std::runtime_error("Algorithm was already executed. You should only call this function once.");
+    if (!executed) {
+      this->_builtModel = this->execute(input);
     }
-    this->_builtModel = this->execute(input);
+
     executed = true;
   }
 

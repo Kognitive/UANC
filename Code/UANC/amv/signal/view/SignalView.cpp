@@ -20,14 +20,11 @@ namespace view {
  *
  * @return The created widget.
  */
-QWidget *SignalView::getWidget() {
-  if (this->_widget == nullptr) {
-    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget());
-    this->_widget = _plotWidget.get();
-  }
+QWidget *SignalView::produceWidget() {
+  this->_plotWidget = new uanc::gui::PlotWidget();
 
   // return the created pointer
-  return this->_widget;
+  return this->_plotWidget;
 }
 
 /** \brief This method applies the model data.

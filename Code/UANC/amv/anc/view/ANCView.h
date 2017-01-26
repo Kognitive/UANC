@@ -36,7 +36,7 @@ class ANCView : public uanc::amv::AlgorithmView<model::ANCModel> {
    *
    * @return The created widget.
    */
-  QWidget *getWidget() final;
+  QWidget *produceWidget() final;
 
   /** \brief This method applies the model data.
   *

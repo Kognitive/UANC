@@ -15,11 +15,13 @@
 namespace uanc {
 namespace util {
 
+using namespace uanc::amv;
+
 /** \brief Basic Signal file loader class.
  *
  * Is derived from the file loader class itself.
  */
-class SignalFileActor : FileActor<Aquila::SignalSource> {
+class SignalFileActor : FileActor<SignalModel> {
 
  public:
   /** \brief Basic constructor which saves a path string internally.
@@ -28,7 +30,7 @@ class SignalFileActor : FileActor<Aquila::SignalSource> {
    *
    * @param path The path to the acted file
    */
-  SignalFileActor(const std::string &path) : FileActor<Aquila::SignalSource>(path) {}
+  SignalFileActor(const std::string &path) : FileActor<SignalModel>(path) {}
 
   /** \brief This method should load the file from the plate.
    *
@@ -36,10 +38,12 @@ class SignalFileActor : FileActor<Aquila::SignalSource> {
    *
    * @return the loaded T
    */
-  std::shared_ptr<Aquila::SignalSource> loadData() {
+  std::shared_ptr<SignalModel> loadData() {
     auto path = this->getPath();
     auto wave = new Aquila::WaveFile(path);
-    return std::shared_ptr<Aquila::SignalSource>(wave);
+    auto model = new SignalModel();
+    model->original = std::shared_ptr<Aquila::SignalSource>(wave);
+    return std::shared_ptr<SignalModel>(model);
   }
 
   /** \brief This method should save a file to the plate.
@@ -49,9 +53,9 @@ class SignalFileActor : FileActor<Aquila::SignalSource> {
    *
    * @param source The source to save
    */
-  void saveData(std::shared_ptr<Aquila::SignalSource> source) {
+  void saveData(std::shared_ptr<SignalModel> source) {
     auto path = this->getPath();
-    Aquila::WaveFile::save(*source, path);
+    Aquila::WaveFile::save(*source->original, path);
   }
 };
 }

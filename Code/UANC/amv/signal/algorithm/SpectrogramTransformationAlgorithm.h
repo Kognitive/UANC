@@ -8,6 +8,7 @@
 
 #include <Code/UANC/amv/signal/model/SpectrogramModel.h>
 #include <Code/UANC/amv/signal/view/SignalView.h>
+#include <Code/UANC/amv/signal/view/SpectrogramView.h>
 #include "SignalTransformationAlgorithm.h"
 
 namespace uanc {

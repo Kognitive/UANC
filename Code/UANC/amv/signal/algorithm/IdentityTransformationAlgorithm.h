@@ -8,6 +8,7 @@
 
 #include <Code/UANC/amv/anc/model/ANCModel.h>
 #include <Code/UANC/amv/anc/view/ANCView.h>
+#include <Code/UANC/amv/signal/view/SignalView.h>
 #include "SignalTransformationAlgorithm.h"
 
 namespace uanc {
@@ -16,6 +17,7 @@ namespace signal {
 namespace algorithm {
 
 using namespace uanc::amv::anc;
+using namespace uanc::amv;
 
 /** \brief Identity transformation.
  *
@@ -23,7 +25,7 @@ using namespace uanc::amv::anc;
  * for a good integration inside of the application, because we don't want to differntiate versus direct
  * data or transformed data views.
  */
-class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<model::SignalModel> {
+class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<SignalModel> {
  public:
 
   /** \brief Returns the name of the transformed data representation.
@@ -65,7 +67,7 @@ class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<mod
    *
    * @return The created ANCView.
    */
-  AlgorithmView<model::ANCModel> *constructView() final {
+  AlgorithmView<SignalModel> *constructView() final {
     return new view::SignalView();
   }
 };

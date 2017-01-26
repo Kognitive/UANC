@@ -27,7 +27,31 @@ class IAlgorithmView {
    *
    * @return The created widget.
    */
-  virtual QWidget *getWidget() = 0;
+  QWidget *getWidget() {
+    if (this->_widget == nullptr) {
+      this->_widget = this->produceWidget();
+    }
+
+    // return the created pointer
+    return this->_widget;
+  }
+
+  /** \brief Produces the widget.
+   *
+   * This function is used to produce the widget from the view. It gets
+   * used for integration the main application
+   *
+   * @return The created widget.
+   */
+  virtual QWidget *produceWidget() = 0;
+
+ private:
+
+  /** \brief This represents a weak pointer to the constructed QWidget.
+   *
+   * This holds a reference to the associated QWidget, if there was one created.
+   */
+  QWidget *_widget = nullptr;
 };
 
 }
