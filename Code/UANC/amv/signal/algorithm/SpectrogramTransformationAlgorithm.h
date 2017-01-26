@@ -8,6 +8,8 @@
 
 #include <Code/UANC/amv/signal/model/SpectrogramModel.h>
 #include <Code/UANC/amv/signal/view/SignalView.h>
+#include "Code/libs/aquila/transform/Spectrogram.h"
+#include "Code/libs/aquila/source/FramesCollection.h"
 #include <Code/UANC/amv/signal/view/SpectrogramView.h>
 #include "SignalTransformationAlgorithm.h"
 
@@ -18,7 +20,7 @@ namespace algorithm {
 
 using namespace uanc::amv::anc;
 
-/** \brief Transforms the input signal into the fourier domain.
+/** \brief Transforms the view of a signal into a spectrogram.
  *
  * This transformation basically adds some fourier room information to the basis
  * SignalModel.
@@ -43,8 +45,13 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
    */
   void transform(SignalModel *in) final {
 
-    //TODO Vladi implement transformation into fourier domain.
+    //Compute the spectrogram with one frame per Second. This should be enough.
 
+    Aquila::FramesCollection collectionSpectrogram = Aquila::FramesCollection(
+        *(in->original), in->original->getSampleFrequency(), 0);
+
+    this->getModel()->spectrum = std::shared_ptr<Aquila::Spectrogram> ( new Aquila::Spectrogram(collectionSpectrogram));
+    //The signal in the signal model is unchanged.
     this->getModel()->original = in->original;
   }
 
