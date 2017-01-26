@@ -11,6 +11,7 @@
 #include <Code/libs/aquila/transform/FftFactory.h>
 #include <Code/UANC/amv/anc/model/ANCModel.h>
 #include <Code/UANC/amv/anc/view/ANCView.h>
+#include <Code/UANC/util/PerformanceMeasure.h>
 #include "ANCAlgorithm.h"
 
 namespace uanc {
@@ -19,6 +20,7 @@ namespace anc {
 namespace algorithm {
 
 using namespace uanc::amv::anc;
+using namespace uanc::util;
 
 /** \brief FFT inversion algorithm.
  *
@@ -54,8 +56,11 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     //const std::size_t SIZE2 = ;
     unsigned int sampleFreq = in->getSampleFrequency();
 
+    std::shared_ptr<PerformanceMeasure<>> measurement (new PerformanceMeasure<>());
+    measurement->start(this->getName());
+
     // start measurement for the fast fouier transformation
-    this->getModel()->getMeasurement()->startSubMeasure(("%s: Transformation in fouier", this->getName()));
+    measurement->startSubMeasure(("%s: Transformation in fouier", this->getName()));
 
     // choose a fft algorithm
     auto fft = Aquila::FftFactory::getFft(in->length());
@@ -64,10 +69,10 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     Aquila::SpectrumType spectrum = fft->fft(in->toArray());
 
     // FFT is done. Stop the mesurement
-    this->getModel()->getMeasurement()->stopSubMeasure();
+    measurement->stopSubMeasure();
 
     // Start mesurment for the invertation in fouier space
-    this->getModel()->getMeasurement()->startSubMeasure(("%s: Inversion", this->getName()));
+    measurement->startSubMeasure(("%s: Inversion", this->getName()));
 
     // invert the spectrum
     std::transform(
@@ -77,17 +82,18 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
         [](Aquila::ComplexType x) { return (x.operator*=(-1)); });
 
     // Invertation is done. Stop mesurement
-    this->getModel()->getMeasurement()->stopSubMeasure();
+    measurement->stopSubMeasure();
 
     // start measurement for the back transformation
-    this->getModel()->getMeasurement()->startSubMeasure(("%s: Back transformation", this->getName()));
+    measurement->startSubMeasure(("%s: Back transformation", this->getName()));
 
     // back transformation of signal from fouier space
     std::shared_ptr<std::vector<double>> x = fft->ifft(spectrum);
 
     // Back transformation is done. Stop mesurement
-    this->getModel()->getMeasurement()->stopSubMeasure();
+    measurement->stopSubMeasure();
 
+    measurement->stop();
     // define output signal
     std::shared_ptr<Aquila::SignalSource> outputSignal(
         new Aquila::SignalSource(&(*x)[0], x->size(), sampleFreq));

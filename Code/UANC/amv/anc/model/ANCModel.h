@@ -25,10 +25,6 @@ using namespace uanc::util;
 class ANCModel : public uanc::amv::SignalModel {
  public:
 
-  ANCModel() {
-    this->measurement = new std::shared_ptr<PerformanceMeasure<>>(new PerformanceMeasure<>());
-  }
-
   /** \brief Holds the inverted signal.
    *
    * This field gets used, to save the inverted signal, in addition to
@@ -36,12 +32,6 @@ class ANCModel : public uanc::amv::SignalModel {
    */
   std::shared_ptr<Aquila::SignalSource> inverted;
 
-  const std::shared_ptr<const PerformanceMeasure<>> getMeasurement() {
-    return this->measurement;
-  }
-
- private:
-  std::shared_ptr<PerformanceMeasure<>> measurement;
 };
 
 }

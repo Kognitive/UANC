@@ -39,7 +39,6 @@ QWidget *SignalView::getWidget() {
  */
 void SignalView::setData(uanc::amv::SignalModel *data) {
   this->_plotWidget->setSignal(data->original);
-  this->_plotWidget->setMeasurement(data->defaultRegister);
 }
 }
 }
