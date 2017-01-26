@@ -8,7 +8,6 @@
 #include <QtWidgets/QWidget>
 #include <memory>
 #include <Code/libs/aquila/source/SignalSource.h>
-#include "Code/UANC/amv/PerformanceMeasurementRegister.h"
 #include "SignalPlot.h"
 #include "Control.h"
 
@@ -31,14 +30,6 @@ class PlotWidget : public QWidget {
    * @param signal The \ref Aquila::SignalSource which will be plotted
    */
   void setSignal(std::shared_ptr<Aquila::SignalSource> signal);
-
-  /** \brief This method is for setting the performance information.
-   * This method is for setting the performance information.
-   * The information will immediately be plotted.
-   *
-   * @param mesurment The \ref PMRegister::PerformanceMeasurementRegister which will be plotted
-   */
-  void setMeasurement(PMRegister::PerformanceMeasurementRegister measurement);
 
   /** \brief Returns the current range of the x axis of the plot.
    *
@@ -71,11 +62,6 @@ class PlotWidget : public QWidget {
    * \brief Holds the plotted signal.
    */
   std::shared_ptr<Aquila::SignalSource> _signal;
-
-  /**
-   *  \brief Holds the plotted performance information
-   */
-  PMRegister::PerformanceMeasurementRegister _measurement;
 
   /**
    * \brief This method initializes the plots.

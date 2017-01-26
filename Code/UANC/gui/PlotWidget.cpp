@@ -53,11 +53,6 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal) {
   _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude, n, false);
 }
 
-void PlotWidget::setMeasurement(PMRegister::PerformanceMeasurementRegister measurement) {
-  // save pointer to measurement in member
-  _measurement = measurement;
-
-}
 const QCPRange PlotWidget::getPlotXRange() const {
   return _signalPlot->xAxis->range();
 }
