@@ -16,7 +16,12 @@ SignalPlot::SignalPlot(std::shared_ptr<PlotWidget> parent) {
 
   // add graph and set it's pen
   addGraph();
-  graph(0)->setPen(_graphColor);
+  graph(_SIGNAL)->setPen(_graphColor);
+
+  // add error graph and hide it
+  addGraph();
+  graph(_ERROR)->setVisible(false);
+  graph(_ERROR)->setPen(QPen(QColor("red")));
 
   // create lines for the plot for dragged zoom
   _zoomLineOrigin = std::shared_ptr<QCPItemStraightLine>(new QCPItemStraightLine(this));
@@ -30,8 +35,12 @@ SignalPlot::SignalPlot(std::shared_ptr<PlotWidget> parent) {
 }
 
 void SignalPlot::setData(QCPDataMap *data, bool copy) {
-  graph(0)->setData(data, copy);
-  graph(0)->rescaleAxes();
+  graph(_SIGNAL)->setData(data, copy);
+  graph(_SIGNAL)->rescaleAxes();
+}
+
+void SignalPlot::setError(QCPDataMap *error, bool copy) {
+  graph(_ERROR)->setData(error, copy);
 }
 
 void SignalPlot::mousePressEvent(QMouseEvent *event) {
@@ -110,6 +119,11 @@ void SignalPlot::setRange(double lower, double upper) {
 void SignalPlot::setZoomLinePos(std::shared_ptr<QCPItemStraightLine> zoomLine, double xCoord) {
   zoomLine->point1->setCoords(xCoord, 0);
   zoomLine->point2->setCoords(xCoord, 1);
+}
+
+void SignalPlot::hideError(bool hide) {
+  graph(_ERROR)->setVisible(hide);
+  replot();
 }
 
 }

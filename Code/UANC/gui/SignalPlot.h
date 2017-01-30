@@ -23,8 +23,12 @@ class SignalPlot : public QCustomPlot {
   SignalPlot(std::shared_ptr<PlotWidget> parent);
 
   void setData(QCPDataMap *data, bool copy = false);
+  void setError(QCPDataMap *error, bool copy = false);
 
   void setRange(double lower, double upper);
+
+ public slots:
+  void hideError(bool hide);
 
  private slots:
   void mousePressEvent(QMouseEvent *event) override;
@@ -55,6 +59,8 @@ class SignalPlot : public QCustomPlot {
 
   void setZoomLinePos(std::shared_ptr<QCPItemStraightLine> zoomLine, double xCoord);
 
+  const int _SIGNAL = 0;
+  const int _ERROR = 1;
 };
 
 }

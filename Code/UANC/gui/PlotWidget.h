@@ -18,18 +18,21 @@ class SignalPlot;
 class Control;
 
 class PlotWidget : public QWidget {
+
+  Q_OBJECT
+
  public:
   /**
    * Contructor
    */
-  PlotWidget();
+  PlotWidget(bool hasError = false);
 
   /** \brief This method is for setting a Signal.
    * This method is for setting a Signal. The Signal will immediately be plotted.
    *
    * @param signal The \ref Aquila::SignalSource which will be plotted
    */
-  void setSignal(std::shared_ptr<Aquila::SignalSource> signal);
+  void setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::shared_ptr<Aquila::SignalSource> originalSignal = NULL);
 
   /** \brief Returns the current range of the x axis of the plot.
    *
@@ -59,9 +62,19 @@ class PlotWidget : public QWidget {
   std::shared_ptr<Control> _control;
 
   /**
+   * \brief True if checkbox for error curve should be shown, else false
+   */
+  bool _hasError;
+
+  /**
+   * \brief Hold the checkbox for showing the error
+   */
+  std::shared_ptr<QCheckBox> _chkBoxShowError;
+
+  /**
    * \brief Holds the plotted signal.
    */
-  std::shared_ptr<Aquila::SignalSource> _signal;
+  std::shared_ptr<Aquila::SignalSource> _signal, _errorSignal;
 
   /**
    * \brief This method initializes the plots.
