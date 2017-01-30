@@ -8,3 +8,4 @@ cmake-build-debug*
 *.log
 *.pdf
 *.synctex.gz
+*.orig

@@ -38,8 +38,7 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
 
   /** \brief Simply saves the input signal to the output.
    *
-   * This method just passes back the input model signal. It is only needed for
-   * integration purposes.
+   * This method transforms the input signal into a Spectrogram.
    *
    * @param input The input model containing the original signal.
    */

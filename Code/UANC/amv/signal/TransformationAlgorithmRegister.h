@@ -9,6 +9,7 @@
 #include <memory>
 #include "Code/UANC/amv/signal/algorithm/IdentityTransformationAlgorithm.h"
 #include "Code/UANC/amv/signal/algorithm/SpectrogramTransformationAlgorithm.h"
+#include "Code/UANC/amv/signal/algorithm/FFTTransformationAlgorithm.h"
 
 namespace uanc {
 namespace amv {
@@ -44,7 +45,7 @@ class TransformationAlgorithmRegister {
 
     lst->push_back(new IdentityTransformationAlgorithm());
     lst->push_back(new SpectrogramTransformationAlgorithm());
-
+    lst->push_back(new FFTTransformationAlgorithm());
     // --------------------------------------
 
     return lst;
