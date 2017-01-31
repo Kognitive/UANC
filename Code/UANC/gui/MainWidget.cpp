@@ -161,7 +161,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<SignalModel> signalSource) {
   // Simply add the tab and block the rest
   tabInRun = true;
   std::string text = "Standard";
-  auto castedObj = std::dynamic_pointer_cast<Aquila::WaveFile>(signalSource->original);
+  auto castedObj = std::dynamic_pointer_cast<Aquila::WaveFile>(signalSource->left_channel);
   if (castedObj.get() != nullptr) {
     text = uanc::util::Path::getFileName(castedObj->getFilename());
   }

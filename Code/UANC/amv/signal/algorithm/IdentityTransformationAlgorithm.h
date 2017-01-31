@@ -44,7 +44,7 @@ class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<Sig
    * @param input The input model containing the original signal.
    */
   void transform(SignalModel *in) final {
-    this->getModel()->original = in->original;
+    this->getModel()->left_channel = in->left_channel;
   }
 
   /** \brief Clones the current instance.

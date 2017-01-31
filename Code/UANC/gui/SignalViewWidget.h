@@ -29,7 +29,7 @@ class SignalViewWidget : public QWidget {
     if (signalSet)
       throw new std::runtime_error("There was already a signal set. You have to create a new widget.");
 
-    // save the original algorithm
+    // save the left_channel algorithm
     originalModel = signalModel;
 
     // basically initialize the gui

@@ -47,13 +47,13 @@ class FFTTransformationAlgorithm :
 
     //Compute the FFT of the signal
     // choose a fft algorithm
-    auto fft = Aquila::FftFactory::getFft(in->original->length());
+    auto fft = Aquila::FftFactory::getFft(in->left_channel->length());
 
-    auto complexFftSignal = fft->fft(in->original->toArray());
+    auto complexFftSignal = fft->fft(in->left_channel->toArray());
 
     std::vector<double> aboluteSpectrum;
 
-    //Compute the absolute values of the spectrum
+    //Compute the absolute values of the left_spectrum
     for (int i = 0; i < complexFftSignal.size(); ++i) {
       aboluteSpectrum.push_back(std::abs(complexFftSignal[i]));
     }
@@ -61,7 +61,7 @@ class FFTTransformationAlgorithm :
         Aquila::SignalSource>(new Aquila::SignalSource(aboluteSpectrum));
 
     //The signal in the signal model is unchanged.
-    this->getModel()->original = in->original;
+    this->getModel()->left_channel = in->left_channel;
   }
 
   /** \brief Clones the current instance.

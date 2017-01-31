@@ -26,22 +26,31 @@ class HeatView : public uanc::amv::AlgorithmView<model::SpectrogramModel> {
  public:
 
   QWidget *produceWidget() final {
-    customPlot = new QCustomPlot();
-    return customPlot;
+    auto container = new QWidget();
+    auto layout = new QHBoxLayout();
+    customPlotL = new QCustomPlot();
+    customPlotR = new QCustomPlot();
+    layout->addWidget(customPlotL);
+    layout->addWidget(customPlotR);
+    container->setLayout(layout);
+    return container;
   }
 
   void setData(model::SpectrogramModel *data) final {
 
-    // configure axis rect:
-    customPlot->setInteractions(QCP::iRangeDrag|QCP::iRangeZoom); // this will also allow rescaling the color scale by dragging/zooming
-    customPlot->axisRect()->setupFullAxesBox(true);
-    customPlot->xAxis->setLabel("Frames");
-    customPlot->yAxis->setLabel("Frequency");
+    configPlot(customPlotL, data->left_spectrum);
+    configPlot(customPlotR, data->right_spectrum);
+  }
+
+  void configPlot(QCustomPlot* plot, std::shared_ptr<Aquila::Spectrogram> spectrogramm) {
+// configure axis rect:// this will also allow rescaling the color scale by dragging/zooming
+    plot->xAxis->setLabel("Frames");
+    plot->yAxis->setLabel("Frequency");
 
     // set up the QCPColorMap:
-    QCPColorMap *colorMap = new QCPColorMap(customPlot->xAxis, customPlot->yAxis);
-    int nx = data->spectrum->getFrameCount();
-    int ny = data->spectrum->getSpectrumSize();
+    QCPColorMap *colorMap = new QCPColorMap(plot->xAxis, plot->yAxis);
+    int nx = spectrogramm->getFrameCount();
+    int ny = spectrogramm->getSpectrumSize();
     colorMap->data()->setSize(nx, ny / 2); // we want the color map to have nx * ny data points
     colorMap->data()->setRange(QCPRange(0, nx), QCPRange(0, ny / 2)); // and span the coordinate range -4..4 in both key (x) and value (y) dimensions
 
@@ -50,21 +59,21 @@ class HeatView : public uanc::amv::AlgorithmView<model::SpectrogramModel> {
     int xforzoom;
 
     //Iterate over all frames
-    for (std::size_t x = 0; x < data->spectrum->getFrameCount(); ++x)
+    for (std::size_t x = 0; x < spectrogramm->getFrameCount(); ++x)
     {
       // output only half of the spectrogram, below Nyquist frequency
-      for (std::size_t y = 0; y < data->spectrum->getSpectrumSize() / 2; ++y)
+      for (std::size_t y = 0; y < spectrogramm->getSpectrumSize() / 2; ++y)
       {
         colorMap->data()->cellToCoord(x, y, &rx, &ry);
-        Aquila::ComplexType point = data->spectrum->getPoint(x, y);
+        Aquila::ComplexType point = spectrogramm->getPoint(x, y);
         rz = Aquila::dB(point);
         colorMap->data()->setCell(x, y, rz);
       }
     }
 
     // add a color scale:
-    QCPColorScale *colorScale = new QCPColorScale(customPlot);
-    customPlot->plotLayout()->addElement(0, 1, colorScale); // add it to the right of the main axis rect
+    QCPColorScale *colorScale = new QCPColorScale(plot);
+    plot->plotLayout()->addElement(0, 1, colorScale); // add it to the right of the main axis rect
     colorScale->setType(QCPAxis::atRight); // scale shall be vertical bar with tick/axis labels right (actually atRight is already the default)
     colorMap->setColorScale(colorScale); // associate the color map with the color scale
     colorScale->axis()->setLabel("Spektrogramm");
@@ -78,19 +87,19 @@ class HeatView : public uanc::amv::AlgorithmView<model::SpectrogramModel> {
     colorMap->rescaleDataRange();
 
     // make sure the axis rect and color scale synchronize their bottom and top margins (so they line up):
-    QCPMarginGroup *marginGroup = new QCPMarginGroup(customPlot);
-    customPlot->axisRect()->setMarginGroup(QCP::msBottom|QCP::msTop, marginGroup);
+    QCPMarginGroup *marginGroup = new QCPMarginGroup(plot);
+    plot->axisRect()->setMarginGroup(QCP::msBottom|QCP::msTop, marginGroup);
     colorScale->setMarginGroup(QCP::msBottom|QCP::msTop, marginGroup);
 
     // rescale the key (x) and value (y) axes so the whole color map is visible:
-    customPlot->rescaleAxes();
-    customPlot->setDisabled(true);
-    customPlot->yAxis->setRange(0, ny / 2);
-    customPlot->xAxis->setRange(0, nx);
-    customPlot->replot();
+    plot->rescaleAxes();
+    plot->yAxis->setRange(0, ny / 2);
+    plot->xAxis->setRange(0, nx);
+    plot->replot();
   }
  private:
- QCustomPlot* customPlot;
+ QCustomPlot* customPlotL;
+  QCustomPlot* customPlotR;
 };
 
 }

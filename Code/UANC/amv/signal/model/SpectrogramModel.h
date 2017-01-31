@@ -27,7 +27,13 @@ class SpectrogramModel : public uanc::amv::SignalModel {
    *
    * This field holds the spectrum of the original signal.
    */
-  std::shared_ptr<Aquila::Spectrogram> spectrum;
+  std::shared_ptr<Aquila::Spectrogram> left_spectrum;
+
+  /** \brief Holds the spectrum.
+   *
+   * This field holds the spectrum of the original signal.
+   */
+  std::shared_ptr<Aquila::Spectrogram> right_spectrum;
 };
 
 }

@@ -47,7 +47,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
   void invert(SignalModel *data) final {
 
     // copy data to in
-    auto in = data->original;
+    auto in = data->left_channel;
 
     // map the input signal to a valid sample
     const std::size_t SIZE = 524288;
@@ -60,7 +60,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     // transform the signal into the fouier space
     Aquila::SpectrumType spectrum = fft->fft(in->toArray());
 
-    // invert the spectrum
+    // invert the left_spectrum
     std::transform(
         spectrum.begin(),
         spectrum.end(),
@@ -74,7 +74,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     std::shared_ptr<Aquila::SignalSource> outputSignal(
         new Aquila::SignalSource(&(*x)[0], x->size(), sampleFreq));
 
-    this->getModel()->original = in;
+    this->getModel()->left_channel = in;
     this->getModel()->inverted = outputSignal;
   }
 

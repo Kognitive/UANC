@@ -17260,7 +17260,7 @@ QVector<QPointF> trailingPoints; // points that must be applied after all other 
 while (it != mData->constEnd())
 {
 currentRegion = getRegion(it.value().key, it.value().value, rectLeft, rectTop, rectRight, rectBottom);
-if (currentRegion != prevRegion) // changed region, possibly need to add some optimized edge points or original points if entering R
+if (currentRegion != prevRegion) // changed region, possibly need to add some optimized edge points or left_channel points if entering R
 {
 if (currentRegion != 5) // segment doesn't end in R, so it's a candidate for removal
 {
@@ -17292,7 +17292,7 @@ trailingPoints << beforeTraverseCornerPoints << crossA;
 {
 *lineData << getOptimizedCornerPoints(prevRegion, currentRegion, prevIt.value().key, prevIt.value().value, it.value().key, it.value().value, rectLeft, rectTop, rectRight, rectBottom);
 }
-} else // segment does end in R, so we add previous point optimized and this point at original position
+} else // segment does end in R, so we add previous point optimized and this point at left_channel position
 {
 if (it == mData->constBegin()) // it is first point in curve and prevIt is last one. So save optimized point for adding it to the lineData in the end
 trailingPoints << getOptimizedPoint(prevRegion, prevIt.value().key, prevIt.value().value, it.value().key, it.value().value, rectLeft, rectTop, rectRight, rectBottom);
@@ -17302,7 +17302,7 @@ lineData->append(coordsToPixels(it.value().key, it.value().value));
 }
 } else // region didn't change
 {
-if (currentRegion == 5) // still in R, keep adding original points
+if (currentRegion == 5) // still in R, keep adding left_channel points
 {
 lineData->append(coordsToPixels(it.value().key, it.value().value));
 } else // still outside R, no need to add anything
@@ -17869,7 +17869,7 @@ intersections = QList<QPointF>() << pv1 << pv2;
 return false;
 }
 
-// possibly re-sort points so optimized point segment has same direction as original segment:
+// possibly re-sort points so optimized point segment has same direction as left_channel segment:
 if ((key-prevKey)*(intersections.at(1).x()-intersections.at(0).x()) + (value-prevValue)*(intersections.at(1).y()-intersections.at(0).y()) < 0) // scalar product of both segments < 0 -> opposite direction
 intersections.move(0, 1);
 crossA = coordsToPixels(intersections.at(0).x(), intersections.at(0).y());
@@ -20567,7 +20567,7 @@ if (mTightBoundary)
 localPainter->setClipRegion(clipBackup);
 localPainter->setRenderHint(QPainter::SmoothPixmapTransform, smoothBackup);
 
-if (useBuffer) // localPainter painted to mapBuffer, so now draw buffer with original painter
+if (useBuffer) // localPainter painted to mapBuffer, so now draw buffer with left_channel painter
 {
 delete localPainter;
 painter->drawPixmap(mapBufferTarget.toRect(), mapBuffer);

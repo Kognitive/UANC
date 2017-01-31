@@ -40,9 +40,11 @@ class SignalFileActor : FileActor<SignalModel> {
    */
   std::shared_ptr<SignalModel> loadData() {
     auto path = this->getPath();
-    auto wave = new Aquila::WaveFile(path);
+    auto lwave = new Aquila::WaveFile(path, Aquila::StereoChannel::LEFT);
+    auto rwave = new Aquila::WaveFile(path, Aquila::StereoChannel::RIGHT);
     auto model = new SignalModel();
-    model->original = std::shared_ptr<Aquila::SignalSource>(wave);
+    model->left_channel = std::shared_ptr<Aquila::SignalSource>(lwave);
+    model->right_channel = std::shared_ptr<Aquila::SignalSource>(rwave);
     return std::shared_ptr<SignalModel>(model);
   }
 
@@ -55,7 +57,7 @@ class SignalFileActor : FileActor<SignalModel> {
    */
   void saveData(std::shared_ptr<SignalModel> source) {
     auto path = this->getPath();
-    Aquila::WaveFile::save(*source->original, path);
+    Aquila::WaveFile::save(*source->left_channel, path);
   }
 };
 }

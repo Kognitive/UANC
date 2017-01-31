@@ -35,13 +35,13 @@ void SpectrogramView::setData(model::SpectrogramModel *data) {
   //The Maximum value that the Y-Axis can have
   unsigned int maxYValue = 0;
   //Iterate over all frames
-  for (int frame = 0 ; frame < data->spectrum->getFrameCount() ; frame++) {
-    QSurfaceDataRow *newRow = new QSurfaceDataRow(data->spectrum->getSpectrumSize());
+  for (int frame = 0 ; frame < data->left_spectrum->getFrameCount() ; frame++) {
+    QSurfaceDataRow *newRow = new QSurfaceDataRow(data->left_spectrum->getSpectrumSize());
     int index = 0;
 
-    //Iterate over all samples of a spectrum
-    for (int sampleNr = 0; sampleNr < data->spectrum->getSpectrumSize(); sampleNr+= data->spectrum->getSpectrumSize()/200) {
-      unsigned int yBuffer = std::abs(data->spectrum->getPoint(frame,sampleNr));
+    //Iterate over all samples of a left_spectrum
+    for (int sampleNr = 0; sampleNr < data->left_spectrum->getSpectrumSize(); sampleNr+= data->left_spectrum->getSpectrumSize()/200) {
+      unsigned int yBuffer = std::abs(data->left_spectrum->getPoint(frame,sampleNr));
       maxYValue = ( maxYValue > yBuffer ) ? maxYValue : yBuffer;
       (*newRow)[index++].setPosition(QVector3D(sampleNr, yBuffer, frame*1000 ));
     }
@@ -51,8 +51,8 @@ void SpectrogramView::setData(model::SpectrogramModel *data) {
 
   //Set the range of the axis values
   m_graph3D->axisY()->setRange(0, maxYValue);
-  m_graph3D->axisZ()->setRange(0, data->spectrum->getFrameCount()*1000);
-  m_graph3D->axisX()->setRange(0, data->spectrum->getSpectrumSize());
+  m_graph3D->axisZ()->setRange(0, data->left_spectrum->getFrameCount()*1000);
+  m_graph3D->axisX()->setRange(0, data->left_spectrum->getSpectrumSize());
   std::cout<<m_graph3D->axisX()->segmentCount()<<std::endl;
   std::cout<<m_graph3D->axisZ()->segmentCount()<<std::endl;
 }

@@ -26,7 +26,13 @@ class SignalModel {
    *
    * Holds the original samples, which were read from the hard drive.
    */
-  std::shared_ptr<Aquila::SignalSource> original;
+  std::shared_ptr<Aquila::SignalSource> left_channel;
+
+  /** \brief Field holds the right samples.
+   *
+   * Holds the original samples, which were read from the hard drive.
+   */
+  std::shared_ptr<Aquila::SignalSource> right_channel;
 
   /**
    *  This member is the container for default and custom performance measurements.

@@ -44,11 +44,11 @@ class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel> {
   void invert(SignalModel *in) final {
 
     // creates a new shared pointer containing the inverted signal
-    auto inverted = new Aquila::SignalSource(*in->original.get());
+    auto inverted = new Aquila::SignalSource(*in->left_channel.get());
     inverted->operator*=(-1);
     std::shared_ptr<Aquila::SignalSource> out(inverted);
 
-    this->getModel()->original = in->original;
+    this->getModel()->left_channel = in->left_channel;
     this->getModel()->inverted = out;
   }
 

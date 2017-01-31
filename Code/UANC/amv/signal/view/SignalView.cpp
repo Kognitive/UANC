@@ -35,7 +35,7 @@ QWidget *SignalView::produceWidget() {
  * @param data The applied data.
  */
 void SignalView::setData(uanc::amv::SignalModel *data) {
-  this->_plotWidget->setSignal(data->original);
+  this->_plotWidget->setSignal(data->left_channel);
 }
 }
 }

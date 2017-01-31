@@ -38,7 +38,7 @@ QWidget *ANCView::produceWidget(){
  * @param data The applied data.
  */
 void ANCView::setData(model::ANCModel *data) {
-  this->_plotWidget->setSignal(data->inverted, data->original);
+  this->_plotWidget->setSignal(data->inverted, data->left_channel);
 }
 }
 }
