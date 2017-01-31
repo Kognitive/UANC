@@ -71,6 +71,9 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::sh
   if (originalSignal != NULL)
     _signalPlot->setError(newError, false);
   _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude, n, false);
+
+  _signalPlot->replot();
+  _control->replot();
 }
 
 const QCPRange PlotWidget::getPlotXRange() const {

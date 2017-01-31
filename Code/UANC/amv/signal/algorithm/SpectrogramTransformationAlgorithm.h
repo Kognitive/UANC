@@ -7,7 +7,7 @@
 #define UANC_SPECTROGRAMTRANSFORMATIONALGORITHM_H
 
 #include <Code/UANC/amv/signal/model/SpectrogramModel.h>
-#include <Code/UANC/amv/signal/view/SignalView.h>
+#include <Code/UANC/amv/signal/view/HeatView.h>
 #include "Code/libs/aquila/transform/Spectrogram.h"
 #include "Code/libs/aquila/source/FramesCollection.h"
 #include <Code/UANC/amv/signal/view/SpectrogramView.h>
@@ -47,7 +47,7 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
     //Compute the spectrogram with one frame per Second. This should be enough.
 
     Aquila::FramesCollection collectionSpectrogram = Aquila::FramesCollection(
-        *(in->original), in->original->getSampleFrequency(), 0);
+        *(in->original), 1024, 0);
 
     this->getModel()->spectrum = std::shared_ptr<Aquila::Spectrogram> ( new Aquila::Spectrogram(collectionSpectrogram));
     //The signal in the signal model is unchanged.
@@ -75,7 +75,7 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
    * @return The created algorithm view..
    */
   AlgorithmView<model::SpectrogramModel> *constructView() final {
-    return new view::SpectrogramView();
+    return new view::HeatView();
   }
 };
 
