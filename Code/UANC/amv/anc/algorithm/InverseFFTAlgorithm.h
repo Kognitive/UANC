@@ -61,7 +61,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     measurement->start(this->getName());
 
     // start measurement for the fast fouier transformation
-    measurement->startSubMeasure("Transformation in fouier");
+    measurement->startSubMeasure("Transformation in Fourier");
 
     // choose a fft algorithm
     auto len = in->length();
@@ -81,7 +81,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
         spectrum.begin(),
         spectrum.end(),
         spectrum.begin(),
-        [](Aquila::ComplexType x) { return (x.operator*=(-1)); });
+        [](Aquila::ComplexType x) { return (x.operator*=(-2)); });
 
     // Invertation is done. Stop mesurement
     measurement->stopSubMeasure();
