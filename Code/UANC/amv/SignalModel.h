@@ -28,10 +28,6 @@ class SignalModel {
    */
   std::shared_ptr<Aquila::SignalSource> original;
 
-  /**
-   *  This member is the container for default and custom performance measurements.
-   */
-  PMRegister::PerformanceMeasurementRegister defaultRegister;
 };
 
 }

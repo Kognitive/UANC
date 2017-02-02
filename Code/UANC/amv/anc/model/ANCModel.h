@@ -32,6 +32,10 @@ class ANCModel : public uanc::amv::SignalModel {
    */
   std::shared_ptr<Aquila::SignalSource> inverted;
 
+  /**
+   *  This member is the container for default and custom performance measurements.
+   */
+  PMRegister::PerformanceMeasurementRegister defaultRegister;
 };
 
 }

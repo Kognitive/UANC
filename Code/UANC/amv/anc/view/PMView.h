@@ -46,8 +46,7 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
   *
   * @param data The applied data.
   */
-  void setData(model::ANCModel *signalData,
-               std::vector<std::shared_ptr<util::PerformanceMeasure<>>> *performanceData) final;
+  void setData(model::ANCModel *signalData) final;
 
  private:
 

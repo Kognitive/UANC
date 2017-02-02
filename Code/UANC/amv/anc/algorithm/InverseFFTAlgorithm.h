@@ -12,6 +12,7 @@
 #include <Code/UANC/amv/anc/model/ANCModel.h>
 #include <Code/UANC/amv/anc/view/ANCView.h>
 #include <Code/UANC/util/PerformanceMeasure.h>
+#include <Code/UANC/amv/anc/view/PMView.h>
 #include "ANCAlgorithm.h"
 
 namespace uanc {
@@ -60,9 +61,10 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     measurement->start(this->getName());
 
     // start measurement for the fast fouier transformation
-    measurement->startSubMeasure(("%s: Transformation in fouier", this->getName()));
+    measurement->startSubMeasure("Transformation in fouier");
 
     // choose a fft algorithm
+    auto len = in->length();
     auto fft = Aquila::FftFactory::getFft(in->length());
 
     // transform the signal into the fouier space
@@ -72,7 +74,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     measurement->stopSubMeasure();
 
     // Start mesurment for the invertation in fouier space
-    measurement->startSubMeasure(("%s: Inversion", this->getName()));
+    measurement->startSubMeasure("Inversion");
 
     // invert the spectrum
     std::transform(
@@ -85,7 +87,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     measurement->stopSubMeasure();
 
     // start measurement for the back transformation
-    measurement->startSubMeasure(("%s: Back transformation", this->getName()));
+    measurement->startSubMeasure("Back transformation");
 
     // back transformation of signal from fouier space
     std::shared_ptr<std::vector<double>> x = fft->ifft(spectrum);
@@ -94,12 +96,14 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     measurement->stopSubMeasure();
 
     measurement->stop();
+    this->getModel()->defaultRegister.registerCustomMeasurement(measurement);
     // define output signal
     std::shared_ptr<Aquila::SignalSource> outputSignal(
-        new Aquila::SignalSource(&(*x)[0], x->size(), sampleFreq));
+        new Aquila::SignalSource(&(*x)[0], len, sampleFreq));
 
     this->getModel()->original = in;
     this->getModel()->inverted = outputSignal;
+
   }
 
   /** \brief Clones the current instance.
@@ -123,7 +127,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
    * @return The created ANCView.
    */
   AlgorithmView<model::ANCModel> *constructView() override {
-    return new view::ANCView();
+    return new view::PMView();
   }
 };
 

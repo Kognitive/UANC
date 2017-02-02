@@ -31,6 +31,8 @@ QWidget *PMView::getWidget() {
     layout->addWidget(_plotWidget.get());
     layout->addWidget(_treeview.get());
     this->_widget->setLayout(layout);
+    this->_plotWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
   }
 
   // return the created pointer
@@ -44,10 +46,9 @@ QWidget *PMView::getWidget() {
  *
  * @param data The applied data.
  */
-void PMView::setData(model::ANCModel *signalData,
-                     std::vector<std::shared_ptr<util::PerformanceMeasure<>>> *performanceData) {
+void PMView::setData(model::ANCModel *signalData) {
   this->_plotWidget->setSignal(signalData->inverted);
-  this->_treeview->setData(performanceData);
+  this->_treeview->setData(signalData->defaultRegister.getCustomMeasurements());
 
 }
 }

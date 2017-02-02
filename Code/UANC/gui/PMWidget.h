@@ -25,13 +25,13 @@ class PMWidget : public QWidget {
    *
    * @param signal The \ref Aquila::SignalSource which will be plotted
    */
-  void setData(std::vector<std::shared_ptr<uanc::util::PerformanceMeasure<>>> *performanceData);
+  void setData(std::vector<std::shared_ptr<uanc::util::PerformanceMeasure<>>> performanceData);
 
  private:
   /**
    * \brief Holds the plotted signal.
    */
-  std::vector<std::shared_ptr<uanc::util::PerformanceMeasure<>>> *_data;
+  std::vector<std::shared_ptr<uanc::util::PerformanceMeasure<>>> _data;
 
   /**
    * \brief This method initializes the plots.
@@ -39,18 +39,12 @@ class PMWidget : public QWidget {
   void initialize();
 
   /**
-   * \brief This method adds a new root item.
-   * @parm measurement The \ref util::PerformanceMeasure<>
-   */
-  void addTreeRoot(std::shared_ptr<uanc::util::PerformanceMeasure<>> *measurement);
-
-  /**
  * \brief This method adds a new child to a parrent
  * @parm parent The \ref QTreeWidgetItem
    *     measurement The \ref util::PerformanceMeasure<>
  */
   void addTreeChild(QTreeWidgetItem *parent,
-                    std::shared_ptr<uanc::util::PerformanceMeasure<>> *measurement);
+                    std::vector<std::shared_ptr<uanc::util::PerformanceMeasureNode<>>> *measurements);
 };
 
 }
