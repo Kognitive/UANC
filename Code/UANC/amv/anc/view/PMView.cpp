@@ -23,7 +23,7 @@ namespace view {
 QWidget *PMView::produceWidget() {
   if (this->_widget == nullptr) {
     // create the widgets for the view
-    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget());
+    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget(true));
     this->_treeview = std::unique_ptr<uanc::gui::PMWidget>(new uanc::gui::PMWidget());
     // set horizontal layout
     this->_widget = new QWidget;
@@ -47,7 +47,7 @@ QWidget *PMView::produceWidget() {
  * @param data The applied data.
  */
 void PMView::setData(model::ANCModel *signalData) {
-  this->_plotWidget->setSignal(signalData->inverted);
+  this->_plotWidget->setSignal(signalData->inverted, signalData->left_channel);
   this->_treeview->setData(signalData->defaultRegister.getCustomMeasurements());
 
 }
