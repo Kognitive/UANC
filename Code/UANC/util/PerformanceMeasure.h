@@ -116,7 +116,7 @@ class PerformanceMeasure {
     auto tempNode = std::shared_ptr<PerformanceMeasureNode<durationType>>(
         new PerformanceMeasureNode<durationType>(subMeasureTitle));
     tempNode->measureParent = currentMeasure;
-    currentMeasure->measureSubMeasureChild = tempNode;
+    currentMeasure->measureSubMeasureChild.push_back(tempNode);
     currentMeasure = tempNode;
     currentMeasure->start();
   }

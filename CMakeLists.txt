@@ -4,7 +4,7 @@ project(UANC)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -msse2")
-set (CMAKE_PREFIX_PATH ${CMAKE_MODULE_PATH} "/opt/Qt/5.8/gcc_64/lib/cmake")
+set (CMAKE_PREFIX_PATH ${CMAKE_MODULE_PATH} "/opt/Qt5.8.0/5.8/gcc_64/lib/cmake")
 
 
 # apply some settings to generate output in Bin folder

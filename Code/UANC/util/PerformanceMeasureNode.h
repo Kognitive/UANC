@@ -15,6 +15,7 @@
 #include <string>
 #include <chrono>
 #include <memory>
+#include <vector>
 
 namespace uanc {
 namespace util {
@@ -69,7 +70,7 @@ class PerformanceMeasureNode {
 
   std::string measureTitle;
   std::shared_ptr<PerformanceMeasureNode<durationType>> subsequentMeasure;
-  std::shared_ptr<PerformanceMeasureNode<durationType>> measureSubMeasureChild;
+  std::vector<std::shared_ptr<PerformanceMeasureNode<durationType>>> measureSubMeasureChild;
   std::shared_ptr<PerformanceMeasureNode<durationType>> measureParent;
   std::shared_ptr<PerformanceMeasureNode<durationType>> previousMeasure;
 

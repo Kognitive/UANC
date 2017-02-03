@@ -8,11 +8,14 @@
 
 #include <Code/UANC/amv/SignalModel.h>
 #include <memory>
+#include <Code/UANC/util/PerformanceMeasure.h>
 
 namespace uanc {
 namespace amv {
 namespace anc {
 namespace model {
+
+using namespace uanc::util;
 
 /** \brief This is an ANCModel.
  *
@@ -28,6 +31,11 @@ class ANCModel : public uanc::amv::SignalModel {
    * the original signal, which is placed in the parent class SignalModel.
    */
   std::shared_ptr<Aquila::SignalSource> inverted;
+
+  /**
+   *  This member is the container for default and custom performance measurements.
+   */
+  PMRegister::PerformanceMeasurementRegister defaultRegister;
 };
 
 }

@@ -11,6 +11,7 @@ namespace uanc {
 namespace amv {
 namespace PMRegister {
 
+
 void PerformanceMeasurementRegister::startOverallExecutionMeasurement() {
   if(!overallMeasurement){
     overallMeasurement = std::shared_ptr<util::PerformanceMeasure<>>(

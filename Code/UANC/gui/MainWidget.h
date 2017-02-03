@@ -45,7 +45,7 @@ class MainWidget : public QWidget {
   /** This represents a mapping between the views and
   std::map<int, std::shared_ptr<std::vector<std::shared_ptr<QWidget>>>> _waveViewMapping;
 
-  /** This represents a map between the waves and the algorithms . */
+  This represents a map between the waves and the algorithms . */
   std::map<int, std::shared_ptr<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>> _waveAlgorithMapping;
 
   /** \brief Holds the apply button
