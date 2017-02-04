@@ -11,13 +11,13 @@ namespace uanc { namespace util { namespace event {
  *
  * be used inside of the application.
  */
-enum Events {
+enum Events : std::uint8_t {
 
   /** \brief Gets fired when a view gets scrolled.
    *
    * Event desrices when a widget gets scrolled.
    */
-      Scroll
+   Scroll
 };
 }}}
 

@@ -2,8 +2,8 @@
 // Created by markus on 02.02.17.
 //
 
-#ifndef UANC_EVENTPUBLISHER_H
-#define UANC_EVENTPUBLISHER_H
+#ifndef UANC_EVENTTOKEN_H
+#define UANC_EVENTTOKEN_H
 
 #include <memory>
 #include "Events.h"
@@ -12,10 +12,11 @@
 
 namespace uanc { namespace util { namespace event {
 
-class EventPublisher {
+class EventToken {
 
   // Add the Event Manager as friend.
   friend class EventManager;
+  friend class EventObserver;
 
  public:
   void trigger(Events event, EventContainer data);
@@ -24,10 +25,12 @@ class EventPublisher {
 
   int _index;
 
-  EventPublisher(int index);
+  EventToken(int index);
 
-  static EventPublisher* Create(int index);
+  static EventToken* Create(int index);
+
+  void subscribe(std::vector<Events> events);
 };
 }}}
 
-#endif //UANC_EVENTPUBLISHER_H
+#endif //UANC_EVENTTOKEN_H

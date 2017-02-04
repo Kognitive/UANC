@@ -7,13 +7,29 @@
 
 #include "EventContainer.h"
 #include "EventManager.h"
+#include "EventToken.h"
 
 namespace uanc { namespace util { namespace event {
 
-class EventObserver {
- public:
-  virtual void triggered(Events event, EventContainer data) = 0;
-};
+class EventToken;
+
+
+  class EventObserver {
+
+    friend class EventManager;
+
+   private:
+    std::vector<Events> _events;
+
+   protected:
+    template<Events... ev>
+    EventObserver();
+
+    std::unique_ptr<EventToken> _token;
+    virtual void triggered(Events event, EventContainer data) = 0;
+  };
+
 }}}
+
 
 #endif //UANC_EVENTOBSERVER_H

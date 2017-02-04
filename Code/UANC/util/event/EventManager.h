@@ -8,24 +8,26 @@
 #include <memory>
 #include <vector>
 #include <map>
-#include "EventPublisher.h"
+#include "EventToken.h"
 #include "Events.h"
 #include "EventObserver.h"
 
 namespace uanc { namespace util { namespace event {
 
-class EventPublisher;
+class EventToken;
+class EventObserver;
 
 class EventManager {
 
   // Add the Event Publisher as friend.
-  friend class EventPublisher;
+  friend class EventToken;
+  friend class EventObserver;
 
  private:
 
   EventManager();
 
-  void trigger(EventPublisher* publisher, Events event, EventContainer data);
+  void trigger(EventToken* publisher, Events event, EventContainer data);
 
   /** \brief Shared pointer to the one and only instance of EventManager
    *
@@ -38,7 +40,6 @@ class EventManager {
 
   // init counter for id to zero
   int _idCounter = 0;
- public:
 
   /** \brief Obtain the reference to the EventManager.
    *
@@ -57,7 +58,9 @@ class EventManager {
    * @param observer The observer to listen to
    * @return The unique event publisher neccessary to publish messages.
    */
-  std::unique_ptr<EventPublisher> listen(Events event, EventObserver* observer);
+  std::unique_ptr<EventToken> listen(EventObserver* observer);
+
+  void subscribe(Events event, EventToken* token);
 };
 }}}
 

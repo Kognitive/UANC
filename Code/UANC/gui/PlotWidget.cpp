@@ -7,7 +7,7 @@
 namespace uanc {
 namespace gui {
 
-PlotWidget::PlotWidget(bool hasError) {
+PlotWidget::PlotWidget(bool hasError) : EventObserver<Events::Scroll>() {
   _hasError = hasError;
   this->initialize();
 }
@@ -88,6 +88,10 @@ void PlotWidget::controlChanged() {
   double left = _control->getBoxLeft();
   double right = _control->getBoxRight();
   _signalPlot->setRange(left, right);
+}
+
+void PlotWidget::triggered(Events event, EventContainer data) {
+
 }
 
 }

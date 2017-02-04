@@ -8,16 +8,19 @@
 #include <QtWidgets/QWidget>
 #include <memory>
 #include <Code/libs/aquila/source/SignalSource.h>
+#include <Code/UANC/util/event/EventObserver.h>
 #include "SignalPlot.h"
 #include "Control.h"
 
 namespace uanc {
 namespace gui {
 
+using namespace uanc::util::event;
+
 class SignalPlot;
 class Control;
 
-class PlotWidget : public QWidget {
+class PlotWidget : public QWidget, public EventObserver {
 
   Q_OBJECT
 
@@ -80,6 +83,8 @@ class PlotWidget : public QWidget {
    * \brief This method initializes the plots.
    */
   void initialize();
+
+  void triggered(Events event, EventContainer data) final;
 };
 
 }
