@@ -11,7 +11,6 @@
 #include <QApplication>
 #include<QMenuBar>
 #include <QtWidgets/QMainWindow>
-
 #include <memory>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
@@ -19,9 +18,12 @@
 #include "MainWidget.h"
 #include "Code/libs/aquila/source/SignalSource.h"
 #include "Code/UANC/util/SignalManager.h"
+#include "ImportWindow.h"
 
 namespace uanc {
 namespace gui {
+
+class ImportWindow;
 
 /** \brief This class represents the main window.
  *
@@ -50,7 +52,7 @@ class MainWindow : public QMainWindow {
    */
   std::unique_ptr<MainWidget> mainWidget;
 
-  /** \brief Represents the laod action.
+  /** \brief Represents the load action.
    *
    * Represents the load action. In detail it is the file open action
    */
@@ -103,11 +105,17 @@ class MainWindow : public QMainWindow {
 
   /** \brief Loads a file from plate and displays it inside of the gui.
    *
-   * This method should open a dialog, to let the user select a file. Then
+   * This method should open the import dialog, to let the user select a file. Then
    * it loads that specified file and in the end it gets drawn to the MainWidget
    * left plot.
    */
   void loadFile();
+
+  /** \brief Imports the signals selected using the Importer into the main window
+   *  @param: The indices of the imported signals that have been selected.
+   */
+  void showImportedSignals(std::vector<int> loadedIndices);
+
 
   /** \brief Saves a file to the hard drive.
    *

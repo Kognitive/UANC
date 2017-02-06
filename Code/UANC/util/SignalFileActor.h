@@ -39,6 +39,7 @@ class SignalFileActor : FileActor<SignalModel> {
    * @return the loaded T
    */
   std::shared_ptr<SignalModel> loadData() {
+    //TODO: There should be an exception thrown, if the path is incorrect
     auto path = this->getPath();
     auto lwave = new Aquila::WaveFile(path, Aquila::StereoChannel::LEFT);
     auto rwave = new Aquila::WaveFile(path, Aquila::StereoChannel::RIGHT);

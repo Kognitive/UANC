@@ -5,7 +5,6 @@
 
 #include "MainWindow.h"
 #include "Code/UANC/util/SignalFileActor.h"
-#include "Code/UANC/util/DialogUtil.h"
 
 namespace uanc {
 namespace gui {
@@ -59,9 +58,9 @@ void MainWindow::setupGUI() {
 void MainWindow::makeActions() {
 
   // create the file open action
-  fileOpenAction = std::unique_ptr<QAction>(new QAction(tr("&Open File..."), this));
+  fileOpenAction = std::unique_ptr<QAction>(new QAction(tr("&Import File..."), this));
   fileOpenAction->setShortcuts(QKeySequence::Open);
-  fileOpenAction->setStatusTip(tr("Open a file"));
+  fileOpenAction->setStatusTip(tr("Import a file"));
   connect(fileOpenAction.get(), &QAction::triggered, this, &MainWindow::loadFile);
 
   // create the file save action
@@ -90,21 +89,13 @@ void MainWindow::makeMenu() {
  */
 void MainWindow::loadFile() {
 
-  // get path to an openable file
-  util::DialogUtil dialogUtil(this);
-  auto path = dialogUtil.chooseLoadPath();
+  //Open the import dialog
+  auto importer = ImportWindow::get();
+  importer->show();
+  importer->raise();
+  importer->activateWindow();
+  connect(&*importer, &ImportWindow::indicesLoaded, this, &MainWindow::showImportedSignals);
 
-  // if a path is available
-  if (!path.empty()) {
-
-    // simply load the data
-    util::SignalFileActor fileActor(path);
-    auto signal = fileActor.loadData();
-
-    // save the signal inside of the main widget
-    auto id = SignalManager::get()->addSignal(signal);
-    this->mainWidget->loadSignalSource(SignalManager::get()->getSignal(id));
-  }
 }
 
 /** \brief Saves a file to the hard drive.
@@ -131,6 +122,13 @@ void MainWindow::saveFile() {
 
 }
 
+void MainWindow::showImportedSignals(std::vector<int> loadedIndices) {
+  for (int signalID : loadedIndices)
+  {
+    this->mainWidget->loadSignalSource(SignalManager::get()->getSignal(signalID));
+  }
+}
+
 /** \brief Shared pointer of the one and only instance of MainWindow.
  *
  * This field wraps a MainWindow inside of a shared_ptr. The main goal is that
@@ -140,3 +138,5 @@ std::shared_ptr<MainWindow> MainWindow::_instance = NULL;
 
 }
 }
+
+
