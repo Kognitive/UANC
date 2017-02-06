@@ -11,7 +11,6 @@
 #include <QApplication>
 #include<QMenuBar>
 #include <QtWidgets/QMainWindow>
-
 #include <memory>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
@@ -19,6 +18,7 @@
 #include "MainWidget.h"
 #include "Code/libs/aquila/source/SignalSource.h"
 #include "Code/UANC/util/SignalManager.h"
+#include "ImportWindow.h"
 
 namespace uanc {
 namespace gui {
