@@ -1,24 +1,30 @@
-//
-// Created by markus on 02.02.17.
-//
+/*
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
 
 #ifndef UANC_EVENTS_H
 #define UANC_EVENTS_H
 
-namespace uanc { namespace util { namespace event {
+namespace uanc {
+namespace util {
+namespace event {
 
-/** \brief THis enumeration contains all events, that can
+/** \brief This enumeration contains all events.
  *
- * be used inside of the application.
+ * These events get used by the event system to signal the
+ * current event.
  */
 enum Events : std::uint8_t {
 
   /** \brief Gets fired when a view gets scrolled.
    *
-   * Event desrices when a widget gets scrolled.
+   * Event describes when a widget gets scrolled.
    */
-   Scroll
+      Scroll
 };
-}}}
+}
+}
+}
 
 #endif //UANC_EVENTS_H

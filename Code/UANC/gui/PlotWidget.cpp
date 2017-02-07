@@ -7,7 +7,7 @@
 namespace uanc {
 namespace gui {
 
-PlotWidget::PlotWidget(bool hasError) : EventObserver<Events::Scroll>() {
+PlotWidget::PlotWidget(bool hasError) : EventObserver({Events::Scroll}) {
   _hasError = hasError;
   this->initialize();
 }
@@ -35,6 +35,8 @@ void PlotWidget::initialize() {
 }
 
 void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::shared_ptr<Aquila::SignalSource> originalSignal) {
+  this->_token->trigger(Events::Scroll, EventContainer());
+
   // save pointer to signal in member
   _signal = signal;
   if (originalSignal != NULL)
@@ -91,7 +93,7 @@ void PlotWidget::controlChanged() {
 }
 
 void PlotWidget::triggered(Events event, EventContainer data) {
-
+  printf("Test");
 }
 
 }
