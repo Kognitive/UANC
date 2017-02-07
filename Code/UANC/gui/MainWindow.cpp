@@ -59,9 +59,9 @@ void MainWindow::setupGUI() {
 void MainWindow::makeActions() {
 
   // create the file open action
-  fileOpenAction = std::unique_ptr<QAction>(new QAction(tr("&Open File..."), this));
+  fileOpenAction = std::unique_ptr<QAction>(new QAction(tr("&Import File..."), this));
   fileOpenAction->setShortcuts(QKeySequence::Open);
-  fileOpenAction->setStatusTip(tr("Open a file"));
+  fileOpenAction->setStatusTip(tr("Import a file"));
   connect(fileOpenAction.get(), &QAction::triggered, this, &MainWindow::loadFile);
 
   // create the file save action
@@ -89,6 +89,10 @@ void MainWindow::makeMenu() {
  * left plot.
  */
 void MainWindow::loadFile() {
+
+  //Open the import dialog
+  auto importer = ImportWindow::get();
+  importer->show();
 
   // get path to an openable file
   util::DialogUtil dialogUtil(this);
