@@ -26,11 +26,11 @@ void ImportWindow::applyCancel() {
 void ImportWindow::addSignal() {
 }
 
-void ImportWindow::loadRecentlyUsedSignals() {
-}
-
 ImportWindow::ImportWindow() {
+  //Initialiaze the QSettings Object with default values
+  recentlyUsedSettings = new QSettings("Gruppe 2", "Understanding Active Noise Cancelling");
   signalMapper = new QSignalMapper(this);
+  loadRecentlyUsedDirectory();
   this->setupGUI();
 }
 
@@ -104,6 +104,7 @@ void ImportWindow::setupGUI() {
 
   mainWidgetVerticalLayout->addWidget(filesGroupBox);
 
+  //Set comboBox for recently used files
   RecentlyUsedGroupBox = new QGroupBox(centralWidget);
   RecentlyUsedGroupBox->setObjectName(
       QString::fromUtf8("RecentlyUsedGroupBox"));
@@ -112,7 +113,9 @@ void ImportWindow::setupGUI() {
   verticalLayout_10->setContentsMargins(11, 11, 11, 11);
   verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
   recentlyUsedCombo = new QComboBox(RecentlyUsedGroupBox);
-  recentlyUsedCombo->setObjectName(QString::fromUtf8("recentlyUsedCombo"));
+  recentlyUsedCombo->setInsertPolicy( QComboBox::InsertAtTop);
+  recentlyUsedCombo->setMaxCount(RECENTLY_USED_MAX_LENGTH);
+  loadRecentlyUsedSignals();
 
   verticalLayout_10->addWidget(recentlyUsedCombo);
 
@@ -210,12 +213,17 @@ void ImportWindow::importFiles() {
 
 }
 
-void ImportWindow::selectFilesFromFS(){
+void ImportWindow::selectFilesFromFS() {
   // get path to multiple openable files
   util::DialogUtil dialogUtil(this);
-  auto path = dialogUtil.chooseLoadableFiles();
-  addFilesToSelected(path);
-
+  auto path = dialogUtil.chooseLoadableFiles(recentlyUsedDirectory);
+  if (path.size() > 0) {
+    //Save the recently used directory
+    QFileInfo fileInfo(path[0]);
+    recentlyUsedDirectory = fileInfo.absolutePath();
+    saveRecentlyUsedDirectory();
+    addFilesToSelected(path);
+  }
 }
 
 void ImportWindow::addFilesToSelected(QStringList selectedFiles) {
@@ -275,8 +283,62 @@ void ImportWindow::addFilesToSelected(QStringList selectedFiles) {
     connect(signalMapper, SIGNAL(mapped(QString)), this,
             SLOT(removeSelectedSignal(QString)));
 
+  }
+  updateRecentlyUsed(selectedFiles);
+}
+
+void ImportWindow::updateRecentlyUsed(QStringList newElements) {
+  for (unsigned int i = 0;
+      i < newElements.size() && i < RECENTLY_USED_MAX_LENGTH; ++i) {
+    //If not already in the list, push to front.
+    std::cout<<recentlyUsedFiles.indexOf(newElements[i])<<std::endl;
+    if(recentlyUsedFiles.indexOf(newElements[i]) != -1){
+      continue;
+    }
+    recentlyUsedFiles.push_front(newElements[i]);
+    //Delete last element, if over maximum queue length
+    if (recentlyUsedFiles.size() > RECENTLY_USED_MAX_LENGTH) {
+      recentlyUsedFiles.erase(recentlyUsedFiles.end()-1);
+    }
+  }
+  //Update the recentlyUsed ComboBox. Since its maximum size is set to the same maximum size as the vector
+  //The inidices in the ComboBox and in the vector must be the same.
+  for(QString path : recentlyUsedFiles){
+    //Add the filename to the ComboBox
+    QFileInfo fileInfo(path);
+    QString currentFilename = fileInfo.fileName();
+    recentlyUsedCombo-> insertItem(0,currentFilename);
+  }
+  saveRecentlyUsedSignals();
+}
+
+void ImportWindow::loadRecentlyUsedSignals() {
+  QStringList elementsBuffer;
+
+  //Try to load the length of the recentlyUsedSettings array
+  int size = recentlyUsedSettings->beginReadArray("RecentlyUsedItems");
+  for (int i = 0; i < size; ++i) {
+    recentlyUsedSettings->setArrayIndex(i);
+    //Revert the order, since it is going to be reverted during insertion
+    elementsBuffer.push_front(recentlyUsedSettings->value("FullPath").toString());
+  }
+  recentlyUsedSettings->endArray();
+  updateRecentlyUsed(elementsBuffer);
+}
 
 
+void ImportWindow::saveRecentlyUsedSignals() {
+  if (recentlyUsedSettings->isWritable()) {
+
+    //Save the recently used files, so that they can be used again.
+    recentlyUsedSettings->beginWriteArray("RecentlyUsedItems");
+    for (int i = 0; i < recentlyUsedFiles.size(); ++i) {
+      recentlyUsedSettings->setArrayIndex(i);
+      recentlyUsedSettings->setValue("FullPath", recentlyUsedFiles[i]);
+    }
+    recentlyUsedSettings->endArray();
+    //Save the setting permanently
+    recentlyUsedSettings->sync();
   }
 }
 
@@ -288,8 +350,26 @@ void ImportWindow::removeSelectedSignal(QString signalIndex) {
   //    selectedPathHashMap[static_cast<size_t>(signalIndex.toULong())]
   //        ->selectEntryRemoveButton);*/
   selectedPathHashMap.erase(static_cast<size_t> (signalIndex.toULong()));
-
 }
 
+void ImportWindow::saveRecentlyUsedDirectory() {
+  if (recentlyUsedSettings->isWritable()) {
+    recentlyUsedSettings->setValue("RecentlyUsedDir", recentlyUsedDirectory);
+    recentlyUsedSettings->sync();
+  }
+}
+
+void ImportWindow::loadRecentlyUsedDirectory() {
+  QVariant dir = recentlyUsedSettings->value("RecentlyUsedDir");
+  if(!dir.isNull()){
+    recentlyUsedDirectory = dir.toString();
+  }
+  else{
+    recentlyUsedDirectory = QString();
+  }
+}
+
 }
 }
+
+

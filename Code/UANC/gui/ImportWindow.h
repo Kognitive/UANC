@@ -14,6 +14,7 @@
 #include <algorithm>
 
 //QT-stuff
+#include <QSettings>
 #include <QSignalMapper>
 #include <QFileInfo>
 #include <QtCore/QVariant>
@@ -73,9 +74,24 @@ class ImportWindow :public QMainWindow {
   void addSignal();
 
   /**
-   * Initializes the list of recently used signals
+   * Loads the list of recently used signals
    */
   void loadRecentlyUsedSignals();
+
+  /**
+   * Saves the list of recently used signals permanently
+   */
+  void saveRecentlyUsedSignals();
+
+  /**
+   * Saves the recently used directory.
+   */
+  void saveRecentlyUsedDirectory();
+
+  /**
+   * Loads the recently used directory.
+   */
+  void loadRecentlyUsedDirectory();
 
   /** \brief Sets up the import window.
    *
@@ -86,6 +102,14 @@ class ImportWindow :public QMainWindow {
   /** \bief The default constructor
    */
   ImportWindow();
+
+  /**
+   * This function manages the LRU Queue for loaded files.
+   * There are maximum RECENTLY_USED_MAX_LENGTH elements in the Queue allowed.
+   * If more new Elements than the length of the queue are passed to the function, only the first
+   * RECENTLY_USED_MAX_LENGTH ones are inserted.
+   */
+  void updateRecentlyUsed(QStringList newElements);
 
   //The signal mapper for the dynamic generated buttons
   QSignalMapper *signalMapper;
@@ -112,6 +136,18 @@ class ImportWindow :public QMainWindow {
   QPushButton *importButton;
   QPushButton *cancelButton;
   QStatusBar *statusBar;
+
+  //The storage for the recently used files full path
+  QStringList recentlyUsedFiles;
+
+  //The QSetting Object for storing the recently used files.
+  QSettings* recentlyUsedSettings;
+
+  //The recently used directory
+  QString recentlyUsedDirectory;
+
+  //The maximum length of the recently used files
+  const size_t RECENTLY_USED_MAX_LENGTH = 5;
 
   //Gui-Elements for a loaded file
   struct selectedPathLoadedElements {
