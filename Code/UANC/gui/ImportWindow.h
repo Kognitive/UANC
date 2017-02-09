@@ -33,6 +33,9 @@ namespace uanc {
 namespace gui {
 
 class ImportWindow :public QMainWindow {
+
+ Q_OBJECT
+
  public:
 
 
@@ -47,10 +50,21 @@ class ImportWindow :public QMainWindow {
 
  private:
 
+  /**
+   * Adds a new signal from the file system to the list of selected signals
+   */
+  void addSignal();
+
+  /**
+   * Initializes the list of recently used signals
+   */
+  void loadRecentlyUsedSignals();
+
   /** \brief Sets up the import window.
    *
    */
   void setupGUI();
+
 
   /** \bief The default constructor
    */
@@ -77,15 +91,32 @@ class ImportWindow :public QMainWindow {
   QVBoxLayout *verticalLayout_7;
   QCheckBox *normalizeCheckBox;
   QGroupBox *actionsGroupBox;
-  QHBoxLayout *horizontalLayout_7;
+  QHBoxLayout *actonLayout;
   QPushButton *importButton;
   QPushButton *cancelButton;
   QStatusBar *statusBar;
 
-
   /** \brief Shared pointer to the one and only instance of ImportWindow.
    */
   static std::shared_ptr<ImportWindow> _instance;
+
+  private slots:
+  /**
+   * Closes the window if "cancel" is clicked.
+   */
+  void applyCancel();
+
+  /**
+   * Imports the selected files
+   */
+  void importFiles();
+
+  /**
+   * Removes the selected file from the import list
+   */
+  void removeSelectedSignal(int signalIndex);
+
+
 
 };
 
