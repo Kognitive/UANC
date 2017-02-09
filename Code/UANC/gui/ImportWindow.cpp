@@ -30,11 +30,11 @@ void ImportWindow::loadRecentlyUsedSignals() {
 }
 
 ImportWindow::ImportWindow() {
+  signalMapper = new QSignalMapper(this);
   this->setupGUI();
 }
 
 void ImportWindow::setupGUI() {
-  std::cout << "Entered setupGUI" << std::endl;
 
   if (this->objectName().isEmpty())
     this->setObjectName(QString::fromUtf8("MainWindow"));
@@ -90,10 +90,10 @@ void ImportWindow::setupGUI() {
   scrollAreaWidgetContents->setObjectName(
       QString::fromUtf8("scrollAreaWidgetContents"));
   scrollAreaWidgetContents->setGeometry(QRect(0, 0, 299, 101));
-  verticalLayout_13 = new QVBoxLayout(scrollAreaWidgetContents);
-  verticalLayout_13->setSpacing(6);
-  verticalLayout_13->setContentsMargins(11, 11, 11, 11);
-  verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
+  scrollAreaVerticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
+  scrollAreaVerticalLayout->setSpacing(6);
+  scrollAreaVerticalLayout->setContentsMargins(11, 11, 11, 11);
+  scrollAreaVerticalLayout->setObjectName(QString::fromUtf8("verticalLayout_13"));
 
   selectedFilesScrollArea->setWidget(scrollAreaWidgetContents);
   filesInnerVertivalLayout->addWidget(selectedFilesScrollArea);
@@ -215,39 +215,73 @@ void ImportWindow::addFilesToSelectes() {
   util::DialogUtil dialogUtil(this);
   auto path = dialogUtil.chooseLoadableFiles();
   //Create new buttons and line edits for every input file
-  for (int i = 0; i< path.length(); i++){
+  for (int i = 0; i < path.length(); i++) {
 
-    selectedEntryHorizontalLayout_0 = new QHBoxLayout();
-    selectedEntryHorizontalLayout_0->setSpacing(6);
-    selectedEntryHorizontalLayout_0->setObjectName(
-        QString::fromUtf8("selectedEntryHorizontalLayout_0"));
+    //Generate hash from the filename for the map. So every file can be only imported once.
+    size_t currentHash = pathHash(path[i].toUtf8().constData());
 
-    //Layout for the scroll-area: Buttons dynamically generated when new files added.
-    verticalLayout_13->addLayout(selectedEntryHorizontalLayout_0);
+    //Separate the path and the filename
+    QFileInfo fileInfo(path[i]);
+    std::string currentFilename = fileInfo.fileName().toUtf8().constData();
 
-    selectedEntryPath_0 = new QLineEdit(scrollAreaWidgetContents);
-    selectedEntryPath_0->setObjectName(QString::fromUtf8("selectedEntryPath_0"));
-    selectedEntryHorizontalLayout_0->addWidget(selectedEntryPath_0);
-    selectEntryRemove_0 = new QPushButton(scrollAreaWidgetContents);
-    selectEntryRemove_0->setObjectName(QString::fromUtf8("selectEntryRemove_0"));
-    selectedEntryHorizontalLayout_0->addWidget(selectEntryRemove_0);
+    //Create new elements to add to the scroll area
+    std::shared_ptr<selectedPathLoadedElements> currentSelectedPath =
+        std::shared_ptr<selectedPathLoadedElements>(
+            new selectedPathLoadedElements { new QHBoxLayout(), new QLineEdit(
+                scrollAreaWidgetContents), new QPushButton(
+                scrollAreaWidgetContents) });
 
-    selectedEntryPath_0->setToolTip(
-        QApplication::translate("MainWindow", "Path to file", 0));
-    selectedEntryPath_0->setStatusTip(
-        QApplication::translate("MainWindow", "Path to file", 0));
-    selectEntryRemove_0->setToolTip(
+    //Save the element in the hashmap
+    std::pair<size_t, std::shared_ptr<selectedPathLoadedElements>> currentHashPathPair(
+        currentHash, currentSelectedPath);
+    selectedPathHashMap.insert(currentHashPathPair);
+
+    //Set properties of the horizontal layout
+    currentSelectedPath->selectedEntryHorizontalLayout->setSpacing(6);
+
+    //Add new entry to the scroll area
+    scrollAreaVerticalLayout->addLayout(
+        currentSelectedPath->selectedEntryHorizontalLayout);
+
+    //Set properties of the line edit
+    currentSelectedPath->selectedEntryHorizontalLayout->addWidget(
+        currentSelectedPath->selectedEntryPathLineEdit);
+    currentSelectedPath->selectedEntryPathLineEdit->setText(path[i]);
+    currentSelectedPath->selectedEntryPathLineEdit->setToolTip(
+    QApplication::translate("MainWindow","Path to file" , 0));
+    currentSelectedPath->selectedEntryPathLineEdit->setStatusTip(
+    QApplication::translate("MainWindow", ("Path to file " + currentFilename).c_str(), 0));
+
+    //Set properties of the remove Button
+    currentSelectedPath->selectedEntryHorizontalLayout->addWidget(
+        currentSelectedPath->selectEntryRemoveButton);
+    currentSelectedPath->selectEntryRemoveButton->setToolTip(
         QApplication::translate("MainWindow", "Remove selected file", 0));
-    selectEntryRemove_0->setStatusTip(
+    currentSelectedPath->selectEntryRemoveButton->setStatusTip(
         QApplication::translate("MainWindow", "Remove selected wave file", 0));
-    selectEntryRemove_0->setText(
+    currentSelectedPath->selectEntryRemoveButton->setText(
         QApplication::translate("MainWindow", "Remove", 0));
+    //Connect the remove button using the signal mapper and the hash
+    connect(currentSelectedPath->selectEntryRemoveButton, SIGNAL(clicked()),
+            signalMapper, SLOT(map()));
+    signalMapper->setMapping(currentSelectedPath->selectEntryRemoveButton,
+                             QString::number(currentHash));
+    connect(signalMapper, SIGNAL(mapped(QString)), this,
+            SLOT(removeSelectedSignal(QString)));
+
+
+
   }
 }
 
-void ImportWindow::removeSelectedSignal(int signalIndex) {
+void ImportWindow::removeSelectedSignal(QString signalIndex) {
+  //Remove the widget and the signal mapping
 
-
+  //TODO: Why is there a segfault?!
+  //signalMapper->removeMappings(
+  //    selectedPathHashMap[static_cast<size_t>(signalIndex.toULong())]
+  //        ->selectEntryRemoveButton);*/
+  selectedPathHashMap.erase(static_cast<size_t> (signalIndex.toULong()));
 
 }
 

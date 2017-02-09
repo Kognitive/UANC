@@ -11,8 +11,11 @@
 #include <memory>
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
 
 //QT-stuff
+#include <QSignalMapper>
+#include <QFileInfo>
 #include <QtCore/QVariant>
 #include <QAction>
 #include <QApplication>
@@ -51,6 +54,10 @@ class ImportWindow :public QMainWindow {
    */
   static std::shared_ptr<ImportWindow> get();
 
+  ~ImportWindow(){
+
+  }
+
 
  private:
 
@@ -74,6 +81,9 @@ class ImportWindow :public QMainWindow {
    */
   ImportWindow();
 
+  //The signal mapper for the dynamic generated buttons
+  QSignalMapper *signalMapper;
+
   //Layout elements
   QWidget *centralWidget;
   QVBoxLayout *mainWidgetVerticalLayout;
@@ -84,7 +94,7 @@ class ImportWindow :public QMainWindow {
   QVBoxLayout *filesInnerVertivalLayout;
   QScrollArea *selectedFilesScrollArea;
   QWidget *scrollAreaWidgetContents;
-  QVBoxLayout *verticalLayout_13;
+  QVBoxLayout *scrollAreaVerticalLayout;
   QGroupBox *RecentlyUsedGroupBox;
   QVBoxLayout *verticalLayout_10;
   QComboBox *recentlyUsedCombo;
@@ -99,19 +109,25 @@ class ImportWindow :public QMainWindow {
 
   //Gui-Elements for a loaded file
   struct selectedPathLoadedElements {
-    QHBoxLayout selectedEntryHorizontalLayout;
-    QLineEdit selectedEntryPath;
-    QPushButton *selectEntryRemove;
+    QHBoxLayout *selectedEntryHorizontalLayout;
+    QLineEdit *selectedEntryPathLineEdit;
+    QPushButton *selectEntryRemoveButton;
+
+    ~selectedPathLoadedElements() {
+      //Remove Elements from Widget when destructed
+      selectedEntryHorizontalLayout->removeWidget(selectedEntryPathLineEdit);
+      selectedEntryHorizontalLayout->removeWidget(selectEntryRemoveButton);
+      delete selectedEntryHorizontalLayout;
+      delete selectedEntryPathLineEdit;
+      delete selectEntryRemoveButton;
+    }
   };
 
   //Hash function for the keys of the selected files
   std::hash<std::string> pathHash;
 
-  //Key values for the selected files.
-  std::vector<size_t> selectedFilePathKeys;
-
   //Maps for selected files
-  std::unordered_map <size_t, selectedPathLoadedElements> selectedPathHashMap;
+  std::unordered_map <size_t, std::shared_ptr<selectedPathLoadedElements> > selectedPathHashMap;
 
   QHBoxLayout *selectedEntryHorizontalLayout_0;
   QLineEdit *selectedEntryPath_0;
@@ -139,8 +155,9 @@ class ImportWindow :public QMainWindow {
 
   /**
    * Removes the selected file from the import list
+   * @param signalIndex:
    */
-  void removeSelectedSignal(int signalIndex);
+  void removeSelectedSignal(QString signalIndex);
 
 
 
