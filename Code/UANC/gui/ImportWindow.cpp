@@ -74,7 +74,7 @@ void ImportWindow::setupGUI() {
   addSelectedFilesButton->setText(
       QApplication::translate("MainWindow", "Select Wave File", 0));
   filesMainVerticalLayout->addWidget(addSelectedFilesButton);
-  connect(addSelectedFilesButton, SIGNAL(clicked()), this, SLOT(selectFilesFromFS()));
+  connect(addSelectedFilesButton, SIGNAL(clicked()), this, SLOT(addFilesToSelectes()));
 
 
   //Layout for the list of files to import
@@ -210,24 +210,18 @@ void ImportWindow::importFiles() {
 
 }
 
-void ImportWindow::selectFilesFromFS(){
+void ImportWindow::addFilesToSelectes() {
   // get path to multiple openable files
   util::DialogUtil dialogUtil(this);
   auto path = dialogUtil.chooseLoadableFiles();
-  addFilesToSelected(path);
-
-}
-
-void ImportWindow::addFilesToSelected(QStringList selectedFiles) {
-
   //Create new buttons and line edits for every input file
-  for (int i = 0; i < selectedFiles.length(); i++) {
+  for (int i = 0; i < path.length(); i++) {
 
     //Generate hash from the filename for the map. So every file can be only imported once.
-    size_t currentHash = pathHash(selectedFiles[i].toUtf8().constData());
+    size_t currentHash = pathHash(path[i].toUtf8().constData());
 
     //Separate the path and the filename
-    QFileInfo fileInfo(selectedFiles[i]);
+    QFileInfo fileInfo(path[i]);
     std::string currentFilename = fileInfo.fileName().toUtf8().constData();
 
     //Create new elements to add to the scroll area
@@ -252,7 +246,7 @@ void ImportWindow::addFilesToSelected(QStringList selectedFiles) {
     //Set properties of the line edit
     currentSelectedPath->selectedEntryHorizontalLayout->addWidget(
         currentSelectedPath->selectedEntryPathLineEdit);
-    currentSelectedPath->selectedEntryPathLineEdit->setText(selectedFiles[i]);
+    currentSelectedPath->selectedEntryPathLineEdit->setText(path[i]);
     currentSelectedPath->selectedEntryPathLineEdit->setToolTip(
     QApplication::translate("MainWindow","Path to file" , 0));
     currentSelectedPath->selectedEntryPathLineEdit->setStatusTip(

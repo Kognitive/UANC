@@ -61,12 +61,6 @@ class ImportWindow :public QMainWindow {
 
  private:
 
-
-  /**
-   * Adds new files to list of selected files.
-   */
-  void addFilesToSelected(QStringList selectedFiles);
-
   /**
    * Adds a new signal from the file system to the list of selected signals
    */
@@ -144,12 +138,6 @@ class ImportWindow :public QMainWindow {
   static std::shared_ptr<ImportWindow> _instance;
 
   private slots:
-
-  /**
-   * Closes the window if "cancel" is clicked.
-   */
-  void selectFilesFromFS();
-
   /**
    * Closes the window if "cancel" is clicked.
    */
@@ -160,7 +148,10 @@ class ImportWindow :public QMainWindow {
    */
   void importFiles();
 
-
+  /**
+   * Adds new files to list of selected files.
+   */
+  void addFilesToSelectes();
 
   /**
    * Removes the selected file from the import list
