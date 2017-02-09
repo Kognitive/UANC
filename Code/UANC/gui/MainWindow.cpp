@@ -93,10 +93,7 @@ void MainWindow::loadFile() {
   //Open the import dialog
   auto importer = ImportWindow::get();
   importer->show();
-  importer->raise();
-  importer->activateWindow();
 
-  /*
   // get path to an openable file
   util::DialogUtil dialogUtil(this);
   auto path = dialogUtil.chooseLoadPath();
@@ -111,7 +108,7 @@ void MainWindow::loadFile() {
     // save the signal inside of the main widget
     auto id = SignalManager::get()->addSignal(signal);
     this->mainWidget->loadSignalSource(SignalManager::get()->getSignal(id));
-  }*/
+  }
 }
 
 /** \brief Saves a file to the hard drive.
