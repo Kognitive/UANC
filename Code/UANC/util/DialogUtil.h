@@ -8,7 +8,6 @@
 
 #include <string>
 #include <iostream>
-#include <QFileDialog>
 
 namespace uanc {
 namespace util {
@@ -38,11 +37,11 @@ class DialogUtil {
    *
    * @return The path to the choosen file.
    */
-  QStringList chooseLoadableFiles() {
+  std::string chooseLoadPath() {
 
     // Simply show a open file dialog
-    auto result = QFileDialog::getOpenFileNames(this->getParent(), "Open WAV File", "/home", "WAV Files (*.wav)");
-    return result;
+    auto result = QFileDialog::getOpenFileName(this->getParent(), "Open WAV File", "/home", "WAV Files (*.wav)");
+    return (result == "") ? "" : result.toUtf8().constData();
   }
 
   /** \brief Should basically reutrn a path to an existing or not existent file

@@ -20,6 +20,7 @@ std::shared_ptr<ImportWindow> ImportWindow::get() {
 }
 
 void ImportWindow::applyCancel() {
+  std::cout << "Whaat?" << std::endl;
   this->close();
 }
 
@@ -62,22 +63,12 @@ void ImportWindow::setupGUI() {
   filesMainVerticalLayout->setSpacing(6);
   filesMainVerticalLayout->setObjectName(
       QString::fromUtf8("filesMainVerticalLayout"));
-
-  //Button for adding new files
   addSelectedFilesButton = new QPushButton(filesGroupBox);
   addSelectedFilesButton->setObjectName(
       QString::fromUtf8("addSelectedFilesButton"));
-  addSelectedFilesButton->setToolTip(
-      QApplication::translate("MainWindow", "Select new input files", 0));
-  addSelectedFilesButton->setStatusTip(
-      QApplication::translate("MainWindow", "Select new input files", 0));
-  addSelectedFilesButton->setText(
-      QApplication::translate("MainWindow", "Select Wave File", 0));
+
   filesMainVerticalLayout->addWidget(addSelectedFilesButton);
-  connect(addSelectedFilesButton, SIGNAL(clicked()), this, SLOT(addFilesToSelectes()));
 
-
-  //Layout for the list of files to import
   filesInnerVertivalLayout = new QVBoxLayout();
   filesInnerVertivalLayout->setSpacing(6);
   filesInnerVertivalLayout->setObjectName(
@@ -94,8 +85,24 @@ void ImportWindow::setupGUI() {
   verticalLayout_13->setSpacing(6);
   verticalLayout_13->setContentsMargins(11, 11, 11, 11);
   verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
+  selectedEntryHorizontalLayout_0 = new QHBoxLayout();
+  selectedEntryHorizontalLayout_0->setSpacing(6);
+  selectedEntryHorizontalLayout_0->setObjectName(
+      QString::fromUtf8("selectedEntryHorizontalLayout_0"));
+  selectedEntryPath_0 = new QLineEdit(scrollAreaWidgetContents);
+  selectedEntryPath_0->setObjectName(QString::fromUtf8("selectedEntryPath_0"));
+
+  selectedEntryHorizontalLayout_0->addWidget(selectedEntryPath_0);
+
+  selectEntryRemove_0 = new QPushButton(scrollAreaWidgetContents);
+  selectEntryRemove_0->setObjectName(QString::fromUtf8("selectEntryRemove_0"));
+
+  selectedEntryHorizontalLayout_0->addWidget(selectEntryRemove_0);
+
+  verticalLayout_13->addLayout(selectedEntryHorizontalLayout_0);
 
   selectedFilesScrollArea->setWidget(scrollAreaWidgetContents);
+
   filesInnerVertivalLayout->addWidget(selectedFilesScrollArea);
 
   filesMainVerticalLayout->addLayout(filesInnerVertivalLayout);
@@ -131,9 +138,10 @@ void ImportWindow::setupGUI() {
 
   mainWidgetVerticalLayout->addWidget(importGroupBox);
 
-  //Layout for Cancel and Import button
   actionsGroupBox = new QGroupBox(centralWidget);
   actionsGroupBox->setObjectName(QString::fromUtf8("actionsGroupBox"));
+
+  //Layout for Cancel and Import button
   actonLayout = new QHBoxLayout(actionsGroupBox);
   actonLayout->setSpacing(6);
   actonLayout->setContentsMargins(11, 11, 11, 11);
@@ -173,6 +181,22 @@ void ImportWindow::setupGUI() {
   //Set the captions
   this->setWindowTitle(QApplication::translate("MainWindow", "Import", 0));
   filesGroupBox->setTitle(QApplication::translate("MainWindow", "Files", 0));
+  addSelectedFilesButton->setToolTip(
+      QApplication::translate("MainWindow", "Select new input files", 0));
+  addSelectedFilesButton->setStatusTip(
+      QApplication::translate("MainWindow", "Select new input files", 0));
+  addSelectedFilesButton->setText(
+      QApplication::translate("MainWindow", "Select Wave File", 0));
+  selectedEntryPath_0->setToolTip(
+      QApplication::translate("MainWindow", "Path to file", 0));
+  selectedEntryPath_0->setStatusTip(
+      QApplication::translate("MainWindow", "Path to file", 0));
+  selectEntryRemove_0->setToolTip(
+      QApplication::translate("MainWindow", "Remove selected file", 0));
+  selectEntryRemove_0->setStatusTip(
+      QApplication::translate("MainWindow", "Remove selected wave file", 0));
+  selectEntryRemove_0->setText(
+      QApplication::translate("MainWindow", "Remove", 0));
   RecentlyUsedGroupBox->setTitle(
       QApplication::translate("MainWindow", "Recently used", 0));
   importGroupBox->setTitle(
@@ -188,6 +212,8 @@ void ImportWindow::setupGUI() {
 
   Qt::WindowFlags flags = windowFlags();
   this->setWindowFlags(flags | Qt::WindowStaysOnTopHint);
+
+  std::cout << "aaa!" << std::endl;
 
   //QMetaObject::connectSlotsByName(this);
 }
@@ -210,45 +236,7 @@ void ImportWindow::importFiles() {
 
 }
 
-void ImportWindow::addFilesToSelectes() {
-  // get path to multiple openable files
-  util::DialogUtil dialogUtil(this);
-  auto path = dialogUtil.chooseLoadableFiles();
-  //Create new buttons and line edits for every input file
-  for (int i = 0; i< path.length(); i++){
-
-    selectedEntryHorizontalLayout_0 = new QHBoxLayout();
-    selectedEntryHorizontalLayout_0->setSpacing(6);
-    selectedEntryHorizontalLayout_0->setObjectName(
-        QString::fromUtf8("selectedEntryHorizontalLayout_0"));
-
-    //Layout for the scroll-area: Buttons dynamically generated when new files added.
-    verticalLayout_13->addLayout(selectedEntryHorizontalLayout_0);
-
-    selectedEntryPath_0 = new QLineEdit(scrollAreaWidgetContents);
-    selectedEntryPath_0->setObjectName(QString::fromUtf8("selectedEntryPath_0"));
-    selectedEntryHorizontalLayout_0->addWidget(selectedEntryPath_0);
-    selectEntryRemove_0 = new QPushButton(scrollAreaWidgetContents);
-    selectEntryRemove_0->setObjectName(QString::fromUtf8("selectEntryRemove_0"));
-    selectedEntryHorizontalLayout_0->addWidget(selectEntryRemove_0);
-
-    selectedEntryPath_0->setToolTip(
-        QApplication::translate("MainWindow", "Path to file", 0));
-    selectedEntryPath_0->setStatusTip(
-        QApplication::translate("MainWindow", "Path to file", 0));
-    selectEntryRemove_0->setToolTip(
-        QApplication::translate("MainWindow", "Remove selected file", 0));
-    selectEntryRemove_0->setStatusTip(
-        QApplication::translate("MainWindow", "Remove selected wave file", 0));
-    selectEntryRemove_0->setText(
-        QApplication::translate("MainWindow", "Remove", 0));
-  }
-}
-
 void ImportWindow::removeSelectedSignal(int signalIndex) {
-
-
-
 }
 
 }
