@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <iostream>
+#include <unordered_map>
 
 //QT-stuff
 #include <QtCore/QVariant>
@@ -28,6 +29,9 @@
 #include <QStatusBar>
 #include <QVBoxLayout>
 #include <QWidget>
+
+//The util for loading and saving files
+#include "Code/UANC/util/DialogUtil.h"
 
 namespace uanc {
 namespace gui {
@@ -81,9 +85,6 @@ class ImportWindow :public QMainWindow {
   QScrollArea *selectedFilesScrollArea;
   QWidget *scrollAreaWidgetContents;
   QVBoxLayout *verticalLayout_13;
-  QHBoxLayout *selectedEntryHorizontalLayout_0;
-  QLineEdit *selectedEntryPath_0;
-  QPushButton *selectEntryRemove_0;
   QGroupBox *RecentlyUsedGroupBox;
   QVBoxLayout *verticalLayout_10;
   QComboBox *recentlyUsedCombo;
@@ -95,6 +96,26 @@ class ImportWindow :public QMainWindow {
   QPushButton *importButton;
   QPushButton *cancelButton;
   QStatusBar *statusBar;
+
+  //Gui-Elements for a loaded file
+  struct selectedPathLoadedElements {
+    QHBoxLayout selectedEntryHorizontalLayout;
+    QLineEdit selectedEntryPath;
+    QPushButton *selectEntryRemove;
+  };
+
+  //Hash function for the keys of the selected files
+  std::hash<std::string> pathHash;
+
+  //Key values for the selected files.
+  std::vector<size_t> selectedFilePathKeys;
+
+  //Maps for selected files
+  std::unordered_map <size_t, selectedPathLoadedElements> selectedPathHashMap;
+
+  QHBoxLayout *selectedEntryHorizontalLayout_0;
+  QLineEdit *selectedEntryPath_0;
+  QPushButton *selectEntryRemove_0;
 
   /** \brief Shared pointer to the one and only instance of ImportWindow.
    */
@@ -110,6 +131,11 @@ class ImportWindow :public QMainWindow {
    * Imports the selected files
    */
   void importFiles();
+
+  /**
+   * Adds new files to list of selected files.
+   */
+  void addFilesToSelectes();
 
   /**
    * Removes the selected file from the import list

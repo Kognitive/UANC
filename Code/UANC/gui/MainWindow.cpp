@@ -5,7 +5,6 @@
 
 #include "MainWindow.h"
 #include "Code/UANC/util/SignalFileActor.h"
-#include "Code/UANC/util/DialogUtil.h"
 
 namespace uanc {
 namespace gui {
@@ -97,9 +96,7 @@ void MainWindow::loadFile() {
   importer->activateWindow();
 
   /*
-  // get path to an openable file
-  util::DialogUtil dialogUtil(this);
-  auto path = dialogUtil.chooseLoadPath();
+
 
   // if a path is available
   if (!path.empty()) {
