@@ -149,30 +149,7 @@ void ImportWindow::setupGUI() {
   statusBar->setObjectName(QString::fromUtf8("statusBar"));
   this->setStatusBar(statusBar);
 
-  //Set the captions
-  this->setWindowTitle(QApplication::translate("MainWindow", "Import", 0));
-  filesGroupBox->setTitle(QApplication::translate("MainWindow", "Files", 0));
-  addSelectedFilesButton->setToolTip(QApplication::translate("MainWindow", "Select new input files", 0));
-  addSelectedFilesButton->setStatusTip(QApplication::translate("MainWindow", "Select new input files", 0));
-  addSelectedFilesButton->setText(QApplication::translate("MainWindow", "Select Wave File", 0));
-  selectedEntryPath_0->setToolTip(QApplication::translate("MainWindow", "Path to file", 0));
-  selectedEntryPath_0->setStatusTip(QApplication::translate("MainWindow", "Path to file", 0));
-  selectEntryRemove_0->setToolTip(QApplication::translate("MainWindow", "Remove selected file", 0));
-  selectEntryRemove_0->setStatusTip(QApplication::translate("MainWindow", "Remove selected wave file", 0));
-  selectEntryRemove_0->setText(QApplication::translate("MainWindow", "Remove", 0));
-  RecentlyUsedGroupBox->setTitle(QApplication::translate("MainWindow", "Recently used", 0));
-  importGroupBox->setTitle(QApplication::translate("MainWindow", "Import Options", 0));
-  normalizeCheckBox->setToolTip(QApplication::translate("MainWindow", "Normalize", 0));
-  normalizeCheckBox->setStatusTip(QApplication::translate("MainWindow", "Normalize the amplitude to 1", 0));
-  normalizeCheckBox->setText(QApplication::translate("MainWindow", "Normalize Input", 0));
-  actionsGroupBox->setTitle(QApplication::translate("MainWindow", "Actions", 0));
-  importButton->setToolTip(QApplication::translate("MainWindow", "Import", 0));
-  importButton->setStatusTip(QApplication::translate("MainWindow", "Import selected files", 0));
-  importButton->setWhatsThis(QString());
-  importButton->setText(QApplication::translate("MainWindow", "Import", 0));
-  cancelButton->setToolTip(QApplication::translate("MainWindow", "Cancel", 0));
-  cancelButton->setStatusTip(QApplication::translate("MainWindow", "Cancel", 0));
-  cancelButton->setText(QApplication::translate("MainWindow", "Cancel", 0));
+  //retranslateUi(this);
 
   QMetaObject::connectSlotsByName(this);
 }
@@ -180,7 +157,58 @@ void ImportWindow::setupGUI() {
 /*
 void retranslateUi(QMainWindow *MainWindow)
 {
-
+  MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Import", 0, QApplication::UnicodeUTF8));
+  filesGroupBox->setTitle(QApplication::translate("MainWindow", "Files", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP.../platforms$ ldd libqxcb.so
+  addSelectedFilesButton->setToolTip(QApplication::translate("MainWindow", "Select new input files", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+  addSelectedFilesButton->setStatusTip(QApplication::translate("MainWindow", "Select new input files", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+  addSelectedFilesButton->setText(QApplication::translate("MainWindow", "Select Wave File", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+  selectedEntryPath_0->setToolTip(QApplication::translate("MainWindow", "Path to file", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+  selectedEntryPath_0->setStatusTip(QApplication::translate("MainWindow", "Path to file", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_TOOLTIP
+  selectEntryRemove_0->setToolTip(QApplication::translate("MainWindow", "Remove selected file", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+  selectEntryRemove_0->setStatusTip(QApplication::translate("MainWindow", "Remove selected wave file", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+  selectEntryRemove_0->setText(QApplication::translate("MainWindow", "Remove", 0, QApplication::UnicodeUTF8));
+  RecentlyUsedGroupBox->setTitle(QApplication::translate("MainWindow", "Recently used", 0, QApplication::UnicodeUTF8));
+  importGroupBox->setTitle(QApplication::translate("MainWindow", "Import Options", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+  normalizeCheckBox->setToolTip(QApplication::translate("MainWindow", "Normalize", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+  normalizeCheckBox->setStatusTip(QApplication::translate("MainWindow", "Normalize the amplitude to 1", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+  normalizeCheckBox->setText(QApplication::translate("MainWindow", "Normalize Input", 0, QApplication::UnicodeUTF8));
+  actionsGroupBox->setTitle(QApplication::translate("MainWindow", "Actions", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+  importButton->setToolTip(QApplication::translate("MainWindow", "Import", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+  importButton->setStatusTip(QApplication::translate("MainWindow", "Import selected files", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_WHATSTHIS
+  importButton->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
+  importButton->setText(QApplication::translate("MainWindow", "Import", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+  cancelButton->setToolTip(QApplication::translate("MainWindow", "Cancel", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+  cancelButton->setStatusTip(QApplication::translate("MainWindow", "Cancel", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_WHATSTHIS
+  cancelButton->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
+  cancelButton->setText(QApplication::translate("MainWindow", "Cancel", 0, QApplication::UnicodeUTF8));
 } // retranslateUi
 }*/
 
