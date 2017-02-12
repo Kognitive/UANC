@@ -44,12 +44,11 @@ void Control::updateNavBox(QCPRange signalZoomRange) {
   replot();
 }
 
-void Control::setData(QCPGraphDataContainer *data, double maxDataValue, double minDataValue, size_t maxKey) {
+void Control::setData(QCPGraphDataContainer *data, double maxDataValue, double minDataValue) {
   graph()->setData(QSharedPointer<QCPGraphDataContainer>(data));
   graph()->rescaleAxes();
   _maxSignalAmplitude = maxDataValue;
   _minSignalAmplitude = minDataValue;
-  _xLimit = maxKey;
   updateNavBox(_parent->getPlotXRange());
 }
 
@@ -91,7 +90,7 @@ void Control::mouseMoveEvent(QMouseEvent *event) {
     double right = _mousePressBoxPosRight + shift;
 
     // if box is in range of graph, then replot, else abort
-    if (left < 0 || right > _xLimit)
+    if (left < 0 || right > _parent->lastIndex())
       return;
     updateNavBox(QCPRange(left, right));
     _parent->controlChanged();

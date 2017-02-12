@@ -44,7 +44,7 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::sh
   if (originalSignal != NULL)
     _errorSignal = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal.get() + *originalSignal.get()));
 
-  // create QCPDataMap and set data in both graphs
+  // create QCPGraphDataContainer and set data in both graphs
   // creating two maps because QCustomPlot requires raw pointers and we want to prevent null pointers
   double maxSignalAmplitude = std::numeric_limits<double>::min();
   double minSignalAmplitude = std::numeric_limits<double>::max();
@@ -55,6 +55,7 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::sh
   QCPGraphData newDatapoint;
 
   double timeConversionFactor = 1.0 / _signal->getSampleFrequency();
+  _lastIndex = n / _signal->getSampleFrequency();
 
   for (size_t i = 0; i < n; ++i) {
     newDatapoint.key = timeConversionFactor * i;
@@ -76,7 +77,7 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::sh
   _signalPlot->setData(newDataMain);
   if (originalSignal != NULL)
     _signalPlot->setError(newError);
-  _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude, n);
+  _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude);
 
   _signalPlot->replot();
   _control->replot();

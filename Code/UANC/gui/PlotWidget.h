@@ -53,6 +53,11 @@ class PlotWidget : public QWidget, public EventObserver {
    */
   void controlChanged();
 
+  std::shared_ptr<Aquila::SignalSource> signal() {return _signal;}
+  std::shared_ptr<Aquila::SignalSource> errorSignal() {return _errorSignal;}
+
+  double lastIndex() {return _lastIndex;}
+
  private:
   /**
    * \brief Holds the \ref QCustomPlot for the signal plot.
@@ -78,6 +83,8 @@ class PlotWidget : public QWidget, public EventObserver {
    * \brief Holds the plotted signal.
    */
   std::shared_ptr<Aquila::SignalSource> _signal, _errorSignal;
+
+  double _lastIndex;
 
   /**
    * \brief This method initializes the plots.

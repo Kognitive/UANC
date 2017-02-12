@@ -96,14 +96,14 @@ void SignalPlot::unzoom(double center) {
 void SignalPlot::zoomRange(double press, double release) {
   double lower = std::min(press, release);
   double upper = std::max(press, release);
-  xAxis->setRange(std::max(lower, 0.0), upper);
+  xAxis->setRange(std::max(lower, 0.0), std::min(upper, _parent->lastIndex()));
 }
 
 QCPRange SignalPlot::scaleRange(double factor, double center) {
   QCPRange oldRange = xAxis->range();
   QCPRange newRange;
   newRange.lower = std::max((oldRange.lower - center) * factor + center, 0.0);
-  newRange.upper = (oldRange.upper - center) * factor + center;
+  newRange.upper = std::min((oldRange.upper - center) * factor + center, _parent->lastIndex());
   if (QCPRange::validRange(newRange))
     newRange = newRange.sanitizedForLinScale();
   return newRange;
