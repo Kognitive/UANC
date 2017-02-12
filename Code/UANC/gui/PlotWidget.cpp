@@ -39,8 +39,6 @@ void PlotWidget::initialize() {
 }
 
 void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::shared_ptr<Aquila::SignalSource> originalSignal) {
-  this->_token->trigger(Events::Scroll, EventContainer());
-
   // save pointer to signal in member
   _signal = signal;
   if (originalSignal != NULL)
@@ -89,17 +87,33 @@ const QCPRange PlotWidget::getPlotXRange() const {
 }
 
 void PlotWidget::plotChanged() {
-  _control->updateNavBox(getPlotXRange());
+  QCPRange range = getPlotXRange();
+  _control->updateNavBox(range);
+
+  // trigger observed plots to replot
+  triggerConnectedWidgets(range);
 }
 
 void PlotWidget::controlChanged() {
   double left = _control->getBoxLeft();
   double right = _control->getBoxRight();
   _signalPlot->setRange(left, right);
+
+  triggerConnectedWidgets(QCPRange(left, right));
 }
 
 void PlotWidget::triggered(Events event, EventContainer data) {
-  printf("Test");
+  double lower = std::stod(data.get("lower"));
+  double upper = std::stod(data.get("upper"));
+  _control->updateNavBox(QCPRange(lower, upper));
+  _signalPlot->setRange(lower, upper);
+}
+
+void PlotWidget::triggerConnectedWidgets(QCPRange range) {
+  EventContainer container = EventContainer();
+  container.add("lower", std::to_string(range.lower));
+  container.add("upper", std::to_string(range.upper));
+  _token->trigger(Events::Scroll, container);
 }
 
 }

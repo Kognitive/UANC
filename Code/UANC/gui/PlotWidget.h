@@ -85,6 +85,8 @@ class PlotWidget : public QWidget, public EventObserver {
   void initialize();
 
   void triggered(Events event, EventContainer data) final;
+
+  void triggerConnectedWidgets(QCPRange range);
 };
 
 }
