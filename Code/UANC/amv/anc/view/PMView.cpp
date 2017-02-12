@@ -21,22 +21,21 @@ namespace view {
  * @return The created widget.
  */
 QWidget *PMView::produceWidget() {
-  if (this->_widget == nullptr) {
+  if (this->_splitter == nullptr) {
     // create the widgets for the view
-    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget());
+    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget(true));
     this->_treeview = std::unique_ptr<uanc::gui::PMWidget>(new uanc::gui::PMWidget());
-    // set horizontal layout
-    this->_widget = new QWidget;
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(_plotWidget.get());
-    layout->addWidget(_treeview.get());
-    this->_widget->setLayout(layout);
-    this->_plotWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    // set horizontal layout (splitter)
+    this->_splitter =  new QSplitter;
+    this->_splitter->setOrientation(Qt::Horizontal);
+    this->_splitter->addWidget(_plotWidget.get());
+    this->_splitter->addWidget(_treeview.get());
 
   }
 
   // return the created pointer
-  return this->_widget;
+  return this->_splitter;
 }
 
 /** \brief This method applies the model data.
@@ -47,7 +46,7 @@ QWidget *PMView::produceWidget() {
  * @param data The applied data.
  */
 void PMView::setData(model::ANCModel *signalData) {
-  this->_plotWidget->setSignal(signalData->inverted);
+  this->_plotWidget->setSignal(signalData->inverted, signalData->left_channel);
   this->_treeview->setData(signalData->defaultRegister.getCustomMeasurements());
 
 }

@@ -66,7 +66,7 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
    *
    * This holds a reference to the associated QWidget, if there was one created.
    */
-  QWidget *_widget = nullptr;
+  QSplitter *_splitter = nullptr;
 };
 
 }

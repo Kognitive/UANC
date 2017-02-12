@@ -25,7 +25,7 @@ void PMWidget::setData(std::vector<std::shared_ptr<uanc::util::PerformanceMeasur
   // create tree view and set data
   QTreeWidget *treeWidget = new QTreeWidget;
   treeWidget->setColumnCount(2);
-  treeWidget->setHeaderLabels(QStringList() << "Measurement" << "Time in ms");
+  treeWidget->setHeaderLabels(QStringList() << "Measurement" << "Time");
 
   // Fill tree view
   for (std::vector<std::shared_ptr<uanc::util::PerformanceMeasure<>>>::iterator it = _data.begin();
@@ -38,11 +38,15 @@ void PMWidget::setData(std::vector<std::shared_ptr<uanc::util::PerformanceMeasur
     qItem->setText(0, QString::fromStdString(measurement->measureTitle));
     // set duration time in second column
     auto msTime = std::chrono::duration_cast<std::chrono::milliseconds>(measurement->getNodeDuration());
-    qItem->setText(1, QString::fromStdString(std::to_string(msTime.count())));
+    auto timeString = std::to_string(msTime.count());
+    qItem->setText(1, QString::fromStdString(timeString + " ms"));
 
     // if there are children add them
     addTreeChild(qItem, &measurement->measureSubMeasureChild);
   }
+
+  treeWidget->expandAll();
+
   auto vLayot = new QVBoxLayout();
   vLayot->addWidget(treeWidget);
   vLayot->totalMinimumSize();
@@ -59,7 +63,8 @@ void PMWidget::addTreeChild(QTreeWidgetItem *parent,
     qItem->setText(0, QString::fromStdString(it->get()->measureTitle));
     // set duration time in second column
     auto msTime = std::chrono::duration_cast<std::chrono::milliseconds>(it->get()->getNodeDuration());
-    qItem->setText(1, QString::fromStdString(std::to_string(msTime.count())));
+    auto timeString = std::to_string(msTime.count());
+    qItem->setText(1, QString::fromStdString(timeString + " ms"));
 
     // add child to parrent
     parent->addChild(qItem);
@@ -68,5 +73,6 @@ void PMWidget::addTreeChild(QTreeWidgetItem *parent,
     addTreeChild(qItem, &it->get()->measureSubMeasureChild);
   }
 }
+
 }
 }
