@@ -46,7 +46,7 @@ void TestQString::measureTest()
   QVERIFY((testNode->getNodeDuration().count())/1000000 == 5);
 
   //Test the first sub-measurement
-  testNode = testNode->measureSubMeasureChild;
+  testNode = testNode->measureSubMeasureChild[0];
   QVERIFY(testNode->measureTitle == "TestSubMeasure1");
   QVERIFY((testNode->getNodeDuration().count())/1000000 == 2);
 

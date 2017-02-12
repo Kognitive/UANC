@@ -28,19 +28,17 @@ SignalPlot::SignalPlot(std::shared_ptr<PlotWidget> parent) {
   _zoomLineTarget = std::shared_ptr<QCPItemStraightLine>(new QCPItemStraightLine(this));
   _zoomLineOrigin->setVisible(false);
   _zoomLineTarget->setVisible(false);
-  _zoomLineOrigin->setPen(QPen(Qt::black, 1, Qt::DashDotDotLine));
-  _zoomLineTarget->setPen(QPen(Qt::black, 1, Qt::DashDotDotLine));
-  addItem(_zoomLineOrigin.get());
-  addItem(_zoomLineTarget.get());
+  _zoomLineOrigin->setPen(QPen(Qt::black, 1, Qt::DotLine));
+  _zoomLineTarget->setPen(QPen(Qt::black, 1, Qt::DotLine));
 }
 
-void SignalPlot::setData(QCPDataMap *data, bool copy) {
-  graph(_SIGNAL)->setData(data, copy);
+void SignalPlot::setData(QCPGraphDataContainer *data) {
+  graph(_SIGNAL)->setData(QSharedPointer<QCPGraphDataContainer>(data));
   graph(_SIGNAL)->rescaleAxes();
 }
 
-void SignalPlot::setError(QCPDataMap *error, bool copy) {
-  graph(_ERROR)->setData(error, copy);
+void SignalPlot::setError(QCPGraphDataContainer *error) {
+  graph(_ERROR)->setData(QSharedPointer<QCPGraphDataContainer>(error));
 }
 
 void SignalPlot::mousePressEvent(QMouseEvent *event) {
@@ -98,14 +96,14 @@ void SignalPlot::unzoom(double center) {
 void SignalPlot::zoomRange(double press, double release) {
   double lower = std::min(press, release);
   double upper = std::max(press, release);
-  xAxis->setRange(std::max(lower, 0.0), upper);
+  xAxis->setRange(std::max(lower, 0.0), std::min(upper, _parent->lastIndex()));
 }
 
 QCPRange SignalPlot::scaleRange(double factor, double center) {
   QCPRange oldRange = xAxis->range();
   QCPRange newRange;
   newRange.lower = std::max((oldRange.lower - center) * factor + center, 0.0);
-  newRange.upper = (oldRange.upper - center) * factor + center;
+  newRange.upper = std::min((oldRange.upper - center) * factor + center, _parent->lastIndex());
   if (QCPRange::validRange(newRange))
     newRange = newRange.sanitizedForLinScale();
   return newRange;

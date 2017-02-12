@@ -25,7 +25,7 @@ class Control : public QCustomPlot {
    */
   Control(std::shared_ptr<PlotWidget> parent);
 
-  void setData(QCPDataMap *data, double maxDataValue, double minDataValue, size_t maxKey, bool copy = false);
+  void setData(QCPGraphDataContainer *data, double maxDataValue, double minDataValue);
 
   void updateNavBox(QCPRange signalZoomRange);
 
@@ -54,7 +54,6 @@ class Control : public QCustomPlot {
    * Holds the maximum and minimum amplitude of the current signal.
    */
   double _minSignalAmplitude, _maxSignalAmplitude;
-  size_t _xLimit;
 
   int _pressedX = -1;
   double _mousePressBoxPosLeft = -1.0, _mousePressBoxPosRight = -1.0;

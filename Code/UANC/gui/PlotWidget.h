@@ -8,16 +8,19 @@
 #include <QtWidgets/QWidget>
 #include <memory>
 #include <Code/libs/aquila/source/SignalSource.h>
+#include <Code/UANC/util/event/EventObserver.h>
 #include "SignalPlot.h"
 #include "Control.h"
 
 namespace uanc {
 namespace gui {
 
+using namespace uanc::util::event;
+
 class SignalPlot;
 class Control;
 
-class PlotWidget : public QWidget {
+class PlotWidget : public QWidget, public EventObserver {
 
   Q_OBJECT
 
@@ -50,6 +53,11 @@ class PlotWidget : public QWidget {
    */
   void controlChanged();
 
+  std::shared_ptr<Aquila::SignalSource> signal() {return _signal;}
+  std::shared_ptr<Aquila::SignalSource> errorSignal() {return _errorSignal;}
+
+  double lastIndex() {return _lastIndex;}
+
  private:
   /**
    * \brief Holds the \ref QCustomPlot for the signal plot.
@@ -76,10 +84,16 @@ class PlotWidget : public QWidget {
    */
   std::shared_ptr<Aquila::SignalSource> _signal, _errorSignal;
 
+  double _lastIndex;
+
   /**
    * \brief This method initializes the plots.
    */
   void initialize();
+
+  void triggered(Events event, EventContainer data) final;
+
+  void triggerConnectedWidgets(QCPRange range);
 };
 
 }
