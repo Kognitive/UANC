@@ -31,6 +31,9 @@ QWidget *PMView::produceWidget() {
     this->_splitter->setOrientation(Qt::Horizontal);
     this->_splitter->addWidget(_plotWidget.get());
     this->_splitter->addWidget(_treeview.get());
+    this->_splitter->setStretchFactor(0,1);
+
+    this->_chkBoxShowMeasure = std::shared_ptr<QCheckBox>(new QCheckBox("Show Performance"));
 
   }
 

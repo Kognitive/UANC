@@ -17,7 +17,7 @@ void PlotWidget::initialize() {
   std::shared_ptr<PlotWidget> sharedThis = std::shared_ptr<PlotWidget>(this);
   _signalPlot = std::shared_ptr<SignalPlot>(new SignalPlot(sharedThis));
   _control = std::shared_ptr<Control>(new Control(sharedThis));
-  _chkBoxShowError = std::shared_ptr<QCheckBox>(new QCheckBox("Zeige Fehler"));
+  _chkBoxShowError = std::shared_ptr<QCheckBox>(new QCheckBox("Show Error"));
 
   QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
   timeTicker->setTimeFormat("%m:%s:%z");

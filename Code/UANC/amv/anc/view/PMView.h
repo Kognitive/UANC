@@ -49,6 +49,10 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
   void setData(model::ANCModel *signalData) final;
 
  private:
+  /**
+   * \brief Hold the checkbox for showing the measurement
+   */
+  std::shared_ptr<QCheckBox> _chkBoxShowMeasure;
 
   /** \brief Holds a reference to the plot widget used inside.
    *
@@ -62,9 +66,9 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
  */
   std::unique_ptr<uanc::gui::PMWidget> _treeview;
 
-  /** \brief This represents a weak pointer to the constructed QWidget.
+  /** \brief This represents a weak pointer to the constructed QSplitter.
    *
-   * This holds a reference to the associated QWidget, if there was one created.
+   * This holds a reference to the associated QSplitter, if there was one created.
    */
   QSplitter *_splitter = nullptr;
 };
