@@ -28,19 +28,17 @@ SignalPlot::SignalPlot(std::shared_ptr<PlotWidget> parent) {
   _zoomLineTarget = std::shared_ptr<QCPItemStraightLine>(new QCPItemStraightLine(this));
   _zoomLineOrigin->setVisible(false);
   _zoomLineTarget->setVisible(false);
-  _zoomLineOrigin->setPen(QPen(Qt::black, 1, Qt::DashDotDotLine));
-  _zoomLineTarget->setPen(QPen(Qt::black, 1, Qt::DashDotDotLine));
-  addItem(_zoomLineOrigin.get());
-  addItem(_zoomLineTarget.get());
+  _zoomLineOrigin->setPen(QPen(Qt::black, 1, Qt::DotLine));
+  _zoomLineTarget->setPen(QPen(Qt::black, 1, Qt::DotLine));
 }
 
-void SignalPlot::setData(QCPDataMap *data, bool copy) {
-  graph(_SIGNAL)->setData(data, copy);
+void SignalPlot::setData(QCPGraphDataContainer *data) {
+  graph(_SIGNAL)->setData(QSharedPointer<QCPGraphDataContainer>(data));
   graph(_SIGNAL)->rescaleAxes();
 }
 
-void SignalPlot::setError(QCPDataMap *error, bool copy) {
-  graph(_ERROR)->setData(error, copy);
+void SignalPlot::setError(QCPGraphDataContainer *error) {
+  graph(_ERROR)->setData(QSharedPointer<QCPGraphDataContainer>(error));
 }
 
 void SignalPlot::mousePressEvent(QMouseEvent *event) {

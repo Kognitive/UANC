@@ -19,6 +19,10 @@ void PlotWidget::initialize() {
   _control = std::shared_ptr<Control>(new Control(sharedThis));
   _chkBoxShowError = std::shared_ptr<QCheckBox>(new QCheckBox("Zeige Fehler"));
 
+  QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+  timeTicker->setTimeFormat("%m:%s:%z");
+  _signalPlot->xAxis->setTicker(timeTicker);
+
   // update plot when state of checkbox changes
   connect(_chkBoxShowError.get(), SIGNAL(toggled(bool)), _signalPlot.get(), SLOT(hideError(bool)));
 
@@ -47,17 +51,19 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::sh
   double maxSignalAmplitude = std::numeric_limits<double>::min();
   double minSignalAmplitude = std::numeric_limits<double>::max();
   size_t n = _signal->getSamplesCount();
-  QCPDataMap *newDataMain = new QCPDataMap;
-  QCPDataMap *newDataControl = new QCPDataMap;
-  QCPDataMap *newError = new QCPDataMap;
-  QCPData newDatapoint;
+  QCPGraphDataContainer *newDataMain = new QCPGraphDataContainer;
+  QCPGraphDataContainer *newDataControl = new QCPGraphDataContainer;
+  QCPGraphDataContainer *newError = new QCPGraphDataContainer;
+  QCPGraphData newDatapoint;
+
+  double timeConversionFactor = 1.0 / _signal->getSampleFrequency();
 
   for (size_t i = 0; i < n; ++i) {
-    newDatapoint.key = i;
+    newDatapoint.key = timeConversionFactor * i;
     newDatapoint.value = _signal->sample(i);
 
-    newDataMain->insertMulti(newDatapoint.key, newDatapoint);
-    newDataControl->insertMulti(newDatapoint.key, newDatapoint);
+    newDataMain->add(newDatapoint);
+    newDataControl->add(newDatapoint);
 
     // keep track of max and min amplitude
     maxSignalAmplitude = std::max(maxSignalAmplitude, newDatapoint.value);
@@ -65,14 +71,14 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::sh
 
     if (originalSignal != NULL) {
       newDatapoint.value = _errorSignal->sample(i);
-      newError->insertMulti(newDatapoint.key, newDatapoint);
+      newError->add(newDatapoint);
     }
   }
 
-  _signalPlot->setData(newDataMain, false);
+  _signalPlot->setData(newDataMain);
   if (originalSignal != NULL)
-    _signalPlot->setError(newError, false);
-  _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude, n, false);
+    _signalPlot->setError(newError);
+  _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude, n);
 
   _signalPlot->replot();
   _control->replot();

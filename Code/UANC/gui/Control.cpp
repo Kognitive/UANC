@@ -30,7 +30,6 @@ Control::Control(std::shared_ptr<PlotWidget> parent) {
   _navigationBox = std::shared_ptr<QCPItemRect>(new QCPItemRect(this));
   _navigationBox->setPen(QPen(_boxBoarderColor));
   _navigationBox->setBrush(_boxColor);
-  addItem(_navigationBox.get());
   _maxSignalAmplitude = 5.0;
   _minSignalAmplitude = 0.0;
   updateNavBox(QCPRange(0.0, 1.0));
@@ -45,8 +44,8 @@ void Control::updateNavBox(QCPRange signalZoomRange) {
   replot();
 }
 
-void Control::setData(QCPDataMap *data, double maxDataValue, double minDataValue, size_t maxKey, bool copy) {
-  graph()->setData(data, copy);
+void Control::setData(QCPGraphDataContainer *data, double maxDataValue, double minDataValue, size_t maxKey) {
+  graph()->setData(QSharedPointer<QCPGraphDataContainer>(data));
   graph()->rescaleAxes();
   _maxSignalAmplitude = maxDataValue;
   _minSignalAmplitude = minDataValue;

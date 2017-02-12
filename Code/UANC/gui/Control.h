@@ -25,7 +25,7 @@ class Control : public QCustomPlot {
    */
   Control(std::shared_ptr<PlotWidget> parent);
 
-  void setData(QCPDataMap *data, double maxDataValue, double minDataValue, size_t maxKey, bool copy = false);
+  void setData(QCPGraphDataContainer *data, double maxDataValue, double minDataValue, size_t maxKey);
 
   void updateNavBox(QCPRange signalZoomRange);
 

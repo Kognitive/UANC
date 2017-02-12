@@ -22,8 +22,8 @@ class SignalPlot : public QCustomPlot {
  public:
   SignalPlot(std::shared_ptr<PlotWidget> parent);
 
-  void setData(QCPDataMap *data, bool copy = false);
-  void setError(QCPDataMap *error, bool copy = false);
+  void setData(QCPGraphDataContainer *data);
+  void setError(QCPGraphDataContainer *error);
 
   void setRange(double lower, double upper);
 

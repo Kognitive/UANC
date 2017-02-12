@@ -26,7 +26,7 @@ class EventContainer {
    * This mapping holds a string to string mapping for the properties
    * of the event.
    */
-  std::map<std::string, std::string> properties = std::map<std::string, std::string>();
+  std::map<std::string, std::string> properties;
 
  public:
 
