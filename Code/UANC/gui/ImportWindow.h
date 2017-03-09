@@ -63,15 +63,6 @@ Q_OBJECT
    */
   static std::shared_ptr<ImportWindow> get();
 
-  /** \brief Register the main window, so that the load function can be called.
-   * @param main: The shared pointer to the main window.
-   */
-  void registerMainWindow(std::shared_ptr<gui::MainWindow> main);
-
-  ~ImportWindow() {
-    //Remove all Elements from the
-  }
-
 signals:
   /** \brief: Slot that indicates that signals have been selected and loaded successfully into the
    * SignalManager
@@ -79,6 +70,10 @@ signals:
   void indicesLoaded(std::vector<int> loadedIndices);
 
  private:
+
+  /** \brief This resets the parameters of the import window, before new files are imported.
+   */
+  void resetImporter();
 
   /** Adds new files to list of selected files.
    * @param selectedFiles: A list of files which should be displayed in the GUI.

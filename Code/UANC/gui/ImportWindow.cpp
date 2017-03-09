@@ -233,7 +233,9 @@ void ImportWindow::importFiles() {
   selectedPathHashMap.clear();
 
   //Send the Signal indicating that the loading was successful.
-  indicesLoaded(loadedIndices);
+  emit indicesLoaded(loadedIndices);
+  importButton->setEnabled(false);
+
   this->close();
 }
 
@@ -371,6 +373,7 @@ void ImportWindow::saveRecentlyUsedSignals() {
     recentlyUsedSettings->sync();
   }
 }
+
 
 void ImportWindow::removeSelectedSignal(QString signalIndex) {
   //Remove the widget and the signal mapping

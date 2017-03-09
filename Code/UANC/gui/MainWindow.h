@@ -100,6 +100,11 @@ class MainWindow : public QMainWindow {
    */
   void makeMenu();
 
+  //The Pointer to the import window.
+  std::shared_ptr<ImportWindow> importWindow;
+
+
+
   /** These simply are the actions taken when you click inside of the menu */
  private slots:
 

@@ -31,6 +31,11 @@ std::shared_ptr<MainWindow> MainWindow::get() {
  * \param context Represents the context in which the window get shown.
  */
 MainWindow::MainWindow() {
+  //Get an instance of the import window.
+  importWindow = ImportWindow::get();
+  //Connect its signals to the corresponding functions
+  connect(&*importWindow, &ImportWindow::indicesLoaded, this, &MainWindow::showImportedSignals);
+
   this->setupGUI();
 }
 
@@ -90,11 +95,9 @@ void MainWindow::makeMenu() {
 void MainWindow::loadFile() {
 
   //Open the import dialog
-  auto importer = ImportWindow::get();
-  importer->show();
-  importer->raise();
-  importer->activateWindow();
-  connect(&*importer, &ImportWindow::indicesLoaded, this, &MainWindow::showImportedSignals);
+  importWindow->show();
+  importWindow->raise();
+  importWindow->activateWindow();
 
 }
 
@@ -123,6 +126,7 @@ void MainWindow::saveFile() {
 }
 
 void MainWindow::showImportedSignals(std::vector<int> loadedIndices) {
+
   for (int signalID : loadedIndices)
   {
     this->mainWidget->loadSignalSource(SignalManager::get()->getSignal(signalID));
