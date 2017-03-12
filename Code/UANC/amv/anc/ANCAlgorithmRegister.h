@@ -9,6 +9,7 @@
 #include <memory>
 #include "Code/UANC/amv/anc/algorithm/InverseDirectAlgorithm.h"
 #include "Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h"
+#include "Code/UANC/amv/anc/algorithm/LinearExtrapolation.h"
 
 namespace uanc {
 namespace amv {
@@ -44,6 +45,7 @@ class ANCAlgorithmRegister {
 
     lst->push_back(new InverseDirectAlgorithm());
     lst->push_back(new InverseFFTAlgorithm());
+    lst->push_back(new LinearExtrapolation());
 
     // --------------------------------------
 
