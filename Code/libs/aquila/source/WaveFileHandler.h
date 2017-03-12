@@ -58,6 +58,19 @@ namespace Aquila
         static void encode8bit(const SignalSource& source, short* data, std::size_t dataSize);
 
     private:
+        /** \brief finds the beginning of the wav data section relative to the beginning of the file
+         * @param id The id, identifying the chunck.
+         * @param fs The fstream to the wav file
+         * @return The index of the first byte of the specified chunk after the id if found. Else -1.
+         */
+        int findBeginOfChunck(const char *id, std::fstream *fs );
+
+        /** \brief Computes the length of a chunck.
+         * @param fs: A pointer to the filestream.
+         * @param offset: The beginning of the chunks length.
+         */
+        int computeChunkLength(std::fstream* fs, unsigned int offset);
+
         void createHeader(const SignalSource& source, WaveHeader& header);
         static void splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb);
 

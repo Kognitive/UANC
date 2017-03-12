@@ -20,6 +20,7 @@
 #include <cstdint>
 #include <cstring>
 #include <fstream>
+#include <iostream>
 
 namespace Aquila
 {
@@ -49,15 +50,26 @@ namespace Aquila
         std::fstream fs;
         fs.open(m_filename.c_str(), std::ios::in | std::ios::binary);
         fs.read((char*)(&header), sizeof(WaveHeader));
+        //Check if the wave file has the correct format:
+        if(findBeginOfChunck("RIFF",&fs) == -1){
+          std::cout<<"A file with a wrong format has been loaded"<<std::endl;
+          return;
+        }
+        int fmt_addr = findBeginOfChunck("fmt ",&fs);
+        if(fmt_addr != -1){
+          fs.seekg(fmt_addr - 16,std::ios::beg);
+          fs.read((char*)(&header), sizeof(WaveHeader));
+        }
+        int data_addr = findBeginOfChunck("data", &fs);
+        if(data_addr != -1){
+          header.WaveSize = computeChunkLength(&fs, data_addr);
+        }
         short* data = new short[header.WaveSize/2];
         fs.read((char*)data, header.WaveSize);
         fs.close();
 
         // initialize data channels (using right channel only in stereo mode)
         unsigned int channelSize = header.WaveSize/header.BytesPerSamp;
-        leftChannel.resize(channelSize);
-        if (2 == header.Channels)
-            rightChannel.resize(channelSize);
 
         // most important conversion happens right here
         if (16 == header.BitsPerSamp)
@@ -149,13 +161,13 @@ namespace Aquila
      *
      * @param channel a reference to audio channel
      * @param data raw data buffer
-     * @param channelSize expected number of samples in channel
+     * @param channelSize expected number of samples in channelc
      */
     void WaveFileHandler::decode16bit(WaveFile::ChannelType& channel, short* data, std::size_t channelSize)
     {
         for (std::size_t i = 0; i < channelSize; ++i)
         {
-            channel[i] = data[i];
+            channel.push_back(data[i]);
         }
     }
 
@@ -172,8 +184,8 @@ namespace Aquila
     {
         for (std::size_t i = 0; i < channelSize; ++i)
         {
-            leftChannel[i] = data[2*i];
-            rightChannel[i] = data[2*i+1];
+            leftChannel.push_back(data[2*i]);
+            rightChannel.push_back(data[2*i+1]);
         }
     }
 
@@ -192,7 +204,7 @@ namespace Aquila
         {
             splitBytes(data[i / 2], lb, hb);
             // only one channel collects samples
-            channel[i] = lb - 128;
+            channel.push_back(lb - 128);
         }
     }
 
@@ -215,8 +227,8 @@ namespace Aquila
             // left channel is in low byte, right in high
             // values are unipolar, so we move them by half
             // of the dynamic range
-            leftChannel[i] = lb - 128;
-            rightChannel[i] = hb - 128;
+            leftChannel.push_back(lb - 128);
+            rightChannel.push_back(hb - 128);
         }
     }
 
@@ -266,4 +278,33 @@ namespace Aquila
         lb = twoBytes & 0x00FF;
         hb = (twoBytes >> 8) & 0x00FF;
     }
+
+    int WaveFileHandler::computeChunkLength(std::fstream* fs, unsigned int offset){
+      fs->seekg(offset,std::ios::beg);
+      char buffer [4];
+      int length = -1;
+      fs->read(buffer, 4);
+      length = (buffer[0] & 0xFF) + ((buffer[1] & 0xFF) << 8) + ((buffer[2] & 0xFF) << 16 )+ ((buffer [3] & 0xFF) << 24);
+      return length;
+    }
+
+    int WaveFileHandler::findBeginOfChunck(const char* id, std::fstream* fs) {
+      fs->seekg(0,std::ios::beg);
+      int bytePosIndex = 0;
+
+      char chunkName [5];
+      while(!fs->eof()){
+        fs->read(chunkName, sizeof(char)*4);
+        chunkName[4] = '\0';
+        //Check if the identifying chunck for the data section was read
+        if(std::strcmp (chunkName, id) == 0){
+          return bytePosIndex + 4;
+        }
+        fs->seekg(-sizeof(char)*3, std::ios::cur);
+        bytePosIndex ++;
+        }
+      return -1;
+      }
 }
+
+
