@@ -81,5 +81,23 @@ std::shared_ptr<SignalManager> SignalManager::get() {
 
   return _instance;
 }
+
+/** \brief This method deletes a signal
+*
+* delete a signal at a given index
+*
+* @param index The index of the signal, wich will be deleted.
+*
+*/
+void SignalManager::eraseSignal(int index){
+  if (signalsMap.find(index) != signalsMap.end()) {
+    for (int i = index; i < this->signalCounter; ++i){
+      auto sig = this->signalsMap.at(i+1);
+      this->signalsMap.erase(i);
+      this->signalsMap.insert(std::make_pair(i,sig));
+    }
+    this->signalCounter = this->signalCounter - 1;
+  }
+}
 }
 }

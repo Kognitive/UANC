@@ -7,6 +7,7 @@
 #include <Code/libs/aquila/source/WaveFile.h>
 #include <Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h>
 #include <Code/UANC/amv/anc/ANCAlgorithmRegister.h>
+#include <iostream>
 #include "MainWidget.h"
 #include "SignalViewWidget.h"
 
@@ -219,11 +220,15 @@ void MainWidget::waveClosed(const int &index) {
   auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>();
 
   // iterate from closed to end
-  for (int i = index; i < this->_tabWidget->count() - 1; ++i) {
-    this->_waveAlgorithMapping.erase(i);
+  for (int i = index; i < this->_tabWidget->count(); ++i) {
     auto vec = this->_waveAlgorithMapping.at(i + 1);
+    this->_waveAlgorithMapping.erase(i);
     this->_waveAlgorithMapping.insert(std::make_pair(i, vec));
   }
+
+  // Deleate signal
+  auto signalManager = SignalManager::get();
+  signalManager->eraseSignal(index);
 
   // do the final erase
   this->_waveAlgorithMapping.erase(this->_tabWidget->count());

@@ -84,6 +84,15 @@ class SignalManager {
  * @return The shared pointer containing the MainWindow
  */
   static std::shared_ptr<SignalManager> get();
+
+  /** \brief This method deletes a signal
+ *
+ * delete a signal at a given index
+ *
+ * @param index The index of the signal, wich will be deleted.
+ *
+ */
+  void eraseSignal(int index);
 };
 
 }
