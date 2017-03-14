@@ -10,7 +10,7 @@
 
 #include <memory>
 #include <QtWidgets/QWidget>
-#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/InvertedModel.h>
 #include <Code/UANC/amv/AlgorithmView.h>
 #include <Code/UANC/gui/PlotWidget.h>
 #include <Code/UANC/amv/signal/model/FFTModel.h>
@@ -47,7 +47,7 @@ class FFTView : public amv::AlgorithmView <model::FFTModel> {
   *
   * @param data The applied data.
   */
-  void setData(model::FFTModel *data) final;
+  void setData(std::shared_ptr<model::FFTModel> data) final;
 
  private:
 

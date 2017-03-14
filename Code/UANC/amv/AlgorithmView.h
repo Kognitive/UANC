@@ -23,7 +23,7 @@ template<typename inmodel>
 class AlgorithmView : public IAlgorithmView {
 
   // Static check, whether the correct model is used.
-  static_assert(std::is_base_of<SignalModel, inmodel>::value, "You have to use a SignalModel in any AlgorithmView.");
+  static_assert(std::is_base_of<InvertedModel, inmodel>::value, "You have to use a SignalModel in any AlgorithmView.");
 
  public:
 
@@ -34,7 +34,7 @@ class AlgorithmView : public IAlgorithmView {
   *
   * @param data The applied data.
   */
-  virtual void setData(inmodel *data) = 0;
+  virtual void setData(std::shared_ptr<inmodel> data) = 0;
 };
 
 }

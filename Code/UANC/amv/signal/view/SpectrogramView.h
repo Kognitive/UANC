@@ -63,7 +63,7 @@ class SpectrogramView : public uanc::amv::AlgorithmView<model::SpectrogramModel>
    */
   QWidget *produceWidget() final;
 
-  void setData(model::SpectrogramModel *data) final;
+  void setData(std::shared_ptr<model::SpectrogramModel> data) final;
 
  private:
   Q3DSurface *m_graph3D;

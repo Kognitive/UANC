@@ -38,7 +38,7 @@ class MainWidget : public QWidget {
    * This method loads a signal source in the top tab view.
    * @param signalSource the signal source to load.
    */
-  void loadSignalSource(std::shared_ptr<SignalModel> signalSource);
+  void loadSignalSource(std::shared_ptr<InvertedModel> signalSource);
 
  private:
 

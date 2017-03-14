@@ -18,7 +18,7 @@ set(CODE_DOC_ROOT_DIR ${CMAKE_HOME_DIRECTORY}/Code/UANC)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_VERBOSE_MAKEFILE on)
+set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_AUTOMOC ON)
 
 # Find the Qt libraries

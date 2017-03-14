@@ -7,12 +7,12 @@
 
 #include <memory>
 #include <QtWidgets/QWidget>
-#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/InvertedModel.h>
 #include <Code/UANC/amv/AlgorithmView.h>
 #include <Code/UANC/util/tools/Path.h>
-#include <Code/UANC/gui/PlotWidget.h>
 #include <Code/UANC/gui/PMWidget.h>
 #include <Code/UANC/amv/anc/model/ANCModel.h>
+#include <Code/UANC/gui/SignalViewWidget.h>
 
 namespace uanc {
 namespace amv {
@@ -46,7 +46,7 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
   *
   * @param data The applied data.
   */
-  void setData(model::ANCModel *signalData) final;
+  void setData(std::shared_ptr<model::ANCModel> signalData) final;
 
  private:
   /**
@@ -56,13 +56,13 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
 
   /** \brief Holds a reference to the plot widget used inside.
    *
-   * This field holds a unqiue reference to the internally used plot widget.
+   * This field holds a unique reference to the internally used signal view widget.
    */
-  std::unique_ptr<uanc::gui::PlotWidget> _plotWidget;
+  std::unique_ptr<uanc::gui::SignalViewWidget> _signalViewWidget;
 
 /** \brief Holds a reference to the tree view used inside.
  *
- * This field holds a unqiue reference to the internally used tree view.
+ * This field holds a unique reference to the internally used tree view.
  */
   std::unique_ptr<uanc::gui::PMWidget> _treeview;
 

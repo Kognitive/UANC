@@ -6,8 +6,7 @@
 #ifndef UANC_SPECTROGRAMMODEL_H
 #define UANC_SPECTROGRAMMODEL_H
 
-#include <Code/UANC/amv/SignalModel.h>
-#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/InvertedModel.h>
 #include "Code/libs/aquila/transform/Spectrogram.h"
 #include <memory>
 
@@ -20,7 +19,7 @@ namespace model {
  *
  * It used by the FourierTransformationAlgorithm.
  */
-class SpectrogramModel : public uanc::amv::SignalModel {
+class SpectrogramModel : public uanc::amv::InvertedModel {
  public:
 
   /** \brief Holds the spectrum.

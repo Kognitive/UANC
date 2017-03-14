@@ -47,7 +47,59 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
    *
    * @param input The input model containing the original signal.
    */
-  void invert(SignalModel *data) final {
+  void invert(std::shared_ptr<InvertedModel> data) final {
+
+    // copy data to in
+    auto inr = data->right_channel;
+
+    //const std::size_t SIZE2 = ;
+    unsigned int sampleFreqr = inr->getSampleFrequency();
+
+    std::shared_ptr<PerformanceMeasure<>> measurement (new PerformanceMeasure<>());
+    measurement->start(this->getName());
+
+    // start measurement for the fast fouier transformation
+    measurement->startSubMeasure("Transformation in Fourier Right");
+
+    // choose a fft algorithm
+    auto lenr = inr->length();
+    auto fftr = Aquila::FftFactory::getFft(inr->length());
+
+    // transform the signal into the fouier space
+    Aquila::SpectrumType spectrumr = fftr->fft(inr->toArray());
+
+    // FFT is done. Stop the mesurement
+    measurement->stopSubMeasure();
+
+    // Start mesurment for the invertation in fouier space
+    measurement->startSubMeasure("Inversion Right");
+
+    // invert the spectrum
+    std::transform(
+        spectrumr.begin(),
+        spectrumr.end(),
+        spectrumr.begin(),
+        [](Aquila::ComplexType x) { return (x.operator*=(-2)); });
+
+    // Invertation is done. Stop mesurement
+    measurement->stopSubMeasure();
+
+    // start measurement for the back transformation
+    measurement->startSubMeasure("Back transformation Right");
+
+    // back transformation of signal from fouier space
+    std::shared_ptr<std::vector<double>> xr = fftr->ifft(spectrumr);
+
+    // Back transformation is done. Stop mesurement
+    measurement->stopSubMeasure();
+
+    // define output signal
+    std::shared_ptr<Aquila::SignalSource> outputSignalr(
+        new Aquila::SignalSource(&(*xr)[0], lenr, sampleFreqr));
+
+    this->getModel()->right_channel = inr;
+
+    // --------------------------------- Left Channel ------------------------------------------------
 
     // copy data to in
     auto in = data->left_channel;
@@ -57,11 +109,8 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     //const std::size_t SIZE2 = ;
     unsigned int sampleFreq = in->getSampleFrequency();
 
-    std::shared_ptr<PerformanceMeasure<>> measurement (new PerformanceMeasure<>());
-    measurement->start(this->getName());
-
     // start measurement for the fast fouier transformation
-    measurement->startSubMeasure("Transformation in Fourier");
+    measurement->startSubMeasure("Transformation in Fourier Left");
 
     // choose a fft algorithm
     auto len = in->length();
@@ -74,7 +123,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     measurement->stopSubMeasure();
 
     // Start mesurment for the invertation in fouier space
-    measurement->startSubMeasure("Inversion");
+    measurement->startSubMeasure("Inversion Left");
 
     // invert the spectrum
     std::transform(
@@ -87,7 +136,7 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     measurement->stopSubMeasure();
 
     // start measurement for the back transformation
-    measurement->startSubMeasure("Back transformation");
+    measurement->startSubMeasure("Back transformation Left");
 
     // back transformation of signal from fouier space
     std::shared_ptr<std::vector<double>> x = fft->ifft(spectrum);
@@ -102,7 +151,10 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
         new Aquila::SignalSource(&(*x)[0], len, sampleFreq));
 
     this->getModel()->left_channel = in;
-    this->getModel()->inverted = outputSignal;
+
+    this->getModel()->inverted = std::shared_ptr<SignalModel>(new InvertedModel);
+    this->getModel()->inverted->left_channel = outputSignal;
+    this->getModel()->inverted->right_channel = outputSignalr;
 
   }
 

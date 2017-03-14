@@ -45,25 +45,33 @@ class InverseDirectAlgorithm : public ANCAlgorithm<model::ANCModel> {
    *
    * @param input The input model containing the original signal.
    */
-  void invert(SignalModel *in) final {
+  void invert(std::shared_ptr<InvertedModel> in) {
 
     std::shared_ptr<PerformanceMeasure<>> measurement (new PerformanceMeasure<>());
 
     // Start measurement for the inversion
     measurement->start(this->getName());
-    measurement->startSubMeasure("Inversion");
+    measurement->startSubMeasure("Inversion Left Channel");
     // creates a new shared pointer containing the inverted signal
-    auto inverted = new Aquila::SignalSource(*in->left_channel.get());
-    inverted->operator*=(-1);
+    auto inverted = new SignalModel();
+    inverted->left_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*in->left_channel.get()));
+    inverted->left_channel->operator*=(-1);
+
+    // Invertation is done. Stop mesurement
+    measurement->stopSubMeasure();
+    measurement->startSubMeasure("Inversion Right Channel");
+    inverted->right_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*in->right_channel.get()));
+    inverted->right_channel->operator*=(-1);
 
     // Invertation is done. Stop mesurement
     measurement->stopSubMeasure();
     measurement->stop();
     this->getModel()->defaultRegister.registerCustomMeasurement(measurement);
 
-    std::shared_ptr<Aquila::SignalSource> out(inverted);
+    std::shared_ptr<SignalModel> out(inverted);
 
     this->getModel()->left_channel = in->left_channel;
+    this->getModel()->right_channel = in->right_channel;
     this->getModel()->inverted = out;
 
   }

@@ -36,7 +36,7 @@ class HeatView : public uanc::amv::AlgorithmView<model::SpectrogramModel> {
     return container;
   }
 
-  void setData(model::SpectrogramModel *data) final {
+  void setData(std::shared_ptr<model::SpectrogramModel> data) final {
 
     configPlot(customPlotL, data->left_spectrum);
     configPlot(customPlotR, data->right_spectrum);

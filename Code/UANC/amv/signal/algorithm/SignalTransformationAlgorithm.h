@@ -29,7 +29,7 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
 
   // check if the models are correct and applicable.
   static_assert(std::is_base_of<viewmodel, datamodel>::value, "The data model has to be derived from the view model.");
-  static_assert(std::is_base_of<SignalModel, viewmodel>::value,
+  static_assert(std::is_base_of<InvertedModel, viewmodel>::value,
                 "The view model has to be derived from SignalModel.");
 
  protected:
@@ -43,8 +43,8 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * \return The created model from the data of the inversion.
    */
-  viewmodel *execute(SignalModel *input) final {
-    this->model = new viewmodel();
+  std::shared_ptr<datamodel> execute(std::shared_ptr<uanc::amv::InvertedModel> input) final {
+    this->model = std::shared_ptr<datamodel>(new viewmodel());
     this->transform(input);
     return this->getModel();
   }
@@ -56,7 +56,7 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * @return The pointer to the data model stored inside.
    */
-  datamodel *getModel() {
+  std::shared_ptr<datamodel> getModel() {
     return this->model;
   }
 
@@ -67,7 +67,7 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * @param input The input model containing the original signal.
    */
-  virtual void transform(SignalModel *input) = 0;
+  virtual void transform(std::shared_ptr<uanc::amv::InvertedModel> input) = 0;
 
  private:
 
@@ -76,7 +76,7 @@ class SignalTransformationAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    * This field gets used to save a reference to the used model. This is passed
    * back by getModel()
    */
-  datamodel *model;
+  std::shared_ptr<datamodel> model;
 };
 
 }

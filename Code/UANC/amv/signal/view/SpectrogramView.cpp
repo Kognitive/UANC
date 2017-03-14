@@ -20,7 +20,7 @@ QWidget *SpectrogramView::produceWidget() {
     return container;
 }
 
-void SpectrogramView::setData(model::SpectrogramModel *data) {
+void SpectrogramView::setData(std::shared_ptr<model::SpectrogramModel> data) {
 
   //Update the data array of the class
    if (this->m_dataArray3D != nullptr) {

@@ -25,7 +25,7 @@ using namespace uanc::amv;
  * for a good integration inside of the application, because we don't want to differntiate versus direct
  * data or transformed data views.
  */
-class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<SignalModel> {
+class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<InvertedModel> {
  public:
 
   /** \brief Returns the name of the transformed data representation.
@@ -43,8 +43,15 @@ class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<Sig
    *
    * @param input The input model containing the original signal.
    */
-  void transform(SignalModel *in) final {
+  void transform(std::shared_ptr<uanc::amv::InvertedModel> in) final {
     this->getModel()->left_channel = in->left_channel;
+    this->getModel()->right_channel = in->right_channel;
+
+    if (in->inverted) {
+      this->getModel()->inverted = std::shared_ptr<SignalModel>(new SignalModel);
+      this->getModel()->inverted->left_channel = in->inverted->left_channel;
+      this->getModel()->inverted->right_channel = in->inverted->right_channel;
+    }
   }
 
   /** \brief Clones the current instance.
@@ -67,7 +74,7 @@ class IdentityTransformationAlgorithm : public SignalTransformationAlgorithm<Sig
    *
    * @return The created ANCView.
    */
-  AlgorithmView<SignalModel> *constructView() final {
+  AlgorithmView<InvertedModel> *constructView() final {
     return new view::SignalView();
   }
 };

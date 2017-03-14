@@ -42,7 +42,7 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
    *
    * @param input The input model containing the original signal.
    */
-  void transform(SignalModel *in) final {
+  void transform(std::shared_ptr<uanc::amv::InvertedModel> in) final {
 
     const int SAMPLES_PER_FRAME = 1024;
 

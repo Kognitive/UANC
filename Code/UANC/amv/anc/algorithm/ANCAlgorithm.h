@@ -42,9 +42,9 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * \return The created model from the data of the inversion.
    */
-  viewmodel *execute(uanc::amv::SignalModel *input) final {
-    this->model = new viewmodel();
-    auto castedModel = static_cast<model::ANCModel*>(this->model);
+  std::shared_ptr<viewmodel> execute(std::shared_ptr<InvertedModel> input) final {
+    this->model = std::shared_ptr<datamodel>(new viewmodel());
+    auto castedModel = static_cast<std::shared_ptr<model::ANCModel>>(this->model);
     castedModel->defaultRegister.startOverallExecutionMeasurement();
     this->invert(input);
     castedModel->defaultRegister.stopOverallExecutionMeasurement();
@@ -58,7 +58,7 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * @return The pointer to the data model stored inside.
    */
-  datamodel *getModel() {
+  std::shared_ptr<datamodel> getModel() {
     return this->model;
   }
 
@@ -70,7 +70,7 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * @param input The input model containing the original signal.
    */
-  virtual void invert(uanc::amv::SignalModel *input) = 0;
+  virtual void invert(std::shared_ptr<InvertedModel> input) = 0;
 
  private:
 
@@ -79,7 +79,7 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    * This field gets used to save a reference to the used model. This is passed
    * back by getModel()
    */
-  datamodel *model;
+  std::shared_ptr<datamodel> model;
 };
 
 }

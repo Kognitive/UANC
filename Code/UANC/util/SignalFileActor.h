@@ -21,7 +21,7 @@ using namespace uanc::amv;
  *
  * Is derived from the file loader class itself.
  */
-class SignalFileActor : FileActor<SignalModel> {
+class SignalFileActor : FileActor<InvertedModel> {
 
  public:
   /** \brief Basic constructor which saves a path string internally.
@@ -30,7 +30,7 @@ class SignalFileActor : FileActor<SignalModel> {
    *
    * @param path The path to the acted file
    */
-  SignalFileActor(const std::string &path) : FileActor<SignalModel>(path) {}
+  SignalFileActor(const std::string &path) : FileActor<InvertedModel>(path) {}
 
   /** \brief This method should load the file from the plate.
    *
@@ -38,15 +38,15 @@ class SignalFileActor : FileActor<SignalModel> {
    *
    * @return the loaded T
    */
-  std::shared_ptr<SignalModel> loadData() {
+  std::shared_ptr<InvertedModel> loadData() {
     //TODO: There should be an exception thrown, if the path is incorrect
     auto path = this->getPath();
     auto lwave = new Aquila::WaveFile(path, Aquila::StereoChannel::LEFT);
     auto rwave = new Aquila::WaveFile(path, Aquila::StereoChannel::RIGHT);
-    auto model = new SignalModel();
+    auto model = new InvertedModel();
     model->left_channel = std::shared_ptr<Aquila::SignalSource>(lwave);
     model->right_channel = std::shared_ptr<Aquila::SignalSource>(rwave);
-    return std::shared_ptr<SignalModel>(model);
+    return std::shared_ptr<InvertedModel>(model);
   }
 
   /** \brief This method should save a file to the plate.
@@ -56,7 +56,7 @@ class SignalFileActor : FileActor<SignalModel> {
    *
    * @param source The source to save
    */
-  void saveData(std::shared_ptr<SignalModel> source) {
+  void saveData(std::shared_ptr<InvertedModel> source) {
     auto path = this->getPath();
     Aquila::WaveFile::save(*source->left_channel, path);
   }

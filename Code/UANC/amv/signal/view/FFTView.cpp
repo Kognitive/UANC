@@ -40,7 +40,7 @@ QWidget *FFTView::produceWidget() {
  *
  * @param data The applied data.
  */
-void FFTView::setData(model::FFTModel *data) {
+void FFTView::setData(std::shared_ptr<model::FFTModel> data) {
 
 
   this->_plotWidget->setSignal(data->fftSignal);

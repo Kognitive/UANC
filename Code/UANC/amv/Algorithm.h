@@ -23,7 +23,7 @@ template<class outmodel>
 class Algorithm : public IAlgorithm {
 
   // Static check, whether the correct model is used.
-  static_assert(std::is_base_of<SignalModel, outmodel>::value, "You have to use a SignalModel in any Algorithm.");
+  static_assert(std::is_base_of<InvertedModel, outmodel>::value, "You have to use a SignalModel in any Algorithm.");
 
  public:
 
@@ -71,7 +71,7 @@ class Algorithm : public IAlgorithm {
    *
    * \param[in] input The input model of the signal.
    */
-  void process(uanc::amv::SignalModel *input) final {
+  void process(std::shared_ptr<uanc::amv::InvertedModel> input) final {
 
     // check if the algorithm was executed before
     if (!executed) {
@@ -92,7 +92,7 @@ class Algorithm : public IAlgorithm {
    *
    * \return The created model from the data of the algorithm execution.
    */
-  virtual outmodel *execute(uanc::amv::SignalModel *input) = 0;
+  virtual std::shared_ptr<outmodel> execute(std::shared_ptr<uanc::amv::InvertedModel> input) = 0;
 
  private:
 
@@ -114,7 +114,7 @@ class Algorithm : public IAlgorithm {
    *
    * This field contains a nullptr, iff !executed.
    */
-  outmodel *_builtModel = nullptr;
+  std::shared_ptr<outmodel> _builtModel = nullptr;
 
  protected:
 

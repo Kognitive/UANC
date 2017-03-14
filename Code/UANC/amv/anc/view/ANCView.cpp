@@ -22,7 +22,7 @@ namespace view {
  */
 QWidget *ANCView::produceWidget(){
   if (this->_widget == nullptr) {
-    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget(true));
+    this->_plotWidget = std::unique_ptr<uanc::gui::PlotWidget>(new uanc::gui::PlotWidget());
     this->_widget = _plotWidget.get();
   }
 
@@ -37,8 +37,8 @@ QWidget *ANCView::produceWidget(){
  *
  * @param data The applied data.
  */
-void ANCView::setData(model::ANCModel *data) {
-  this->_plotWidget->setSignal(data->inverted, data->left_channel);
+void ANCView::setData(std::shared_ptr<model::ANCModel> data) {
+  this->_plotWidget->setSignal(data);
 }
 }
 }

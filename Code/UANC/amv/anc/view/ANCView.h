@@ -8,7 +8,7 @@
 
 #include <memory>
 #include <QtWidgets/QWidget>
-#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/InvertedModel.h>
 #include <Code/UANC/amv/AlgorithmView.h>
 #include <Code/UANC/util/tools/Path.h>
 #include <Code/UANC/gui/PlotWidget.h>
@@ -45,7 +45,7 @@ class ANCView : public uanc::amv::AlgorithmView<model::ANCModel> {
   *
   * @param data The applied data.
   */
-  void setData(model::ANCModel *data) final;
+  void setData(std::shared_ptr<model::ANCModel> data) final;
 
  private:
 

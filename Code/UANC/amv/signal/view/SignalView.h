@@ -8,7 +8,7 @@
 
 #include <memory>
 #include <QtWidgets/QWidget>
-#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/InvertedModel.h>
 #include <Code/UANC/amv/AlgorithmView.h>
 #include <Code/UANC/util/tools/Path.h>
 #include <Code/UANC/gui/PlotWidget.h>
@@ -24,7 +24,7 @@ namespace view {
  * This represents a general SignalView. It operates on an SignalModel. It basically shows a plot of the
  * original signal.
  */
-class SignalView : public uanc::amv::AlgorithmView<uanc::amv::SignalModel> {
+class SignalView : public uanc::amv::AlgorithmView<uanc::amv::InvertedModel> {
 
  public:
 
@@ -45,7 +45,7 @@ class SignalView : public uanc::amv::AlgorithmView<uanc::amv::SignalModel> {
   *
   * @param data The applied data.
   */
-  void setData(uanc::amv::SignalModel *data) final;
+  void setData(std::shared_ptr<uanc::amv::InvertedModel> data) final;
 
  private:
 

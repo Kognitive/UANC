@@ -6,8 +6,8 @@
 #ifndef UANC_IALGORITHM_H
 #define UANC_IALGORITHM_H
 
+#include <Code/UANC/amv/anc/model/ANCModel.h>
 #include "IAlgorithmView.h"
-#include "SignalModel.h"
 
 namespace uanc {
 namespace amv {
@@ -62,7 +62,7 @@ class IAlgorithm {
    *
    * \param[in] input The input model of the signal.
    */
-  virtual void process(uanc::amv::SignalModel *input) = 0;
+  virtual void process(std::shared_ptr<uanc::amv::InvertedModel> input) = 0;
 };
 }
 }

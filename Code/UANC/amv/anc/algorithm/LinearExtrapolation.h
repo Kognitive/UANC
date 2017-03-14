@@ -32,27 +32,42 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
    *
    * @param input The input model containing the original signal.
    */
-  void invert(SignalModel *in) final {
+  void invert(std::shared_ptr<InvertedModel> in) final {
 
       std::shared_ptr <PerformanceMeasure<>> measurement(new PerformanceMeasure<>());
 
       // Start measurement for the inversion
       measurement->start(this->getName());
-      measurement->startSubMeasure("Inversion");
+      measurement->startSubMeasure("Transformation & Inversion Left");
 
       // creates a new shared pointer containing the inverted signal
       auto invertedApproximated = approximate(in->left_channel.get());
 
       // Invertation is done. Stop mesurement
       measurement->stopSubMeasure();
-      measurement->stop();
-      this->getModel()->defaultRegister.registerCustomMeasurement(measurement);
 
       std::shared_ptr <Aquila::SignalSource> out(invertedApproximated);
 
       this->getModel()->left_channel = in->left_channel;
-      this->getModel()->inverted = out;
 
+      // ------------------------------- RIGHT CHANNEL ----------------------------------
+
+      measurement->startSubMeasure("Transformation & Inversion Right");
+
+      // creates a new shared pointer containing the inverted signal
+      auto invertedApproximatedr = approximate(in->right_channel.get());
+
+      // Invertation is done. Stop mesurement
+      measurement->stopSubMeasure();
+      measurement->stop();
+      this->getModel()->defaultRegister.registerCustomMeasurement(measurement);
+
+      std::shared_ptr <Aquila::SignalSource> outr(invertedApproximated);
+
+      this->getModel()->right_channel = in->right_channel;
+      this->getModel()->inverted = std::shared_ptr<InvertedModel>(new InvertedModel);
+      this->getModel()->inverted->left_channel = out;
+      this->getModel()->inverted->right_channel = outr;
   }
 
   /** \brief Clones the current instance.

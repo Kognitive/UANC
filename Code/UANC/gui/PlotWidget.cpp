@@ -2,13 +2,13 @@
 // Created by jannewulf on 12.12.16.
 //
 
+#include <Code/UANC/amv/InvertedModel.h>
 #include "PlotWidget.h"
 
 namespace uanc {
 namespace gui {
 
-PlotWidget::PlotWidget(bool hasError) : EventObserver({Events::Scroll}) {
-  _hasError = hasError;
+PlotWidget::PlotWidget() : EventObserver({Events::Scroll}) {
   this->initialize();
 }
 
@@ -30,36 +30,41 @@ void PlotWidget::initialize() {
   _control->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // create the layout
-  QVBoxLayout *layout = new QVBoxLayout;
-  layout->addWidget(_signalPlot.get());
-  layout->addWidget(_control.get());
-  if (_hasError)
-    layout->addWidget(_chkBoxShowError.get());
-  setLayout(layout);
+  _layout = new QVBoxLayout;
+  _layout->addWidget(_signalPlot.get());
+  _layout->addWidget(_control.get());
+  setLayout(_layout);
 }
 
-void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::shared_ptr<Aquila::SignalSource> originalSignal) {
+void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   // save pointer to signal in member
   _signal = signal;
-  if (originalSignal != NULL)
-    _errorSignal = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal.get() + *originalSignal.get()));
+  if (signal->inverted && !_chkShown)
+    _layout->addWidget(_chkBoxShowError.get());
+
+  if (signal->inverted) {
+    _signal = signal->inverted;
+    _errorSignal = std::shared_ptr<uanc::amv::InvertedModel>(new uanc::amv::InvertedModel);
+    _errorSignal->left_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal->left_channel + *signal->inverted->left_channel));
+    _errorSignal->right_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal->right_channel + *signal->inverted->right_channel));
+  }
 
   // create QCPGraphDataContainer and set data in both graphs
   // creating two maps because QCustomPlot requires raw pointers and we want to prevent null pointers
   double maxSignalAmplitude = std::numeric_limits<double>::min();
   double minSignalAmplitude = std::numeric_limits<double>::max();
-  size_t n = _signal->getSamplesCount();
+  size_t n = _signal->left_channel->getSamplesCount();
   QCPGraphDataContainer *newDataMain = new QCPGraphDataContainer;
   QCPGraphDataContainer *newDataControl = new QCPGraphDataContainer;
   QCPGraphDataContainer *newError = new QCPGraphDataContainer;
   QCPGraphData newDatapoint;
 
-  double timeConversionFactor = 1.0 / _signal->getSampleFrequency();
-  _lastIndex = n / _signal->getSampleFrequency();
+  double timeConversionFactor = 1.0 / _signal->left_channel->getSampleFrequency();
+  _lastIndex = n / _signal->left_channel->getSampleFrequency();
 
   for (size_t i = 0; i < n; ++i) {
     newDatapoint.key = timeConversionFactor * i;
-    newDatapoint.value = _signal->sample(i);
+    newDatapoint.value = _signal->left_channel->sample(i);
 
     newDataMain->add(newDatapoint);
     newDataControl->add(newDatapoint);
@@ -68,14 +73,14 @@ void PlotWidget::setSignal(std::shared_ptr<Aquila::SignalSource> signal, std::sh
     maxSignalAmplitude = std::max(maxSignalAmplitude, newDatapoint.value);
     minSignalAmplitude = std::min(minSignalAmplitude, newDatapoint.value);
 
-    if (originalSignal != NULL) {
-      newDatapoint.value = _errorSignal->sample(i);
+    if (signal->inverted) {
+      newDatapoint.value = _errorSignal->left_channel->sample(i);
       newError->add(newDatapoint);
     }
   }
 
   _signalPlot->setData(newDataMain);
-  if (originalSignal != NULL)
+  if (signal->inverted)
     _signalPlot->setError(newError);
   _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude);
 

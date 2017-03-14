@@ -154,7 +154,7 @@ void MainWidget::tabSelected() {
  * This method loads a signal source in the top tab view.
  * @param signalSource the signal source to load.
  */
-void MainWidget::loadSignalSource(std::shared_ptr<SignalModel> signalSource) {
+void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
 
   auto widget = new SignalViewWidget();
   widget->setSignalModel(signalSource);
@@ -199,7 +199,7 @@ void MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
   }
 
   // apply the algorithm
-  algorithm.process(signal.get());
+  algorithm.process(signal);
 }
 
 void MainWidget::waveClosed(const int &index) {

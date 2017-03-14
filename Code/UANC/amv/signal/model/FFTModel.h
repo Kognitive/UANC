@@ -8,9 +8,7 @@
 #ifndef CODE_UANC_AMV_SIGNAL_MODEL_FFTMODEL_H_
 #define CODE_UANC_AMV_SIGNAL_MODEL_FFTMODEL_H_
 
-
-#include <Code/UANC/amv/SignalModel.h>
-#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/InvertedModel.h>
 #include "Code/libs/aquila/transform/Spectrogram.h"
 #include <memory>
 
@@ -23,14 +21,14 @@ namespace model {
  *
  * It used by the FourierTransformationAlgorithm.
  */
-class FFTModel : public uanc::amv::SignalModel {
+class FFTModel : public uanc::amv::InvertedModel {
  public:
 
   /** \brief Holds the spectrum.
    *
    * This field holds the spectrum of the original signal.
    */
-  std::shared_ptr<Aquila::SignalSource> fftSignal;
+  std::shared_ptr<uanc::amv::InvertedModel> fftSignal;
 };
 
 }

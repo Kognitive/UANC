@@ -6,7 +6,7 @@
 #ifndef UANC_ANCMODEL_H
 #define UANC_ANCMODEL_H
 
-#include <Code/UANC/amv/SignalModel.h>
+#include <Code/UANC/amv/InvertedModel.h>
 #include <memory>
 #include <Code/UANC/util/PerformanceMeasure.h>
 
@@ -22,15 +22,8 @@ using namespace uanc::util;
  * This model gets derived from the SignalModel. It adds a field containing
  * the inverted signal to the original signal in SignalModel.
  */
-class ANCModel : public uanc::amv::SignalModel {
+class ANCModel : public uanc::amv::InvertedModel {
  public:
-
-  /** \brief Holds the inverted signal.
-   *
-   * This field gets used, to save the inverted signal, in addition to
-   * the original signal, which is placed in the parent class SignalModel.
-   */
-  std::shared_ptr<Aquila::SignalSource> inverted;
 
   /**
    *  This member is the container for default and custom performance measurements.
