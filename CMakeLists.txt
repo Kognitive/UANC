@@ -95,6 +95,21 @@ target_link_libraries(UANC ${Qt5PrintSupport_LIBRARIES})
 target_link_libraries(UANC ${Qt5Network_LIBRARIES})
 target_link_libraries(UANC ${Qt5DataVisualization_LIBRARIES})
 
+# ----------------------------- CPPLint target ----------------------------
+find_package(PythonInterp)
+if (PYTHONINTERP_FOUND)
+	add_custom_target("stylecheck"
+	COMMAND "${CMAKE_COMMAND}" -E chdir
+            "${CMAKE_CURRENT_SOURCE_DIR}"
+            "${PYTHON_EXECUTABLE}"
+            "${CMAKE_HOME_DIRECTORY}/misc/cpplint.py"
+            "--counting=detailed"
+            "--extensions=cpp,hpp,h,cc"
+            "--linelength=250"
+            ${SOURCE_FILES}
+    VERBATIM)
+endif(PYTHONINTERP_FOUND)
+
 # ------------------------------------ Doxygen -----------------------------------------
 
 # add a target to generate API documentation with Doxygen
