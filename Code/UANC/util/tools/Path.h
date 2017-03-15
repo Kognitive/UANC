@@ -6,6 +6,8 @@
 #define UANC_PATH_H
 
 #include <string>
+#include <QFileInfo>
+#include <QString>
 
 namespace uanc {
 namespace util {

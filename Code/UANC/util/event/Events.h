@@ -15,7 +15,7 @@ namespace event {
  * These events get used by the event system to signal the
  * current event.
  */
-enum Events : std::uint8_t {
+enum Events : uint8_t {
 
   /** \brief Gets fired when a view gets scrolled.
    *

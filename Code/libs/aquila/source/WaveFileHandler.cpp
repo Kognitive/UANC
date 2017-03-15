@@ -48,6 +48,7 @@ namespace Aquila
         // then as we know now the data size, we create a temporary
         // buffer and read raw data into that buffer
         std::fstream fs;
+        errno = 0;
         fs.open(m_filename.c_str(), std::ios::in | std::ios::binary);
         fs.read((char*)(&header), sizeof(WaveHeader));
         //Check if the wave file has the correct format:
@@ -300,7 +301,7 @@ namespace Aquila
         if(std::strcmp (chunkName, id) == 0){
           return bytePosIndex + 4;
         }
-        fs->seekg(-sizeof(char)*3, std::ios::cur);
+        fs->seekg(-sizeof(char)*3, std::ios_base::cur);
         bytePosIndex ++;
         }
       return -1;
