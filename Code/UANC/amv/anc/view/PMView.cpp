@@ -30,9 +30,10 @@ QWidget *PMView::produceWidget() {
     this->_splitter =  new QSplitter;
     this->_splitter->setOrientation(Qt::Horizontal);
     this->_splitter->addWidget(_signalViewWidget.get());
+    this->_splitter->setStretchFactor(0,1);
     this->_splitter->addWidget(_treeview.get());
     this->_splitter->setStretchFactor(0,1);
-    this->_splitter->setStretchFactor(1,0);
+
 
     this->_chkBoxShowMeasure = std::shared_ptr<QCheckBox>(new QCheckBox("Show Performance"));
 

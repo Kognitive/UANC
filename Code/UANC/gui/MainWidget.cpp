@@ -107,7 +107,11 @@ void MainWidget::applyClicked() {
   auto currentIndex = _cmbAlgorithm->currentIndex();
   auto algorithm = this->_algorithmList->at(currentIndex)->clone();
 
-  this->applyAlgorithm(*algorithm);
+  int applyAlgorithmCode = this->applyAlgorithm(*algorithm);
+  // check if execution of the algorithm was successful
+  if (applyAlgorithmCode != 0) {
+    return;
+  }
   auto index = this->_tabWidget->currentIndex();
 
   // get the mapping list and push back the algorithm save afterwards
@@ -180,7 +184,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
  *
  * @param algorithm The algorithm to use
  */
-void MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
+int MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
 
   // check if signal available if not present a messagebox and
   // ask the user to load a signal.
@@ -195,11 +199,12 @@ void MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
     msgBox.setIcon(QMessageBox::Critical);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();
-    return;
+    return 1;
   }
 
   // apply the algorithm
   algorithm.process(signal);
+  return 0;
 }
 
 void MainWidget::waveClosed(const int &index) {

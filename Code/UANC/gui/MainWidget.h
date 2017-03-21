@@ -90,7 +90,7 @@ class MainWidget : public QWidget {
    *
    * @param algorithm The algorithm to use
    */
-  void applyAlgorithm(uanc::amv::IAlgorithm &algorithm);
+  int applyAlgorithm(uanc::amv::IAlgorithm &algorithm);
 
  private slots:
 
