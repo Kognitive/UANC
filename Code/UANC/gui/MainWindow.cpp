@@ -69,9 +69,9 @@ void MainWindow::makeActions() {
   connect(fileOpenAction.get(), &QAction::triggered, this, &MainWindow::loadFile);
 
   // create the application close action
-  ApplicationCloseAction = std::unique_ptr<QAction>(new QAction(tr("&Exit"), this));
-  ApplicationCloseAction->setShortcuts(QKeySequence::Open);
-  ApplicationCloseAction->setStatusTip(tr("Exit"));
+  ApplicationCloseAction = std::unique_ptr<QAction>(new QAction(tr("&Quit"), this));
+  ApplicationCloseAction->setShortcuts(QKeySequence::Quit);
+  ApplicationCloseAction->setStatusTip(tr("Quit"));
   connect(ApplicationCloseAction.get(), &QAction::triggered, this, &MainWindow::close);
 
 }
