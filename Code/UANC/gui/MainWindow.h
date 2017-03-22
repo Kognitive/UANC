@@ -58,12 +58,11 @@ class MainWindow : public QMainWindow {
    */
   std::unique_ptr<QAction> fileOpenAction;
 
-  /** \brief Represents the save action.
-   *
-   * Represents the save action. In detail it is the file save action
-   */
-  std::unique_ptr<QAction> fileSaveAction;
-
+  /** \brief Represents the close action.
+ *
+ * Represents the close action. In detail it is the application close action
+ */
+  std::unique_ptr<QAction> ApplicationCloseAction;
   /** \brief Represents the file menu itself.
    *
    * Represents the file menu itself. */
@@ -120,13 +119,6 @@ class MainWindow : public QMainWindow {
    */
   void showImportedSignals(std::vector<int> loadedIndices);
 
-
-  /** \brief Saves a file to the hard drive.
-   *
-   * This method displays a file save dialog. Then it saves the right signal to
-   * the hard drive.
-   */
-  void saveFile();
 };
 
 }
