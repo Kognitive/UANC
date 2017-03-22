@@ -18,13 +18,18 @@ std::shared_ptr<EventManager> EventManager::_instance;
 EventManager::EventManager() {
 
   // Create the two mappings.
-  _eventMapping = std::unique_ptr<std::map<Events, std::vector<int> *>>(
-      new std::map<Events, std::vector<int> *>()
+  _eventMapping = std::unique_ptr<std::unordered_map<Events, std::vector<int> *>>(
+      new std::unordered_map<Events, std::vector<int> *>()
   );
 
   // Creaate empty id mapping
-  _idMapping = std::unique_ptr<std::map<int, EventObserver *>>(
-      new std::map<int, EventObserver *>()
+  _idMapping = std::unique_ptr<std::unordered_map<int, EventObserver *>>(
+      new std::unordered_map<int, EventObserver *>()
+  );
+
+  // create empty start mapping
+  _idEventMapping = std::unique_ptr<std::unordered_map<int, std::vector<Events> *>>(
+      new std::unordered_map<int, std::vector<Events > *>()
   );
 }
 
@@ -58,6 +63,10 @@ std::unique_ptr<EventToken> EventManager::listen(EventObserver *observer) {
 
   // First of all add the observer to the internal map
   this->_idMapping->insert(std::make_pair(_idCounter, observer));
+
+  // Now create new vector and add ti idEventMapping
+  auto eventVector = new std::vector<Events>();
+  this->_idEventMapping->insert(std::make_pair(_idCounter, eventVector));
 
   // Now basically initialize a publisher and pass back
   auto publisher = EventToken::Create(_idCounter);
@@ -110,6 +119,33 @@ void EventManager::subscribe(Events event, EventToken *token) {
 
   // now add the pointer
   pointer->push_back(token->_index);
+
+  // and add to event mapping
+  _idEventMapping->at(token->_index)->push_back(event);
+}
+
+/** \brief Unregister token from the event manager.
+  *
+  * This method takes a token and degisters it from the event manager.
+  * @param token The token to remove.
+  */
+void EventManager::unregister(EventToken* token) {
+  auto eventList = _idEventMapping->at(token->_index);
+
+  // iterate over all registered events and remove matching
+  // indices.
+  for (auto &event : *eventList) {
+    auto indexList = _eventMapping->at(event);
+    for (auto it = indexList->begin(); it < indexList->end(); ++it) {
+      if (*it == token->_index) {
+        indexList->erase(it);
+      }
+    }
+  }
+
+  // remove from id mapping
+  _idMapping->erase(token->_index);
+  _idEventMapping->erase(token->_index);
 }
 
 }

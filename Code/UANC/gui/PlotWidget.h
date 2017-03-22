@@ -72,12 +72,12 @@ private:
     /**
      * \brief Holds the \ref QCustomPlot for the signal plot.
      */
-    std::shared_ptr<SignalPlot> _signalPlot;
+    SignalPlot* _signalPlot;
 
     /**
      * \brief Holds the \ref QCustomPlot for the control.
      */
-    std::shared_ptr<Control> _control;
+    Control* _control;
 
     /**
      * \brief True if checkbox for error curve should be shown, else false
@@ -89,7 +89,7 @@ private:
     /**
      * \brief Hold the checkbox for showing the error
      */
-    std::shared_ptr<QCheckBox> _chkBoxShowError;
+    QCheckBox* _chkBoxShowError;
 
     /**
      * \brief Holds the plotted signal.

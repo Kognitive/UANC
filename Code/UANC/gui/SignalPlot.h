@@ -20,7 +20,7 @@ class SignalPlot : public QCustomPlot {
  Q_OBJECT
 
  public:
-  SignalPlot(std::shared_ptr<PlotWidget> parent);
+  SignalPlot(PlotWidget* parent);
 
   void setData(QCPGraphDataContainer *data);
   void setError(QCPGraphDataContainer *error);
@@ -39,7 +39,7 @@ class SignalPlot : public QCustomPlot {
   /** \brief Holds reference to the parent widget
    *
    */
-  std::shared_ptr<PlotWidget> _parent;
+  PlotWidget* _parent;
 
   /** \brief Holds the color for the plot
    *
@@ -47,7 +47,7 @@ class SignalPlot : public QCustomPlot {
    */
   QColor _graphColor;
 
-  std::shared_ptr<QCPItemStraightLine> _zoomLineOrigin, _zoomLineTarget;
+  QCPItemStraightLine *_zoomLineOrigin, *_zoomLineTarget;
 
   int _pressedX = -1, _pressedY = -1;
 
@@ -57,7 +57,7 @@ class SignalPlot : public QCustomPlot {
   void zoomRange(double press, double release);
   QCPRange scaleRange(double factor, double center);
 
-  void setZoomLinePos(std::shared_ptr<QCPItemStraightLine> zoomLine, double xCoord);
+  void setZoomLinePos(QCPItemStraightLine*, double xCoord);
 
   const int _SIGNAL = 0;
   const int _ERROR = 1;

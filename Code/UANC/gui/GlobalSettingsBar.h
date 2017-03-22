@@ -10,6 +10,7 @@
 #include <QWidget>
 #include <Code/UANC/amv/signal/TransformationAlgorithmRegister.h>
 #include "../util/event/EventObserver.h"
+#include <iostream>
 
 namespace uanc {
 namespace gui {

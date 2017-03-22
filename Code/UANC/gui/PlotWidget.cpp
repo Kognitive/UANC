@@ -14,25 +14,24 @@ PlotWidget::PlotWidget() : EventObserver({Events::Scroll}) {
 
 void PlotWidget::initialize() {
   // create the signal plot and the control plot
-  std::shared_ptr<PlotWidget> sharedThis = std::shared_ptr<PlotWidget>(this);
-  _signalPlot = std::shared_ptr<SignalPlot>(new SignalPlot(sharedThis));
-  _control = std::shared_ptr<Control>(new Control(sharedThis));
-  _chkBoxShowError = std::shared_ptr<QCheckBox>(new QCheckBox("Show Error"));
+  _signalPlot = new SignalPlot(this);
+  _control = new Control(this);
+  _chkBoxShowError = new QCheckBox("Show Error");
 
   QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
   timeTicker->setTimeFormat("%m:%s:%z");
   _signalPlot->xAxis->setTicker(timeTicker);
 
   // update plot when state of checkbox changes
-  connect(_chkBoxShowError.get(), SIGNAL(toggled(bool)), _signalPlot.get(), SLOT(hideError(bool)));
+  connect(_chkBoxShowError, SIGNAL(toggled(bool)), _signalPlot, SLOT(hideError(bool)));
 
   // set size policy, such that control has minimum height
   _control->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // create the layout
   _layout = new QVBoxLayout;
-  _layout->addWidget(_signalPlot.get());
-  _layout->addWidget(_control.get());
+  _layout->addWidget(_signalPlot);
+  _layout->addWidget(_control);
   setLayout(_layout);
 }
 
@@ -40,7 +39,7 @@ void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   // save pointer to signal in member
   _signal = signal;
   if (signal->inverted && !_chkShown)
-    _layout->addWidget(_chkBoxShowError.get());
+    _layout->addWidget(_chkBoxShowError);
 
   if (signal->inverted) {
     _signal = signal->inverted;

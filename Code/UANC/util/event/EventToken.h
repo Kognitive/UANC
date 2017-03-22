@@ -37,6 +37,12 @@ class EventToken {
    */
   void trigger(Events event, EventContainer data);
 
+  /** \brief Dereference from EventObserver.
+   *
+   * This destructor baically dereferences from the event observer.
+   */
+  ~EventToken();
+
  private:
 
   /** \brief Current Index.

@@ -12,6 +12,7 @@
 #include <QtWidgets/QToolBar>
 #include <Code/UANC/amv/signal/algorithm/IdentityTransformationAlgorithm.h>
 #include <Code/UANC/amv/signal/TransformationAlgorithmRegister.h>
+#include <iostream>
 
 namespace uanc {
 namespace gui {
@@ -29,7 +30,7 @@ class SignalViewWidget : public QWidget, public EventObserver {
    * @param hasError True, if it has error.
    */
   SignalViewWidget(int id, bool hasError = true) : EventObserver({Events::ChangeView}), _error(hasError) {
-
+    _id = id;
   }
 
 
@@ -77,21 +78,21 @@ class SignalViewWidget : public QWidget, public EventObserver {
 
     // reove widget
     this->layout->removeWidget(this->widget);
-    this->widget->hide();
+    delete this->widget;
 
     // new chosen cmbIndex is the new currentSelected Index value
     currentSelected = cmbIndex;
 
     // initialize using the identity transformation
-    this->registeredViews->at(currentSelected)->process(this->originalModel);
+    auto clonedOne = this->registeredViews->at(currentSelected)->clone();
+    clonedOne->process(this->originalModel);
 
     // add the view from the algorithm to the layout
-    this->widget = this->registeredViews->at(currentSelected)->getView()->getWidget();
+    this->widget = clonedOne->getView()->getWidget();
     this->layout->addWidget(this->widget);
-    this->widget->show();
 
     // finally fill in the data
-    registeredViews->at(currentSelected)->fillView();
+    clonedOne->fillView();
   }
 
  private:

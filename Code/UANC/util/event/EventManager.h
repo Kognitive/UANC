@@ -8,7 +8,7 @@
 
 #include <memory>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include "EventToken.h"
 #include "Events.h"
 #include "EventObserver.h"
@@ -55,8 +55,9 @@ class EventManager {
    */
   static std::shared_ptr<EventManager> _instance;
 
-  std::unique_ptr<std::map<Events, std::vector<int> *>> _eventMapping;
-  std::unique_ptr<std::map<int, EventObserver *>> _idMapping;
+  std::unique_ptr<std::unordered_map<Events, std::vector<int>*>> _eventMapping;
+  std::unique_ptr<std::unordered_map<int, std::vector<Events>*>> _idEventMapping;
+  std::unique_ptr<std::unordered_map<int, EventObserver*>> _idMapping;
 
   // init counter for id to zero
   int _idCounter = 0;
@@ -89,6 +90,13 @@ class EventManager {
    * @param token The token to register.
    */
   void subscribe(Events event, EventToken *token);
+
+  /** \brief Unregister token from the event manager.
+   *
+   * This method takes a token and degisters it from the event manager.
+   * @param token The token to remove.
+   */
+  void unregister(EventToken* token);
 };
 }
 }
