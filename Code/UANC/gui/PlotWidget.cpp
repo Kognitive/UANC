@@ -3,6 +3,8 @@
 //
 
 #include <Code/UANC/amv/InvertedModel.h>
+#include <Code/UANC/util/DialogUtil.h>
+#include <Code/UANC/util/SignalFileActor.h>
 #include "PlotWidget.h"
 
 namespace uanc {
@@ -18,12 +20,18 @@ void PlotWidget::initialize() {
   _control = new Control(this);
   _chkBoxShowError = new QCheckBox("Show Error");
 
+  // create the save button
+  _btnSaveSignal = new QPushButton("Save");
+
   QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
   timeTicker->setTimeFormat("%m:%s:%z");
   _signalPlot->xAxis->setTicker(timeTicker);
 
   // update plot when state of checkbox changes
   connect(_chkBoxShowError, SIGNAL(toggled(bool)), _signalPlot, SLOT(hideError(bool)));
+
+  // save Signal when button is pressed
+  connect(_btnSaveSignal, SIGNAL(pressed()), this, SLOT(saveSignal()));
 
   // set size policy, such that control has minimum height
   _control->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
@@ -38,8 +46,15 @@ void PlotWidget::initialize() {
 void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   // save pointer to signal in member
   _signal = signal;
-  if (signal->inverted && !_chkShown)
-    _layout->addWidget(_chkBoxShowError);
+  if (signal->inverted && !_chkShown) {
+    QHBoxLayout *hLayout = new QHBoxLayout;
+    hLayout->addWidget(_chkBoxShowError);
+    hLayout->addWidget(_btnSaveSignal);
+    QWidget *widget = new QWidget;
+    widget->setLayout(hLayout);
+    widget->setFixedHeight(40);
+    _layout->addWidget(widget);
+  }
 
   if (signal->inverted) {
     _signal = signal->inverted;
@@ -120,6 +135,24 @@ void PlotWidget::triggerConnectedWidgets(QCPRange range) {
   container.add("lower", std::to_string(range.lower));
   container.add("upper", std::to_string(range.upper));
   _token->trigger(Events::Scroll, container);
+}
+
+
+void PlotWidget::saveSignal() {
+  // get path to an saveable file
+  util::DialogUtil dialogUtil(this);
+  auto path = dialogUtil.chooseSavePath();
+
+  // if a path is available
+  if (!path.empty()) {
+    // simply load the data
+    util::SignalFileActor fileActor(path);
+
+    auto invertedSignal = std::shared_ptr<uanc::amv::InvertedModel>(new uanc::amv::InvertedModel());
+    invertedSignal->left_channel = _signal->left_channel;
+    invertedSignal->right_channel = _signal->right_channel;
+    fileActor.saveData(invertedSignal);
+  }
 }
 
 }
