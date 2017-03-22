@@ -34,11 +34,11 @@ void MainWidget::setupGUI() {
   // create the layout. Therefore create the apply button
   // and the corresponding combobox displaying the algorithms
   QVBoxLayout *layout = new QVBoxLayout;
-  this->_buttonApply = std::unique_ptr<QPushButton>(new QPushButton("Apply"));
-  this->_cmbAlgorithm = std::unique_ptr<QComboBox>(new QComboBox());
+  this->_buttonApply = new QPushButton("Apply");
+  this->_cmbAlgorithm = new QComboBox();
 
   // connect the handler to the button
-  connect(this->_buttonApply.get(), SIGNAL (clicked()), this, SLOT (applyClicked()));
+  connect(this->_buttonApply, SIGNAL (clicked()), this, SLOT (applyClicked()));
 
   // register algorithms and add them to the combobox
   this->_algorithmList = uanc::amv::anc::ANCAlgorithmRegister::getAlgorithms();
@@ -49,35 +49,35 @@ void MainWidget::setupGUI() {
   QHBoxLayout *hlayout = new QHBoxLayout;
 
   // add subwidgets and set the correct size policies
-  this->_buttonApply.get()->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
-  hlayout->addWidget(this->_cmbAlgorithm.get());
-  hlayout->addWidget(this->_buttonApply.get());
+  this->_buttonApply->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+  hlayout->addWidget(this->_cmbAlgorithm);
+  hlayout->addWidget(this->_buttonApply);
 
   // set the correct layout options
   hbar->setLayout(hlayout);
   hbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // construct the complete layout
-  this->_tabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
-  this->_tabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+  this->_tabWidget = new QTabWidget();
+  this->_tabWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
   this->_tabWidget->setTabsClosable(true);
-  connect(this->_tabWidget.get(), SIGNAL(tabCloseRequested(int)), this, SLOT(waveClosed(int)));
+  connect(this->_tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(waveClosed(int)));
 
   // construct the complete layout
-  this->_detailTabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
-  this->_detailTabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+  this->_detailTabWidget = new QTabWidget();
+  this->_detailTabWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
   this->_detailTabWidget->setTabsClosable(true);
-  connect(this->_detailTabWidget.get(),
+  connect(this->_detailTabWidget,
           SIGNAL(tabCloseRequested(int)),
           this,
           SLOT(algorithmClosed(int)));
 
   // add new algorithm for a chosen detailTabWidget
-  connect(this->_tabWidget.get(), SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
+  connect(this->_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
 
-  layout->addWidget(this->_tabWidget.get());
+  layout->addWidget(this->_tabWidget);
   layout->addWidget(hbar);
-  layout->addWidget(this->_detailTabWidget.get());
+  layout->addWidget(this->_detailTabWidget);
 
   this->setLayout(layout);
   this->show();

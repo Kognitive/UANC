@@ -37,12 +37,6 @@ class EventToken {
    */
   void trigger(Events event, EventContainer data);
 
-  /** \brief Dereference from EventObserver.
-   *
-   * This destructor baically dereferences from the event observer.
-   */
-  ~EventToken();
-
  private:
 
   /** \brief Current Index.
@@ -79,6 +73,9 @@ class EventToken {
    * @param events The events to subscribe to.
    */
   void subscribe(std::vector<Events> events);
+
+  /** Destruct Event Token. */
+  void destruct();
 };
 }
 }

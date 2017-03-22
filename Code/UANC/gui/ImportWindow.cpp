@@ -42,30 +42,27 @@ void ImportWindow::setupGUI() {
   sizePolicy.setVerticalStretch(0);
   sizePolicy.setHeightForWidth(this->sizePolicy().hasHeightForWidth());
   this->setSizePolicy(sizePolicy);
-  centralWidget = std::shared_ptr<QWidget>(new QWidget(this));
+  centralWidget = new QWidget(this);
   centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-  mainWidgetVerticalLayout = std::shared_ptr<QVBoxLayout>(
-      new QVBoxLayout(&*centralWidget));
+  mainWidgetVerticalLayout = new QVBoxLayout(&*centralWidget);
   mainWidgetVerticalLayout->setSpacing(6);
   mainWidgetVerticalLayout->setContentsMargins(11, 11, 11, 11);
   mainWidgetVerticalLayout->setObjectName(
       QString::fromUtf8("mainWidgetVerticalLayout"));
-  filesGroupBox = std::shared_ptr<QGroupBox>(new QGroupBox(&*centralWidget));
+  filesGroupBox = new QGroupBox(&*centralWidget);
   filesGroupBox->setObjectName(QString::fromUtf8("filesGroupBox"));
-  mainWidgetGroupLayout = std::shared_ptr<QVBoxLayout>(
-      new QVBoxLayout(&*filesGroupBox));
+  mainWidgetGroupLayout = new QVBoxLayout(&*filesGroupBox);
   mainWidgetGroupLayout->setSpacing(6);
   mainWidgetGroupLayout->setContentsMargins(11, 11, 11, 11);
   mainWidgetGroupLayout->setObjectName(
       QString::fromUtf8("mainWidgetGroupLayout"));
-  filesMainVerticalLayout = std::shared_ptr<QVBoxLayout>(new QVBoxLayout());
+  filesMainVerticalLayout = new QVBoxLayout();
   filesMainVerticalLayout->setSpacing(6);
   filesMainVerticalLayout->setObjectName(
       QString::fromUtf8("filesMainVerticalLayout"));
 
   //Button for adding new files
-  addSelectedFilesButton = std::shared_ptr<QPushButton>(
-      new QPushButton(&*filesGroupBox));
+  addSelectedFilesButton = new QPushButton(&*filesGroupBox);
   addSelectedFilesButton->setObjectName(
       QString::fromUtf8("addSelectedFilesButton"));
   addSelectedFilesButton->setToolTip(
@@ -79,21 +76,19 @@ void ImportWindow::setupGUI() {
           SLOT(selectFilesFromFS()));
 
   //Layout for the list of files to import
-  filesInnerVertivalLayout = std::shared_ptr<QVBoxLayout>(new QVBoxLayout());
+  filesInnerVertivalLayout = new QVBoxLayout();
   filesInnerVertivalLayout->setSpacing(6);
   filesInnerVertivalLayout->setObjectName(
       QString::fromUtf8("filesInnerVertivalLayout"));
-  selectedFilesScrollArea = std::shared_ptr<QScrollArea>(
-      new QScrollArea(&*filesGroupBox));
+  selectedFilesScrollArea = new QScrollArea(&*filesGroupBox);
   selectedFilesScrollArea->setObjectName(
       QString::fromUtf8("selectedFilesScrollArea"));
   selectedFilesScrollArea->setWidgetResizable(true);
-  scrollAreaWidgetContents = std::shared_ptr<QWidget>(new QWidget());
+  scrollAreaWidgetContents = new QWidget();
   scrollAreaWidgetContents->setObjectName(
       QString::fromUtf8("scrollAreaWidgetContents"));
   scrollAreaWidgetContents->setGeometry(QRect(0, 0, 299, 101));
-  scrollAreaVerticalLayout = std::shared_ptr<QVBoxLayout>(
-      new QVBoxLayout(&*scrollAreaWidgetContents));
+  scrollAreaVerticalLayout = new QVBoxLayout(&*scrollAreaWidgetContents);
   scrollAreaVerticalLayout->setSpacing(6);
   scrollAreaVerticalLayout->setContentsMargins(11, 11, 11, 11);
   scrollAreaVerticalLayout->setObjectName(
@@ -109,17 +104,14 @@ void ImportWindow::setupGUI() {
   mainWidgetVerticalLayout->addWidget(&*filesGroupBox);
 
   //Set comboBox for recently used files
-  RecentlyUsedGroupBox = std::shared_ptr<QGroupBox>(
-      new QGroupBox(&*centralWidget));
+  RecentlyUsedGroupBox = new QGroupBox(&*centralWidget);
   RecentlyUsedGroupBox->setObjectName(
       QString::fromUtf8("RecentlyUsedGroupBox"));
-  verticalLayout_10 = std::shared_ptr<QVBoxLayout>(
-      new QVBoxLayout(&*RecentlyUsedGroupBox));
+  verticalLayout_10 = new QVBoxLayout(&*RecentlyUsedGroupBox);
   verticalLayout_10->setSpacing(6);
   verticalLayout_10->setContentsMargins(11, 11, 11, 11);
   verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
-  recentlyUsedCombo = std::shared_ptr<QComboBox>(
-      new QComboBox(&*RecentlyUsedGroupBox));
+  recentlyUsedCombo = new QComboBox(&*RecentlyUsedGroupBox);
   recentlyUsedCombo->setInsertPolicy(QComboBox::InsertAtTop);
   recentlyUsedCombo->setMaxCount(RECENTLY_USED_MAX_LENGTH);
   loadRecentlyUsedSignals();
@@ -130,15 +122,13 @@ void ImportWindow::setupGUI() {
 
   mainWidgetVerticalLayout->addWidget(&*RecentlyUsedGroupBox);
 
-  importGroupBox = std::shared_ptr<QGroupBox>(new QGroupBox(&*centralWidget));
+  importGroupBox = new QGroupBox(&*centralWidget);
   importGroupBox->setObjectName(QString::fromUtf8("importGroupBox"));
-  verticalLayout_7 = std::shared_ptr<QVBoxLayout>(
-      new QVBoxLayout(&*importGroupBox));
+  verticalLayout_7 = new QVBoxLayout(&*importGroupBox);
   verticalLayout_7->setSpacing(6);
   verticalLayout_7->setContentsMargins(11, 11, 11, 11);
   verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-  normalizeCheckBox = std::shared_ptr<QCheckBox>(
-      new QCheckBox(&*importGroupBox));
+  normalizeCheckBox = new QCheckBox(&*importGroupBox);
   normalizeCheckBox->setObjectName(QString::fromUtf8("normalizeCheckBox"));
 
   verticalLayout_7->addWidget(&*normalizeCheckBox);
@@ -146,17 +136,15 @@ void ImportWindow::setupGUI() {
   mainWidgetVerticalLayout->addWidget(&*importGroupBox);
 
   //Layout for Cancel and Import button
-  actionsGroupBox = std::shared_ptr<QGroupBox>(new QGroupBox(&*centralWidget));
+  actionsGroupBox = new QGroupBox(&*centralWidget);
   actionsGroupBox->setObjectName(QString::fromUtf8("actionsGroupBox"));
-  actonLayout = std::shared_ptr<QHBoxLayout>(
-      new QHBoxLayout(&*actionsGroupBox));
+  actonLayout = new QHBoxLayout(&*actionsGroupBox);
   actonLayout->setSpacing(6);
   actonLayout->setContentsMargins(11, 11, 11, 11);
   actonLayout->setObjectName(QString::fromUtf8("actonLayout"));
 
   //ImportButton
-  importButton = std::shared_ptr<QPushButton>(
-      new QPushButton(&*actionsGroupBox));
+  importButton = new QPushButton(&*actionsGroupBox);
   importButton->setObjectName(QString::fromUtf8("importButton"));
   importButton->setEnabled(false);
   importButton->setToolTip(QApplication::translate("MainWindow", "Import", 0));
@@ -168,8 +156,7 @@ void ImportWindow::setupGUI() {
   connect(&*importButton, SIGNAL(clicked()), this, SLOT(importFiles()));
 
   //Cancel Button
-  cancelButton = std::shared_ptr<QPushButton>(
-      new QPushButton(&*actionsGroupBox));
+  cancelButton = new QPushButton(&*actionsGroupBox);
   cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
   cancelButton->setToolTip(QApplication::translate("MainWindow", "Cancel", 0));
   cancelButton->setStatusTip(
@@ -182,7 +169,7 @@ void ImportWindow::setupGUI() {
   mainWidgetVerticalLayout->addWidget(&*actionsGroupBox);
 
   this->setCentralWidget(&*centralWidget);
-  statusBar = std::shared_ptr<QStatusBar>(new QStatusBar(this));
+  statusBar = new QStatusBar(this);
   statusBar->setObjectName(QString::fromUtf8("statusBar"));
   this->setStatusBar(&*statusBar);
 

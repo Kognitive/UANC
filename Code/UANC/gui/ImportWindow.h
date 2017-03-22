@@ -122,27 +122,27 @@ signals:
   std::shared_ptr<QSignalMapper> signalMapper;
 
   //Layout elements
-  std::shared_ptr<QWidget> centralWidget;
-  std::shared_ptr<QVBoxLayout> mainWidgetVerticalLayout;
-  std::shared_ptr<QGroupBox> filesGroupBox;
-  std::shared_ptr<QVBoxLayout> mainWidgetGroupLayout;
-  std::shared_ptr<QVBoxLayout> filesMainVerticalLayout;
-  std::shared_ptr<QPushButton> addSelectedFilesButton;
-  std::shared_ptr<QVBoxLayout> filesInnerVertivalLayout;
-  std::shared_ptr<QScrollArea> selectedFilesScrollArea;
-  std::shared_ptr<QWidget> scrollAreaWidgetContents;
-  std::shared_ptr<QVBoxLayout> scrollAreaVerticalLayout;
-  std::shared_ptr<QGroupBox> RecentlyUsedGroupBox;
-  std::shared_ptr<QVBoxLayout> verticalLayout_10;
-  std::shared_ptr<QComboBox> recentlyUsedCombo;
-  std::shared_ptr<QGroupBox> importGroupBox;
-  std::shared_ptr<QVBoxLayout> verticalLayout_7;
-  std::shared_ptr<QCheckBox> normalizeCheckBox;
-  std::shared_ptr<QGroupBox> actionsGroupBox;
-  std::shared_ptr<QHBoxLayout> actonLayout;
-  std::shared_ptr<QPushButton> importButton;
-  std::shared_ptr<QPushButton> cancelButton;
-  std::shared_ptr<QStatusBar> statusBar;
+  QWidget* centralWidget;
+  QVBoxLayout* mainWidgetVerticalLayout;
+  QGroupBox* filesGroupBox;
+  QVBoxLayout* mainWidgetGroupLayout;
+  QVBoxLayout* filesMainVerticalLayout;
+  QPushButton* addSelectedFilesButton;
+  QVBoxLayout* filesInnerVertivalLayout;
+  QScrollArea* selectedFilesScrollArea;
+  QWidget* scrollAreaWidgetContents;
+  QVBoxLayout* scrollAreaVerticalLayout;
+  QGroupBox* RecentlyUsedGroupBox;
+  QVBoxLayout* verticalLayout_10;
+  QComboBox* recentlyUsedCombo;
+  QGroupBox* importGroupBox;
+  QVBoxLayout* verticalLayout_7;
+  QCheckBox* normalizeCheckBox;
+  QGroupBox* actionsGroupBox;
+  QHBoxLayout* actonLayout;
+  QPushButton* importButton;
+  QPushButton* cancelButton;
+  QStatusBar* statusBar;
 
   //The storage for the recently used files full path
   QStringList recentlyUsedFiles;

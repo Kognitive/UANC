@@ -18,5 +18,7 @@ int main(int argc, char **argv) {
   mainwindow->resize(1000, 800);
   mainwindow->show();
 
-  return a.exec();
+  auto code = a.exec();
+
+  return code;
 }

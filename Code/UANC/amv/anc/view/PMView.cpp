@@ -22,26 +22,21 @@ namespace view {
  * @return The created widget.
  */
 QWidget *PMView::produceWidget() {
-  if (this->_splitter == nullptr) {
-    // create the widgets for the view
-    this->_signalViewWidget = std::unique_ptr<uanc::gui::SignalViewWidget>(new uanc::gui::SignalViewWidget(uanc::util::GlobalSettings::get()->currentIndex));
-    this->_treeview = std::unique_ptr<uanc::gui::PMWidget>(new uanc::gui::PMWidget());
 
-    // set horizontal layout (splitter)
-    this->_splitter =  new QSplitter;
-    this->_splitter->setOrientation(Qt::Horizontal);
-    this->_splitter->addWidget(_signalViewWidget.get());
-    this->_splitter->setStretchFactor(0,1);
-    this->_splitter->addWidget(_treeview.get());
-    this->_splitter->setStretchFactor(0,1);
+  // create the widgets for the view
+  this->_signalViewWidget = std::unique_ptr<uanc::gui::SignalViewWidget>(new uanc::gui::SignalViewWidget(uanc::util::GlobalSettings::get()->currentIndex));
+  this->_treeview = std::unique_ptr<uanc::gui::PMWidget>(new uanc::gui::PMWidget());
 
-
-    this->_chkBoxShowMeasure = std::shared_ptr<QCheckBox>(new QCheckBox("Show Performance"));
-
-  }
+  // set horizontal layout (splitter)
+  this->_layout =  new QHBoxLayout;
+  this->_layout->addWidget(_signalViewWidget.get());
+  this->_layout->addWidget(_treeview.get());
+  _treeview->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+  auto widget = new QWidget();
+  widget->setLayout(_layout);
 
   // return the created pointer
-  return this->_splitter;
+  return widget;
 }
 
 /** \brief This method applies the model data.
@@ -55,6 +50,7 @@ void PMView::setData(std::shared_ptr<model::ANCModel> signalData) {
   this->_signalViewWidget->setSignalModel(signalData);
   this->_treeview->setData(signalData->defaultRegister.getCustomMeasurements());
 }
+
 }
 }
 }

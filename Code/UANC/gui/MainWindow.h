@@ -50,7 +50,7 @@ class MainWindow : public QMainWindow {
    * This field holds the main widget of the main widget. In detail
    * that means it gets used as the central widget later.
    */
-  std::unique_ptr<MainWidget> mainWidget;
+  MainWidget* mainWidget;
 
   /** \brief Represents the load action.
    *
@@ -67,7 +67,7 @@ class MainWindow : public QMainWindow {
   /** \brief Represents the file menu itself.
    *
    * Represents the file menu itself. */
-  std::unique_ptr<QMenu> fileMenu;
+  QMenu* fileMenu;
 
   /** \brief Private constructor to deny creation outside of the singleton pattern.
    *
@@ -102,7 +102,6 @@ class MainWindow : public QMainWindow {
 
   //The Pointer to the import window.
   std::shared_ptr<ImportWindow> importWindow;
-
 
 
   /** These simply are the actions taken when you click inside of the menu */

@@ -31,6 +31,14 @@ class EventManager {
   friend class EventToken;
   friend class EventObserver;
 
+ public:
+
+  /** \brief Basic destructor.
+   *
+   * This deconstructore destroys the registered instance.
+   */
+  ~EventManager();
+
  private:
 
   /** \brief Basic constructor.
@@ -62,6 +70,9 @@ class EventManager {
   // init counter for id to zero
   int _idCounter = 0;
 
+  /** True, iff the event manger was already destroyed. */
+  bool _destroyed = false;
+
   /** \brief Obtain the reference to the EventManager.
    *
    * Uses a classical singleton pattern to give back exactly the same copy of the event manager.
@@ -79,7 +90,7 @@ class EventManager {
    * @param observer The observer to listen to
    * @return The unique event publisher neccessary to publish messages.
    */
-  std::unique_ptr<EventToken> listen(EventObserver *observer);
+  EventToken* listen(EventObserver *observer);
 
   /** \brief Subsrcibe to an event.
    *
@@ -96,7 +107,7 @@ class EventManager {
    * This method takes a token and degisters it from the event manager.
    * @param token The token to remove.
    */
-  void unregister(EventToken* token);
+  void unregister(int tokenid);
 };
 }
 }

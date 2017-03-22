@@ -20,12 +20,9 @@ EventToken::EventToken(int index) {
   this->_index = index;
 }
 
-/** \brief Dereference from EventObserver.
- *
- * This destructor baically dereferences from the event observer.
- */
-EventToken::~EventToken() {
-  EventManager::get()->unregister(this);
+/** Destruct Event Token. */
+void EventToken::destruct() {
+  EventManager::get()->unregister(this->_index);
 }
 
 /** \brief Creates an event.

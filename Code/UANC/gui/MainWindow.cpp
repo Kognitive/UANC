@@ -46,7 +46,7 @@ MainWindow::MainWindow() {
 void MainWindow::setupGUI() {
   auto widget = new MainWidget();
   setCentralWidget(widget);
-  this->mainWidget = std::unique_ptr<MainWidget>(widget);
+  this->mainWidget = widget;
 
   // basically create the top menu
   this->makeActions();
@@ -81,7 +81,7 @@ void MainWindow::makeActions() {
  */
 void MainWindow::makeMenu() {
 
-  fileMenu = std::unique_ptr<QMenu>(menuBar()->addMenu(tr("&File")));
+  fileMenu = menuBar()->addMenu(tr("&File"));
   fileMenu->addAction(fileOpenAction.get());
   fileMenu->addAction(fileSaveAction.get());
 }
