@@ -10,7 +10,6 @@
 #include <Code/UANC/amv/signal/view/HeatView.h>
 #include "Code/libs/aquila/transform/Spectrogram.h"
 #include "Code/libs/aquila/source/FramesCollection.h"
-#include <Code/UANC/amv/signal/view/SpectrogramView.h>
 #include "SignalTransformationAlgorithm.h"
 
 namespace uanc {

@@ -27,7 +27,6 @@ find_package(Qt5Gui REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Test REQUIRED)
-find_package(Qt5DataVisualization REQUIRED)
 find_package(Qt5Network REQUIRED)
 
 #Find the doxygen library
