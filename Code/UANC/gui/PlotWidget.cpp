@@ -80,8 +80,9 @@ void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   }
 
   _signalPlot->setData(newDataMain);
-  if (signal->inverted)
+  if (signal->inverted) {
     _signalPlot->setError(newError);
+  }
   _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude);
 
   _signalPlot->replot();
