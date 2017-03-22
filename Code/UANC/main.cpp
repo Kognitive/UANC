@@ -1,7 +1,11 @@
 #include <iostream>
 #include <Code/UANC/gui/MainWindow.h>
+#include <Code/UANC/util/GlobalSettings.h>
 
 using namespace uanc::gui;
+
+// globally define settings
+GlobalSettings* GlobalSettings::globalSettings = nullptr;
 
 int main(int argc, char **argv) {
 

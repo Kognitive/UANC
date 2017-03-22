@@ -17,11 +17,14 @@ namespace event {
  */
 enum Events : uint8_t {
 
-  /** \brief Gets fired when a view gets scrolled.
-   *
-   * Event describes when a widget gets scrolled.
-   */
-      Scroll
+      /** \brief Gets fired when a view gets scrolled.
+       *
+       * Event describes when a widget gets scrolled.
+       */
+      Scroll,
+
+  /** Represents the change of a view. */
+      ChangeView
 };
 }
 }

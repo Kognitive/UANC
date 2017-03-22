@@ -5,6 +5,7 @@
 #include <Code/UANC/gui/PlotWidget.h>
 #include <Code/UANC/gui/PMWidget.h>
 #include "PMView.h"
+#include "Code/UANC/util/GlobalSettings.h"
 
 namespace uanc {
 namespace amv {
@@ -23,7 +24,7 @@ namespace view {
 QWidget *PMView::produceWidget() {
   if (this->_splitter == nullptr) {
     // create the widgets for the view
-    this->_signalViewWidget = std::unique_ptr<uanc::gui::SignalViewWidget>(new uanc::gui::SignalViewWidget(true));
+    this->_signalViewWidget = std::unique_ptr<uanc::gui::SignalViewWidget>(new uanc::gui::SignalViewWidget(uanc::util::GlobalSettings::get()->currentIndex));
     this->_treeview = std::unique_ptr<uanc::gui::PMWidget>(new uanc::gui::PMWidget());
 
     // set horizontal layout (splitter)

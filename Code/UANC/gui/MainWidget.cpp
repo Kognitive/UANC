@@ -8,8 +8,10 @@
 #include <Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h>
 #include <Code/UANC/amv/anc/ANCAlgorithmRegister.h>
 #include <iostream>
+#include <Code/UANC/util/GlobalSettings.h>
 #include "MainWidget.h"
 #include "SignalViewWidget.h"
+#include "GlobalSettingsBar.h"
 
 namespace uanc {
 namespace gui {
@@ -139,6 +141,7 @@ void MainWidget::tabSelected() {
 
   // get the list of algorithms
   auto index = this->_tabWidget->currentIndex();
+  uanc::util::GlobalSettings::get()->currentIndex = index;
 
   // get the mapping list and push back the algorithm save afterwards
   auto vec = this->_waveAlgorithMapping.at(index);
@@ -160,9 +163,6 @@ void MainWidget::tabSelected() {
  */
 void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
 
-  auto widget = new SignalViewWidget();
-  widget->setSignalModel(signalSource);
-
   // Simply add the tab and block the rest
   tabInRun = true;
   std::string text = "Standard";
@@ -171,7 +171,22 @@ void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
     text = uanc::util::Path::getFileName(castedObj->getFilename());
   }
 
+  auto vBoxLayout = new QVBoxLayout();
+  auto widget = new QWidget();
+  widget->setLayout(vBoxLayout);
   auto index = this->_tabWidget->addTab(widget, QString::fromStdString(text));
+
+  // add GlobalSettingsBar
+  auto globalSettingsBar = new GlobalSettingsBar(index);
+  vBoxLayout->addWidget(globalSettingsBar);
+  globalSettingsBar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+
+  // create new widget with appropriate bar.
+  auto signalWidget = new SignalViewWidget(index);
+  signalWidget->setSignalModel(signalSource);
+  vBoxLayout->addWidget(signalWidget);
+
+  // set tabinRun to false
   tabInRun = false;
 
   auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>();
