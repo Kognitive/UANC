@@ -61,7 +61,7 @@ if(Qt5Test_FOUND)
 	foreach(testSrc ${TEST_FILES})
 		#Get the filename for every testfile in this directory and generate the target with the same name.
 		get_filename_component(testName ${testSrc} NAME_WE)
-		add_executable(${testName} ${testSrc} ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES})
+		add_executable(${testName} ${testSrc} ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES} Code/UANC/util/Tests/EpsilonTests.cpp Code/UANC/util/Tests/EpsilonTests.h)
 		target_link_libraries(${testName} ${Boost_LIBRARIES})
 		#Move the testbins to Bin/testbin
 		set_target_properties(${testName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin)

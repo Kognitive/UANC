@@ -20,7 +20,7 @@ namespace gui
 
 using namespace uanc::amv;
 
-class SignalViewWidget : public QWidget, public EventObserver
+class SignalViewWidget : public QWidget
 {
 Q_OBJECT
 
