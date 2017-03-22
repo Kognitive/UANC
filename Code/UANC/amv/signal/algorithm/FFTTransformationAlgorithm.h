@@ -67,6 +67,7 @@ class FFTTransformationAlgorithm :
     }
     this->getModel()->fftSignal->left_channel = std::shared_ptr<
         Aquila::SignalSource>(new Aquila::SignalSource(aboluteSpectruml));
+    this->getModel()->fftSignal->left_channel->setSampleFrequency(in->left_channel->getSampleFrequency());
 
     // ------------------------- Right Channel Normal --------------------------------
 
@@ -91,6 +92,7 @@ class FFTTransformationAlgorithm :
     }
     this->getModel()->fftSignal->right_channel = std::shared_ptr<
         Aquila::SignalSource>(new Aquila::SignalSource(aboluteSpectrumr));
+    this->getModel()->fftSignal->right_channel->setSampleFrequency(in->right_channel->getSampleFrequency());
 
     //The signal in the signal model is unchanged.
     this->getModel()->right_channel = in->left_channel;

@@ -20,6 +20,14 @@ EventObserver::EventObserver(std::initializer_list<Events> events) {
   this->_token->subscribe(events);
 }
 
+/** \brief Deconstructor
+  *
+  * This deconstructor can be used to deregister the token.
+  */
+EventObserver::~EventObserver() {
+  this->_token->destruct();
+  delete this->_token;
+}
 }
 }
 }

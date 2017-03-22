@@ -3,6 +3,7 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
+#include <iostream>
 #include "EventManager.h"
 
 namespace uanc {
@@ -18,14 +19,30 @@ std::shared_ptr<EventManager> EventManager::_instance;
 EventManager::EventManager() {
 
   // Create the two mappings.
-  _eventMapping = std::unique_ptr<std::map<Events, std::vector<int> *>>(
-      new std::map<Events, std::vector<int> *>()
+  _eventMapping = std::unique_ptr<std::unordered_map<Events, std::vector<int> *>>(
+      new std::unordered_map<Events, std::vector<int> *>()
   );
 
   // Creaate empty id mapping
-  _idMapping = std::unique_ptr<std::map<int, EventObserver *>>(
-      new std::map<int, EventObserver *>()
+  _idMapping = std::unique_ptr<std::unordered_map<int, EventObserver *>>(
+      new std::unordered_map<int, EventObserver *>()
   );
+
+  // create empty start mapping
+  _idEventMapping = std::unique_ptr<std::unordered_map<int, std::vector<Events> *>>(
+      new std::unordered_map<int, std::vector<Events > *>()
+  );
+}
+
+/** \brief Basic destructor.
+ *
+ * This deconstructore destroys the registered instance.
+ */
+EventManager::~EventManager() {
+  _destroyed = true;
+  _idEventMapping->clear();
+  _idMapping->clear();
+  _eventMapping->clear();
 }
 
 /** \brief Obtain the reference to the EventManager.
@@ -36,9 +53,8 @@ EventManager::EventManager() {
  * @return The shared pointer containing the event manager
  */
 std::shared_ptr<EventManager> EventManager::get() {
-  if (!_instance) {
+  if (!_instance)
     _instance = std::shared_ptr<EventManager>(new EventManager());
-  }
 
   return _instance;
 }
@@ -51,7 +67,7 @@ std::shared_ptr<EventManager> EventManager::get() {
  * @param observer The observer to listen to
  * @return The unique event publisher neccessary to publish messages.
  */
-std::unique_ptr<EventToken> EventManager::listen(EventObserver *observer) {
+EventToken* EventManager::listen(EventObserver *observer) {
 
   // Basically increase the id counter by one
   this->_idCounter++;
@@ -59,11 +75,15 @@ std::unique_ptr<EventToken> EventManager::listen(EventObserver *observer) {
   // First of all add the observer to the internal map
   this->_idMapping->insert(std::make_pair(_idCounter, observer));
 
+  // Now create new vector and add ti idEventMapping
+  auto eventVector = new std::vector<Events>();
+  this->_idEventMapping->insert(std::make_pair(_idCounter, eventVector));
+
   // Now basically initialize a publisher and pass back
   auto publisher = EventToken::Create(_idCounter);
 
   // Pass back the result
-  return std::unique_ptr<EventToken>(publisher);
+  return publisher;
 }
 
 /** \brief Token calls this method to trigger an event.
@@ -110,6 +130,35 @@ void EventManager::subscribe(Events event, EventToken *token) {
 
   // now add the pointer
   pointer->push_back(token->_index);
+
+  // and add to event mapping
+  _idEventMapping->at(token->_index)->push_back(event);
+}
+
+/** \brief Unregister token from the event manager.
+  *
+  * This method takes a token and degisters it from the event manager.
+  * @param token The token to remove.
+  */
+void EventManager::unregister(int id) {
+  if (_destroyed) return;
+
+  auto eventList = _idEventMapping->at(id);
+
+  // iterate over all registered events and remove matching
+  // indices.
+  for (auto &event : *eventList) {
+    auto indexList = _eventMapping->at(event);
+    for (auto it = indexList->begin(); it < indexList->end(); ++it) {
+      if (*it == id) {
+        indexList->erase(it);
+      }
+    }
+  }
+
+  // remove from id mapping
+  _idMapping->erase(id);
+  _idEventMapping->erase(id);
 }
 
 }

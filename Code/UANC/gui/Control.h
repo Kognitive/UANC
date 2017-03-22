@@ -23,7 +23,7 @@ class Control : public QCustomPlot {
    *
    * @param parent this is the parent widget
    */
-  Control(std::shared_ptr<PlotWidget> parent);
+  Control(PlotWidget* parent);
 
   void setData(QCPGraphDataContainer *data, double maxDataValue, double minDataValue);
 
@@ -38,7 +38,7 @@ class Control : public QCustomPlot {
   void mouseMoveEvent(QMouseEvent *event) override;
 
  private:
-  std::shared_ptr<PlotWidget> _parent;
+  PlotWidget* _parent;
 
   /** \brief Holds the colors for the plots
    *
@@ -46,7 +46,7 @@ class Control : public QCustomPlot {
    */
   QColor _graphColor, _boxColor, _boxBoarderColor;
 
-  std::shared_ptr<QCPItemRect> _navigationBox;
+  QCPItemRect* _navigationBox;
 
   /**
    * \brief Holds the maximum and minimum amplitude of the current signal

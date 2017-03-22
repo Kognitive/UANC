@@ -73,6 +73,9 @@ class EventToken {
    * @param events The events to subscribe to.
    */
   void subscribe(std::vector<Events> events);
+
+  /** Destruct Event Token. */
+  void destruct();
 };
 }
 }

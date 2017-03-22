@@ -8,8 +8,10 @@
 #include <Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h>
 #include <Code/UANC/amv/anc/ANCAlgorithmRegister.h>
 #include <iostream>
+#include <Code/UANC/util/GlobalSettings.h>
 #include "MainWidget.h"
 #include "SignalViewWidget.h"
+#include "GlobalSettingsBar.h"
 
 namespace uanc {
 namespace gui {
@@ -32,11 +34,11 @@ void MainWidget::setupGUI() {
   // create the layout. Therefore create the apply button
   // and the corresponding combobox displaying the algorithms
   QVBoxLayout *layout = new QVBoxLayout;
-  this->_buttonApply = std::unique_ptr<QPushButton>(new QPushButton("Apply"));
-  this->_cmbAlgorithm = std::unique_ptr<QComboBox>(new QComboBox());
+  this->_buttonApply = new QPushButton("Apply");
+  this->_cmbAlgorithm = new QComboBox();
 
   // connect the handler to the button
-  connect(this->_buttonApply.get(), SIGNAL (clicked()), this, SLOT (applyClicked()));
+  connect(this->_buttonApply, SIGNAL (clicked()), this, SLOT (applyClicked()));
 
   // register algorithms and add them to the combobox
   this->_algorithmList = uanc::amv::anc::ANCAlgorithmRegister::getAlgorithms();
@@ -47,35 +49,35 @@ void MainWidget::setupGUI() {
   QHBoxLayout *hlayout = new QHBoxLayout;
 
   // add subwidgets and set the correct size policies
-  this->_buttonApply.get()->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
-  hlayout->addWidget(this->_cmbAlgorithm.get());
-  hlayout->addWidget(this->_buttonApply.get());
+  this->_buttonApply->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+  hlayout->addWidget(this->_cmbAlgorithm);
+  hlayout->addWidget(this->_buttonApply);
 
   // set the correct layout options
   hbar->setLayout(hlayout);
   hbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // construct the complete layout
-  this->_tabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
-  this->_tabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+  this->_tabWidget = new QTabWidget();
+  this->_tabWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
   this->_tabWidget->setTabsClosable(true);
-  connect(this->_tabWidget.get(), SIGNAL(tabCloseRequested(int)), this, SLOT(waveClosed(int)));
+  connect(this->_tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(waveClosed(int)));
 
   // construct the complete layout
-  this->_detailTabWidget = std::unique_ptr<QTabWidget>(new QTabWidget());
-  this->_detailTabWidget.get()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+  this->_detailTabWidget = new QTabWidget();
+  this->_detailTabWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
   this->_detailTabWidget->setTabsClosable(true);
-  connect(this->_detailTabWidget.get(),
+  connect(this->_detailTabWidget,
           SIGNAL(tabCloseRequested(int)),
           this,
           SLOT(algorithmClosed(int)));
 
   // add new algorithm for a chosen detailTabWidget
-  connect(this->_tabWidget.get(), SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
+  connect(this->_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
 
-  layout->addWidget(this->_tabWidget.get());
+  layout->addWidget(this->_tabWidget);
   layout->addWidget(hbar);
-  layout->addWidget(this->_detailTabWidget.get());
+  layout->addWidget(this->_detailTabWidget);
 
   this->setLayout(layout);
   this->show();
@@ -139,6 +141,7 @@ void MainWidget::tabSelected() {
 
   // get the list of algorithms
   auto index = this->_tabWidget->currentIndex();
+  uanc::util::GlobalSettings::get()->currentIndex = index;
 
   // get the mapping list and push back the algorithm save afterwards
   auto vec = this->_waveAlgorithMapping.at(index);
@@ -160,9 +163,6 @@ void MainWidget::tabSelected() {
  */
 void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
 
-  auto widget = new SignalViewWidget();
-  widget->setSignalModel(signalSource);
-
   // Simply add the tab and block the rest
   tabInRun = true;
   std::string text = "Standard";
@@ -171,7 +171,22 @@ void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
     text = uanc::util::Path::getFileName(castedObj->getFilename());
   }
 
+  auto vBoxLayout = new QVBoxLayout();
+  auto widget = new QWidget();
+  widget->setLayout(vBoxLayout);
   auto index = this->_tabWidget->addTab(widget, QString::fromStdString(text));
+
+  // add GlobalSettingsBar
+  auto globalSettingsBar = new GlobalSettingsBar(index);
+  vBoxLayout->addWidget(globalSettingsBar);
+  globalSettingsBar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+
+  // create new widget with appropriate bar.
+  auto signalWidget = new SignalViewWidget(index);
+  signalWidget->setSignalModel(signalSource);
+  vBoxLayout->addWidget(signalWidget);
+
+  // set tabinRun to false
   tabInRun = false;
 
   auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>();

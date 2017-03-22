@@ -7,7 +7,7 @@
 namespace uanc {
 namespace gui {
 
-Control::Control(std::shared_ptr<PlotWidget> parent) {
+Control::Control(PlotWidget* parent) {
   // save reference to parent widget
   _parent = parent;
 
@@ -27,7 +27,7 @@ Control::Control(std::shared_ptr<PlotWidget> parent) {
   this->yAxis->setVisible(false);
 
   // create navigation box
-  _navigationBox = std::shared_ptr<QCPItemRect>(new QCPItemRect(this));
+  _navigationBox = new QCPItemRect(this);
   _navigationBox->setPen(QPen(_boxBoarderColor));
   _navigationBox->setBrush(_boxColor);
   _maxSignalAmplitude = 5.0;

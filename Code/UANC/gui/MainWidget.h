@@ -52,19 +52,19 @@ class MainWidget : public QWidget {
    *
    * This basically holds the left button in the middle
    */
-  std::unique_ptr<QPushButton> _buttonApply;
+  QPushButton* _buttonApply;
 
   /** \brief Hold the bottom plot
    *
    * This basically holds the right button in the middle
    */
-  std::unique_ptr<QComboBox> _cmbAlgorithm;
+  QComboBox* _cmbAlgorithm;
 
   /** Represents a tab widget displayed in the top region. */
-  std::unique_ptr<QTabWidget> _tabWidget;
+  QTabWidget* _tabWidget;
 
   /** Represents a detailed tab widget. */
-  std::unique_ptr<QTabWidget> _detailTabWidget;
+  QTabWidget* _detailTabWidget;
 
   /** \brief Maps gets used to save algorithms
    *

@@ -8,7 +8,7 @@
 
 #include <memory>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include "EventToken.h"
 #include "Events.h"
 #include "EventObserver.h"
@@ -30,6 +30,14 @@ class EventManager {
   // Add the Event Publisher as friend.
   friend class EventToken;
   friend class EventObserver;
+
+ public:
+
+  /** \brief Basic destructor.
+   *
+   * This deconstructore destroys the registered instance.
+   */
+  ~EventManager();
 
  private:
 
@@ -55,11 +63,15 @@ class EventManager {
    */
   static std::shared_ptr<EventManager> _instance;
 
-  std::unique_ptr<std::map<Events, std::vector<int> *>> _eventMapping;
-  std::unique_ptr<std::map<int, EventObserver *>> _idMapping;
+  std::unique_ptr<std::unordered_map<Events, std::vector<int>*>> _eventMapping;
+  std::unique_ptr<std::unordered_map<int, std::vector<Events>*>> _idEventMapping;
+  std::unique_ptr<std::unordered_map<int, EventObserver*>> _idMapping;
 
   // init counter for id to zero
   int _idCounter = 0;
+
+  /** True, iff the event manger was already destroyed. */
+  bool _destroyed = false;
 
   /** \brief Obtain the reference to the EventManager.
    *
@@ -78,7 +90,7 @@ class EventManager {
    * @param observer The observer to listen to
    * @return The unique event publisher neccessary to publish messages.
    */
-  std::unique_ptr<EventToken> listen(EventObserver *observer);
+  EventToken* listen(EventObserver *observer);
 
   /** \brief Subsrcibe to an event.
    *
@@ -89,6 +101,13 @@ class EventManager {
    * @param token The token to register.
    */
   void subscribe(Events event, EventToken *token);
+
+  /** \brief Unregister token from the event manager.
+   *
+   * This method takes a token and degisters it from the event manager.
+   * @param token The token to remove.
+   */
+  void unregister(int tokenid);
 };
 }
 }

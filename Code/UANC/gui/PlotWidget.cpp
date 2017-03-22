@@ -3,6 +3,8 @@
 //
 
 #include <Code/UANC/amv/InvertedModel.h>
+#include <Code/UANC/util/DialogUtil.h>
+#include <Code/UANC/util/SignalFileActor.h>
 #include "PlotWidget.h"
 
 namespace uanc {
@@ -14,33 +16,45 @@ PlotWidget::PlotWidget() : EventObserver({Events::Scroll}) {
 
 void PlotWidget::initialize() {
   // create the signal plot and the control plot
-  std::shared_ptr<PlotWidget> sharedThis = std::shared_ptr<PlotWidget>(this);
-  _signalPlot = std::shared_ptr<SignalPlot>(new SignalPlot(sharedThis));
-  _control = std::shared_ptr<Control>(new Control(sharedThis));
-  _chkBoxShowError = std::shared_ptr<QCheckBox>(new QCheckBox("Show Error"));
+  _signalPlot = new SignalPlot(this);
+  _control = new Control(this);
+  _chkBoxShowError = new QCheckBox("Show Error");
+
+  // create the save button
+  _btnSaveSignal = new QPushButton("Save");
 
   QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
   timeTicker->setTimeFormat("%m:%s:%z");
   _signalPlot->xAxis->setTicker(timeTicker);
 
   // update plot when state of checkbox changes
-  connect(_chkBoxShowError.get(), SIGNAL(toggled(bool)), _signalPlot.get(), SLOT(hideError(bool)));
+  connect(_chkBoxShowError, SIGNAL(toggled(bool)), _signalPlot, SLOT(hideError(bool)));
+
+  // save Signal when button is pressed
+  connect(_btnSaveSignal, SIGNAL(pressed()), this, SLOT(saveSignal()));
 
   // set size policy, such that control has minimum height
   _control->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // create the layout
   _layout = new QVBoxLayout;
-  _layout->addWidget(_signalPlot.get());
-  _layout->addWidget(_control.get());
+  _layout->addWidget(_signalPlot);
+  _layout->addWidget(_control);
   setLayout(_layout);
 }
 
 void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   // save pointer to signal in member
   _signal = signal;
-  if (signal->inverted && !_chkShown)
-    _layout->addWidget(_chkBoxShowError.get());
+  if (signal->inverted && !_chkShown) {
+    QHBoxLayout *hLayout = new QHBoxLayout;
+    hLayout->addWidget(_chkBoxShowError);
+    hLayout->addWidget(_btnSaveSignal);
+    QWidget *widget = new QWidget;
+    widget->setLayout(hLayout);
+    widget->setFixedHeight(40);
+    _layout->addWidget(widget);
+  }
 
   if (signal->inverted) {
     _signal = signal->inverted;
@@ -80,8 +94,9 @@ void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   }
 
   _signalPlot->setData(newDataMain);
-  if (signal->inverted)
+  if (signal->inverted) {
     _signalPlot->setError(newError);
+  }
   _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude);
 
   _signalPlot->replot();
@@ -120,6 +135,24 @@ void PlotWidget::triggerConnectedWidgets(QCPRange range) {
   container.add("lower", std::to_string(range.lower));
   container.add("upper", std::to_string(range.upper));
   _token->trigger(Events::Scroll, container);
+}
+
+
+void PlotWidget::saveSignal() {
+  // get path to an saveable file
+  util::DialogUtil dialogUtil(this);
+  auto path = dialogUtil.chooseSavePath();
+
+  // if a path is available
+  if (!path.empty()) {
+    // simply load the data
+    util::SignalFileActor fileActor(path);
+
+    auto invertedSignal = std::shared_ptr<uanc::amv::InvertedModel>(new uanc::amv::InvertedModel());
+    invertedSignal->left_channel = _signal->left_channel;
+    invertedSignal->right_channel = _signal->right_channel;
+    fileActor.saveData(invertedSignal);
+  }
 }
 
 }

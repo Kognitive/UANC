@@ -50,7 +50,7 @@ class MainWindow : public QMainWindow {
    * This field holds the main widget of the main widget. In detail
    * that means it gets used as the central widget later.
    */
-  std::unique_ptr<MainWidget> mainWidget;
+  MainWidget* mainWidget;
 
   /** \brief Represents the load action.
    *
@@ -58,16 +58,15 @@ class MainWindow : public QMainWindow {
    */
   std::unique_ptr<QAction> fileOpenAction;
 
-  /** \brief Represents the save action.
-   *
-   * Represents the save action. In detail it is the file save action
-   */
-  std::unique_ptr<QAction> fileSaveAction;
-
+  /** \brief Represents the close action.
+ *
+ * Represents the close action. In detail it is the application close action
+ */
+  std::unique_ptr<QAction> ApplicationCloseAction;
   /** \brief Represents the file menu itself.
    *
    * Represents the file menu itself. */
-  std::unique_ptr<QMenu> fileMenu;
+  QMenu* fileMenu;
 
   /** \brief Private constructor to deny creation outside of the singleton pattern.
    *
@@ -104,7 +103,6 @@ class MainWindow : public QMainWindow {
   std::shared_ptr<ImportWindow> importWindow;
 
 
-
   /** These simply are the actions taken when you click inside of the menu */
  private slots:
 
@@ -121,13 +119,6 @@ class MainWindow : public QMainWindow {
    */
   void showImportedSignals(std::vector<int> loadedIndices);
 
-
-  /** \brief Saves a file to the hard drive.
-   *
-   * This method displays a file save dialog. Then it saves the right signal to
-   * the hard drive.
-   */
-  void saveFile();
 };
 
 }

@@ -20,6 +20,11 @@ EventToken::EventToken(int index) {
   this->_index = index;
 }
 
+/** Destruct Event Token. */
+void EventToken::destruct() {
+  EventManager::get()->unregister(this->_index);
+}
+
 /** \brief Creates an event.
  *
  * This method simply creates a new token with the supplied index.

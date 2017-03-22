@@ -35,11 +35,17 @@ class EventObserver {
    */
   EventObserver(std::initializer_list<Events> events);
 
+  /** \brief Deconstructor
+   *
+   * This deconstructor can be used to deregister the token.
+   */
+  ~EventObserver();
+
   /** \brief Unique Pointer to the token.
    *
    * This can be used to access the token.
    */
-  std::unique_ptr<EventToken> _token;
+  EventToken* _token;
 
   /** \brief Override to catch event.
    *

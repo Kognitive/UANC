@@ -7,7 +7,7 @@
 namespace uanc {
 namespace gui {
 
-SignalPlot::SignalPlot(std::shared_ptr<PlotWidget> parent) {
+SignalPlot::SignalPlot(PlotWidget* parent) {
   // save reference to parent widget
   _parent = parent;
 
@@ -24,8 +24,8 @@ SignalPlot::SignalPlot(std::shared_ptr<PlotWidget> parent) {
   graph(_ERROR)->setPen(QPen(QColor("red")));
 
   // create lines for the plot for dragged zoom
-  _zoomLineOrigin = std::shared_ptr<QCPItemStraightLine>(new QCPItemStraightLine(this));
-  _zoomLineTarget = std::shared_ptr<QCPItemStraightLine>(new QCPItemStraightLine(this));
+  _zoomLineOrigin = new QCPItemStraightLine(this);
+  _zoomLineTarget = new QCPItemStraightLine(this);
   _zoomLineOrigin->setVisible(false);
   _zoomLineTarget->setVisible(false);
   _zoomLineOrigin->setPen(QPen(Qt::black, 1, Qt::DotLine));
@@ -114,7 +114,7 @@ void SignalPlot::setRange(double lower, double upper) {
   replot();
 }
 
-void SignalPlot::setZoomLinePos(std::shared_ptr<QCPItemStraightLine> zoomLine, double xCoord) {
+void SignalPlot::setZoomLinePos(QCPItemStraightLine* zoomLine, double xCoord) {
   zoomLine->point1->setCoords(xCoord, 0);
   zoomLine->point2->setCoords(xCoord, 1);
 }

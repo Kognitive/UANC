@@ -4,6 +4,7 @@
 
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QPushButton>
 #include "PMWidget.h"
 
 namespace uanc {
@@ -22,8 +23,15 @@ void PMWidget::setData(std::vector<std::shared_ptr<uanc::util::PerformanceMeasur
   // save pointer to performance information in member
   _data = performanceData;
 
+  // create new button
+  btnShowPerformance = new QPushButton();
+  btnShowPerformance->setText("<");
+  btnShowPerformance->setFixedWidth(20);
+  btnShowPerformance->setFixedHeight(50);
+
+
   // create tree view and set data
-  QTreeWidget *treeWidget = new QTreeWidget;
+  treeWidget = new QTreeWidget;
   treeWidget->setColumnCount(2);
   treeWidget->setHeaderLabels(QStringList() << "Measurement" << "Time");
 
@@ -47,10 +55,15 @@ void PMWidget::setData(std::vector<std::shared_ptr<uanc::util::PerformanceMeasur
 
   treeWidget->expandAll();
 
-  auto vLayot = new QVBoxLayout();
-  vLayot->addWidget(treeWidget);
-  vLayot->totalMinimumSize();
-  this->setLayout(vLayot);
+  this->connect(btnShowPerformance, SIGNAL(pressed()), this, SLOT(tooglePerformance()));
+
+  // set horizontal layout (splitter)
+  auto layout =  new QHBoxLayout;
+  layout->addWidget(btnShowPerformance);
+  layout->addWidget(treeWidget);
+  treeWidget->hide();
+
+  this->setLayout(layout);
 }
 
 void PMWidget::addTreeChild(QTreeWidgetItem *parent,
@@ -72,6 +85,21 @@ void PMWidget::addTreeChild(QTreeWidgetItem *parent,
     // if there are children add them
     addTreeChild(qItem, &it->get()->measureSubMeasureChild);
   }
+}
+
+
+
+void PMWidget::tooglePerformance() {
+  if (performanceShown) {
+    treeWidget->hide();
+    btnShowPerformance->setText("<");
+  }
+  else {
+    btnShowPerformance->setText(">");
+    treeWidget->show();
+  }
+
+  this->performanceShown = !performanceShown;
 }
 
 }

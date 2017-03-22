@@ -12,103 +12,108 @@
 #include <QtWidgets/QToolBar>
 #include <Code/UANC/amv/signal/algorithm/IdentityTransformationAlgorithm.h>
 #include <Code/UANC/amv/signal/TransformationAlgorithmRegister.h>
+#include <iostream>
 
-namespace uanc
-{
-namespace gui
-{
+namespace uanc {
+namespace gui {
 
 using namespace uanc::amv;
 
-class SignalViewWidget : public QWidget
-{
-Q_OBJECT
+class SignalViewWidget : public QWidget, public EventObserver {
+ Q_OBJECT
 
-public:
-    SignalViewWidget(bool hasError = true) : _error(hasError)
-    {
+ public:
 
-    }
+  /** Default constructore for the signal view widget.
+   *
+   * @param id The unique id of this widget.
+   * @param hasError True, if it has error.
+   */
+  SignalViewWidget(int id, bool hasError = true) : EventObserver({Events::ChangeView}), _error(hasError) {
+    _id = id;
+  }
 
-    void
-    setSignalModel(std::shared_ptr<InvertedModel> signalModel)
-    {
-        if (signalSet)
-            throw new std::runtime_error("There was already a signal set. You have to create a new widget.");
 
-        // save the left_channel algorithm
-        this->originalModel = signalModel;
+  /** This method sets the signal model internally.
+   *
+   * @param signalModel The signal model to set.
+   */
+  void setSignalModel(std::shared_ptr<InvertedModel> signalModel) {
+    if (signalSet)
+      throw new std::runtime_error("There was already a signal set. You have to create a new widget.");
 
-        // basically initialize the gui
-        this->layout = new QVBoxLayout;
-        auto toolbar = new QToolBar;
+    // save the left_channel algorithm
+    this->originalModel = signalModel;
 
-        // create the toolbar with the entries from the register
-        this->viewComboBox = new QComboBox;
-        this->registeredViews = uanc::amv::signal::TransformationAlgorithmRegister::getTransformations();
-        for (auto const &algorithm: *this->registeredViews.get())
-        {
-            this->viewComboBox->addItem(QString::fromStdString(algorithm->getName()));
-        }
+    // basically initialize the gui
+    this->layout = new QVBoxLayout;
 
-        toolbar->addWidget(this->viewComboBox);
+    // create the toolbar with the entries from the register
+    this->registeredViews = uanc::amv::signal::TransformationAlgorithmRegister::getTransformations();
 
-        // create a action in the toolbar
-        auto changeViewAction = toolbar->addAction("Change...");
-        connect(changeViewAction, SIGNAL(triggered()), this, SLOT(changeView()));
+    // initialize using the identity transformation
+    this->registeredViews->at(currentSelected)->process(signalModel);
 
-        // add the toolbar widget
-        this->layout->addWidget(toolbar);
+    // add the view from the algorithm to the layout
+    this->widget = this->registeredViews->at(currentSelected)->getView()->getWidget();
+    this->layout->addWidget(this->widget);
+    setLayout(this->layout);
 
-        // initialize using the identity transformation
-        this->registeredViews->at(currentSelected)->process(signalModel);
+    // finally fill in the data
+    registeredViews->at(currentSelected)->fillView();
+  }
 
-        // add the view from the algorithm to the layout
-        this->widget = this->registeredViews->at(currentSelected)->getView()->getWidget();
-        this->layout->addWidget(this->widget);
-        setLayout(this->layout);
+  // Gets called when the event is triggered
+  void triggered(Events event, EventContainer data) final {
 
-        // finally fill in the data
-        registeredViews->at(currentSelected)->fillView();
-    }
+    // retrieve fields from container.
+    auto strID = data.get("ID");
+    auto strIndex = data.get("Index");
+    auto id = atoi(strID.c_str());
+    auto cmbIndex = atoi(strIndex.c_str());
 
-private:
-    bool signalSet = false;
-    bool _error;
-    int currentSelected = 0;
-    QComboBox *viewComboBox;
-    QVBoxLayout *layout;
-    QWidget *widget;
-    std::shared_ptr<std::vector<IAlgorithm *>> registeredViews;
-    std::shared_ptr<InvertedModel> originalModel;
+    // wrong id, so we want no change.
+    if (id != _id) return;
+    if (cmbIndex == currentSelected) return;
 
-public slots:
-    void
-    changeView()
-    {
+    // reove widget
+    this->layout->removeWidget(this->widget);
+    delete this->widget;
 
-        // get the current index and return if nothing has changed
-        auto cmbIndex = this->viewComboBox->currentIndex();
-        if (cmbIndex == currentSelected)
-            return;
+    // new chosen cmbIndex is the new currentSelected Index value
+    currentSelected = cmbIndex;
 
-        this->layout->removeWidget(this->widget);
-        this->widget->hide();
+    // initialize using the identity transformation
+    auto clonedOne = this->registeredViews->at(currentSelected)->clone();
+    clonedOne->process(this->originalModel);
 
-        // new chosen cmbIndex is the new currentSelected Index value
-        currentSelected = cmbIndex;
+    // add the view from the algorithm to the layout
+    this->widget = clonedOne->getView()->getWidget();
+    this->layout->addWidget(this->widget);
 
-        // initialize using the identity transformation
-        this->registeredViews->at(currentSelected)->process(this->originalModel);
+    // finally fill in the data
+    clonedOne->fillView();
+  }
 
-        // add the view from the algorithm to the layout
-        this->widget = this->registeredViews->at(currentSelected)->getView()->getWidget();
-        this->layout->addWidget(this->widget);
-        this->widget->show();
+ private:
 
-        // finally fill in the data
-        registeredViews->at(currentSelected)->fillView();
-    };
+  /** Holds state if signal was already set. */
+  bool signalSet = false;
+
+  /** Holds state if error is shown. */
+  bool _error;
+
+  /** Holds the current selected index. */
+  int currentSelected = 0;
+
+  /** Holds the unique id of this widget. */
+  int _id;
+
+  /** Simple view related fields */
+  QVBoxLayout *layout;
+  QWidget *widget;
+  std::shared_ptr<std::vector<IAlgorithm *>> registeredViews;
+  std::shared_ptr<InvertedModel> originalModel;
 };
 }
 }

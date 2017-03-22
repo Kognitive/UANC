@@ -1,9 +1,13 @@
 
 #include <Code/UANC/gui/MainWindow.h>
+#include <Code/UANC/util/GlobalSettings.h>
 #include <Code/UANC/util/Tests/EpsilonTests.h>
 
 
 using namespace uanc::gui;
+
+// globally define settings
+GlobalSettings* GlobalSettings::globalSettings = nullptr;
 
 int main(int argc, char **argv) {
 
@@ -27,6 +31,7 @@ int main(int argc, char **argv) {
         mainwindow->resize(1000, 800);
         mainwindow->show();
 
-        return a.exec();
+  auto code = a.exec();
 
+  return code;
 }

@@ -14,6 +14,7 @@ namespace uanc {
 namespace gui {
 
 class PMWidget : public QWidget {
+  Q_OBJECT
  public:
   /**
    * Contructor
@@ -33,6 +34,9 @@ class PMWidget : public QWidget {
    */
   std::vector<std::shared_ptr<uanc::util::PerformanceMeasure<>>> _data;
 
+  QTreeWidget* treeWidget;
+  QPushButton* btnShowPerformance;
+
   /**
    * \brief This method initializes the plots.
    */
@@ -45,6 +49,13 @@ class PMWidget : public QWidget {
  */
   void addTreeChild(QTreeWidgetItem *parent,
                     std::vector<std::shared_ptr<uanc::util::PerformanceMeasureNode<>>> *measurements);
+
+  /** Holds state if performance is shown. */
+  bool performanceShown = false;
+
+ public slots:
+
+  void tooglePerformance();
 };
 
 }
