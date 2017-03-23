@@ -37,6 +37,14 @@ void ImportWindow::setupGUI() {
   if (this->objectName().isEmpty())
     this->setObjectName(QString::fromUtf8("MainWindow"));
   this->resize(347, 429);
+  this->setGeometry(
+          QStyle::alignedRect(
+                  Qt::LeftToRight,
+                  Qt::AlignCenter,
+                  this->size(),
+                  qApp->desktop()->availableGeometry()
+          )
+  );
   QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
   sizePolicy.setHorizontalStretch(0);
   sizePolicy.setVerticalStretch(0);
