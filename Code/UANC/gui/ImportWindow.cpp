@@ -213,12 +213,20 @@ void ImportWindow::importFiles() {
         selectedFileItem.second->selectedEntryPathLineEdit->text().toUtf8()
             .constData();
 
-    //TODO: There should be an error handling if an incorrect path is given.
-    util::SignalFileActor fileActor(path);
-    auto signal = fileActor.loadData();
+    struct stat sb = {0};
+    if (!stat(path.c_str(), &sb)) {
+      util::SignalFileActor fileActor(path);
+      auto signal = fileActor.loadData();
 
-    // save the signal inside of the main widget
-    loadedIndices.push_back(util::SignalManager::get()->addSignal(signal));
+      // save the signal inside of the main widget
+      loadedIndices.push_back(util::SignalManager::get()->addSignal(signal));
+    } else {
+      // if the wave file is lost an error will be shown
+      QMessageBox::warning(this, "Error loading file", "Cannot find file", "", "");
+      if (recentlyUsedFiles.contains(QString::fromStdString(path)))
+        recentlyUsedFiles.removeOne(QString::fromStdString(path));
+      saveRecentlyUsedSignals();
+    }
   }
 
   //Remove all signals from the selected items, since they have been imported

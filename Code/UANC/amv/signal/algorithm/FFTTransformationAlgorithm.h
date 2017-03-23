@@ -48,28 +48,30 @@ class FFTTransformationAlgorithm :
     this->getModel()->fftSignal = std::shared_ptr<InvertedModel>(new InvertedModel());
 
     //Create an pointer vector for the in-and output
-    std::vector<std::shared_ptr<Aquila::SignalSource>> outChannels {
-        this->getModel()->fftSignal->left_channel, this->getModel()
-            ->right_channel };
+    std::vector<std::shared_ptr<Aquila::SignalSource>> outChannels{
+        this->getModel()->fftSignal->left_channel, this->getModel()->fftSignal
+            ->right_channel};
 
-    std::vector<std::shared_ptr<Aquila::SignalSource>> inChannels { in->inverted
-        ->left_channel, in->inverted->right_channel };
+    auto inLeftChannel = (!in->inverted) ?
+                         in->left_channel :
+                         in->inverted->left_channel;
+
+    auto inRightChannel = (!in->inverted) ?
+                          in->right_channel :
+                          in->inverted->right_channel;
+    std::vector<std::shared_ptr<Aquila::SignalSource>> inChannels{inLeftChannel, inRightChannel};
 
 
     //Invert in the Fourier space in both channels, iterate over all channels
-    for(int i = 0; i < inChannels.size(); ++i) {
-      auto outChannel = outChannels[i];
+    for (int i = 0; i < inChannels.size(); ++i) {
+      auto &outChannel = outChannels[i];
       auto inChannel = inChannels[i];
 
       //Compute the FFT of the signal
-          // choose a fft algorithm
-      auto fftl = (in->inverted != NULL) ?
-                      Aquila::FftFactory::getFft(inChannel->length())
-                      : Aquila::FftFactory::getFft(inChannel->length());
+      // choose a fft algorithm
+      auto fftl = Aquila::FftFactory::getFft(inChannel->length());
 
-      auto complexFftSignal = (in->inverted != NULL) ?
-                               fftl->fft(inChannel->toArray())
-                               : fftl->fft(inChannel->toArray());
+      auto complexFftSignal = fftl->fft(inChannel->toArray());
 
       std::vector<double> aboluteSpectrum;
       //Compute the absolute values of the spectrum
@@ -80,9 +82,12 @@ class FFTTransformationAlgorithm :
       outChannel = std::shared_ptr<
           Aquila::SignalSource>(new Aquila::SignalSource(aboluteSpectrum));
 
-      outChannel->setSampleFrequency(in->right_channel->getSampleFrequency());
+      outChannel->setSampleFrequency(inChannel->getSampleFrequency());
 
     }
+
+    this->getModel()->fftSignal->left_channel = outChannels[0];
+    this->getModel()->fftSignal->right_channel = outChannels[1];
 
     //The signal in the signal model is unchanged.
     this->getModel()->left_channel = in->left_channel;

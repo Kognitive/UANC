@@ -12,7 +12,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <algorithm>
-
+#include <sys/stat.h>
 //QT-stuff
 #include <QSettings>
 #include <QSignalMapper>
