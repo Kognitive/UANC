@@ -32,9 +32,17 @@ class ImportWindow;
  */
 class MainWindow : public QMainWindow {
 
+ protected:
+
+  /** \brief This method executes all necessary actions when the main application is closed
+   *
+   * It executes all necessary actions when the main application is closed
+   */
+  void closeEvent(QCloseEvent *);
+
  public:
 
-  /** \brief Obtain a reference to the main window.
+  /** \brief Hol a reference to the main window.
    *
    * Uses a classical singleton pattern to give back exactly the same copy of the main window.
    * In addition it uses a shared pointer.
@@ -50,7 +58,7 @@ class MainWindow : public QMainWindow {
    * This field holds the main widget of the main widget. In detail
    * that means it gets used as the central widget later.
    */
-  MainWidget* mainWidget;
+  MainWidget *mainWidget;
 
   /** \brief Represents the load action.
    *
@@ -58,16 +66,15 @@ class MainWindow : public QMainWindow {
    */
   std::unique_ptr<QAction> fileOpenAction;
 
-  /** \brief Represents the save action.
-   *
-   * Represents the save action. In detail it is the file save action
-   */
-  std::unique_ptr<QAction> fileSaveAction;
-
+  /** \brief Represents the close action.
+ *
+ * Represents the close action. In detail it is the application close action
+ */
+  std::unique_ptr<QAction> ApplicationCloseAction;
   /** \brief Represents the file menu itself.
    *
    * Represents the file menu itself. */
-  QMenu* fileMenu;
+  QMenu *fileMenu;
 
   /** \brief Private constructor to deny creation outside of the singleton pattern.
    *
@@ -120,13 +127,6 @@ class MainWindow : public QMainWindow {
    */
   void showImportedSignals(std::vector<int> loadedIndices);
 
-
-  /** \brief Saves a file to the hard drive.
-   *
-   * This method displays a file save dialog. Then it saves the right signal to
-   * the hard drive.
-   */
-  void saveFile();
 };
 
 }

@@ -31,6 +31,19 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
   static_assert(std::is_base_of<viewmodel, datamodel>::value, "The data model has to be derived from the view model.");
   static_assert(std::is_base_of<model::ANCModel, viewmodel>::value, "The view model has to be derived from ANCModel.");
 
+  public:
+
+    /** \brief Gets a pointer, to access the model of the algorithm.
+     *
+     * Getter for the model used inside of the algorithm. This pointer
+     * can be modified by deriving classes to manipulate the model.
+     *
+     * @return The pointer to the data model stored inside.
+     */
+    std::shared_ptr<datamodel> getModel() {
+      return this->model;
+    }
+
  protected:
 
   /** \brief Executed an algorithm with the given input model.
@@ -49,17 +62,6 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
     this->invert(input);
     castedModel->defaultRegister.stopOverallExecutionMeasurement();
     return this->getModel();
-  }
-
-  /** \brief Gets a pointer, to access the model of the algorithm.
-   *
-   * Getter for the model used inside of the algorithm. This pointer
-   * can be modified by deriving classes to manipulate the model.
-   *
-   * @return The pointer to the data model stored inside.
-   */
-  std::shared_ptr<datamodel> getModel() {
-    return this->model;
   }
 
   /** \brief Inverts the input signal.

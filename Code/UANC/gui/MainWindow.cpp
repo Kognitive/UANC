@@ -67,13 +67,17 @@ void MainWindow::makeActions() {
   fileOpenAction->setShortcuts(QKeySequence::Open);
   fileOpenAction->setStatusTip(tr("Import a file"));
   connect(fileOpenAction.get(), &QAction::triggered, this, &MainWindow::loadFile);
+  this->addAction(fileOpenAction.get());
 
-  // create the file save action
-  fileSaveAction = std::unique_ptr<QAction>(new QAction(tr("&Save File..."), this));
-  fileSaveAction->setShortcuts(QKeySequence::Save);
-  fileSaveAction->setStatusTip(tr("Save a file"));
-  connect(fileSaveAction.get(), &QAction::triggered, this, &MainWindow::saveFile);
+  // create the application close action
+  ApplicationCloseAction = std::unique_ptr<QAction>(new QAction(tr("&Quit"), this));
+  ApplicationCloseAction->setShortcuts(QKeySequence::Quit);
+  ApplicationCloseAction->setStatusTip(tr("Quit"));
+  connect(ApplicationCloseAction.get(), &QAction::triggered, this, &MainWindow::close);
+  this->addAction(ApplicationCloseAction.get());
+
 }
+
 
 /** \brief This method creates the top menu
  *
@@ -83,7 +87,7 @@ void MainWindow::makeMenu() {
 
   fileMenu = menuBar()->addMenu(tr("&File"));
   fileMenu->addAction(fileOpenAction.get());
-  fileMenu->addAction(fileSaveAction.get());
+  fileMenu->addAction(ApplicationCloseAction.get());
 }
 
 /** \brief Loads a file from plate and displays it inside of the gui.
@@ -101,36 +105,16 @@ void MainWindow::loadFile() {
 
 }
 
-/** \brief Saves a file to the hard drive.
- *
- * This method displays a file save dialog. Then it saves the right signal to
- * the hard drive.
- */
-void MainWindow::saveFile() {
-
-  // get path to an saveable file
-  util::DialogUtil dialogUtil(this);
-  auto path = dialogUtil.chooseSavePath();
-
-  // if a path is available
-  if (!path.empty()) {
-
-    // get the output signal from the main widget.
-    auto signal = SignalManager::get()->getSignal(0);
-
-    // simply load the data
-    util::SignalFileActor fileActor(path);
-    fileActor.saveData(signal);
-  }
-
-}
-
 void MainWindow::showImportedSignals(std::vector<int> loadedIndices) {
 
   for (int signalID : loadedIndices)
   {
     this->mainWidget->loadSignalSource(SignalManager::get()->getSignal(signalID));
   }
+}
+
+void MainWindow::closeEvent(QCloseEvent *) {
+  importWindow->close();
 }
 
 /** \brief Shared pointer of the one and only instance of MainWindow.

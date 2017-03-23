@@ -46,14 +46,25 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
     const int SAMPLES_PER_FRAME = 1024;
 
     //Compute the spectrogram with one frame per Second. This should be enough.
-    Aquila::FramesCollection collectionSpectrogramL = Aquila::FramesCollection(
-        *(in->left_channel), SAMPLES_PER_FRAME, 0);
+    Aquila::FramesCollection collectionSpectrogramL = (in->inverted != NULL) ?
+                                                      Aquila::FramesCollection(*(in->inverted->left_channel),
+                                                                               SAMPLES_PER_FRAME, 0)
+                                                                             : Aquila::FramesCollection(*(in->left_channel),
+                                                                                                        SAMPLES_PER_FRAME,
+                                                                                                        0);
 
-    this->getModel()->left_spectrum = std::shared_ptr<Aquila::Spectrogram> ( new Aquila::Spectrogram(collectionSpectrogramL));
+    this->getModel()->left_spectrum =
+        std::shared_ptr<Aquila::Spectrogram>(new Aquila::Spectrogram(collectionSpectrogramL));
 
-    Aquila::FramesCollection collectionSpectrogramR = Aquila::FramesCollection(
-        *(in->right_channel), SAMPLES_PER_FRAME, 0);
-    this->getModel()->right_spectrum = std::shared_ptr<Aquila::Spectrogram> ( new Aquila::Spectrogram(collectionSpectrogramR));
+    Aquila::FramesCollection collectionSpectrogramR = (in->inverted != NULL) ?
+                                                      Aquila::FramesCollection(*(in->inverted->right_channel),
+                                                                               SAMPLES_PER_FRAME, 0)
+                                                                             : Aquila::FramesCollection(*(in->right_channel),
+                                                                                                        SAMPLES_PER_FRAME,
+                                                                                                        0);
+
+    this->getModel()->right_spectrum =
+        std::shared_ptr<Aquila::Spectrogram>(new Aquila::Spectrogram(collectionSpectrogramR));
 
     //The signal in the signal model is unchanged.
     this->getModel()->left_channel = in->left_channel;
