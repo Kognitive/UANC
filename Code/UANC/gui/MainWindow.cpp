@@ -67,12 +67,14 @@ void MainWindow::makeActions() {
   fileOpenAction->setShortcuts(QKeySequence::Open);
   fileOpenAction->setStatusTip(tr("Import a file"));
   connect(fileOpenAction.get(), &QAction::triggered, this, &MainWindow::loadFile);
+  this->addAction(fileOpenAction.get());
 
   // create the application close action
   ApplicationCloseAction = std::unique_ptr<QAction>(new QAction(tr("&Quit"), this));
   ApplicationCloseAction->setShortcuts(QKeySequence::Quit);
   ApplicationCloseAction->setStatusTip(tr("Quit"));
   connect(ApplicationCloseAction.get(), &QAction::triggered, this, &MainWindow::close);
+  this->addAction(ApplicationCloseAction.get());
 
 }
 
