@@ -49,7 +49,7 @@ void EpsilonTests::run(std::string path) {
             double b = 0;
             double mi = abs(sample[0]);
             double ma = abs(sample[0]);
-            for (int i = 0; i < length; ++i) {
+            for (size_t i = 0; i < length; ++i) {
                 errorSum = errorSum + abs(sample[i]);
                 b = b + (abs(sample[i]) * abs(sample[i]));
                 mi = std::min(mi, abs(sample[i]));

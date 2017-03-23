@@ -65,6 +65,7 @@ class MainWindow : public QMainWindow {
    * Represents the load action. In detail it is the file open action
    */
   std::unique_ptr<QAction> fileOpenAction;
+  std::unique_ptr<QAction> aboutAction;
 
   /** \brief Represents the close action.
  *

@@ -83,7 +83,7 @@ OouraFft::OouraFft(std::size_t length)
           stuffedSamples = new SampleType[stuffedLength];
           std::memcpy( stuffedSamples, x, N * sizeof(SampleType) );
           z = stuffedSamples;
-          for(int i = N; i < stuffedLength; ++i){
+          for(size_t i = N; i < stuffedLength; ++i){
             stuffedSamples[i] = 0;
           }
         }
@@ -132,7 +132,7 @@ OouraFft::OouraFft(std::size_t length)
         if (stuffedLength != N) {
           stuffedSamples = spectrum;
           z = &stuffedSamples;
-          for (int i = 0; i < stuffedLength; ++i) {
+          for (size_t i = 0; i < stuffedLength; ++i) {
             stuffedSamples.push_back(0);
           }
         }

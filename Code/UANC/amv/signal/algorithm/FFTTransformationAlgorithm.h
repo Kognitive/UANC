@@ -63,7 +63,7 @@ class FFTTransformationAlgorithm :
 
 
     //Invert in the Fourier space in both channels, iterate over all channels
-    for (int i = 0; i < inChannels.size(); ++i) {
+    for (size_t i = 0; i < inChannels.size(); ++i) {
       auto &outChannel = outChannels[i];
       auto inChannel = inChannels[i];
 
@@ -75,7 +75,7 @@ class FFTTransformationAlgorithm :
 
       std::vector<double> aboluteSpectrum;
       //Compute the absolute values of the spectrum
-      for (int i = 0; i < complexFftSignal.size(); ++i) {
+      for (size_t i = 0; i < complexFftSignal.size(); ++i) {
         aboluteSpectrum.push_back(std::abs(complexFftSignal[i]));
       }
 

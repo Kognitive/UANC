@@ -50,7 +50,7 @@ MainWindow* MainWindow::get() {
             this->makeMenu();
 
             // change the window title to a longer one.
-            this->setWindowTitle("Understanding Active Noise Cancelling");
+            this->setWindowTitle("Antischall");
         }
 
 /** \brief This method creates the appropriate actions and links them accordingely
@@ -132,7 +132,7 @@ MainWindow* MainWindow::get() {
  * left plot.
  */
         void MainWindow::about() {
-            QMessageBox::about(this, "About", "Understanding-Active-Noise-Cancelling Ver. 1.1.32 \n "
+            QMessageBox::about(this, "About", "Antischall Ver. 1.1.7 \n "
                     "Developpers: \n"
                     "\t Daniel José Ceballos Jung \n"
                     "\t Janne Wulf \n"
