@@ -40,7 +40,7 @@ namespace gui {
     int _id;
 
     /** Simple initialization method for the gui. */
-    void init() {
+    void init(bool hasRight) {
 
       // create the combobox
       _cmbSignal = new QComboBox();
@@ -52,7 +52,7 @@ namespace gui {
       // create left right combobox
       _cmbChannel = new QComboBox();
       _cmbChannel->addItem("Left");
-      _cmbChannel->addItem("Right");
+      if (hasRight) _cmbChannel->addItem("Right");
 
       // connect to the slot in this module and apply
       // the layout internally.
@@ -69,13 +69,12 @@ namespace gui {
    public:
 
     /** Default constructor for the signal view change bar. */
-    GlobalSettingsBar() : EventObserver({Events::ChangeView, Events::ChangeChannel}) {
-
+    GlobalSettingsBar(int hasRight) : EventObserver({Events::ChangeView, Events::ChangeChannel}) {
 
       // call init
       _id = uanc::util::GlobalSettings::get()->currentIndex;
 
-      init();
+      init(hasRight);
     }
 
     /** This method gets called when one of the events was triggered. */
