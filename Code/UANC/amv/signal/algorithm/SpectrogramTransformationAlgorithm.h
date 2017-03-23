@@ -46,7 +46,7 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
     const int SAMPLES_PER_FRAME = 1024;
 
     //Compute the spectrogram with one frame per Second. This should be enough.
-    Aquila::FramesCollection collectionSpectrogramL = (in->inverted != NULL) ?
+    Aquila::FramesCollection collectionSpectrogramL = (in->inverted != nullptr) ?
                                                       Aquila::FramesCollection(*(in->inverted->left_channel),
                                                                                SAMPLES_PER_FRAME, 0)
                                                                              : Aquila::FramesCollection(*(in->left_channel),
@@ -56,7 +56,7 @@ class SpectrogramTransformationAlgorithm : public SignalTransformationAlgorithm<
     this->getModel()->left_spectrum =
         std::shared_ptr<Aquila::Spectrogram>(new Aquila::Spectrogram(collectionSpectrogramL));
 
-    Aquila::FramesCollection collectionSpectrogramR = (in->inverted != NULL) ?
+    Aquila::FramesCollection collectionSpectrogramR = (in->inverted != nullptr) ?
                                                       Aquila::FramesCollection(*(in->inverted->right_channel),
                                                                                SAMPLES_PER_FRAME, 0)
                                                                              : Aquila::FramesCollection(*(in->right_channel),
