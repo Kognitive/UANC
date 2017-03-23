@@ -5,8 +5,12 @@
 #ifndef UANC_GLOBALSETTINGS_H
 #define UANC_GLOBALSETTINGS_H
 
+#include <iostream>
+
 namespace uanc {
   namespace util {
+    using namespace std;
+
     class GlobalSettings {
      public:
 

@@ -11,6 +11,7 @@
 #include <Code/UANC/amv/signal/TransformationAlgorithmRegister.h>
 #include "../util/event/EventObserver.h"
 #include <iostream>
+#include "../util/GlobalSettings.h"
 
 namespace uanc {
 namespace gui {
@@ -26,8 +27,14 @@ namespace gui {
 
    private:
 
+    /** Debug flag */
+    const bool DEBUG = true;
+
     /** Holds the signal view bar. */
     QComboBox* _cmbSignal;
+
+    /** Holds the combobox, which channel is displayed. */
+    QComboBox* _cmbChannel;
 
     /** Holds a unique identifier. */
     int _id;
@@ -42,23 +49,34 @@ namespace gui {
         _cmbSignal->addItem(QString::fromStdString(algorithm->getName()));
       }
 
+      // create left right combobox
+      _cmbChannel = new QComboBox();
+      _cmbChannel->addItem("Left");
+      _cmbChannel->addItem("Right");
+
       // connect to the slot in this module and apply
       // the layout internally.
       this->connect(_cmbSignal, SIGNAL(currentIndexChanged(int)), this, SLOT(changedView(int)));
+      this->connect(_cmbChannel, SIGNAL(currentIndexChanged(int)), this, SLOT(changedChannel(int)));
 
       // create the hLayout using the widgets
       auto hlayout = new QHBoxLayout();
       hlayout->addWidget(_cmbSignal);
+      hlayout->addWidget(_cmbChannel);
       this->setLayout(hlayout);
     }
 
    public:
 
     /** Default constructor for the signal view change bar. */
-    GlobalSettingsBar(int id) : EventObserver({Events::ChangeView}) {
+    GlobalSettingsBar() : EventObserver({Events::ChangeView, Events::ChangeChannel}) {
+
 
       // call init
-      _id = id;
+      _id = uanc::util::GlobalSettings::get()->currentIndex;
+
+      if (DEBUG) std::cout << "Globas Settingsbar initialized with id: " << _id << std::endl;
+
       init();
     }
 
@@ -72,10 +90,17 @@ namespace gui {
       /** Slot if the view changed */
       void changedView(int index) {
         EventContainer container = EventContainer();
-        container.add("ID", std::to_string(_id));
         container.add("Index", std::to_string(index));
         _token->trigger(Events::ChangeView, container);
       };
+
+      /** Slot if channel changed */
+      void changedChannel(int index) {
+        EventContainer container = EventContainer();
+        container.ID = _id;
+        container.add("Index", std::to_string(index));
+        _token->trigger(Events::ChangeChannel, container);
+      }
 
   };
 }}

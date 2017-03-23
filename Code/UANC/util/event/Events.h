@@ -15,16 +15,21 @@ namespace event {
  * These events get used by the event system to signal the
  * current event.
  */
-enum Events : uint8_t {
+enum class Events : uint8_t {
 
       /** \brief Gets fired when a view gets scrolled.
        *
        * Event describes when a widget gets scrolled.
        */
-      Scroll,
+      Scroll = 0,
 
-  /** Represents the change of a view. */
-      ChangeView
+       /** Represents the change of a view. */
+      ChangeView = 1,
+
+      /** Represents the change of a channel. */
+      ChangeChannel = 2,
+
+      Last = 3
 };
 }
 }

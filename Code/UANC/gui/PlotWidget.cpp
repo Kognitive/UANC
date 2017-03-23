@@ -3,12 +3,13 @@
 //
 
 #include <Code/UANC/amv/InvertedModel.h>
+#include <Code/UANC/util/GlobalSettings.h>
 #include "PlotWidget.h"
 
 namespace uanc {
 namespace gui {
 
-PlotWidget::PlotWidget() : EventObserver({Events::Scroll}) {
+PlotWidget::PlotWidget() : EventObserver({Events::Scroll, Events::ChangeChannel}) {
   this->initialize();
 }
 
@@ -38,55 +39,26 @@ void PlotWidget::initialize() {
 void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   // save pointer to signal in member
   _signal = signal;
+
   if (signal->inverted && !_chkShown)
     _layout->addWidget(_chkBoxShowError);
 
   if (signal->inverted) {
-    _signal = signal->inverted;
     _errorSignal = std::shared_ptr<uanc::amv::InvertedModel>(new uanc::amv::InvertedModel);
     _errorSignal->left_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal->left_channel + *signal->inverted->left_channel));
     _errorSignal->right_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal->right_channel + *signal->inverted->right_channel));
   }
 
-  // create QCPGraphDataContainer and set data in both graphs
-  // creating two maps because QCustomPlot requires raw pointers and we want to prevent null pointers
-  double maxSignalAmplitude = std::numeric_limits<double>::min();
-  double minSignalAmplitude = std::numeric_limits<double>::max();
-  size_t n = _signal->left_channel->getSamplesCount();
-  QCPGraphDataContainer *newDataMain = new QCPGraphDataContainer;
-  QCPGraphDataContainer *newDataControl = new QCPGraphDataContainer;
-  QCPGraphDataContainer *newError = new QCPGraphDataContainer;
-  QCPGraphData newDatapoint;
-
-  double timeConversionFactor = 1.0 / _signal->left_channel->getSampleFrequency();
-  _lastIndex = n / _signal->left_channel->getSampleFrequency();
-
-  for (size_t i = 0; i < n; ++i) {
-    newDatapoint.key = timeConversionFactor * i;
-    newDatapoint.value = _signal->left_channel->sample(i);
-
-    newDataMain->add(newDatapoint);
-    newDataControl->add(newDatapoint);
-
-    // keep track of max and min amplitude
-    maxSignalAmplitude = std::max(maxSignalAmplitude, newDatapoint.value);
-    minSignalAmplitude = std::min(minSignalAmplitude, newDatapoint.value);
-
-    if (signal->inverted) {
-      newDatapoint.value = _errorSignal->left_channel->sample(i);
-      newError->add(newDatapoint);
-    }
+  int channel = 0;
+  if (_token->hasLastEvent(Events::ChangeChannel)) {
+    channel = atoi(_token->getLastEvent(Events::ChangeChannel).get("Index").c_str());
   }
 
-  _signalPlot->setData(newDataMain);
-  if (signal->inverted) {
-    _signalPlot->setError(newError);
-  }
-  _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude);
-
-  _signalPlot->replot();
-  _control->replot();
+  switchChannel(channel);
 }
+
+
+
 
 const QCPRange PlotWidget::getPlotXRange() const {
   return _signalPlot->xAxis->range();
@@ -109,10 +81,16 @@ void PlotWidget::controlChanged() {
 }
 
 void PlotWidget::triggered(Events event, EventContainer data) {
-  double lower = std::stod(data.get("lower"));
-  double upper = std::stod(data.get("upper"));
-  _control->updateNavBox(QCPRange(lower, upper));
-  _signalPlot->setRange(lower, upper);
+  if (event == Events::Scroll) {
+    double lower = std::stod(data.get("lower"));
+    double upper = std::stod(data.get("upper"));
+    _control->updateNavBox(QCPRange(lower, upper));
+    _signalPlot->setRange(lower, upper);
+  }
+  else if (event == Events::ChangeChannel) {
+    int index = atoi(data.get("Index").c_str());
+    switchChannel(index);
+  }
 }
 
 void PlotWidget::triggerConnectedWidgets(QCPRange range) {
@@ -120,6 +98,79 @@ void PlotWidget::triggerConnectedWidgets(QCPRange range) {
   container.add("lower", std::to_string(range.lower));
   container.add("upper", std::to_string(range.upper));
   _token->trigger(Events::Scroll, container);
+}
+
+void PlotWidget::switchChannel(int channel) {
+
+    std::shared_ptr<Aquila::SignalSource> signal;
+    std::shared_ptr<Aquila::SignalSource> errorSignal;
+    if (_signal->inverted) {
+      if (channel == 0) {
+        signal = _signal->inverted->left_channel;
+        errorSignal = _errorSignal->left_channel;
+      }
+      else {
+        signal = _signal->inverted->right_channel;
+        errorSignal = _errorSignal->right_channel;
+      }
+    }
+    else {
+      if (channel == 0) {
+        signal = _signal->left_channel;
+      }
+      else {
+        signal = _signal->right_channel;
+      }
+    }
+
+    // create QCPGraphDataContainer and set data in both graphs
+    // creating two maps because QCustomPlot requires raw pointers and we want to prevent null pointers
+    double maxSignalAmplitude = std::numeric_limits<double>::min();
+    double minSignalAmplitude = std::numeric_limits<double>::max();
+    size_t n = signal->getSamplesCount();
+    QCPGraphDataContainer *newDataMain = new QCPGraphDataContainer;
+    QCPGraphDataContainer *newDataControl = new QCPGraphDataContainer;
+    QCPGraphDataContainer *newError = new QCPGraphDataContainer;
+    QCPGraphData newDatapoint;
+
+    double timeConversionFactor = 1.0 / signal->getSampleFrequency();
+    _lastIndex = n / signal->getSampleFrequency();
+
+    for (size_t i = 0; i < n; ++i) {
+      newDatapoint.key = timeConversionFactor * i;
+      newDatapoint.value = signal->sample(i);
+
+      newDataMain->add(newDatapoint);
+      newDataControl->add(newDatapoint);
+
+      // keep track of max and min amplitude
+      maxSignalAmplitude = std::max(maxSignalAmplitude, newDatapoint.value);
+      minSignalAmplitude = std::min(minSignalAmplitude, newDatapoint.value);
+
+      if (_signal->inverted) {
+        newDatapoint.value = errorSignal->sample(i);
+        newError->add(newDatapoint);
+      }
+    }
+
+    _signalPlot->setData(newDataMain);
+    if (_signal->inverted) {
+      _signalPlot->setError(newError);
+    }
+    _control->setData(newDataControl, maxSignalAmplitude, minSignalAmplitude);
+
+
+    if (_token->hasLastEvent(Events::Scroll)) {
+      EventContainer container = _token->getLastEvent(Events::Scroll);
+      double lower = std::stod(container.get("lower"));
+      double upper = std::stod(container.get("upper"));
+      _control->updateNavBox(QCPRange(lower, upper));
+      _signalPlot->setRange(lower, upper);
+    }
+    else {
+      _signalPlot->replot();
+      _control->replot();
+    }
 }
 
 }

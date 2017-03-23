@@ -54,9 +54,6 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
 
       measurement->startSubMeasure("Transformation & Inversion Right");
 
-      // creates a new shared pointer containing the inverted signal
-      auto invertedApproximatedr = approximate(in->right_channel.get());
-
       // Invertation is done. Stop mesurement
       measurement->stopSubMeasure();
       measurement->stop();
@@ -110,7 +107,7 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
       std::vector<double> approxInvSamples(signal->getSamplesCount());
 
       double slope;
-      for (int i = 0; i < signal->getSamplesCount(); ++i) {
+      for (unsigned int i = 0; i < signal->getSamplesCount(); ++i) {
           if (i % _extrapolationFactor == 0) {
               slope = (i == signal->getSamplesCount() - 1) ? 0.0 : signal->sample(i + 1) - signal->sample(i);
               approxInvSamples[i] = - signal->sample(i);

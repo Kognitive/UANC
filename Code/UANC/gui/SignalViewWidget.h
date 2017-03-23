@@ -29,8 +29,7 @@ class SignalViewWidget : public QWidget, public EventObserver {
    * @param id The unique id of this widget.
    * @param hasError True, if it has error.
    */
-  SignalViewWidget(int id, bool hasError = true) : EventObserver({Events::ChangeView}), _error(hasError) {
-    _id = id;
+  SignalViewWidget(bool hasError = true) : EventObserver({Events::ChangeView}), _error(hasError) {
   }
 
 
@@ -47,6 +46,10 @@ class SignalViewWidget : public QWidget, public EventObserver {
 
     // basically initialize the gui
     this->layout = new QVBoxLayout;
+
+    if (_token->hasLastEvent(Events::ChangeView)) {
+      currentSelected = atoi(_token->getLastEvent(Events::ChangeView).get("Index").c_str());
+    }
 
     // create the toolbar with the entries from the register
     this->registeredViews = uanc::amv::signal::TransformationAlgorithmRegister::getTransformations();
@@ -67,13 +70,10 @@ class SignalViewWidget : public QWidget, public EventObserver {
   void triggered(Events event, EventContainer data) final {
 
     // retrieve fields from container.
-    auto strID = data.get("ID");
     auto strIndex = data.get("Index");
-    auto id = atoi(strID.c_str());
     auto cmbIndex = atoi(strIndex.c_str());
 
     // wrong id, so we want no change.
-    if (id != _id) return;
     if (cmbIndex == currentSelected) return;
 
     // reove widget

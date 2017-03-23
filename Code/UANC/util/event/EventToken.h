@@ -37,6 +37,13 @@ class EventToken {
    */
   void trigger(Events event, EventContainer data);
 
+  /** Can be used to get the last event */
+  EventContainer getLastEvent(Events event);
+
+  /** Can be used to get the last event */
+  bool hasLastEvent(Events event);
+
+
  private:
 
   /** \brief Current Index.
@@ -45,6 +52,12 @@ class EventToken {
    * index gets used by the eventsystem to identify this token.
    */
   int _index;
+
+  /** \brief Current Tab ID.
+   *
+   * This holds the tab id.
+   */
+  int _tabID;
 
   /** \brief Basic constructor of token.
    *

@@ -69,6 +69,7 @@ public:
     lastIndex() { return _lastIndex; }
 
 private:
+
     /**
      * \brief Holds the \ref QCustomPlot for the signal plot.
      */
@@ -94,7 +95,8 @@ private:
     /**
      * \brief Holds the plotted signal.
      */
-    std::shared_ptr<uanc::amv::SignalModel> _signal, _errorSignal;
+    std::shared_ptr<uanc::amv::SignalModel> _errorSignal;
+    std::shared_ptr<uanc::amv::InvertedModel> _signal;
 
     double _lastIndex;
 
@@ -109,6 +111,8 @@ private:
 
     void
     triggerConnectedWidgets(QCPRange range);
+
+    void switchChannel(int channel);
 };
 
 }

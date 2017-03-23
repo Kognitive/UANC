@@ -56,7 +56,6 @@ class HeatView : public uanc::amv::AlgorithmView<model::SpectrogramModel> {
 
     // now we assign some data, by accessing the QCPColorMapData instance of the color map:
     double rx, ry, rz;
-    int xforzoom;
 
     //Iterate over all frames
     for (std::size_t x = 0; x < spectrogramm->getFrameCount(); ++x)

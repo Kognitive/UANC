@@ -30,6 +30,9 @@ class EventContainer {
 
  public:
 
+  /** Holds the id for the callee. */
+  int ID = -1;
+
   /** \brief Adds a key to the container.
    *
    * This function takes a key and a value and adds it internally.

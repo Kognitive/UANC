@@ -13,12 +13,34 @@
 #include "Events.h"
 #include "EventObserver.h"
 
+
+struct EventIDHash {
+ public:
+  template <typename T, typename U>
+  std::size_t operator()(const std::pair<T, U> &x) const
+  {
+    return std::hash<T>()(x.first) ^ static_cast<std::size_t>(x.second);
+  }
+};
+
+class EventIDEqual
+{
+ public:
+  template <typename T, typename U>
+  bool operator() (std::pair<T, U> const& t1, std::pair<T, U> const& t2) const
+  {
+    return t1.first == t2.first && t1.second == t2.second;
+  }
+};
+
 namespace uanc {
 namespace util {
 namespace event {
 
 class EventToken;
 class EventObserver;
+
+using Cache = std::unordered_map<std::pair<int, Events>, EventContainer, EventIDHash>;
 
 /** \brief Simple event manager.
  *
@@ -40,6 +62,9 @@ class EventManager {
   ~EventManager();
 
  private:
+
+  /** Simple debug flag. */
+  const bool DEBUG = true;
 
   /** \brief Basic constructor.
    *
@@ -69,6 +94,9 @@ class EventManager {
 
   // init counter for id to zero
   int _idCounter = 0;
+
+  // Simple cache for the last event
+  std::unique_ptr<Cache> cache;
 
   /** True, iff the event manger was already destroyed. */
   bool _destroyed = false;
@@ -101,6 +129,10 @@ class EventManager {
    * @param token The token to register.
    */
   void subscribe(Events event, EventToken *token);
+
+  EventContainer getLastEvent(int id, Events event);
+
+  bool hasLastEvent(int id, Events event);
 
   /** \brief Unregister token from the event manager.
    *

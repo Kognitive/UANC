@@ -62,7 +62,7 @@ class FFTTransformationAlgorithm :
     std::vector<double> aboluteSpectruml;
 
     //Compute the absolute values of the left_spectrum
-    for (int i = 0; i < complexFftSignall.size(); ++i) {
+    for (size_t i = 0; i < complexFftSignall.size(); ++i) {
       aboluteSpectruml.push_back(std::abs(complexFftSignall[i]));
     }
     this->getModel()->fftSignal->left_channel = std::shared_ptr<
@@ -87,7 +87,7 @@ class FFTTransformationAlgorithm :
     std::vector<double> aboluteSpectrumr;
 
     //Compute the absolute values of the left_spectrum
-    for (int i = 0; i < complexFftSignalr.size(); ++i) {
+    for (size_t i = 0; i < complexFftSignalr.size(); ++i) {
       aboluteSpectrumr.push_back(std::abs(complexFftSignalr[i]));
     }
     this->getModel()->fftSignal->right_channel = std::shared_ptr<

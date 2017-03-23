@@ -3,6 +3,7 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
+#include <Code/UANC/util/GlobalSettings.h>
 #include "EventToken.h"
 
 namespace uanc {
@@ -18,11 +19,22 @@ namespace event {
   */
 EventToken::EventToken(int index) {
   this->_index = index;
+  this->_tabID = uanc::util::GlobalSettings::get()->currentIndex;
 }
 
 /** Destruct Event Token. */
 void EventToken::destruct() {
   EventManager::get()->unregister(this->_index);
+}
+
+/** Can be used to get the last event */
+EventContainer EventToken::getLastEvent(Events event) {
+  return EventManager::get()->getLastEvent(this->_tabID, event);
+}
+
+/** Can be used to get the last event */
+bool EventToken::hasLastEvent(Events event) {
+  return EventManager::get()->hasLastEvent(this->_tabID, event);
 }
 
 /** \brief Creates an event.
@@ -47,6 +59,7 @@ EventToken *EventToken::Create(int index) {
  * @param data The data to pass with the event.
  */
 void EventToken::trigger(Events event, EventContainer data) {
+  data.ID = _tabID;
   EventManager::get()->trigger(this, event, data);
 }
 

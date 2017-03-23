@@ -32,6 +32,10 @@ EventManager::EventManager() {
   _idEventMapping = std::unique_ptr<std::unordered_map<int, std::vector<Events> *>>(
       new std::unordered_map<int, std::vector<Events > *>()
   );
+
+  cache = std::unique_ptr<Cache>(
+     new Cache()
+  );
 }
 
 /** \brief Basic destructor.
@@ -98,11 +102,20 @@ void EventManager::trigger(EventToken *publisher, Events event, EventContainer d
   // basically get the vector of all observer ids
   auto vec = this->_eventMapping->at(event);
 
+  // add new map if no exists
+  if (cache->count(std::make_pair(data.ID, event)) > 0) {
+    cache->erase(std::make_pair(data.ID, event));
+  }
+
+  // insert event
+  cache->insert(std::make_pair(std::make_pair(data.ID, event), data));
+
+
   // Now iterate overall values of the vector and initiate the events to the clients
   for (auto const &id: *vec) {
     if (id != publisher->_index) {
       auto observer = this->_idMapping->at(id);
-      observer->triggered(event, data);
+      if (observer->_token->_tabID == data.ID) observer->triggered(event, data);
     }
   }
 }
@@ -159,6 +172,14 @@ void EventManager::unregister(int id) {
   // remove from id mapping
   _idMapping->erase(id);
   _idEventMapping->erase(id);
+}
+
+EventContainer EventManager::getLastEvent(int id, Events event) {
+  return cache->at(std::make_pair(id, event));
+}
+
+bool EventManager::hasLastEvent(int id, Events event) {
+  return cache->count(std::make_pair(id, event)) > 0;
 }
 
 }

@@ -104,8 +104,6 @@ class InverseFFTAlgorithm : public ANCAlgorithm<model::ANCModel> {
     // copy data to in
     auto in = data->left_channel;
 
-    // map the input signal to a valid sample
-    const std::size_t SIZE = 524288;
     //const std::size_t SIZE2 = ;
     unsigned int sampleFreq = in->getSampleFrequency();
 

@@ -93,7 +93,7 @@ void MainWidget::showAvailableAlgorithms() {
   auto size = this->_algorithmList->size();
 
   // now basically iterate over the elements
-  for (auto i = -1; ++i < size;) {
+  for (size_t i = -1; ++i < size;) {
     this->_cmbAlgorithm->addItem(QString::fromStdString(this->_algorithmList->at(i)->getName()));
   }
 }
@@ -174,23 +174,27 @@ void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
   auto vBoxLayout = new QVBoxLayout();
   auto widget = new QWidget();
   widget->setLayout(vBoxLayout);
-  auto index = this->_tabWidget->addTab(widget, QString::fromStdString(text));
+  GlobalSettings::get()->currentIndex = this->_tabWidget->addTab(widget, QString::fromStdString(text));
+  this->_tabWidget->setCurrentIndex(GlobalSettings::get()->currentIndex);
 
   // add GlobalSettingsBar
-  auto globalSettingsBar = new GlobalSettingsBar(index);
+  auto globalSettingsBar = new GlobalSettingsBar();
   vBoxLayout->addWidget(globalSettingsBar);
   globalSettingsBar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
   // create new widget with appropriate bar.
-  auto signalWidget = new SignalViewWidget(index);
+  auto signalWidget = new SignalViewWidget();
   signalWidget->setSignalModel(signalSource);
   vBoxLayout->addWidget(signalWidget);
 
   // set tabinRun to false
   tabInRun = false;
 
+
   auto vec = std::make_shared<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>();
-  this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
+  this->_waveAlgorithMapping.insert(std::make_pair(GlobalSettings::get()->currentIndex, vec));
+
+  tabSelected();
 }
 
 /** \brief This method can be used to apply an algorithm to the inner data.
@@ -226,9 +230,6 @@ void MainWidget::waveClosed(const int &index) {
   if (index == -1) {
     return;
   }
-
-  // get tabitem widget
-  QWidget *tabItem = this->_tabWidget->widget(index);
 
   tabInRun = true;
   // Removes the tab at position index from this stack of widgets.
@@ -269,8 +270,6 @@ void MainWidget::algorithmClosed(const int &index) {
     return;
   }
 
-  // get tabitem widget
-  QWidget *tabItem = this->_detailTabWidget->widget(index);
 
   tabInRun = true;
   // Removes the tab at position index from this stack of widgets.
