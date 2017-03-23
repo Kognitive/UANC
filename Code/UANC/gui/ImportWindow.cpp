@@ -10,25 +10,17 @@
 namespace uanc {
 namespace gui {
 
-std::shared_ptr<ImportWindow> ImportWindow::get() {
-  if (!_instance) {
-    _instance = std::shared_ptr<ImportWindow>(new ImportWindow());
-  }
-
-  return _instance;
-
-}
-
 void ImportWindow::applyCancel() {
   this->close();
 }
 
-ImportWindow::ImportWindow() {
+ImportWindow::ImportWindow(QWidget* parent) : QDialog(parent) {
   //Initialiaze the QSettings Object with default values
   recentlyUsedSettings = std::shared_ptr<QSettings>(
       new QSettings("Gruppe 2", "Understanding Active Noise Cancelling"));
   signalMapper = std::shared_ptr<QSignalMapper>(new QSignalMapper(this));
   loadRecentlyUsedDirectory();
+  this->setModal(true);
   this->setupGUI();
 }
 
@@ -42,7 +34,7 @@ void ImportWindow::setupGUI() {
                   Qt::LeftToRight,
                   Qt::AlignCenter,
                   this->size(),
-                  qApp->desktop()->availableGeometry()
+                  parentWidget()->window()->frameGeometry()
           )
   );
   QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
@@ -50,20 +42,26 @@ void ImportWindow::setupGUI() {
   sizePolicy.setVerticalStretch(0);
   sizePolicy.setHeightForWidth(this->sizePolicy().hasHeightForWidth());
   this->setSizePolicy(sizePolicy);
-  centralWidget = new QWidget(this);
-  centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-  mainWidgetVerticalLayout = new QVBoxLayout(&*centralWidget);
+
+  mainWidgetVerticalLayout = new QVBoxLayout();
   mainWidgetVerticalLayout->setSpacing(6);
   mainWidgetVerticalLayout->setContentsMargins(11, 11, 11, 11);
   mainWidgetVerticalLayout->setObjectName(
       QString::fromUtf8("mainWidgetVerticalLayout"));
-  filesGroupBox = new QGroupBox(&*centralWidget);
+
+  this->setLayout(mainWidgetVerticalLayout);
+
+  filesGroupBox = new QGroupBox();
   filesGroupBox->setObjectName(QString::fromUtf8("filesGroupBox"));
-  mainWidgetGroupLayout = new QVBoxLayout(&*filesGroupBox);
+  mainWidgetVerticalLayout->addWidget(filesGroupBox);
+
+  mainWidgetGroupLayout = new QVBoxLayout();
   mainWidgetGroupLayout->setSpacing(6);
   mainWidgetGroupLayout->setContentsMargins(11, 11, 11, 11);
   mainWidgetGroupLayout->setObjectName(
       QString::fromUtf8("mainWidgetGroupLayout"));
+  filesGroupBox->setLayout(mainWidgetGroupLayout);
+
   filesMainVerticalLayout = new QVBoxLayout();
   filesMainVerticalLayout->setSpacing(6);
   filesMainVerticalLayout->setObjectName(
@@ -82,9 +80,9 @@ void ImportWindow::setupGUI() {
   filesMainVerticalLayout->addWidget(&*addSelectedFilesButton);
   connect(&*addSelectedFilesButton, SIGNAL(clicked()), this,
           SLOT(selectFilesFromFS()));
-
   //Layout for the list of files to import
   filesInnerVertivalLayout = new QVBoxLayout();
+  //filesGroupBox->setLayout(filesInnerVertivalLayout);
   filesInnerVertivalLayout->setSpacing(6);
   filesInnerVertivalLayout->setObjectName(
       QString::fromUtf8("filesInnerVertivalLayout"));
@@ -112,7 +110,8 @@ void ImportWindow::setupGUI() {
   mainWidgetVerticalLayout->addWidget(&*filesGroupBox);
 
   //Set comboBox for recently used files
-  RecentlyUsedGroupBox = new QGroupBox(&*centralWidget);
+  RecentlyUsedGroupBox = new QGroupBox();
+  mainWidgetVerticalLayout->addWidget(RecentlyUsedGroupBox);
   RecentlyUsedGroupBox->setObjectName(
       QString::fromUtf8("RecentlyUsedGroupBox"));
   verticalLayout_10 = new QVBoxLayout(&*RecentlyUsedGroupBox);
@@ -130,7 +129,8 @@ void ImportWindow::setupGUI() {
 
   mainWidgetVerticalLayout->addWidget(&*RecentlyUsedGroupBox);
 
-  importGroupBox = new QGroupBox(&*centralWidget);
+  importGroupBox = new QGroupBox();
+  mainWidgetVerticalLayout->addWidget(importGroupBox);
   importGroupBox->setObjectName(QString::fromUtf8("importGroupBox"));
   verticalLayout_7 = new QVBoxLayout(&*importGroupBox);
   verticalLayout_7->setSpacing(6);
@@ -144,7 +144,8 @@ void ImportWindow::setupGUI() {
   mainWidgetVerticalLayout->addWidget(&*importGroupBox);
 
   //Layout for Cancel and Import button
-  actionsGroupBox = new QGroupBox(&*centralWidget);
+  actionsGroupBox = new QGroupBox();
+  mainWidgetVerticalLayout->addWidget(actionsGroupBox);
   actionsGroupBox->setObjectName(QString::fromUtf8("actionsGroupBox"));
   actonLayout = new QHBoxLayout(&*actionsGroupBox);
   actonLayout->setSpacing(6);
@@ -176,10 +177,6 @@ void ImportWindow::setupGUI() {
   //Add the group Box for actions
   mainWidgetVerticalLayout->addWidget(&*actionsGroupBox);
 
-  this->setCentralWidget(&*centralWidget);
-  statusBar = new QStatusBar(this);
-  statusBar->setObjectName(QString::fromUtf8("statusBar"));
-  this->setStatusBar(&*statusBar);
 
   //Set the captions
   this->setWindowTitle(QApplication::translate("MainWindow", "Import", 0));

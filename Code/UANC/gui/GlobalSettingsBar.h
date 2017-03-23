@@ -75,8 +75,6 @@ namespace gui {
       // call init
       _id = uanc::util::GlobalSettings::get()->currentIndex;
 
-      if (DEBUG) std::cout << "Globas Settingsbar initialized with id: " << _id << std::endl;
-
       init();
     }
 

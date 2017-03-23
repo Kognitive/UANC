@@ -91,6 +91,7 @@ private:
      * \brief Hold the checkbox for showing the error
      */
     QCheckBox* _chkBoxShowError;
+    QPushButton* _btnSaveSignal;
 
     /**
      * \brief Holds the plotted signal.
@@ -113,6 +114,9 @@ private:
     triggerConnectedWidgets(QCPRange range);
 
     void switchChannel(int channel);
+
+  public slots:
+    void saveSignal();
 };
 
 }

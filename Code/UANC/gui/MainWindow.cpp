@@ -32,9 +32,6 @@ std::shared_ptr<MainWindow> MainWindow::get() {
  */
 MainWindow::MainWindow() {
   //Get an instance of the import window.
-  importWindow = ImportWindow::get();
-  //Connect its signals to the corresponding functions
-  connect(&*importWindow, &ImportWindow::indicesLoaded, this, &MainWindow::showImportedSignals);
 
   this->setupGUI();
 }
@@ -98,6 +95,11 @@ void MainWindow::makeMenu() {
  */
 void MainWindow::loadFile() {
 
+  auto importWindow = new ImportWindow(this);
+
+  //Connect its signals to the corresponding functions
+  connect(&*importWindow, &ImportWindow::indicesLoaded, this, &MainWindow::showImportedSignals);
+
   //Open the import dialog
   importWindow->show();
   importWindow->raise();
@@ -114,7 +116,7 @@ void MainWindow::showImportedSignals(std::vector<int> loadedIndices) {
 }
 
 void MainWindow::closeEvent(QCloseEvent *) {
-  importWindow->close();
+
 }
 
 /** \brief Shared pointer of the one and only instance of MainWindow.

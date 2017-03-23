@@ -58,7 +58,6 @@ void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   }
 
   if (signal->inverted) {
-    _signal = signal->inverted;
     _errorSignal = std::shared_ptr<uanc::amv::InvertedModel>(new uanc::amv::InvertedModel);
     _errorSignal->left_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal->left_channel + *signal->inverted->left_channel));
     _errorSignal->right_channel = std::shared_ptr<Aquila::SignalSource>(new Aquila::SignalSource(*signal->right_channel + *signal->inverted->right_channel));

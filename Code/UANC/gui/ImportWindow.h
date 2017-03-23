@@ -49,19 +49,15 @@ namespace gui {
 //Forward declaration
 class MainWindow;
 
-class ImportWindow : public QMainWindow {
+class ImportWindow : public QDialog {
 
 Q_OBJECT
 
  public:
 
-  /** \brief Obtain a reference to the Importer window.
-   *
-   * Uses a classical singleton pattern to give back exactly the same copy of the main window.
-   *
-   * @return The shared pointer containing the Importer Window
-   */
-  static std::shared_ptr<ImportWindow> get();
+  /** \bief The default constructor
+ */
+  ImportWindow(QWidget *parent);
 
 signals:
   /** \brief: Slot that indicates that signals have been selected and loaded successfully into the
@@ -105,10 +101,6 @@ signals:
    *
    */
   void setupGUI();
-
-  /** \bief The default constructor
-   */
-  ImportWindow();
 
   /**
    * This function manages the LRU Queue for loaded files.
