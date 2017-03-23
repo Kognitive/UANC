@@ -178,7 +178,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
   this->_tabWidget->setCurrentIndex(GlobalSettings::get()->currentIndex);
 
   // add GlobalSettingsBar
-  auto globalSettingsBar = new GlobalSettingsBar();
+  auto globalSettingsBar = new GlobalSettingsBar(signalSource->right_channel->length() > 0);
   vBoxLayout->addWidget(globalSettingsBar);
   globalSettingsBar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
