@@ -21,111 +21,120 @@
 #include "ImportWindow.h"
 
 namespace uanc {
-namespace gui {
+    namespace gui {
 
-class ImportWindow;
+        class ImportWindow;
 
 /** \brief This class represents the main window.
  *
  * It is a QMainWindow. So you can think of it as a wrapper to extend the
  * functionality of a basic QMainWindow
  */
-class MainWindow : public QMainWindow {
+        class MainWindow : public QMainWindow {
 
- protected:
+        protected:
 
-  /** \brief This method executes all necessary actions when the main application is closed
-   *
-   * It executes all necessary actions when the main application is closed
-   */
-  void closeEvent(QCloseEvent *);
+            /** \brief This method executes all necessary actions when the main application is closed
+             *
+             * It executes all necessary actions when the main application is closed
+             */
+            void closeEvent(QCloseEvent *);
 
- public:
+        public:
 
-  /** \brief Hol a reference to the main window.
-   *
-   * Uses a classical singleton pattern to give back exactly the same copy of the main window.
-   * In addition it uses a shared pointer.
-   *
-   * @return The shared pointer containing the MainWindow
-   */
-  static std::shared_ptr<MainWindow> get();
+            /** \brief Hol a reference to the main window.
+             *
+             * Uses a classical singleton pattern to give back exactly the same copy of the main window.
+             * In addition it uses a shared pointer.
+             *
+             * @return The shared pointer containing the MainWindow
+             */
+            static std::shared_ptr<MainWindow> get();
 
- private:
+        private:
 
-  /** \brief Holds the main widget of the main window.
-   *
-   * This field holds the main widget of the main widget. In detail
-   * that means it gets used as the central widget later.
-   */
-  MainWidget *mainWidget;
+            /** \brief Holds the main widget of the main window.
+             *
+             * This field holds the main widget of the main widget. In detail
+             * that means it gets used as the central widget later.
+             */
+            MainWidget *mainWidget;
 
-  /** \brief Represents the load action.
-   *
-   * Represents the load action. In detail it is the file open action
-   */
-  std::unique_ptr<QAction> fileOpenAction;
+            /** \brief Represents the load action.
+             *
+             * Represents the load action. In detail it is the file open action
+             */
+            std::unique_ptr<QAction> fileOpenAction;
 
-  /** \brief Represents the close action.
- *
- * Represents the close action. In detail it is the application close action
- */
-  std::unique_ptr<QAction> ApplicationCloseAction;
-  /** \brief Represents the file menu itself.
-   *
-   * Represents the file menu itself. */
-  QMenu *fileMenu;
+            /** \brief Represents the about action.
+            *
+            * Represents the about action. In detail it is the about action
+            */
+            std::unique_ptr<QAction> aboutAction;
 
-  /** \brief Private constructor to deny creation outside of the singleton pattern.
-   *
-   * This constructor takes a QApplication and saves it internally as it context.
-   */
-  MainWindow();
+            /** \brief Represents the close action.
+         *
+         * Represents the close action. In detail it is the application close action
+         */
+            std::unique_ptr<QAction> ApplicationCloseAction;
 
-  /** \brief Shared pointer of the one and only instance of MainWindow.
-   *
-   * This field wraps a MainWindow inside of a shared_ptr. The main goal is that
-   * there are no dangling pointer referring to MainWindow.
-   */
-  static std::shared_ptr<MainWindow> _instance;
+            /** \brief Represents the file menu itself.
+             *
+             * Represents the file menu itself. */
+            QMenu *fileMenu;
 
-  /** \brief This method will setup the gui appropriately
-   *
-   * It creates basically a main widget and a menu inside of the main window.
-   */
-  void setupGUI();
+            /** \brief Private constructor to deny creation outside of the singleton pattern.
+             *
+             * This constructor takes a QApplication and saves it internally as it context.
+             */
+            MainWindow();
 
-  /** \brief This method creates the appropriate actions and links them accordingely
-   *
-   * Simply link the actions and create them.
-   */
-  void makeActions();
+            /** \brief Shared pointer of the one and only instance of MainWindow.
+             *
+             * This field wraps a MainWindow inside of a shared_ptr. The main goal is that
+             * there are no dangling pointer referring to MainWindow.
+             */
+            static std::shared_ptr<MainWindow> _instance;
 
-  /** \brief This method creates the top menu
-   *
-   * This method sets up the top menu inside of the application.
-   */
-  void makeMenu();
+            /** \brief This method will setup the gui appropriately
+             *
+             * It creates basically a main widget and a menu inside of the main window.
+             */
+            void setupGUI();
+
+            /** \brief This method creates the appropriate actions and links them accordingely
+             *
+             * Simply link the actions and create them.
+             */
+            void makeActions();
+
+            /** \brief This method creates the top menu
+             *
+             * This method sets up the top menu inside of the application.
+             */
+            void makeMenu();
+
+            void about();
 
 
-  /** These simply are the actions taken when you click inside of the menu */
- private slots:
+            /** These simply are the actions taken when you click inside of the menu */
+        private slots:
 
-  /** \brief Loads a file from plate and displays it inside of the gui.
-   *
-   * This method should open the import dialog, to let the user select a file. Then
-   * it loads that specified file and in the end it gets drawn to the MainWidget
-   * left plot.
-   */
-  void loadFile();
+            /** \brief Loads a file from plate and displays it inside of the gui.
+             *
+             * This method should open the import dialog, to let the user select a file. Then
+             * it loads that specified file and in the end it gets drawn to the MainWidget
+             * left plot.
+             */
+            void loadFile();
 
-  /** \brief Imports the signals selected using the Importer into the main window
-   *  @param: The indices of the imported signals that have been selected.
-   */
-  void showImportedSignals(std::vector<int> loadedIndices);
+            /** \brief Imports the signals selected using the Importer into the main window
+             *  @param: The indices of the imported signals that have been selected.
+             */
+            void showImportedSignals(std::vector<int> loadedIndices);
 
-};
+        };
 
-}
+    }
 }
 #endif //CODE_UANC_GUI_MAINWINDOW_H
