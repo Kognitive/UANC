@@ -107,6 +107,8 @@ class MainWindow : public QMainWindow {
    */
   void makeMenu();
 
+            void about();
+
 
   /** These simply are the actions taken when you click inside of the menu */
  private slots:
