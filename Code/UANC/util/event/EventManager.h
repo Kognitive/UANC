@@ -61,6 +61,9 @@ class EventManager {
    */
   ~EventManager();
 
+  /** This method gets called to destroy the event manager. */
+  static void destroy();
+
  private:
 
   /** Simple debug flag. */
@@ -86,7 +89,7 @@ class EventManager {
    *
    * Holds a reference to the global event manager.
    */
-  static std::shared_ptr<EventManager> _instance;
+  static EventManager* _instance;
 
   std::unique_ptr<std::unordered_map<Events, std::vector<int>*>> _eventMapping;
   std::unique_ptr<std::unordered_map<int, std::vector<Events>*>> _idEventMapping;
@@ -108,7 +111,7 @@ class EventManager {
    *
    * @return The shared pointer containing the event manager
    */
-  static std::shared_ptr<EventManager> get();
+  static EventManager* get();
 
   /** \brief Used to register an oberserver to an event.
    *

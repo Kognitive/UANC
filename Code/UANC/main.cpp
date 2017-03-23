@@ -5,6 +5,7 @@
 
 
 using namespace uanc::gui;
+using namespace uanc::util::event;
 
 // globally define settings
 GlobalSettings* GlobalSettings::globalSettings = nullptr;
@@ -32,6 +33,8 @@ int main(int argc, char **argv) {
         mainwindow->show();
 
   auto code = a.exec();
+
+    EventManager::destroy();
 
   return code;
 }

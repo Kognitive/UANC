@@ -10,7 +10,7 @@ namespace uanc {
 namespace util {
 namespace event {
 
-std::shared_ptr<EventManager> EventManager::_instance;
+EventManager* EventManager::_instance;
 
 /** \brief Basic constructor.
  *
@@ -56,11 +56,16 @@ EventManager::~EventManager() {
  *
  * @return The shared pointer containing the event manager
  */
-std::shared_ptr<EventManager> EventManager::get() {
+EventManager* EventManager::get() {
   if (!_instance)
-    _instance = std::shared_ptr<EventManager>(new EventManager());
+    _instance = new EventManager();
 
   return _instance;
+}
+
+/** This method gets called to destroy the event manager. */
+void EventManager::destroy() {
+  delete EventManager::get();
 }
 
 /** \brief Used to register an oberserver to an event.

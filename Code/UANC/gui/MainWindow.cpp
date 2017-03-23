@@ -16,9 +16,9 @@ namespace gui {
  *
  * @return The shared pointer containing the MainWindow
  */
-std::shared_ptr<MainWindow> MainWindow::get() {
+MainWindow* MainWindow::get() {
   if (!_instance) {
-    _instance = std::shared_ptr<MainWindow>(new MainWindow());
+    _instance = new MainWindow();
   }
 
   return _instance;
@@ -124,7 +124,7 @@ void MainWindow::closeEvent(QCloseEvent *) {
  * This field wraps a MainWindow inside of a shared_ptr. The main goal is that
  * there are no dangling pointer referring to MainWindow.
  */
-std::shared_ptr<MainWindow> MainWindow::_instance = NULL;
+MainWindow* MainWindow::_instance = nullptr;
 
 }
 }

@@ -49,7 +49,7 @@ class MainWindow : public QMainWindow {
    *
    * @return The shared pointer containing the MainWindow
    */
-  static std::shared_ptr<MainWindow> get();
+  static MainWindow* get();
 
  private:
 
@@ -87,7 +87,7 @@ class MainWindow : public QMainWindow {
    * This field wraps a MainWindow inside of a shared_ptr. The main goal is that
    * there are no dangling pointer referring to MainWindow.
    */
-  static std::shared_ptr<MainWindow> _instance;
+  static MainWindow* _instance;
 
   /** \brief This method will setup the gui appropriately
    *
