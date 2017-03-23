@@ -29,6 +29,7 @@ class SignalPlot : public QCustomPlot {
 
  public slots:
   void hideError(bool hide);
+  void setCenteredYAxis(bool b) {_centeredYAxis = b;};
 
  private slots:
   void mousePressEvent(QMouseEvent *event) override;
@@ -59,8 +60,19 @@ class SignalPlot : public QCustomPlot {
 
   void setZoomLinePos(QCPItemStraightLine*, double xCoord);
 
+  bool _centeredYAxis = true;
+  /** \brief Rescales the y-axis depending on the max/min value (visible)
+ *
+ * Rescales the y-axis depending on the max/min value (visible)
+ */
+  void rescaleYAxis();
+
+  std::shared_ptr<QCPGraphDataContainer> _MapExtremeValues;
+  void setExtremeValues();
+
   const int _SIGNAL = 0;
   const int _ERROR = 1;
+
 };
 
 }

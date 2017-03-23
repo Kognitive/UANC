@@ -29,6 +29,8 @@ QWidget *FFTView::produceWidget() {
 
   this->_plotWidget = new uanc::gui::PlotWidget();
 
+  this->_plotWidget->setCenteredYAxis(false);
+
   // return the created pointer
   return this->_plotWidget;
 }

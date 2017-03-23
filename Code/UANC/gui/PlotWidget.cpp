@@ -168,6 +168,7 @@ void PlotWidget::switchChannel(int channel) {
     }
 
     _signalPlot->setData(newDataMain);
+    _signalPlot->setCenteredYAxis(_centeredYAxis);
     if (_signal->inverted) {
       _signalPlot->setError(newError);
     }

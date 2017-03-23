@@ -23,6 +23,8 @@ namespace view {
 QWidget *SignalView::produceWidget() {
   this->_plotWidget = new uanc::gui::PlotWidget();
 
+  this->_plotWidget->setCenteredYAxis(true);
+
   // return the created pointer
   return this->_plotWidget;
 }

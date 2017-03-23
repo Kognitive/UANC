@@ -7,7 +7,7 @@
 namespace uanc {
 namespace gui {
 
-SignalPlot::SignalPlot(PlotWidget* parent) {
+SignalPlot::SignalPlot(PlotWidget *parent) {
   // save reference to parent widget
   _parent = parent;
 
@@ -35,6 +35,7 @@ SignalPlot::SignalPlot(PlotWidget* parent) {
 void SignalPlot::setData(QCPGraphDataContainer *data) {
   graph(_SIGNAL)->setData(QSharedPointer<QCPGraphDataContainer>(data));
   graph(_SIGNAL)->rescaleAxes();
+  setExtremeValues();
 }
 
 void SignalPlot::setError(QCPGraphDataContainer *error) {
@@ -81,16 +82,20 @@ void SignalPlot::mouseReleaseEvent(QMouseEvent *event) {
   _zoomLineTarget->setVisible(false);
 
   // update both plots
+  rescaleYAxis();
   replot();
   _parent->plotChanged();
 }
 
 void SignalPlot::zoom(double center) {
   xAxis->setRange(scaleRange(1.0 / _ZOOMFACTOR, center));
+  rescaleYAxis();
+
 }
 
 void SignalPlot::unzoom(double center) {
   xAxis->setRange(scaleRange(_ZOOMFACTOR, center));
+  rescaleYAxis();
 }
 
 void SignalPlot::zoomRange(double press, double release) {
@@ -111,10 +116,11 @@ QCPRange SignalPlot::scaleRange(double factor, double center) {
 
 void SignalPlot::setRange(double lower, double upper) {
   xAxis->setRange(lower, upper);
+  rescaleYAxis();
   replot();
 }
 
-void SignalPlot::setZoomLinePos(QCPItemStraightLine* zoomLine, double xCoord) {
+void SignalPlot::setZoomLinePos(QCPItemStraightLine *zoomLine, double xCoord) {
   zoomLine->point1->setCoords(xCoord, 0);
   zoomLine->point2->setCoords(xCoord, 1);
 }
@@ -124,5 +130,75 @@ void SignalPlot::hideError(bool hide) {
   replot();
 }
 
+void SignalPlot::setExtremeValues() {
+  _MapExtremeValues = std::shared_ptr<QCPGraphDataContainer>(new QCPGraphDataContainer);
+  auto data = graph(_SIGNAL)->data();
+
+  QCPGraphData newDatapoint;
+  // get all extreme values (via state machine)
+  int state = 0;
+  for (size_t i = 1; i < data->size(); ++i) {
+    switch (state) {
+      case 0 : {
+        // canidate for new maximum
+        if (data->at(i)->value > data->at(i - 1)->value) state = 1;
+        // canidate for new minimum
+        if (data->at(i)->value < data->at(i - 1)->value) state = 2;
+        break;
+      }
+      case 1 : {
+        // found new maximum
+        if (data->at(i)->value < data->at(i-1)->value) {
+          newDatapoint.key = data->at(i)->key;
+          newDatapoint.value = data->at(i)->value;
+          _MapExtremeValues->add(newDatapoint);
+          state = 0;
+        }
+        break;
+      }
+      case 2 : {
+        // found new minimum
+        if (data->at(i)->value > data->at(i-1)->value) {
+          newDatapoint.key = data->at(i)->key;
+          newDatapoint.value = data->at(i)->value;
+          _MapExtremeValues->add(newDatapoint);
+          state = 0;
+        }
+        break;
+      }
+    }
+  }
+}
+
+void SignalPlot::rescaleYAxis() {
+
+  auto &data = _MapExtremeValues;
+
+  double lower = xAxis->range().lower;
+  double upper = xAxis->range().upper;
+
+  double dHigh = std::numeric_limits<double>::min();
+  double dLow = std::numeric_limits<double>::max();
+
+  auto it = data->findBegin(lower);
+  while (it != data->findEnd(upper)) {
+    if (it->value > dHigh) dHigh = it->value;
+    if (it->value < dLow) dLow = it->value;
+    it++;
+  }
+
+  if(_centeredYAxis) {
+    if(dHigh > (dLow * -1)){
+      yAxis->setRange((dHigh * -1), dHigh);
+    } else {
+      yAxis->setRange(dLow, (dLow * -1));
+    }
+
+  } else {
+    yAxis->setRange(0, dHigh);
+  }
+
+
+}
 }
 }
