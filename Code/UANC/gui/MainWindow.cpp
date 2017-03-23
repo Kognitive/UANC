@@ -78,6 +78,7 @@ void MainWindow::makeActions() {
 
 }
 
+
 /** \brief This method creates the top menu
  *
  * This method sets up the top menu inside of the application.
@@ -110,6 +111,10 @@ void MainWindow::showImportedSignals(std::vector<int> loadedIndices) {
   {
     this->mainWidget->loadSignalSource(SignalManager::get()->getSignal(signalID));
   }
+}
+
+void MainWindow::closeEvent(QCloseEvent *) {
+  importWindow->close();
 }
 
 /** \brief Shared pointer of the one and only instance of MainWindow.
