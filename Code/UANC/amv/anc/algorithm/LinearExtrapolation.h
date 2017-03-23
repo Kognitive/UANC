@@ -54,15 +54,19 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
 
       measurement->startSubMeasure("Transformation & Inversion Right");
 
+      auto invertedApproximatedr = approximate(in->right_channel.get());
+
       // Invertation is done. Stop mesurement
       measurement->stopSubMeasure();
       measurement->stop();
       this->getModel()->defaultRegister.registerCustomMeasurement(measurement);
 
-      std::shared_ptr <Aquila::SignalSource> outr(invertedApproximated);
+      std::shared_ptr <Aquila::SignalSource> outr(invertedApproximatedr);
 
       this->getModel()->right_channel = in->right_channel;
       this->getModel()->inverted = std::shared_ptr<InvertedModel>(new InvertedModel);
+
+
       this->getModel()->inverted->left_channel = out;
       this->getModel()->inverted->right_channel = outr;
   }
