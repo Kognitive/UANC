@@ -1,0 +1,97 @@
+.TH "uanc::amv::anc::algorithm::ANCAlgorithm< datamodel, viewmodel >" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::anc::algorithm::ANCAlgorithm< datamodel, viewmodel > \- Every algorithm used inside has to be derived by this class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ANCAlgorithm\&.h>\fP
+.PP
+Inherits \fBuanc::amv::Algorithm< viewmodel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< datamodel > \fBgetModel\fP ()"
+.br
+.RI "\fIGets a pointer, to access the model of the algorithm\&. \fP"
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< viewmodel > \fBexecute\fP (std::shared_ptr< \fBInvertedModel\fP > input) final"
+.br
+.RI "\fIExecuted an algorithm with the given input model\&. \fP"
+.ti -1c
+.RI "virtual void \fBinvert\fP (std::shared_ptr< \fBInvertedModel\fP > input)=0"
+.br
+.RI "\fIInverts the input signal\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename datamodel, typename viewmodel = datamodel>
+.br
+class uanc::amv::anc::algorithm::ANCAlgorithm< datamodel, viewmodel >"
+Every algorithm used inside has to be derived by this class\&. 
+
+This represents an \fBANCAlgorithm\fP\&. So every inverting algorithm has to be derived by this\&. In addition one can specify the data model and the view model\&. If you want to use only a subset of the data you can specify a view model which is actually a parent of the data model\&. If there is no view model supplied, they will be handled, as if they are the same
+.PP
+\fBTemplate Parameters:\fP
+.RS 4
+\fIdatamodel\fP The data model to use, has to be inherited from viewmodel 
+.br
+\fIviewmodel\fP The view model to use, has to be inherited from ANCModel 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename datamodel, typename viewmodel = datamodel> std::shared_ptr<viewmodel> \fBuanc::amv::anc::algorithm::ANCAlgorithm\fP< datamodel, viewmodel >::execute (std::shared_ptr< \fBInvertedModel\fP > input)\fC [inline]\fP, \fC [final]\fP, \fC [protected]\fP"
+
+.PP
+Executed an algorithm with the given input model\&. This method first all gets an empty model from the deriving class\&. Afterwards it inverts the signal and passed back the model, which was created during the execution stage\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP The input model of the signal\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The created model from the data of the inversion\&. 
+.RE
+.PP
+
+.SS "template<typename datamodel, typename viewmodel = datamodel> std::shared_ptr<datamodel> \fBuanc::amv::anc::algorithm::ANCAlgorithm\fP< datamodel, viewmodel >::getModel ()\fC [inline]\fP"
+
+.PP
+Gets a pointer, to access the model of the algorithm\&. Getter for the model used inside of the algorithm\&. This pointer can be modified by deriving classes to manipulate the model\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The pointer to the data model stored inside\&. 
+.RE
+.PP
+
+.SS "template<typename datamodel, typename viewmodel = datamodel> virtual void \fBuanc::amv::anc::algorithm::ANCAlgorithm\fP< datamodel, viewmodel >::invert (std::shared_ptr< \fBInvertedModel\fP > input)\fC [protected]\fP, \fC [pure virtual]\fP"
+
+.PP
+Inverts the input signal\&. This is actually the heart of an ANC algorithm inside of this application\&. It takes an input model and processes it\&. Besides it should save its data inside the model using \fBgetModel()\fP\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP The input model containing the original signal\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::amv::anc::algorithm::InverseFFTAlgorithm\fP, \fBuanc::amv::anc::algorithm::InverseDirectAlgorithm\fP, \fBuanc::amv::anc::algorithm::SplineInterpolation\fP, and \fBuanc::amv::anc::algorithm::LinearExtrapolation\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

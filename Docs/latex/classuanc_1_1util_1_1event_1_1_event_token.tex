@@ -1,0 +1,94 @@
+\hypertarget{classuanc_1_1util_1_1event_1_1_event_token}{}\section{uanc\+:\+:util\+:\+:event\+:\+:Event\+Token Class Reference}
+\label{classuanc_1_1util_1_1event_1_1_event_token}\index{uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}}
+
+
+Token retrieved by the eventsystem.  
+
+
+
+
+{\ttfamily \#include $<$Event\+Token.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classuanc_1_1util_1_1event_1_1_event_token_a2bd43e6e227119b4b55a1a3adc7dd22c}{trigger} (\hyperlink{namespaceuanc_1_1util_1_1event_a63f690675589114db9c6bcbe6f1088a4}{Events} event, \hyperlink{classuanc_1_1util_1_1event_1_1_event_container}{Event\+Container} data)
+\begin{DoxyCompactList}\small\item\em Call this method to trigger an event. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1event_1_1_event_container}{Event\+Container} \hyperlink{classuanc_1_1util_1_1event_1_1_event_token_ab2996160dd25090ef19681dcac70e302}{get\+Last\+Event} (\hyperlink{namespaceuanc_1_1util_1_1event_a63f690675589114db9c6bcbe6f1088a4}{Events} event)
+\item 
+bool \hyperlink{classuanc_1_1util_1_1event_1_1_event_token_ad0ee869b12bf8dfc3d7daa2aeb10d71f}{has\+Last\+Event} (\hyperlink{namespaceuanc_1_1util_1_1event_a63f690675589114db9c6bcbe6f1088a4}{Events} event)
+\item 
+void \hyperlink{classuanc_1_1util_1_1event_1_1_event_token_a8e7086a70365a2cd3d5e759fdae20b30}{delete\+Last\+Event} (\hyperlink{namespaceuanc_1_1util_1_1event_a63f690675589114db9c6bcbe6f1088a4}{Events} event)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classuanc_1_1util_1_1event_1_1_event_token_aba45a46c615e2683daffdae82e2d3b8f}{Event\+Manager}
+\item 
+class \hyperlink{classuanc_1_1util_1_1event_1_1_event_token_a7512992e19dc2f4613dea5e056e626f9}{Event\+Observer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Token retrieved by the eventsystem. 
+
+This token describes the access of a class to the eventsystem. Every instance will be handled as a unqiue one. 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}!delete\+Last\+Event@{delete\+Last\+Event}}
+\index{delete\+Last\+Event@{delete\+Last\+Event}!uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}}
+\subsubsection[{\texorpdfstring{delete\+Last\+Event(\+Events event)}{deleteLastEvent(Events event)}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::util\+::event\+::\+Event\+Token\+::delete\+Last\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf Events}}]{event}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1util_1_1event_1_1_event_token_a8e7086a70365a2cd3d5e759fdae20b30}{}\label{classuanc_1_1util_1_1event_1_1_event_token_a8e7086a70365a2cd3d5e759fdae20b30}
+Can be used to delete the last event. \index{uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}!get\+Last\+Event@{get\+Last\+Event}}
+\index{get\+Last\+Event@{get\+Last\+Event}!uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}}
+\subsubsection[{\texorpdfstring{get\+Last\+Event(\+Events event)}{getLastEvent(Events event)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Container} uanc\+::util\+::event\+::\+Event\+Token\+::get\+Last\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf Events}}]{event}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1util_1_1event_1_1_event_token_ab2996160dd25090ef19681dcac70e302}{}\label{classuanc_1_1util_1_1event_1_1_event_token_ab2996160dd25090ef19681dcac70e302}
+Can be used to get the last event \index{uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}!has\+Last\+Event@{has\+Last\+Event}}
+\index{has\+Last\+Event@{has\+Last\+Event}!uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}}
+\subsubsection[{\texorpdfstring{has\+Last\+Event(\+Events event)}{hasLastEvent(Events event)}}]{\setlength{\rightskip}{0pt plus 5cm}bool uanc\+::util\+::event\+::\+Event\+Token\+::has\+Last\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf Events}}]{event}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1util_1_1event_1_1_event_token_ad0ee869b12bf8dfc3d7daa2aeb10d71f}{}\label{classuanc_1_1util_1_1event_1_1_event_token_ad0ee869b12bf8dfc3d7daa2aeb10d71f}
+Can be used to get the last event \index{uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}!trigger@{trigger}}
+\index{trigger@{trigger}!uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}}
+\subsubsection[{\texorpdfstring{trigger(\+Events event, Event\+Container data)}{trigger(Events event, EventContainer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::util\+::event\+::\+Event\+Token\+::trigger (
+\begin{DoxyParamCaption}
+\item[{{\bf Events}}]{event, }
+\item[{{\bf Event\+Container}}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1util_1_1event_1_1_event_token_a2bd43e6e227119b4b55a1a3adc7dd22c}{}\label{classuanc_1_1util_1_1event_1_1_event_token_a2bd43e6e227119b4b55a1a3adc7dd22c}
+
+
+Call this method to trigger an event. 
+
+This can be called to trigger an event. Therefore you need to supply an event and a data container.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & The event to trigger. \\
+\hline
+{\em data} & The data to pass with the event. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}!Event\+Manager@{Event\+Manager}}
+\index{Event\+Manager@{Event\+Manager}!uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}}
+\subsubsection[{\texorpdfstring{Event\+Manager}{EventManager}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Event\+Manager}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classuanc_1_1util_1_1event_1_1_event_token_aba45a46c615e2683daffdae82e2d3b8f}{}\label{classuanc_1_1util_1_1event_1_1_event_token_aba45a46c615e2683daffdae82e2d3b8f}
+\index{uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}!Event\+Observer@{Event\+Observer}}
+\index{Event\+Observer@{Event\+Observer}!uanc\+::util\+::event\+::\+Event\+Token@{uanc\+::util\+::event\+::\+Event\+Token}}
+\subsubsection[{\texorpdfstring{Event\+Observer}{EventObserver}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Event\+Observer}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classuanc_1_1util_1_1event_1_1_event_token_a7512992e19dc2f4613dea5e056e626f9}{}\label{classuanc_1_1util_1_1event_1_1_event_token_a7512992e19dc2f4613dea5e056e626f9}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/event/\hyperlink{_event_token_8h}{Event\+Token.\+h}\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/event/\hyperlink{_event_token_8cpp}{Event\+Token.\+cpp}\end{DoxyCompactItemize}

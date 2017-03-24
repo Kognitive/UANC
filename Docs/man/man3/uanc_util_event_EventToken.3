@@ -1,0 +1,74 @@
+.TH "uanc::util::event::EventToken" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::event::EventToken \- Token retrieved by the eventsystem\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EventToken\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBtrigger\fP (\fBEvents\fP event, \fBEventContainer\fP data)"
+.br
+.RI "\fICall this method to trigger an event\&. \fP"
+.ti -1c
+.RI "\fBEventContainer\fP \fBgetLastEvent\fP (\fBEvents\fP event)"
+.br
+.ti -1c
+.RI "bool \fBhasLastEvent\fP (\fBEvents\fP event)"
+.br
+.ti -1c
+.RI "void \fBdeleteLastEvent\fP (\fBEvents\fP event)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBEventManager\fP"
+.br
+.ti -1c
+.RI "class \fBEventObserver\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Token retrieved by the eventsystem\&. 
+
+This token describes the access of a class to the eventsystem\&. Every instance will be handled as a unqiue one\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::util::event::EventToken::deleteLastEvent (\fBEvents\fP event)"
+Can be used to delete the last event\&. 
+.SS "\fBEventContainer\fP uanc::util::event::EventToken::getLastEvent (\fBEvents\fP event)"
+Can be used to get the last event 
+.SS "bool uanc::util::event::EventToken::hasLastEvent (\fBEvents\fP event)"
+Can be used to get the last event 
+.SS "void uanc::util::event::EventToken::trigger (\fBEvents\fP event, \fBEventContainer\fP data)"
+
+.PP
+Call this method to trigger an event\&. This can be called to trigger an event\&. Therefore you need to supply an event and a data container\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIevent\fP The event to trigger\&. 
+.br
+\fIdata\fP The data to pass with the event\&. 
+.RE
+.PP
+
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "friend class \fBEventManager\fP\fC [friend]\fP"
+
+.SS "friend class \fBEventObserver\fP\fC [friend]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

@@ -1,0 +1,107 @@
+\hypertarget{classuanc_1_1util_1_1_dialog_util}{}\section{uanc\+:\+:util\+:\+:Dialog\+Util Class Reference}
+\label{classuanc_1_1util_1_1_dialog_util}\index{uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}}
+
+
+This class can be used to access various dialogs.  
+
+
+
+
+{\ttfamily \#include $<$Dialog\+Util.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1util_1_1_dialog_util_a1d190a4acd4808a578ddcd3d9db20b73}{Dialog\+Util} (Q\+Widget $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Constructor basically saves the passed parent internally. \end{DoxyCompactList}\item 
+Q\+String\+List \hyperlink{classuanc_1_1util_1_1_dialog_util_aaebf5202357b611c68bc7149b4dc5639}{choose\+Loadable\+Files} (const Q\+String \&directory)
+\begin{DoxyCompactList}\small\item\em Should basically return a path of an existing file. The dialog starts with the given folder. \end{DoxyCompactList}\item 
+Q\+String\+List \hyperlink{classuanc_1_1util_1_1_dialog_util_a7ed1e54433f3812a22c1c76e241420cb}{choose\+Loadable\+Files} ()
+\begin{DoxyCompactList}\small\item\em Should basically return a path of an existing file. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classuanc_1_1util_1_1_dialog_util_a4e6c388c66bf96c980a96e87e53d9cdd}{choose\+Save\+Path} ()
+\begin{DoxyCompactList}\small\item\em Should basically reutrn a path to an existing or not existent file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class can be used to access various dialogs. 
+
+Can open various dialogs, for example an open file dialog or an open save dialog 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}!Dialog\+Util@{Dialog\+Util}}
+\index{Dialog\+Util@{Dialog\+Util}!uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}}
+\subsubsection[{\texorpdfstring{Dialog\+Util(\+Q\+Widget $\ast$parent=0)}{DialogUtil(QWidget *parent=0)}}]{\setlength{\rightskip}{0pt plus 5cm}uanc\+::util\+::\+Dialog\+Util\+::\+Dialog\+Util (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dialog_util_a1d190a4acd4808a578ddcd3d9db20b73}{}\label{classuanc_1_1util_1_1_dialog_util_a1d190a4acd4808a578ddcd3d9db20b73}
+
+
+Constructor basically saves the passed parent internally. 
+
+Can be used to create a dialogutil with the specified parent
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & the parent to use \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}!choose\+Loadable\+Files@{choose\+Loadable\+Files}}
+\index{choose\+Loadable\+Files@{choose\+Loadable\+Files}!uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}}
+\subsubsection[{\texorpdfstring{choose\+Loadable\+Files(const Q\+String \&directory)}{chooseLoadableFiles(const QString &directory)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String\+List uanc\+::util\+::\+Dialog\+Util\+::choose\+Loadable\+Files (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{directory}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dialog_util_aaebf5202357b611c68bc7149b4dc5639}{}\label{classuanc_1_1util_1_1_dialog_util_aaebf5202357b611c68bc7149b4dc5639}
+
+
+Should basically return a path of an existing file. The dialog starts with the given folder. 
+
+This method should open a dialog and return a path to an existing file 
+\begin{DoxyParams}{Parameters}
+{\em directory} & The directory where to start the loading. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The path to the choosen file. 
+\end{DoxyReturn}
+\index{uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}!choose\+Loadable\+Files@{choose\+Loadable\+Files}}
+\index{choose\+Loadable\+Files@{choose\+Loadable\+Files}!uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}}
+\subsubsection[{\texorpdfstring{choose\+Loadable\+Files()}{chooseLoadableFiles()}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String\+List uanc\+::util\+::\+Dialog\+Util\+::choose\+Loadable\+Files (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dialog_util_a7ed1e54433f3812a22c1c76e241420cb}{}\label{classuanc_1_1util_1_1_dialog_util_a7ed1e54433f3812a22c1c76e241420cb}
+
+
+Should basically return a path of an existing file. 
+
+This method should open a dialog and return a path to an existing file
+
+\begin{DoxyReturn}{Returns}
+The path to the choosen file. 
+\end{DoxyReturn}
+\index{uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}!choose\+Save\+Path@{choose\+Save\+Path}}
+\index{choose\+Save\+Path@{choose\+Save\+Path}!uanc\+::util\+::\+Dialog\+Util@{uanc\+::util\+::\+Dialog\+Util}}
+\subsubsection[{\texorpdfstring{choose\+Save\+Path()}{chooseSavePath()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string uanc\+::util\+::\+Dialog\+Util\+::choose\+Save\+Path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dialog_util_a4e6c388c66bf96c980a96e87e53d9cdd}{}\label{classuanc_1_1util_1_1_dialog_util_a4e6c388c66bf96c980a96e87e53d9cdd}
+
+
+Should basically reutrn a path to an existing or not existent file. 
+
+This method should display a save dialog and gain a path to any file.
+
+\begin{DoxyReturn}{Returns}
+The choosen path 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/\hyperlink{_dialog_util_8h}{Dialog\+Util.\+h}\end{DoxyCompactItemize}

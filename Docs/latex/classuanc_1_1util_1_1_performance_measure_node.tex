@@ -1,0 +1,137 @@
+\hypertarget{classuanc_1_1util_1_1_performance_measure_node}{}\section{uanc\+:\+:util\+:\+:Performance\+Measure\+Node$<$ duration\+Type $>$ Class Template Reference}
+\label{classuanc_1_1util_1_1_performance_measure_node}\index{uanc\+::util\+::\+Performance\+Measure\+Node$<$ duration\+Type $>$@{uanc\+::util\+::\+Performance\+Measure\+Node$<$ duration\+Type $>$}}
+
+
+{\ttfamily \#include $<$Performance\+Measure\+Node.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceuanc_1_1util_a1327e6c853ec100096ba39559392affd}{Running\+State} \hyperlink{classuanc_1_1util_1_1_performance_measure_node_ac3bffb3fbe98084515e36054f6aa734c}{get\+Timer\+State} () const 
+\begin{DoxyCompactList}\small\item\em Simply return the time state. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1_performance_measure_node_a9d95ba2bd78adc3a94408ab7a617cec4}{Performance\+Measure\+Node} (std\+::string measurement\+Title)
+\begin{DoxyCompactList}\small\item\em Constructor basically saves the passed measurement titel. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1_performance_measure_node_ae0c28da21ea63503d9ec54de2ffcba8a}{Performance\+Measure\+Node} ()
+\begin{DoxyCompactList}\small\item\em The default constructor. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1util_1_1_performance_measure_node_af650b94015d87472e558fa1f48591bcc}{start} ()
+\begin{DoxyCompactList}\small\item\em Start the Measurement. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1util_1_1_performance_measure_node_aff3fedae5b6e11bc0c88ff8692dae14c}{stop} ()
+\begin{DoxyCompactList}\small\item\em Stop the Measurement. \end{DoxyCompactList}\item 
+duration\+Type \hyperlink{classuanc_1_1util_1_1_performance_measure_node_acb24e9f5bc4b722a69c0688900eb93ec}{get\+Node\+Duration} () const 
+\begin{DoxyCompactList}\small\item\em Simply returns the node duration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classuanc_1_1util_1_1_performance_measure_node_aade3a613184f260d27b6ee46eebcaee6}{measure\+Title}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node}{Performance\+Measure\+Node}$<$ duration\+Type $>$ $>$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node_a48b59e75db03b65e2dc2dfd7bbdf05bb}{subsequent\+Measure}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node}{Performance\+Measure\+Node}$<$ duration\+Type $>$ $>$ $>$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node_a226829aeae0cbf90d0ec0fe05b486431}{measure\+Sub\+Measure\+Child}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node}{Performance\+Measure\+Node}$<$ duration\+Type $>$ $>$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node_a0c668332709a4b28f41e8deb05020d85}{measure\+Parent}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node}{Performance\+Measure\+Node}$<$ duration\+Type $>$ $>$ \hyperlink{classuanc_1_1util_1_1_performance_measure_node_a32e4f3a9afcee94d9ea000ea66c3dbd2}{previous\+Measure}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!Performance\+Measure\+Node@{Performance\+Measure\+Node}}
+\index{Performance\+Measure\+Node@{Performance\+Measure\+Node}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{Performance\+Measure\+Node(std\+::string measurement\+Title)}{PerformanceMeasureNode(std::string measurementTitle)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::{\bf Performance\+Measure\+Node} (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{measurement\+Title}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_a9d95ba2bd78adc3a94408ab7a617cec4}{}\label{classuanc_1_1util_1_1_performance_measure_node_a9d95ba2bd78adc3a94408ab7a617cec4}
+
+
+Constructor basically saves the passed measurement titel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em measurement\+Title} & a String with the measurement titel \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!Performance\+Measure\+Node@{Performance\+Measure\+Node}}
+\index{Performance\+Measure\+Node@{Performance\+Measure\+Node}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{Performance\+Measure\+Node()}{PerformanceMeasureNode()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::{\bf Performance\+Measure\+Node} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_ae0c28da21ea63503d9ec54de2ffcba8a}{}\label{classuanc_1_1util_1_1_performance_measure_node_ae0c28da21ea63503d9ec54de2ffcba8a}
+
+
+The default constructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!get\+Node\+Duration@{get\+Node\+Duration}}
+\index{get\+Node\+Duration@{get\+Node\+Duration}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{get\+Node\+Duration() const }{getNodeDuration() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ duration\+Type {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::get\+Node\+Duration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_acb24e9f5bc4b722a69c0688900eb93ec}{}\label{classuanc_1_1util_1_1_performance_measure_node_acb24e9f5bc4b722a69c0688900eb93ec}
+
+
+Simply returns the node duration. 
+
+\begin{DoxyReturn}{Returns}
+a node duration 
+\end{DoxyReturn}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!get\+Timer\+State@{get\+Timer\+State}}
+\index{get\+Timer\+State@{get\+Timer\+State}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{get\+Timer\+State() const }{getTimerState() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ {\bf Running\+State} {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::get\+Timer\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_ac3bffb3fbe98084515e36054f6aa734c}{}\label{classuanc_1_1util_1_1_performance_measure_node_ac3bffb3fbe98084515e36054f6aa734c}
+
+
+Simply return the time state. 
+
+return a timer state \index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!start@{start}}
+\index{start@{start}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{start()}{start()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ void {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_af650b94015d87472e558fa1f48591bcc}{}\label{classuanc_1_1util_1_1_performance_measure_node_af650b94015d87472e558fa1f48591bcc}
+
+
+Start the Measurement. 
+
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!stop@{stop}}
+\index{stop@{stop}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{stop()}{stop()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ void {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_aff3fedae5b6e11bc0c88ff8692dae14c}{}\label{classuanc_1_1util_1_1_performance_measure_node_aff3fedae5b6e11bc0c88ff8692dae14c}
+
+
+Stop the Measurement. 
+
+
+
+\subsection{Member Data Documentation}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!measure\+Parent@{measure\+Parent}}
+\index{measure\+Parent@{measure\+Parent}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{measure\+Parent}{measureParent}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ std\+::shared\+\_\+ptr$<${\bf Performance\+Measure\+Node}$<$duration\+Type$>$ $>$ {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::measure\+Parent}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_a0c668332709a4b28f41e8deb05020d85}{}\label{classuanc_1_1util_1_1_performance_measure_node_a0c668332709a4b28f41e8deb05020d85}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!measure\+Sub\+Measure\+Child@{measure\+Sub\+Measure\+Child}}
+\index{measure\+Sub\+Measure\+Child@{measure\+Sub\+Measure\+Child}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{measure\+Sub\+Measure\+Child}{measureSubMeasureChild}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ std\+::vector$<$std\+::shared\+\_\+ptr$<${\bf Performance\+Measure\+Node}$<$duration\+Type$>$ $>$ $>$ {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::measure\+Sub\+Measure\+Child}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_a226829aeae0cbf90d0ec0fe05b486431}{}\label{classuanc_1_1util_1_1_performance_measure_node_a226829aeae0cbf90d0ec0fe05b486431}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!measure\+Title@{measure\+Title}}
+\index{measure\+Title@{measure\+Title}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{measure\+Title}{measureTitle}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ std\+::string {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::measure\+Title}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_aade3a613184f260d27b6ee46eebcaee6}{}\label{classuanc_1_1util_1_1_performance_measure_node_aade3a613184f260d27b6ee46eebcaee6}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!previous\+Measure@{previous\+Measure}}
+\index{previous\+Measure@{previous\+Measure}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{previous\+Measure}{previousMeasure}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ std\+::shared\+\_\+ptr$<${\bf Performance\+Measure\+Node}$<$duration\+Type$>$ $>$ {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::previous\+Measure}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_a32e4f3a9afcee94d9ea000ea66c3dbd2}{}\label{classuanc_1_1util_1_1_performance_measure_node_a32e4f3a9afcee94d9ea000ea66c3dbd2}
+\index{uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}!subsequent\+Measure@{subsequent\+Measure}}
+\index{subsequent\+Measure@{subsequent\+Measure}!uanc\+::util\+::\+Performance\+Measure\+Node@{uanc\+::util\+::\+Performance\+Measure\+Node}}
+\subsubsection[{\texorpdfstring{subsequent\+Measure}{subsequentMeasure}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename duration\+Type  = std\+::chrono\+::microseconds$>$ std\+::shared\+\_\+ptr$<${\bf Performance\+Measure\+Node}$<$duration\+Type$>$ $>$ {\bf uanc\+::util\+::\+Performance\+Measure\+Node}$<$ duration\+Type $>$\+::subsequent\+Measure}\hypertarget{classuanc_1_1util_1_1_performance_measure_node_a48b59e75db03b65e2dc2dfd7bbdf05bb}{}\label{classuanc_1_1util_1_1_performance_measure_node_a48b59e75db03b65e2dc2dfd7bbdf05bb}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/\hyperlink{_performance_measure_node_8h}{Performance\+Measure\+Node.\+h}\end{DoxyCompactItemize}

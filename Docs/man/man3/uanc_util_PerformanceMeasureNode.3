@@ -1,0 +1,115 @@
+.TH "uanc::util::PerformanceMeasureNode< durationType >" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::PerformanceMeasureNode< durationType > \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PerformanceMeasureNode\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRunningState\fP \fBgetTimerState\fP () const "
+.br
+.RI "\fISimply return the time state\&. \fP"
+.ti -1c
+.RI "\fBPerformanceMeasureNode\fP (std::string measurementTitle)"
+.br
+.RI "\fIConstructor basically saves the passed measurement titel\&. \fP"
+.ti -1c
+.RI "\fBPerformanceMeasureNode\fP ()"
+.br
+.RI "\fIThe default constructor\&. \fP"
+.ti -1c
+.RI "void \fBstart\fP ()"
+.br
+.RI "\fIStart the Measurement\&. \fP"
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.RI "\fIStop the Measurement\&. \fP"
+.ti -1c
+.RI "durationType \fBgetNodeDuration\fP () const "
+.br
+.RI "\fISimply returns the node duration\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBmeasureTitle\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBPerformanceMeasureNode\fP< durationType > > \fBsubsequentMeasure\fP"
+.br
+.ti -1c
+.RI "std::vector< std::shared_ptr< \fBPerformanceMeasureNode\fP< durationType > > > \fBmeasureSubMeasureChild\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBPerformanceMeasureNode\fP< durationType > > \fBmeasureParent\fP"
+.br
+.ti -1c
+.RI "std::shared_ptr< \fBPerformanceMeasureNode\fP< durationType > > \fBpreviousMeasure\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename durationType  = std::chrono::microseconds> \fBuanc::util::PerformanceMeasureNode\fP< durationType >::\fBPerformanceMeasureNode\fP (std::string measurementTitle)\fC [inline]\fP"
+
+.PP
+Constructor basically saves the passed measurement titel\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImeasurementTitle\fP a String with the measurement titel 
+.RE
+.PP
+
+.SS "template<typename durationType  = std::chrono::microseconds> \fBuanc::util::PerformanceMeasureNode\fP< durationType >::\fBPerformanceMeasureNode\fP ()\fC [inline]\fP"
+
+.PP
+The default constructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename durationType  = std::chrono::microseconds> durationType \fBuanc::util::PerformanceMeasureNode\fP< durationType >::getNodeDuration () const\fC [inline]\fP"
+
+.PP
+Simply returns the node duration\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a node duration 
+.RE
+.PP
+
+.SS "template<typename durationType  = std::chrono::microseconds> \fBRunningState\fP \fBuanc::util::PerformanceMeasureNode\fP< durationType >::getTimerState () const\fC [inline]\fP"
+
+.PP
+Simply return the time state\&. return a timer state 
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasureNode\fP< durationType >::start ()\fC [inline]\fP"
+
+.PP
+Start the Measurement\&. 
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasureNode\fP< durationType >::stop ()\fC [inline]\fP"
+
+.PP
+Stop the Measurement\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename durationType  = std::chrono::microseconds> std::shared_ptr<\fBPerformanceMeasureNode\fP<durationType> > \fBuanc::util::PerformanceMeasureNode\fP< durationType >::measureParent"
+
+.SS "template<typename durationType  = std::chrono::microseconds> std::vector<std::shared_ptr<\fBPerformanceMeasureNode\fP<durationType> > > \fBuanc::util::PerformanceMeasureNode\fP< durationType >::measureSubMeasureChild"
+
+.SS "template<typename durationType  = std::chrono::microseconds> std::string \fBuanc::util::PerformanceMeasureNode\fP< durationType >::measureTitle"
+
+.SS "template<typename durationType  = std::chrono::microseconds> std::shared_ptr<\fBPerformanceMeasureNode\fP<durationType> > \fBuanc::util::PerformanceMeasureNode\fP< durationType >::previousMeasure"
+
+.SS "template<typename durationType  = std::chrono::microseconds> std::shared_ptr<\fBPerformanceMeasureNode\fP<durationType> > \fBuanc::util::PerformanceMeasureNode\fP< durationType >::subsequentMeasure"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

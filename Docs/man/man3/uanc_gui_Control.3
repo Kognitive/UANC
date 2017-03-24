@@ -1,0 +1,83 @@
+.TH "uanc::gui::Control" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::Control \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Control\&.h>\fP
+.PP
+Inherits QCustomPlot\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBControl\fP (\fBPlotWidget\fP *parent)"
+.br
+.RI "\fIConstructor of \fBControl\fP class\&. \fP"
+.ti -1c
+.RI "void \fBsetData\fP (QCPGraphDataContainer *data, double maxDataValue, double minDataValue)"
+.br
+.RI "\fIrescales the axes for the data rescales the axis to a given minimum and maximum of a data \fP"
+.ti -1c
+.RI "void \fBupdateNavBox\fP (QCPRange signalZoomRange)"
+.br
+.RI "\fIupdates navigation box updates navigation box after zoom \fP"
+.ti -1c
+.RI "double \fBgetBoxLeft\fP ()"
+.br
+.ti -1c
+.RI "double \fBgetBoxRight\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::Control::Control (\fBPlotWidget\fP * parent)"
+
+.PP
+Constructor of \fBControl\fP class\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP this is the parent widget 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "double uanc::gui::Control::getBoxLeft ()"
+
+.SS "double uanc::gui::Control::getBoxRight ()"
+
+.SS "void uanc::gui::Control::setData (QCPGraphDataContainer * data, double maxDataValue, double minDataValue)"
+
+.PP
+rescales the axes for the data rescales the axis to a given minimum and maximum of a data 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI*data\fP this is the data that has to be rescaled 
+.br
+\fImaxDataValue\fP this is the maximum value in the data 
+.br
+\fIminDataValue\fP this is the minimum value in the data 
+.RE
+.PP
+
+.SS "void uanc::gui::Control::updateNavBox (QCPRange signalZoomRange)"
+
+.PP
+updates navigation box updates navigation box after zoom 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsignalZoomRange\fP the range of the zoomed signal 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

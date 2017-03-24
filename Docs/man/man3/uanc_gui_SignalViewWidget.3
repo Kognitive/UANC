@@ -1,0 +1,70 @@
+.TH "uanc::gui::SignalViewWidget" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::SignalViewWidget \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SignalViewWidget\&.h>\fP
+.PP
+Inherits QWidget, and \fBuanc::util::event::EventObserver\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSignalViewWidget\fP (bool hasError=true)"
+.br
+.ti -1c
+.RI "void \fBsetSignalModel\fP (std::shared_ptr< \fBInvertedModel\fP > signalModel)"
+.br
+.ti -1c
+.RI "void \fBtriggered\fP (\fBEvents\fP event, \fBEventContainer\fP data) final"
+.br
+.RI "\fIOverride to catch event\&. \fP"
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::SignalViewWidget::SignalViewWidget (bool hasError = \fCtrue\fP)\fC [inline]\fP"
+Default constructore for the signal view widget\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIid\fP The unique id of this widget\&. 
+.br
+\fIhasError\fP True, if it has error\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::gui::SignalViewWidget::setSignalModel (std::shared_ptr< \fBInvertedModel\fP > signalModel)\fC [inline]\fP"
+This method sets the signal model internally\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsignalModel\fP The signal model to set\&. 
+.RE
+.PP
+
+.SS "void uanc::gui::SignalViewWidget::triggered (\fBEvents\fP event, \fBEventContainer\fP data)\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Override to catch event\&. This can be used, to integrate a handling to a specific event\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIevent\fP The event which should be triggered\&. 
+.br
+\fIdata\fP The data to supply\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::util::event::EventObserver\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

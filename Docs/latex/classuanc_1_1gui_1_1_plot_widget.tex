@@ -1,0 +1,179 @@
+\hypertarget{classuanc_1_1gui_1_1_plot_widget}{}\section{uanc\+:\+:gui\+:\+:Plot\+Widget Class Reference}
+\label{classuanc_1_1gui_1_1_plot_widget}\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+
+
+{\ttfamily \#include $<$Plot\+Widget.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:gui\+:\+:Plot\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classuanc_1_1gui_1_1_plot_widget}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classuanc_1_1gui_1_1_plot_widget_ac9bd837545242bbe1f9e0b5ca6b6a40a}{save\+Signal} ()
+\begin{DoxyCompactList}\small\item\em saves the signal to the fileactor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1gui_1_1_plot_widget_af448f772ff5abbe5786a7fa0a448e217}{Plot\+Widget} ()
+\item 
+void \hyperlink{classuanc_1_1gui_1_1_plot_widget_a66a5565461bcb900c4d7003f75781e62}{set\+Signal} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{uanc\+::amv\+::\+Inverted\+Model} $>$ \hyperlink{classuanc_1_1gui_1_1_plot_widget_a2c7050da7a3c85ce55cb95ffd1dc2eb8}{signal})
+\begin{DoxyCompactList}\small\item\em This method is for setting a Signal. This method is for setting a Signal. The Signal will immediately be plotted. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1gui_1_1_plot_widget_a15f259c15b2db5c26f9181f8a8fca705}{set\+Centered\+Y\+Axis} (bool b)
+\begin{DoxyCompactList}\small\item\em This method is for setting the Y\+Axis This method is for setting the Y\+Axis to true or false. \end{DoxyCompactList}\item 
+const Q\+C\+P\+Range \hyperlink{classuanc_1_1gui_1_1_plot_widget_add4f78d4efad5b7f27caae2535620e56}{get\+Plot\+X\+Range} () const 
+\begin{DoxyCompactList}\small\item\em Returns the current range of the x axis of the plot. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1gui_1_1_plot_widget_a8a2eb029622ad4ec3ee100f9bcc68732}{plot\+Changed} ()
+\begin{DoxyCompactList}\small\item\em This method is for triggering the control to update because the plot changed. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1gui_1_1_plot_widget_a9db10479dc8c6590713a18e5a2607138}{control\+Changed} ()
+\begin{DoxyCompactList}\small\item\em This method is for triggering the plot to update because the state of the control changed. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_signal_model}{uanc\+::amv\+::\+Signal\+Model} $>$ \hyperlink{classuanc_1_1gui_1_1_plot_widget_a2c7050da7a3c85ce55cb95ffd1dc2eb8}{signal} ()
+\begin{DoxyCompactList}\small\item\em Constructor for signals. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_signal_model}{uanc\+::amv\+::\+Signal\+Model} $>$ \hyperlink{classuanc_1_1gui_1_1_plot_widget_a9a678b758c7ebf06680ed190badcfe36}{error\+Signal} ()
+\begin{DoxyCompactList}\small\item\em simply returns the error signal \end{DoxyCompactList}\item 
+double \hyperlink{classuanc_1_1gui_1_1_plot_widget_ab89e84ccfbc81bc77fef0fd9301273a3}{last\+Index} ()
+\begin{DoxyCompactList}\small\item\em simple returns the the last index \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!Plot\+Widget@{Plot\+Widget}}
+\index{Plot\+Widget@{Plot\+Widget}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{Plot\+Widget()}{PlotWidget()}}]{\setlength{\rightskip}{0pt plus 5cm}uanc\+::gui\+::\+Plot\+Widget\+::\+Plot\+Widget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1gui_1_1_plot_widget_af448f772ff5abbe5786a7fa0a448e217}{}\label{classuanc_1_1gui_1_1_plot_widget_af448f772ff5abbe5786a7fa0a448e217}
+Contructor 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!control\+Changed@{control\+Changed}}
+\index{control\+Changed@{control\+Changed}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{control\+Changed()}{controlChanged()}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::gui\+::\+Plot\+Widget\+::control\+Changed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1gui_1_1_plot_widget_a9db10479dc8c6590713a18e5a2607138}{}\label{classuanc_1_1gui_1_1_plot_widget_a9db10479dc8c6590713a18e5a2607138}
+
+
+This method is for triggering the plot to update because the state of the control changed. 
+
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!error\+Signal@{error\+Signal}}
+\index{error\+Signal@{error\+Signal}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{error\+Signal()}{errorSignal()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf uanc\+::amv\+::\+Signal\+Model}$>$ uanc\+::gui\+::\+Plot\+Widget\+::error\+Signal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1gui_1_1_plot_widget_a9a678b758c7ebf06680ed190badcfe36}{}\label{classuanc_1_1gui_1_1_plot_widget_a9a678b758c7ebf06680ed190badcfe36}
+
+
+simply returns the error signal 
+
+\begin{DoxyReturn}{Returns}
+a Signal\+Model of the error signal 
+\end{DoxyReturn}
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!get\+Plot\+X\+Range@{get\+Plot\+X\+Range}}
+\index{get\+Plot\+X\+Range@{get\+Plot\+X\+Range}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{get\+Plot\+X\+Range() const }{getPlotXRange() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+C\+P\+Range uanc\+::gui\+::\+Plot\+Widget\+::get\+Plot\+X\+Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classuanc_1_1gui_1_1_plot_widget_add4f78d4efad5b7f27caae2535620e56}{}\label{classuanc_1_1gui_1_1_plot_widget_add4f78d4efad5b7f27caae2535620e56}
+
+
+Returns the current range of the x axis of the plot. 
+
+\begin{DoxyReturn}{Returns}
+Current range of the x axis of the plot. 
+\end{DoxyReturn}
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!last\+Index@{last\+Index}}
+\index{last\+Index@{last\+Index}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{last\+Index()}{lastIndex()}}]{\setlength{\rightskip}{0pt plus 5cm}double uanc\+::gui\+::\+Plot\+Widget\+::last\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1gui_1_1_plot_widget_ab89e84ccfbc81bc77fef0fd9301273a3}{}\label{classuanc_1_1gui_1_1_plot_widget_ab89e84ccfbc81bc77fef0fd9301273a3}
+
+
+simple returns the the last index 
+
+\begin{DoxyReturn}{Returns}
+a double with the last index 
+\end{DoxyReturn}
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!plot\+Changed@{plot\+Changed}}
+\index{plot\+Changed@{plot\+Changed}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{plot\+Changed()}{plotChanged()}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::gui\+::\+Plot\+Widget\+::plot\+Changed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1gui_1_1_plot_widget_a8a2eb029622ad4ec3ee100f9bcc68732}{}\label{classuanc_1_1gui_1_1_plot_widget_a8a2eb029622ad4ec3ee100f9bcc68732}
+
+
+This method is for triggering the control to update because the plot changed. 
+
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!save\+Signal@{save\+Signal}}
+\index{save\+Signal@{save\+Signal}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{save\+Signal}{saveSignal}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::gui\+::\+Plot\+Widget\+::save\+Signal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classuanc_1_1gui_1_1_plot_widget_ac9bd837545242bbe1f9e0b5ca6b6a40a}{}\label{classuanc_1_1gui_1_1_plot_widget_ac9bd837545242bbe1f9e0b5ca6b6a40a}
+
+
+saves the signal to the fileactor 
+
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!set\+Centered\+Y\+Axis@{set\+Centered\+Y\+Axis}}
+\index{set\+Centered\+Y\+Axis@{set\+Centered\+Y\+Axis}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{set\+Centered\+Y\+Axis(bool b)}{setCenteredYAxis(bool b)}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::gui\+::\+Plot\+Widget\+::set\+Centered\+Y\+Axis (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1gui_1_1_plot_widget_a15f259c15b2db5c26f9181f8a8fca705}{}\label{classuanc_1_1gui_1_1_plot_widget_a15f259c15b2db5c26f9181f8a8fca705}
+
+
+This method is for setting the Y\+Axis This method is for setting the Y\+Axis to true or false. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & given boolean \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!set\+Signal@{set\+Signal}}
+\index{set\+Signal@{set\+Signal}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{set\+Signal(std\+::shared\+\_\+ptr$<$ uanc\+::amv\+::\+Inverted\+Model $>$ signal)}{setSignal(std::shared_ptr< uanc::amv::InvertedModel > signal)}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::gui\+::\+Plot\+Widget\+::set\+Signal (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf uanc\+::amv\+::\+Inverted\+Model} $>$}]{signal}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1gui_1_1_plot_widget_a66a5565461bcb900c4d7003f75781e62}{}\label{classuanc_1_1gui_1_1_plot_widget_a66a5565461bcb900c4d7003f75781e62}
+
+
+This method is for setting a Signal. This method is for setting a Signal. The Signal will immediately be plotted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signal} & The Aquila\+::\+Signal\+Source which will be plotted \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}!signal@{signal}}
+\index{signal@{signal}!uanc\+::gui\+::\+Plot\+Widget@{uanc\+::gui\+::\+Plot\+Widget}}
+\subsubsection[{\texorpdfstring{signal()}{signal()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf uanc\+::amv\+::\+Signal\+Model}$>$ uanc\+::gui\+::\+Plot\+Widget\+::signal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1gui_1_1_plot_widget_a2c7050da7a3c85ce55cb95ffd1dc2eb8}{}\label{classuanc_1_1gui_1_1_plot_widget_a2c7050da7a3c85ce55cb95ffd1dc2eb8}
+
+
+Constructor for signals. 
+
+\begin{DoxyReturn}{Returns}
+a Signal\+Model 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/gui/\hyperlink{_plot_widget_8h}{Plot\+Widget.\+h}\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/gui/\hyperlink{_plot_widget_8cpp}{Plot\+Widget.\+cpp}\end{DoxyCompactItemize}

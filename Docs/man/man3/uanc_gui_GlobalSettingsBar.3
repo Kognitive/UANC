@@ -1,0 +1,54 @@
+.TH "uanc::gui::GlobalSettingsBar" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::GlobalSettingsBar \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <GlobalSettingsBar\&.h>\fP
+.PP
+Inherits QWidget, and \fBuanc::util::event::EventObserver\fP\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBchangedView\fP (int index)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBGlobalSettingsBar\fP (int hasRight)"
+.br
+.ti -1c
+.RI "void \fBtriggered\fP (\fBEvents\fP event, \fBEventContainer\fP data) final"
+.br
+.ti -1c
+.RI "void \fBchangedChannel\fP (int index)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+This class represents the global settings bar\&. It fires an event so that all views can change\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::GlobalSettingsBar::GlobalSettingsBar (int hasRight)\fC [inline]\fP"
+Default constructor for the signal view change bar\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::gui::GlobalSettingsBar::changedChannel (int index)\fC [inline]\fP"
+Slot if channel changed 
+.SS "void uanc::gui::GlobalSettingsBar::changedView (int index)\fC [inline]\fP, \fC [slot]\fP"
+Slot if the view changed 
+.SS "void uanc::gui::GlobalSettingsBar::triggered (\fBEvents\fP event, \fBEventContainer\fP data)\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+This method gets called when one of the events was triggered\&. 
+.PP
+Implements \fBuanc::util::event::EventObserver\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

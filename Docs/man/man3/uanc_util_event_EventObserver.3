@@ -1,0 +1,97 @@
+.TH "uanc::util::event::EventObserver" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::event::EventObserver \- Represents the observer interface\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EventObserver\&.h>\fP
+.PP
+Inherited by \fBuanc::gui::GlobalSettingsBar\fP, \fBuanc::gui::HeatWidget\fP\fC [private]\fP, \fBuanc::gui::PlotWidget\fP, and \fBuanc::gui::SignalViewWidget\fP\&.
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEventObserver\fP (std::initializer_list< \fBEvents\fP > events)"
+.br
+.RI "\fIConstructor for observing the event\&. \fP"
+.ti -1c
+.RI "\fB~EventObserver\fP ()"
+.br
+.RI "\fIDeconstructor\&. \fP"
+.ti -1c
+.RI "virtual void \fBtriggered\fP (\fBEvents\fP event, \fBEventContainer\fP data)=0"
+.br
+.RI "\fIOverride to catch event\&. \fP"
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBEventToken\fP * \fB_token\fP"
+.br
+.RI "\fIUnique Pointer to the token\&. \fP"
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBEventManager\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents the observer interface\&. 
+
+This class is an event observer\&. Simply derive from it to let a class access the event system\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::util::event::EventObserver::EventObserver (std::initializer_list< \fBEvents\fP > events)\fC [protected]\fP"
+
+.PP
+Constructor for observing the event\&. This constructor can be used register all neccessary events inside\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIevents\fP The events to register\&. 
+.RE
+.PP
+
+.SS "uanc::util::event::EventObserver::~EventObserver ()\fC [protected]\fP"
+
+.PP
+Deconstructor\&. This deconstructor can be used to deregister the token\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void uanc::util::event::EventObserver::triggered (\fBEvents\fP event, \fBEventContainer\fP data)\fC [protected]\fP, \fC [pure virtual]\fP"
+
+.PP
+Override to catch event\&. This can be used, to integrate a handling to a specific event\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIevent\fP The event which should be triggered\&. 
+.br
+\fIdata\fP The data to supply\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::gui::HeatWidget\fP, \fBuanc::gui::GlobalSettingsBar\fP, and \fBuanc::gui::SignalViewWidget\fP\&.
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "friend class \fBEventManager\fP\fC [friend]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBEventToken\fP* uanc::util::event::EventObserver::_token\fC [protected]\fP"
+
+.PP
+Unique Pointer to the token\&. This can be used to access the token\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

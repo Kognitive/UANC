@@ -1,0 +1,60 @@
+.TH "uanc::amv::AlgorithmThread" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::AlgorithmThread \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <AlgorithmThread\&.h>\fP
+.PP
+Inherits QThread\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetAlgorithm\fP (\fBIAlgorithm\fP *algorithm, std::shared_ptr< \fBInvertedModel\fP > model)"
+.br
+.RI "\fICan be used to set an algorithm\&. \fP"
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBalgorithmFinished\fP ()"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBrun\fP () final"
+.br
+.RI "\fIRu method of this thread\&. \fP"
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::amv::AlgorithmThread::algorithmFinished ()\fC [signal]\fP"
+Gets called when the algorithm is finished\&. 
+.SS "void uanc::amv::AlgorithmThread::run ()\fC [inline]\fP, \fC [final]\fP, \fC [protected]\fP"
+
+.PP
+Ru method of this thread\&. This method does the running of the algorithm\&. 
+.SS "void uanc::amv::AlgorithmThread::setAlgorithm (\fBIAlgorithm\fP * algorithm, std::shared_ptr< \fBInvertedModel\fP > model)\fC [inline]\fP, \fC [slot]\fP"
+
+.PP
+Can be used to set an algorithm\&. This method takes a pointer and saves it internally, to actually know which algorithm to use for the operation\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIalgorithm\fP The \fBAlgorithm\fP to use\&. 
+.br
+\fImodel\fP The Model to invert\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

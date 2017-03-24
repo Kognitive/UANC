@@ -1,0 +1,44 @@
+.TH "uanc::amv::signal::model::SpectrogramModel" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::signal::model::SpectrogramModel \- This is a model for the transformation of a signal to a spectrogram representation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SpectrogramModel\&.h>\fP
+.PP
+Inherits \fBuanc::amv::InvertedModel\fP\&.
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< Aquila::Spectrogram > \fBleft_spectrum\fP"
+.br
+.RI "\fIHolds the spectrum\&. \fP"
+.ti -1c
+.RI "std::shared_ptr< Aquila::Spectrogram > \fBright_spectrum\fP"
+.br
+.RI "\fIHolds the spectrum\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is a model for the transformation of a signal to a spectrogram representation\&. 
+
+It used by the FourierTransformationAlgorithm\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "std::shared_ptr<Aquila::Spectrogram> uanc::amv::signal::model::SpectrogramModel::left_spectrum"
+
+.PP
+Holds the spectrum\&. This field holds the spectrum of the original signal\&. 
+.SS "std::shared_ptr<Aquila::Spectrogram> uanc::amv::signal::model::SpectrogramModel::right_spectrum"
+
+.PP
+Holds the spectrum\&. This field holds the spectrum of the original signal\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

@@ -1,0 +1,133 @@
+.TH "uanc::util::DummyActor" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::DummyActor \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <DummyActor\&.h>\fP
+.PP
+Inherits \fBuanc::util::FileActor< Aquila::SignalSource >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDummyActor\fP (const std::string &path)"
+.br
+.RI "\fIBasic constructor which saves a path string internally\&. \fP"
+.ti -1c
+.RI "std::shared_ptr< Aquila::SignalSource > \fBloadData\fP ()"
+.br
+.RI "\fIThis method should load the file from the plate\&. \fP"
+.ti -1c
+.RI "void \fBsaveData\fP (std::shared_ptr< Aquila::SignalSource > source)"
+.br
+.RI "\fIThis method should save a file to the plate\&. \fP"
+.ti -1c
+.RI "\fBDummyActor\fP * \fBsetType\fP (std::string type)"
+.br
+.RI "\fIsets the type of the given string \fP"
+.ti -1c
+.RI "\fBDummyActor\fP * \fBsetFrequency\fP (Aquila::FrequencyType frequency)"
+.br
+.RI "\fIsets the frequency \fP"
+.ti -1c
+.RI "\fBDummyActor\fP * \fBsetAmplitude\fP (Aquila::FrequencyType amplitude)"
+.br
+.RI "\fIsets the amplitude of an FrequencyType \fP"
+.ti -1c
+.RI "\fBDummyActor\fP * \fBsetSampleCount\fP (size_t count)"
+.br
+.RI "\fIsets the number of samples \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::util::DummyActor::DummyActor (const std::string & path)\fC [inline]\fP"
+
+.PP
+Basic constructor which saves a path string internally\&. This constructor just save the passed string internally\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP The path to the acted file 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::shared_ptr<Aquila::SignalSource> uanc::util::DummyActor::loadData ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+This method should load the file from the plate\&. This method should return the loaded T
+.PP
+\fBReturns:\fP
+.RS 4
+the loaded T 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::util::FileActor< Aquila::SignalSource >\fP\&.
+.SS "void uanc::util::DummyActor::saveData (std::shared_ptr< Aquila::SignalSource > source)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+This method should save a file to the plate\&. This should method should save the passed T to the specified path\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsource\fP The source to save 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::util::FileActor< Aquila::SignalSource >\fP\&.
+.SS "\fBDummyActor\fP* uanc::util::DummyActor::setAmplitude (Aquila::FrequencyType amplitude)\fC [inline]\fP"
+
+.PP
+sets the amplitude of an FrequencyType 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIamplitude\fP a FrequencyType 
+.RE
+.PP
+
+.SS "\fBDummyActor\fP* uanc::util::DummyActor::setFrequency (Aquila::FrequencyType frequency)\fC [inline]\fP"
+
+.PP
+sets the frequency 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfrequency\fP a FrequencyType 
+.RE
+.PP
+
+.SS "\fBDummyActor\fP* uanc::util::DummyActor::setSampleCount (size_t count)\fC [inline]\fP"
+
+.PP
+sets the number of samples 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcount\fP number of samples counted 
+.RE
+.PP
+
+.SS "\fBDummyActor\fP* uanc::util::DummyActor::setType (std::string type)\fC [inline]\fP"
+
+.PP
+sets the type of the given string 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItype\fP string with the type 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

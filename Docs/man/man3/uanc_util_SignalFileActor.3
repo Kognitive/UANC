@@ -1,0 +1,79 @@
+.TH "uanc::util::SignalFileActor" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::SignalFileActor \- Basic Signal file loader class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SignalFileActor\&.h>\fP
+.PP
+Inherits \fBuanc::util::FileActor< InvertedModel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSignalFileActor\fP (const std::string &path)"
+.br
+.RI "\fIBasic constructor which saves a path string internally\&. \fP"
+.ti -1c
+.RI "std::shared_ptr< \fBInvertedModel\fP > \fBloadData\fP ()"
+.br
+.RI "\fIThis method should load the file from the plate\&. \fP"
+.ti -1c
+.RI "void \fBsaveData\fP (std::shared_ptr< \fBInvertedModel\fP > source)"
+.br
+.RI "\fIThis method should save a file to the plate\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Basic Signal file loader class\&. 
+
+Is derived from the file loader class itself\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::util::SignalFileActor::SignalFileActor (const std::string & path)\fC [inline]\fP"
+
+.PP
+Basic constructor which saves a path string internally\&. This constructor just save the passed string internally\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP The path to the acted file 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::shared_ptr<\fBInvertedModel\fP> uanc::util::SignalFileActor::loadData ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+This method should load the file from the plate\&. This method should return the loaded T
+.PP
+\fBReturns:\fP
+.RS 4
+the loaded T 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::util::FileActor< InvertedModel >\fP\&.
+.SS "void uanc::util::SignalFileActor::saveData (std::shared_ptr< \fBInvertedModel\fP > source)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+This method should save a file to the plate\&. This should method should save the passed T to the specified path\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsource\fP The source to save 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::util::FileActor< InvertedModel >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

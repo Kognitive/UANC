@@ -1,0 +1,61 @@
+.TH "uanc::util::event::EventManager" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::event::EventManager \- Simple event manager\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EventManager\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB~EventManager\fP ()"
+.br
+.RI "\fIBasic destructor\&. \fP"
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBEventToken\fP"
+.br
+.ti -1c
+.RI "class \fBEventObserver\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Simple event manager\&. 
+
+This class represents the event manager and can be accessed via the singleton pattern from all classes which are friends of this one\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::util::event::EventManager::~EventManager ()"
+
+.PP
+Basic destructor\&. This deconstructore destroys the registered instance\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::util::event::EventManager::destroy ()\fC [static]\fP"
+This method gets called to destroy the event manager\&. 
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "friend class \fBEventObserver\fP\fC [friend]\fP"
+
+.SS "friend class \fBEventToken\fP\fC [friend]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

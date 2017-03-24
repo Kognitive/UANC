@@ -1,0 +1,93 @@
+.TH "uanc::util::DialogUtil" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::DialogUtil \- This class can be used to access various dialogs\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <DialogUtil\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDialogUtil\fP (QWidget *parent=0)"
+.br
+.RI "\fIConstructor basically saves the passed parent internally\&. \fP"
+.ti -1c
+.RI "QStringList \fBchooseLoadableFiles\fP (const QString &directory)"
+.br
+.RI "\fIShould basically return a path of an existing file\&. The dialog starts with the given folder\&. \fP"
+.ti -1c
+.RI "QStringList \fBchooseLoadableFiles\fP ()"
+.br
+.RI "\fIShould basically return a path of an existing file\&. \fP"
+.ti -1c
+.RI "std::string \fBchooseSavePath\fP ()"
+.br
+.RI "\fIShould basically reutrn a path to an existing or not existent file\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This class can be used to access various dialogs\&. 
+
+Can open various dialogs, for example an open file dialog or an open save dialog 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::util::DialogUtil::DialogUtil (QWidget * parent = \fC0\fP)\fC [inline]\fP"
+
+.PP
+Constructor basically saves the passed parent internally\&. Can be used to create a dialogutil with the specified parent
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP the parent to use 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QStringList uanc::util::DialogUtil::chooseLoadableFiles (const QString & directory)\fC [inline]\fP"
+
+.PP
+Should basically return a path of an existing file\&. The dialog starts with the given folder\&. This method should open a dialog and return a path to an existing file 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdirectory\fP The directory where to start the loading\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The path to the choosen file\&. 
+.RE
+.PP
+
+.SS "QStringList uanc::util::DialogUtil::chooseLoadableFiles ()\fC [inline]\fP"
+
+.PP
+Should basically return a path of an existing file\&. This method should open a dialog and return a path to an existing file
+.PP
+\fBReturns:\fP
+.RS 4
+The path to the choosen file\&. 
+.RE
+.PP
+
+.SS "std::string uanc::util::DialogUtil::chooseSavePath ()\fC [inline]\fP"
+
+.PP
+Should basically reutrn a path to an existing or not existent file\&. This method should display a save dialog and gain a path to any file\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The choosen path 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

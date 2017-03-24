@@ -1,0 +1,44 @@
+.TH "uanc::amv::SignalModel" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::SignalModel \- Every model used inside of this application has to be a signal model\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SignalModel\&.h>\fP
+.PP
+Inherited by \fBuanc::amv::InvertedModel\fP\&.
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< Aquila::SignalSource > \fBleft_channel\fP"
+.br
+.RI "\fIField holds the original samples\&. \fP"
+.ti -1c
+.RI "std::shared_ptr< Aquila::SignalSource > \fBright_channel\fP"
+.br
+.RI "\fIField holds the right samples\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Every model used inside of this application has to be a signal model\&. 
+
+This class represents the most general model\&. It basically contains a field with the original signal\&. This gets used throughout the whole project\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "std::shared_ptr<Aquila::SignalSource> uanc::amv::SignalModel::left_channel"
+
+.PP
+Field holds the original samples\&. Holds the original samples, which were read from the hard drive\&. 
+.SS "std::shared_ptr<Aquila::SignalSource> uanc::amv::SignalModel::right_channel"
+
+.PP
+Field holds the right samples\&. Holds the original samples, which were read from the hard drive\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

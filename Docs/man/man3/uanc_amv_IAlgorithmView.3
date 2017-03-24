@@ -1,0 +1,60 @@
+.TH "uanc::amv::IAlgorithmView" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::IAlgorithmView \- The general interface for every view\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <IAlgorithmView\&.h>\fP
+.PP
+Inherited by \fBuanc::amv::AlgorithmView< InvertedModel >\fP, \fBuanc::amv::AlgorithmView< model::ANCModel >\fP, \fBuanc::amv::AlgorithmView< model::FFTModel >\fP, \fBuanc::amv::AlgorithmView< model::SpectrogramModel >\fP, \fBuanc::amv::AlgorithmView< outmodel >\fP, \fBuanc::amv::AlgorithmView< uanc::amv::InvertedModel >\fP, \fBuanc::amv::AlgorithmView< viewmodel >\fP, and \fBuanc::amv::AlgorithmView< inmodel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "QWidget * \fBgetWidget\fP ()"
+.br
+.RI "\fIGets the complete widget\&. \fP"
+.ti -1c
+.RI "virtual QWidget * \fBproduceWidget\fP ()=0"
+.br
+.RI "\fIProduces the widget\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The general interface for every view\&. 
+
+This interface has to implemented by any view, which should be used seamlesly in the main application\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "QWidget* uanc::amv::IAlgorithmView::getWidget ()\fC [inline]\fP"
+
+.PP
+Gets the complete widget\&. This function is used to retrieve the widget from the view\&. It gets used for integration the main application
+.PP
+\fBReturns:\fP
+.RS 4
+The created widget\&. 
+.RE
+.PP
+
+.SS "virtual QWidget* uanc::amv::IAlgorithmView::produceWidget ()\fC [pure virtual]\fP"
+
+.PP
+Produces the widget\&. This function is used to produce the widget from the view\&. It gets used for integration the main application
+.PP
+\fBReturns:\fP
+.RS 4
+The created widget\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::amv::signal::view::FFTView\fP, \fBuanc::amv::anc::view::PMView\fP, \fBuanc::amv::anc::view::ANCView\fP, \fBuanc::amv::signal::view::SignalView\fP, and \fBuanc::amv::signal::view::HeatView\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

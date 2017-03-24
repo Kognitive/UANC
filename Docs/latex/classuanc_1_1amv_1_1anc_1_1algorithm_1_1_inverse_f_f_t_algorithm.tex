@@ -1,0 +1,126 @@
+\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm}{}\section{uanc\+:\+:amv\+:\+:anc\+:\+:algorithm\+:\+:Inverse\+F\+F\+T\+Algorithm Class Reference}
+\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm}\index{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}}
+
+
+F\+FT inversion algorithm.  
+
+
+
+
+{\ttfamily \#include $<$Inverse\+F\+F\+T\+Algorithm.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:anc\+:\+:algorithm\+:\+:Inverse\+F\+F\+T\+Algorithm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a7f412ced258f067f47e865608de16cd6}{get\+Name} () final
+\begin{DoxyCompactList}\small\item\em Returns the name of the algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a75d38b5ce03bca80a856dfa257f590a4}{invert} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{Inverted\+Model} $>$ data) final
+\begin{DoxyCompactList}\small\item\em Inverts the input signal. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1amv_1_1_algorithm}{Algorithm} $\ast$ \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_abb8ee8a2ba58c14cf2a138657f3cc211}{clone} () final
+\begin{DoxyCompactList}\small\item\em Clones the current instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1amv_1_1_algorithm_view}{Algorithm\+View}$<$ \hyperlink{classuanc_1_1amv_1_1anc_1_1model_1_1_a_n_c_model}{model\+::\+A\+N\+C\+Model} $>$ $\ast$ \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_ae2e62b5fc9ef0a7173d86078d5133009}{construct\+View} () override
+\begin{DoxyCompactList}\small\item\em Constructs a view, which can handle an A\+N\+C\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+F\+FT inversion algorithm. 
+
+This class represents a fft inversion algorithm. It simply transformes the data in the fourier room, inverts it and passed it back. 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}!clone@{clone}}
+\index{clone@{clone}!uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}}
+\subsubsection[{\texorpdfstring{clone() final}{clone() final}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Algorithm}$\ast$ uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_abb8ee8a2ba58c14cf2a138657f3cc211}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_abb8ee8a2ba58c14cf2a138657f3cc211}
+
+
+Clones the current instance. 
+
+This is basically the prototype pattern. It gets used to create an copy of the current \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_direct_algorithm}{Inverse\+Direct\+Algorithm}. To do so it simply creates a new instance.
+
+\begin{DoxyReturn}{Returns}
+The cloned algorithm. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_af6fcbfa35f460363c2cc7e6134af8dc7}{uanc\+::amv\+::\+I\+Algorithm}.
+
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}!construct\+View@{construct\+View}}
+\index{construct\+View@{construct\+View}!uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}}
+\subsubsection[{\texorpdfstring{construct\+View() override}{constructView() override}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Algorithm\+View}$<${\bf model\+::\+A\+N\+C\+Model}$>$$\ast$ uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm\+::construct\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_ae2e62b5fc9ef0a7173d86078d5133009}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_ae2e62b5fc9ef0a7173d86078d5133009}
+
+
+Constructs a view, which can handle an A\+N\+C\+Model. 
+
+This view basically display the standard information of the algorithm.
+
+\begin{DoxyReturn}{Returns}
+The created A\+N\+C\+View. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_algorithm_af5561072283ed19634893263c95a4b6e}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+A\+N\+C\+Model $>$}.
+
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}}
+\subsubsection[{\texorpdfstring{get\+Name() final}{getName() final}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a7f412ced258f067f47e865608de16cd6}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a7f412ced258f067f47e865608de16cd6}
+
+
+Returns the name of the algorithm. 
+
+Simply passes back the name of the algorithm.
+
+\begin{DoxyReturn}{Returns}
+Name of the algorithm 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_a4935ab2fdacccf7df35d6fb596075edb}{uanc\+::amv\+::\+I\+Algorithm}.
+
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}!invert@{invert}}
+\index{invert@{invert}!uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}}
+\subsubsection[{\texorpdfstring{invert(std\+::shared\+\_\+ptr$<$ Inverted\+Model $>$ data) final}{invert(std::shared_ptr< InvertedModel > data) final}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm\+::invert (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Inverted\+Model} $>$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a75d38b5ce03bca80a856dfa257f590a4}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a75d38b5ce03bca80a856dfa257f590a4}
+
+
+Inverts the input signal. 
+
+This is actually the heart of an A\+NC algorithm inside of this application. It takes an input model and processes it. Besides it should save its data inside the model using \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_a12ce80f6746cbb440cf771fc6878f7cf}{get\+Model()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input model containing the original signal. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abfdc7f14f7e41e408ee08037a839760d}{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm$<$ model\+::\+A\+N\+C\+Model $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/anc/algorithm/\hyperlink{_inverse_f_f_t_algorithm_8h}{Inverse\+F\+F\+T\+Algorithm.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,164 @@
+\hypertarget{classuanc_1_1util_1_1_dummy_actor}{}\section{uanc\+:\+:util\+:\+:Dummy\+Actor Class Reference}
+\label{classuanc_1_1util_1_1_dummy_actor}\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+
+
+{\ttfamily \#include $<$Dummy\+Actor.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:util\+:\+:Dummy\+Actor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classuanc_1_1util_1_1_dummy_actor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1util_1_1_dummy_actor_abb98480739b7b401d41ccc68c8cba8a1}{Dummy\+Actor} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Basic constructor which saves a path string internally. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ Aquila\+::\+Signal\+Source $>$ \hyperlink{classuanc_1_1util_1_1_dummy_actor_ae2912157674c282f5436f27ddbfcf8cc}{load\+Data} ()
+\begin{DoxyCompactList}\small\item\em This method should load the file from the plate. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1util_1_1_dummy_actor_a321ba3ff6c3718d56edb6efe961f8230}{save\+Data} (std\+::shared\+\_\+ptr$<$ Aquila\+::\+Signal\+Source $>$ source)
+\begin{DoxyCompactList}\small\item\em This method should save a file to the plate. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1_dummy_actor}{Dummy\+Actor} $\ast$ \hyperlink{classuanc_1_1util_1_1_dummy_actor_a5727b1ff300c340abd9216287592f9d9}{set\+Type} (std\+::string type)
+\begin{DoxyCompactList}\small\item\em sets the type of the given string \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1_dummy_actor}{Dummy\+Actor} $\ast$ \hyperlink{classuanc_1_1util_1_1_dummy_actor_a05d45731dce558047fff26bebd55e8ed}{set\+Frequency} (Aquila\+::\+Frequency\+Type frequency)
+\begin{DoxyCompactList}\small\item\em sets the frequency \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1_dummy_actor}{Dummy\+Actor} $\ast$ \hyperlink{classuanc_1_1util_1_1_dummy_actor_a3e14c7739566b336c5c60b187d033f24}{set\+Amplitude} (Aquila\+::\+Frequency\+Type amplitude)
+\begin{DoxyCompactList}\small\item\em sets the amplitude of an Frequency\+Type \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1_dummy_actor}{Dummy\+Actor} $\ast$ \hyperlink{classuanc_1_1util_1_1_dummy_actor_a9b52353146bb402cb422656a5d69983a}{set\+Sample\+Count} (size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em sets the number of samples \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}!Dummy\+Actor@{Dummy\+Actor}}
+\index{Dummy\+Actor@{Dummy\+Actor}!uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+\subsubsection[{\texorpdfstring{Dummy\+Actor(const std\+::string \&path)}{DummyActor(const std::string &path)}}]{\setlength{\rightskip}{0pt plus 5cm}uanc\+::util\+::\+Dummy\+Actor\+::\+Dummy\+Actor (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dummy_actor_abb98480739b7b401d41ccc68c8cba8a1}{}\label{classuanc_1_1util_1_1_dummy_actor_abb98480739b7b401d41ccc68c8cba8a1}
+
+
+Basic constructor which saves a path string internally. 
+
+This constructor just save the passed string internally.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the acted file \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}!load\+Data@{load\+Data}}
+\index{load\+Data@{load\+Data}!uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+\subsubsection[{\texorpdfstring{load\+Data()}{loadData()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<$Aquila\+::\+Signal\+Source$>$ uanc\+::util\+::\+Dummy\+Actor\+::load\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1util_1_1_dummy_actor_ae2912157674c282f5436f27ddbfcf8cc}{}\label{classuanc_1_1util_1_1_dummy_actor_ae2912157674c282f5436f27ddbfcf8cc}
+
+
+This method should load the file from the plate. 
+
+This method should return the loaded T
+
+\begin{DoxyReturn}{Returns}
+the loaded T 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1util_1_1_file_actor_ad2db7584c9332a4d8376ccf6276ec301}{uanc\+::util\+::\+File\+Actor$<$ Aquila\+::\+Signal\+Source $>$}.
+
+\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}!save\+Data@{save\+Data}}
+\index{save\+Data@{save\+Data}!uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+\subsubsection[{\texorpdfstring{save\+Data(std\+::shared\+\_\+ptr$<$ Aquila\+::\+Signal\+Source $>$ source)}{saveData(std::shared_ptr< Aquila::SignalSource > source)}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::util\+::\+Dummy\+Actor\+::save\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ Aquila\+::\+Signal\+Source $>$}]{source}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1util_1_1_dummy_actor_a321ba3ff6c3718d56edb6efe961f8230}{}\label{classuanc_1_1util_1_1_dummy_actor_a321ba3ff6c3718d56edb6efe961f8230}
+
+
+This method should save a file to the plate. 
+
+This should method should save the passed T to the specified path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The source to save \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classuanc_1_1util_1_1_file_actor_aee5e36b37c46dda87f0499fc7b9e4b0d}{uanc\+::util\+::\+File\+Actor$<$ Aquila\+::\+Signal\+Source $>$}.
+
+\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}!set\+Amplitude@{set\+Amplitude}}
+\index{set\+Amplitude@{set\+Amplitude}!uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+\subsubsection[{\texorpdfstring{set\+Amplitude(\+Aquila\+::\+Frequency\+Type amplitude)}{setAmplitude(Aquila::FrequencyType amplitude)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dummy\+Actor}$\ast$ uanc\+::util\+::\+Dummy\+Actor\+::set\+Amplitude (
+\begin{DoxyParamCaption}
+\item[{Aquila\+::\+Frequency\+Type}]{amplitude}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dummy_actor_a3e14c7739566b336c5c60b187d033f24}{}\label{classuanc_1_1util_1_1_dummy_actor_a3e14c7739566b336c5c60b187d033f24}
+
+
+sets the amplitude of an Frequency\+Type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amplitude} & a Frequency\+Type \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}!set\+Frequency@{set\+Frequency}}
+\index{set\+Frequency@{set\+Frequency}!uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+\subsubsection[{\texorpdfstring{set\+Frequency(\+Aquila\+::\+Frequency\+Type frequency)}{setFrequency(Aquila::FrequencyType frequency)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dummy\+Actor}$\ast$ uanc\+::util\+::\+Dummy\+Actor\+::set\+Frequency (
+\begin{DoxyParamCaption}
+\item[{Aquila\+::\+Frequency\+Type}]{frequency}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dummy_actor_a05d45731dce558047fff26bebd55e8ed}{}\label{classuanc_1_1util_1_1_dummy_actor_a05d45731dce558047fff26bebd55e8ed}
+
+
+sets the frequency 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frequency} & a Frequency\+Type \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}!set\+Sample\+Count@{set\+Sample\+Count}}
+\index{set\+Sample\+Count@{set\+Sample\+Count}!uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+\subsubsection[{\texorpdfstring{set\+Sample\+Count(size\+\_\+t count)}{setSampleCount(size_t count)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dummy\+Actor}$\ast$ uanc\+::util\+::\+Dummy\+Actor\+::set\+Sample\+Count (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{count}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dummy_actor_a9b52353146bb402cb422656a5d69983a}{}\label{classuanc_1_1util_1_1_dummy_actor_a9b52353146bb402cb422656a5d69983a}
+
+
+sets the number of samples 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & number of samples counted \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!uanc\+::util\+::\+Dummy\+Actor@{uanc\+::util\+::\+Dummy\+Actor}}
+\subsubsection[{\texorpdfstring{set\+Type(std\+::string type)}{setType(std::string type)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dummy\+Actor}$\ast$ uanc\+::util\+::\+Dummy\+Actor\+::set\+Type (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_dummy_actor_a5727b1ff300c340abd9216287592f9d9}{}\label{classuanc_1_1util_1_1_dummy_actor_a5727b1ff300c340abd9216287592f9d9}
+
+
+sets the type of the given string 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & string with the type \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/\hyperlink{_dummy_actor_8h}{Dummy\+Actor.\+h}\end{DoxyCompactItemize}

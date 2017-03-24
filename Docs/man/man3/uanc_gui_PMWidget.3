@@ -1,0 +1,56 @@
+.TH "uanc::gui::PMWidget" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::PMWidget \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PMWidget\&.h>\fP
+.PP
+Inherits QWidget\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBtooglePerformance\fP ()"
+.br
+.RI "\fIsimple hides or shows the performance measurement \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPMWidget\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetData\fP (std::vector< std::shared_ptr< \fBuanc::util::PerformanceMeasure\fP<>>> performanceData)"
+.br
+.RI "\fIThis method is for setting the measurement information\&. This method is for setting the measurement information\&. \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::PMWidget::PMWidget ()"
+Contructor 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::gui::PMWidget::setData (std::vector< std::shared_ptr< \fBuanc::util::PerformanceMeasure\fP<>>> performanceData)"
+
+.PP
+This method is for setting the measurement information\&. This method is for setting the measurement information\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsignal\fP The \fBAquila::SignalSource\fP which will be plotted 
+.RE
+.PP
+
+.SS "void uanc::gui::PMWidget::tooglePerformance ()\fC [slot]\fP"
+
+.PP
+simple hides or shows the performance measurement 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

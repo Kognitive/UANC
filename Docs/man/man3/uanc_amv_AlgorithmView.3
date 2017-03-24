@@ -1,0 +1,56 @@
+.TH "uanc::amv::AlgorithmView< inmodel >" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::AlgorithmView< inmodel > \- Basic algorithm associated view\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <AlgorithmView\&.h>\fP
+.PP
+Inherits \fBuanc::amv::IAlgorithmView\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBsetData\fP (std::shared_ptr< inmodel > data)=0"
+.br
+.RI "\fIThis method applies the model data\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename inmodel>
+.br
+class uanc::amv::AlgorithmView< inmodel >"
+Basic algorithm associated view\&. 
+
+This class basically knows the underlying model due to the passed template parameter\&. This is essential for a cast free use inside of the application\&. Also it defines what models are applicable\&.
+.PP
+\fBTemplate Parameters:\fP
+.RS 4
+\fIinmodel\fP The type of data the model can handle\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename inmodel> virtual void \fBuanc::amv::AlgorithmView\fP< inmodel >::setData (std::shared_ptr< inmodel > data)\fC [pure virtual]\fP"
+
+.PP
+This method applies the model data\&. This method simply takes the passed data and places it inside of the view at the appropriate places\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP The applied data\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::amv::anc::view::PMView\fP, \fBuanc::amv::anc::view::ANCView\fP, \fBuanc::amv::signal::view::SignalView\fP, and \fBuanc::amv::signal::view::HeatView\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

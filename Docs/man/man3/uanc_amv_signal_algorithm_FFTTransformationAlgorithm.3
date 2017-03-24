@@ -1,0 +1,100 @@
+.TH "uanc::amv::signal::algorithm::FFTTransformationAlgorithm" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::signal::algorithm::FFTTransformationAlgorithm \- Transforms the view of a signal into Fourier space using FFT\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <FFTTransformationAlgorithm\&.h>\fP
+.PP
+Inherits \fBuanc::amv::signal::algorithm::SignalTransformationAlgorithm< model::FFTModel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBgetName\fP () final"
+.br
+.RI "\fIReturns the name of the transformed data representation\&. \fP"
+.ti -1c
+.RI "void \fBtransform\fP (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > in) final"
+.br
+.RI "\fISimply saves the input signal to the output\&. \fP"
+.ti -1c
+.RI "\fBAlgorithm\fP * \fBclone\fP () final"
+.br
+.RI "\fIClones the current instance\&. \fP"
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAlgorithmView\fP< \fBmodel::FFTModel\fP > * \fBconstructView\fP () final"
+.br
+.RI "\fIConstructs a view, which can handle an FourierModel\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Transforms the view of a signal into Fourier space using FFT\&. 
+
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAlgorithm\fP* uanc::amv::signal::algorithm::FFTTransformationAlgorithm::clone ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Clones the current instance\&. This is basically the prototype pattern\&. It gets used to create an copy of the current \fBFFTTransformationAlgorithm\fP\&. To do so it simply creates a new instance\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The cloned algorithm\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::IAlgorithm\fP\&.
+.SS "\fBAlgorithmView\fP<\fBmodel::FFTModel\fP>* uanc::amv::signal::algorithm::FFTTransformationAlgorithm::constructView ()\fC [inline]\fP, \fC [final]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Constructs a view, which can handle an FourierModel\&. This view basically display the standard information of the algorithm\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The created algorithm view\&.\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::Algorithm< model::FFTModel >\fP\&.
+.SS "std::string uanc::amv::signal::algorithm::FFTTransformationAlgorithm::getName ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Returns the name of the transformed data representation\&. Simply passes back the name of the data transformation
+.PP
+\fBReturns:\fP
+.RS 4
+Name of the data transformation 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::IAlgorithm\fP\&.
+.SS "void uanc::amv::signal::algorithm::FFTTransformationAlgorithm::transform (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > in)\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Simply saves the input signal to the output\&. This method transforms the input signal into Fourier space and writes it into the model\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP The input model containing the original signal\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::signal::algorithm::SignalTransformationAlgorithm< model::FFTModel >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

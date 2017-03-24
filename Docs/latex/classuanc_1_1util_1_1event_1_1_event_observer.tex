@@ -1,0 +1,123 @@
+\hypertarget{classuanc_1_1util_1_1event_1_1_event_observer}{}\section{uanc\+:\+:util\+:\+:event\+:\+:Event\+Observer Class Reference}
+\label{classuanc_1_1util_1_1event_1_1_event_observer}\index{uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}}
+
+
+Represents the observer interface.  
+
+
+
+
+{\ttfamily \#include $<$Event\+Observer.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:util\+:\+:event\+:\+:Event\+Observer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.407035cm]{classuanc_1_1util_1_1event_1_1_event_observer}
+\end{center}
+\end{figure}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1util_1_1event_1_1_event_observer_a0b2188938471e358af093489db73c490}{Event\+Observer} (std\+::initializer\+\_\+list$<$ \hyperlink{namespaceuanc_1_1util_1_1event_a63f690675589114db9c6bcbe6f1088a4}{Events} $>$ events)
+\begin{DoxyCompactList}\small\item\em Constructor for observing the event. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1util_1_1event_1_1_event_observer_a026ac27f3295ed3d56b3f4d34af8c0bb}{$\sim$\+Event\+Observer} ()
+\begin{DoxyCompactList}\small\item\em Deconstructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classuanc_1_1util_1_1event_1_1_event_observer_af1640e34db3379eaba8c817a92199807}{triggered} (\hyperlink{namespaceuanc_1_1util_1_1event_a63f690675589114db9c6bcbe6f1088a4}{Events} event, \hyperlink{classuanc_1_1util_1_1event_1_1_event_container}{Event\+Container} data)=0
+\begin{DoxyCompactList}\small\item\em Override to catch event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1util_1_1event_1_1_event_token}{Event\+Token} $\ast$ \hyperlink{classuanc_1_1util_1_1event_1_1_event_observer_a71e5e39d89518e1ec0018227ddd3c368}{\+\_\+token}
+\begin{DoxyCompactList}\small\item\em Unique Pointer to the token. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classuanc_1_1util_1_1event_1_1_event_observer_aba45a46c615e2683daffdae82e2d3b8f}{Event\+Manager}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents the observer interface. 
+
+This class is an event observer. Simply derive from it to let a class access the event system. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}!Event\+Observer@{Event\+Observer}}
+\index{Event\+Observer@{Event\+Observer}!uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}}
+\subsubsection[{\texorpdfstring{Event\+Observer(std\+::initializer\+\_\+list$<$ Events $>$ events)}{EventObserver(std::initializer_list< Events > events)}}]{\setlength{\rightskip}{0pt plus 5cm}uanc\+::util\+::event\+::\+Event\+Observer\+::\+Event\+Observer (
+\begin{DoxyParamCaption}
+\item[{std\+::initializer\+\_\+list$<$ {\bf Events} $>$}]{events}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classuanc_1_1util_1_1event_1_1_event_observer_a0b2188938471e358af093489db73c490}{}\label{classuanc_1_1util_1_1event_1_1_event_observer_a0b2188938471e358af093489db73c490}
+
+
+Constructor for observing the event. 
+
+This constructor can be used register all neccessary events inside.
+
+
+\begin{DoxyParams}{Parameters}
+{\em events} & The events to register. \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}!````~Event\+Observer@{$\sim$\+Event\+Observer}}
+\index{````~Event\+Observer@{$\sim$\+Event\+Observer}!uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}}
+\subsubsection[{\texorpdfstring{$\sim$\+Event\+Observer()}{~EventObserver()}}]{\setlength{\rightskip}{0pt plus 5cm}uanc\+::util\+::event\+::\+Event\+Observer\+::$\sim$\+Event\+Observer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classuanc_1_1util_1_1event_1_1_event_observer_a026ac27f3295ed3d56b3f4d34af8c0bb}{}\label{classuanc_1_1util_1_1event_1_1_event_observer_a026ac27f3295ed3d56b3f4d34af8c0bb}
+
+
+Deconstructor. 
+
+This deconstructor can be used to deregister the token. 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}!triggered@{triggered}}
+\index{triggered@{triggered}!uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}}
+\subsubsection[{\texorpdfstring{triggered(\+Events event, Event\+Container data)=0}{triggered(Events event, EventContainer data)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void uanc\+::util\+::event\+::\+Event\+Observer\+::triggered (
+\begin{DoxyParamCaption}
+\item[{{\bf Events}}]{event, }
+\item[{{\bf Event\+Container}}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1util_1_1event_1_1_event_observer_af1640e34db3379eaba8c817a92199807}{}\label{classuanc_1_1util_1_1event_1_1_event_observer_af1640e34db3379eaba8c817a92199807}
+
+
+Override to catch event. 
+
+This can be used, to integrate a handling to a specific event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & The event which should be triggered. \\
+\hline
+{\em data} & The data to supply. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classuanc_1_1gui_1_1_heat_widget_afe92e65ebf7d607ef7e1d40aaaa6131a}{uanc\+::gui\+::\+Heat\+Widget}, \hyperlink{classuanc_1_1gui_1_1_global_settings_bar_a780fabb890235753ff90c1403638c47d}{uanc\+::gui\+::\+Global\+Settings\+Bar}, and \hyperlink{classuanc_1_1gui_1_1_signal_view_widget_a2f070824372de0e83960814229d93b46}{uanc\+::gui\+::\+Signal\+View\+Widget}.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}!Event\+Manager@{Event\+Manager}}
+\index{Event\+Manager@{Event\+Manager}!uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}}
+\subsubsection[{\texorpdfstring{Event\+Manager}{EventManager}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Event\+Manager}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classuanc_1_1util_1_1event_1_1_event_observer_aba45a46c615e2683daffdae82e2d3b8f}{}\label{classuanc_1_1util_1_1event_1_1_event_observer_aba45a46c615e2683daffdae82e2d3b8f}
+
+
+\subsection{Member Data Documentation}
+\index{uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}!\+\_\+token@{\+\_\+token}}
+\index{\+\_\+token@{\+\_\+token}!uanc\+::util\+::event\+::\+Event\+Observer@{uanc\+::util\+::event\+::\+Event\+Observer}}
+\subsubsection[{\texorpdfstring{\+\_\+token}{_token}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Token}$\ast$ uanc\+::util\+::event\+::\+Event\+Observer\+::\+\_\+token\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classuanc_1_1util_1_1event_1_1_event_observer_a71e5e39d89518e1ec0018227ddd3c368}{}\label{classuanc_1_1util_1_1event_1_1_event_observer_a71e5e39d89518e1ec0018227ddd3c368}
+
+
+Unique Pointer to the token. 
+
+This can be used to access the token. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/event/\hyperlink{_event_observer_8h}{Event\+Observer.\+h}\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/event/\hyperlink{_event_observer_8cpp}{Event\+Observer.\+cpp}\end{DoxyCompactItemize}

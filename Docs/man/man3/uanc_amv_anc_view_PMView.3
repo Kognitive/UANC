@@ -1,0 +1,69 @@
+.TH "uanc::amv::anc::view::PMView" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::anc::view::PMView \- Represents an \fBPMView\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PMView\&.h>\fP
+.PP
+Inherits \fBuanc::amv::AlgorithmView< model::ANCModel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "QWidget * \fBproduceWidget\fP () final"
+.br
+.RI "\fIGets the complete widget\&. \fP"
+.ti -1c
+.RI "void \fBsetData\fP (std::shared_ptr< \fBmodel::ANCModel\fP > signalData) final"
+.br
+.RI "\fIThis method applies the model data\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents an \fBPMView\fP\&. 
+
+This represents a general \fBPMView\fP\&. It operates on an ANCModel and PMModel\&. It displays a simple plot of the the inverted signal and performance informations of the algorithm\&. It is a specialization of the more general \fBAlgorithmView\fP\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "QWidget * uanc::amv::anc::view::PMView::produceWidget ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Gets the complete widget\&. This function is used to retrieve the widget from the view\&. It gets used for integration the main application\&. It holds a Plotwidget and a TreeView inside of a QWidget (horizontal layout) and passes this back\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The created widget\&.
+.RE
+.PP
+This function is used to retrieve the widget from the view\&. It gets used for integration the main application\&. It creates a Plotwidget inside of a QWidget and passes this back\&. Uses the singleton pattern to ensure the unique creation of the widget\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The created widget\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::IAlgorithmView\fP\&.
+.SS "void uanc::amv::anc::view::PMView::setData (std::shared_ptr< \fBmodel::ANCModel\fP > signalData)\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+This method applies the model data\&. This method simply takes the passed data and places it inside of the view at the appropriate places\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP The applied data\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::AlgorithmView< model::ANCModel >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

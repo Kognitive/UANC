@@ -1,0 +1,115 @@
+\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm}{}\section{uanc\+:\+:amv\+:\+:signal\+:\+:algorithm\+:\+:Signal\+Transformation\+Algorithm$<$ datamodel, viewmodel $>$ Class Template Reference}
+\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm}\index{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm$<$ datamodel, viewmodel $>$@{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm$<$ datamodel, viewmodel $>$}}
+
+
+Every algorithm used inside has to be derived by this class.  
+
+
+
+
+{\ttfamily \#include $<$Signal\+Transformation\+Algorithm.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:signal\+:\+:algorithm\+:\+:Signal\+Transformation\+Algorithm$<$ datamodel, viewmodel $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm}
+\end{center}
+\end{figure}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ datamodel $>$ \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_a7118b46dcfdadf8648cf927c4bdd70d0}{execute} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{uanc\+::amv\+::\+Inverted\+Model} $>$ input) final
+\begin{DoxyCompactList}\small\item\em Executed an algorithm with the given input model. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ datamodel $>$ \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_acb59a47bcaf75198a7f5e3a2f1392942}{get\+Model} ()
+\begin{DoxyCompactList}\small\item\em Gets a pointer, to access the model of the algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_a40dee2d59e84244373cacc9c472514d6}{transform} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{uanc\+::amv\+::\+Inverted\+Model} $>$ input)=0
+\begin{DoxyCompactList}\small\item\em Inverts the input signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename datamodel, typename viewmodel = datamodel$>$\\*
+class uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm$<$ datamodel, viewmodel $>$}
+
+Every algorithm used inside has to be derived by this class. 
+
+This represents an A\+N\+C\+Algorithm. So every inverting algorithm has to be derived by this. In addition one can specify the data model and the view model. If you want to use only a subset of the data you can specify a view model which is actually a parent of the data model. If there is no view model supplied, they will be handled, as if they are the same
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em datamodel} & The data model to use, has to be inherited from viewmodel \\
+\hline
+{\em viewmodel} & The view model to use, has to be inherited from \hyperlink{classuanc_1_1amv_1_1_signal_model}{Signal\+Model} \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}!execute@{execute}}
+\index{execute@{execute}!uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}}
+\subsubsection[{\texorpdfstring{execute(std\+::shared\+\_\+ptr$<$ uanc\+::amv\+::\+Inverted\+Model $>$ input) final}{execute(std::shared_ptr< uanc::amv::InvertedModel > input) final}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename datamodel, typename viewmodel = datamodel$>$ std\+::shared\+\_\+ptr$<$datamodel$>$ {\bf uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}$<$ datamodel, viewmodel $>$\+::execute (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf uanc\+::amv\+::\+Inverted\+Model} $>$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_a7118b46dcfdadf8648cf927c4bdd70d0}{}\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_a7118b46dcfdadf8648cf927c4bdd70d0}
+
+
+Executed an algorithm with the given input model. 
+
+This method first all gets an empty model from the deriving class. Afterwards it inverts the signal and passed back the model, which was created during the execution stage.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & The input model of the signal.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created model from the data of the inversion. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_algorithm_a3a0bd5e6e8cc1a3f9bd9d9b384e121b5}{uanc\+::amv\+::\+Algorithm$<$ viewmodel $>$}.
+
+\index{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}!get\+Model@{get\+Model}}
+\index{get\+Model@{get\+Model}!uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}}
+\subsubsection[{\texorpdfstring{get\+Model()}{getModel()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename datamodel, typename viewmodel = datamodel$>$ std\+::shared\+\_\+ptr$<$datamodel$>$ {\bf uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}$<$ datamodel, viewmodel $>$\+::get\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_acb59a47bcaf75198a7f5e3a2f1392942}{}\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_acb59a47bcaf75198a7f5e3a2f1392942}
+
+
+Gets a pointer, to access the model of the algorithm. 
+
+Getter for the model used inside of the algorithm. This pointer can be modified by deriving classes to manipulate the model.
+
+\begin{DoxyReturn}{Returns}
+The pointer to the data model stored inside. 
+\end{DoxyReturn}
+\index{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}!transform@{transform}}
+\index{transform@{transform}!uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}}
+\subsubsection[{\texorpdfstring{transform(std\+::shared\+\_\+ptr$<$ uanc\+::amv\+::\+Inverted\+Model $>$ input)=0}{transform(std::shared_ptr< uanc::amv::InvertedModel > input)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename datamodel, typename viewmodel = datamodel$>$ virtual void {\bf uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm}$<$ datamodel, viewmodel $>$\+::transform (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf uanc\+::amv\+::\+Inverted\+Model} $>$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_a40dee2d59e84244373cacc9c472514d6}{}\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_a40dee2d59e84244373cacc9c472514d6}
+
+
+Inverts the input signal. 
+
+This is actually capable of transforming the input model into another data representation, which is then used to display it inside of the gui.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input model containing the original signal. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a0748e30e870a462a10220cb07c784f2a}{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_identity_transformation_algorithm_aac5f7f10ab44d7f8625eb5dbb72e5c44}{uanc\+::amv\+::signal\+::algorithm\+::\+Identity\+Transformation\+Algorithm}, and \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_spectrogram_transformation_algorithm_a988bc9d4cc15eafb384ed5c81885ef43}{uanc\+::amv\+::signal\+::algorithm\+::\+Spectrogram\+Transformation\+Algorithm}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/signal/algorithm/\hyperlink{_signal_transformation_algorithm_8h}{Signal\+Transformation\+Algorithm.\+h}\end{DoxyCompactItemize}
