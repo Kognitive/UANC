@@ -201,7 +201,7 @@ class SplineInterpolation : public ANCAlgorithm<model::ANCModel> {
 
     // iterate over all pairs of indices.
     for (auto current = indices.begin(), nxt = next(current); nxt != indices.end(); current = nxt, nxt = next(nxt)) {
-      std::cout << (*nxt - *current) << " Samples" << std::endl;
+      // std::cout << (*nxt - *current) << " Samples" << std::endl;
       auto alpha = optimalAlpha(*current, *nxt - 1, *nxt - *current, signal, widthBetween);
 
       // fill in the values
