@@ -73,6 +73,13 @@ class Control : public QCustomPlot {
   bool _pressedOnNavBox = false;
 
   bool cursorOnNavBox(QMouseEvent *event);
+
+  /**
+ * \brief Holds the maximum value of the x-axis
+ *
+ * Holds the maximum value on the x-axis
+ */
+  double _maxRangeXAxis;
 };
 
 }

@@ -42,8 +42,6 @@ void Control::updateNavBox(QCPRange signalZoomRange) {
   double maxX = signalZoomRange.upper;
   _navigationBox->topLeft->setCoords(minX, _maxSignalAmplitude + 10);
   _navigationBox->bottomRight->setCoords(maxX, _minSignalAmplitude - 10);
-
-  std::cout << "Update Nav Box" << std::endl;
   replot();
 }
 
@@ -52,6 +50,7 @@ void Control::setData(QCPGraphDataContainer *data, double maxDataValue, double m
   graph()->rescaleAxes();
   _maxSignalAmplitude = maxDataValue;
   _minSignalAmplitude = minDataValue;
+  _maxRangeXAxis = _parent->getPlotXRange().upper;
   updateNavBox(_parent->getPlotXRange());
 }
 
@@ -69,9 +68,6 @@ void Control::mousePressEvent(QMouseEvent *event) {
   _mousePressBoxPosLeft = getBoxLeft();
   _mousePressBoxPosRight = getBoxRight();
 
-
-  std::cout << "Mouse press event" << std::endl;
-
   if (cursorOnNavBox(event))
     _pressedOnNavBox = true;
 }
@@ -81,9 +77,10 @@ void Control::mouseDoubleClickEvent(QMouseEvent *e)
   if ( e->button() == Qt::LeftButton )
   {
     _pressedOnNavBox= false;
-    std::cout << "Double Click Event" << std::endl;
-    if (cursorOnNavBox(e))
-      updateNavBox(QCPRange(0.0, 1.0));
+    if (cursorOnNavBox(e)) {
+      updateNavBox(QCPRange(0.0, _maxRangeXAxis));
+      _parent->controlChanged();
+    }
   }
 }
 
@@ -106,9 +103,17 @@ void Control::mouseMoveEvent(QMouseEvent *event) {
     double left = _mousePressBoxPosLeft + shift;
     double right = _mousePressBoxPosRight + shift;
 
-    // if box is in range of graph, then replot, else abort
-    if (left < 0 || right > _parent->lastIndex())
+    // if box is in range of graph, then replot, else set box und min/max pos
+    if (left < 0 || right > _parent->lastIndex()) {
+      double r = right-left;
+      if(left < 0)
+        updateNavBox(QCPRange(0.0, r));
+      if(right > _parent->lastIndex())
+        updateNavBox(QCPRange(_parent->lastIndex() -r, _parent->lastIndex()));
+      _parent->controlChanged();
       return;
+    }
+
     updateNavBox(QCPRange(left, right));
     _parent->controlChanged();
   } else if (cursorOnNavBox(event)) {
@@ -121,7 +126,8 @@ void Control::mouseMoveEvent(QMouseEvent *event) {
 bool Control::cursorOnNavBox(QMouseEvent *event) {
   double leftBoundary = getBoxLeft();
   double rightBoundary = getBoxRight();
-  double threshold = 0.150204 / 2;
+
+  double threshold = 0.005 * _maxRangeXAxis / 2;
 
   // assign minimum range if under threshold
   double range = rightBoundary - leftBoundary;

@@ -36,6 +36,7 @@ void MainWidget::setupGUI() {
   QVBoxLayout *layout = new QVBoxLayout;
   this->_buttonApply = new QPushButton("Apply");
   this->_cmbAlgorithm = new QComboBox();
+  this->_progressIndicator = new QProgressIndicator();
 
   // connect the handler to the button
   connect(this->_buttonApply, SIGNAL (clicked()), this, SLOT (applyClicked()));
@@ -49,9 +50,12 @@ void MainWidget::setupGUI() {
   QHBoxLayout *hlayout = new QHBoxLayout;
 
   // add subwidgets and set the correct size policies
-  this->_buttonApply->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+  this->_buttonApply->setFixedWidth(80);
+  this->_progressIndicator->setFixedWidth(80);
   hlayout->addWidget(this->_cmbAlgorithm);
   hlayout->addWidget(this->_buttonApply);
+  hlayout->addWidget(this->_progressIndicator);
+  this->_progressIndicator->hide();
 
   // set the correct layout options
   hbar->setLayout(hlayout);
@@ -107,24 +111,36 @@ void MainWidget::applyClicked() {
   // get the current index and using that get the correct algorithm
   // After that simply apply the algorithm
   auto currentIndex = _cmbAlgorithm->currentIndex();
-  auto algorithm = this->_algorithmList->at(currentIndex)->clone();
+  _algorithm = this->_algorithmList->at(currentIndex)->clone();
 
-  int applyAlgorithmCode = this->applyAlgorithm(*algorithm);
-  // check if execution of the algorithm was successful
-  if (applyAlgorithmCode != 0) {
-    return;
-  }
-  auto index = this->_tabWidget->currentIndex();
+  this->applyAlgorithm(_algorithm);
+}
+
+/** Gets called when the algorithm is finished. */
+void MainWidget::algorithmFinished() {
+
+  auto cIndex = this->_tabWidget->currentIndex();
 
   // get the mapping list and push back the algorithm save afterwards
-  auto vec = this->_waveAlgorithMapping.at(index);
-  vec->push_back(std::shared_ptr<uanc::amv::IAlgorithm>(algorithm));
-  this->_waveAlgorithMapping.insert(std::make_pair(index, vec));
+  auto vec = this->_waveAlgorithMapping.at(this->_algorithmTabIndex);
+  vec->push_back(std::shared_ptr<uanc::amv::IAlgorithm>(_algorithm));
+  this->_waveAlgorithMapping.insert(std::make_pair(this->_algorithmTabIndex, vec));
 
   // we want to simply derive a anc a view and combine them
-  this->_detailTabWidget->addTab(algorithm->getView()->getWidget(),
-                                 QString::fromStdString(algorithm->getName()));
-  algorithm->fillView();
+  if (cIndex == this->_algorithmTabIndex)
+    this->_detailTabWidget->addTab(_algorithm->getView()->getWidget(),
+                                 QString::fromStdString(_algorithm->getName()));
+  else {
+    this->_tabWidget->setCurrentIndex(this->_algorithmTabIndex);
+  }
+  _algorithm->fillView();
+  delete algoThread;
+  _algorithm = nullptr;
+
+  // show loading badge
+  this->_progressIndicator->hide();
+  this->_progressIndicator->stopAnimation();
+  this->_buttonApply->show();
 }
 
 bool tabInRun = false;
@@ -203,7 +219,7 @@ void MainWidget::loadSignalSource(std::shared_ptr<InvertedModel> signalSource) {
  *
  * @param algorithm The algorithm to use
  */
-int MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
+int MainWidget::applyAlgorithm(uanc::amv::IAlgorithm *algorithm) {
 
   // check if signal available if not present a messagebox and
   // ask the user to load a signal.
@@ -221,13 +237,37 @@ int MainWidget::applyAlgorithm(uanc::amv::IAlgorithm &algorithm) {
     return 1;
   }
 
-  // apply the algorithm
-  algorithm.process(signal);
+  algorithm->getView()->getWidget();
+
+  // create new algorithm thread
+  algoThread = new AlgorithmThread();
+  algoThread->setAlgorithm(algorithm, signal);
+  this->connect(algoThread, SIGNAL(algorithmFinished()), this, SLOT(algorithmFinished()));
+
+  // show loading badge
+  this->_buttonApply->hide();
+  this->_progressIndicator->show();
+  this->_progressIndicator->startAnimation();
+  this->_algorithmTabIndex = this->_tabWidget->currentIndex();
+
+  algoThread->start();
+
   return 0;
 }
 
 void MainWidget::waveClosed(const int &index) {
   if (index == -1) {
+    return;
+  }
+
+  if (_algorithm != nullptr) {
+    QMessageBox msgBox;
+    msgBox.setText("You can't close wave tabs, while an algorithm is executing.");
+    msgBox.setWindowTitle("Algorithm is executing.");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Critical);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
     return;
   }
 
@@ -267,6 +307,17 @@ void MainWidget::waveClosed(const int &index) {
 
 void MainWidget::algorithmClosed(const int &index) {
   if (index == -1) {
+    return;
+  }
+
+  if (_algorithm != nullptr) {
+    QMessageBox msgBox;
+    msgBox.setText("You can't close algorithm tabs, while another algorithm is executing.");
+    msgBox.setWindowTitle("Algorithm is executing.");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Critical);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
     return;
   }
 
