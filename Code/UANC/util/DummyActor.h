@@ -51,6 +51,10 @@ class DummyActor : FileActor<Aquila::SignalSource> {
    */
   void saveData(std::shared_ptr<Aquila::SignalSource> source) {}
 
+    /** \brief sets the type of the given string
+     *
+     * @param type string with the type
+     */
   DummyActor *setType(std::string type) {
     if (type == "sine") {
       this->type = type;
@@ -62,16 +66,28 @@ class DummyActor : FileActor<Aquila::SignalSource> {
       return NULL;
   }
 
+    /** \brief sets the frequency
+       *
+       * @param frequency a FrequencyType
+       */
   DummyActor *setFrequency(Aquila::FrequencyType frequency) {
     this->freq = frequency;
     return this;
   }
 
+    /** \brief sets the amplitude of an FrequencyType
+     *
+     * @param amplitude a FrequencyType
+     */
   DummyActor *setAmplitude(Aquila::FrequencyType amplitude) {
     this->amp = amplitude;
     return this;
   }
 
+    /** \brief sets the number of samples
+     *
+     * @param count number of samples counted
+     */
   DummyActor *setSampleCount(size_t count) {
     this->samples = count;
     return this;
