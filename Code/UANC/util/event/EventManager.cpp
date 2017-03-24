@@ -10,6 +10,10 @@ namespace uanc {
 namespace util {
 namespace event {
 
+/** \brief Actual instance.
+ *
+ * Holds the actual instance of the class.
+ */
 EventManager* EventManager::_instance;
 
 /** \brief Basic constructor.
@@ -179,14 +183,32 @@ void EventManager::unregister(int id) {
   _idEventMapping->erase(id);
 }
 
+/** \brief Return the last event
+  *
+  * This method returns the last event for a given id
+  * @param ID to check for the event
+  * @param Event to check for on ID
+  */
 EventContainer EventManager::getLastEvent(int id, Events event) {
   return cache->at(std::make_pair(id, event));
 }
 
+/** \brief Checks if there was a last event
+  *
+  * This method checks if there is a last for a given ID
+  * @param ID to check for the event
+  * @param Event to check for on ID
+  */
 bool EventManager::hasLastEvent(int id, Events event) {
   return cache->count(std::make_pair(id, event)) > 0;
 }
 
+/** \brief Checks if there was a last event
+  *
+  * This method checks if there is a last for a given ID
+  * @param ID to delete the event
+  * @param Event to delete from ID
+  */
 /** Can be used to delete the last event. */
 void   EventManager::deleteLastEvent(int id, Events event) {
   if (hasLastEvent(id, event)) {
