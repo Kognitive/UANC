@@ -24,9 +24,23 @@ class SignalPlot : public QCustomPlot {
    */
   SignalPlot(PlotWidget* parent);
 
+    /** \brief sets the data to plot the signal
+     *
+     * @param data this is the data that has to be ploted
+     */
   void setData(QCPGraphDataContainer *data);
+
+    /** \brief sets the data to plot the signal
+     *
+     * @param error this is the eroor that has to be ploted
+     */
   void setError(QCPGraphDataContainer *error);
 
+    /** \brief sets the range of the plot
+     *
+     * @param lower the lower border
+     * @param upper the upper border
+     */
   void setRange(double lower, double upper);
 
  public slots:
