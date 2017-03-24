@@ -86,15 +86,27 @@ namespace uanc {
                 return nodeDuration;
             }
 
-            // hold title of the measurement
+            /**
+             * hold title of the measurement
+             */
             std::string measureTitle;
-            // a subsequenz of the measurement
+
+            /**
+             * a subsequenz of the measurement
+             */
+
             std::shared_ptr<PerformanceMeasureNode<durationType>> subsequentMeasure;
-            // vector of submeasurement
+            /**
+             * vector of submeasurement
+             */
             std::vector<std::shared_ptr<PerformanceMeasureNode<durationType>>> measureSubMeasureChild;
-            // parent of the measurement
+            /**
+             * parent of the measurement
+             */
             std::shared_ptr<PerformanceMeasureNode<durationType>> measureParent;
-            // previous measurement
+            /**
+             * previous measurement
+             */
             std::shared_ptr<PerformanceMeasureNode<durationType>> previousMeasure;
 
         private:

@@ -26,7 +26,7 @@ namespace uanc {
  * It creates a 2 - dimensional tree, where subsequent measurements are stored in the horizontal and
  * sub-measures are stored in the vertical dimension. A measure main contain multiple sub-measure layers.
  *
- *
+ * <pre>
  *  startSubMeasure().----.    start()         .----.
  *     .-------------| M1 |------------------->| M2 |
  *     |             '----'                    '----'
@@ -39,7 +39,7 @@ namespace uanc {
  *  | S1 |------>| S2 |--------------->| S3 |
  *  '----'       '----'                '----'
  *        start()          start()
- *
+ * </pre>
  */
         template<typename durationType = std::chrono::microseconds>
         class PerformanceMeasure {

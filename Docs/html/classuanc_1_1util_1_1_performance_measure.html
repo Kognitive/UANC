@@ -141,8 +141,20 @@ class uanc::util::PerformanceMeasure&lt; durationType &gt;</h3>
 
 <p>Class for the performance measure of algorithms.</p>
 <p>It creates a 2 - dimensional tree, where subsequent measurements are stored in the horizontal and sub-measures are stored in the vertical dimension. A measure main contain multiple sub-measure layers.</p>
-<p><a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a7284b6620e998084b6cd548cb0b5c6c3">startSubMeasure()</a>.-&mdash;. <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a63d1c53616c602fa930f2b17b50d7604">start()</a> .-&mdash;. .----------&mdash;| M1 |----------------&mdash;&gt;| M2 | | '-&mdash;' '-&mdash;' | ^ | ^ | | | | | | <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a82db8e78171d1dfbe4af7fda3fe67a54">stopSubMeasure()</a> | | | '---------------&mdash;. '&mdash;' v | <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a6931b89f739c6f334b59e85a2b3ce5b8">stop()</a> .-&mdash;. .-&mdash;. .-&mdash;. | S1 |---&mdash;&gt;| S2 |------------&mdash;&gt;| S3 | '-&mdash;' '-&mdash;' '-&mdash;' <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a63d1c53616c602fa930f2b17b50d7604">start()</a> <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a63d1c53616c602fa930f2b17b50d7604">start()</a> </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<pre>
+ <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a7284b6620e998084b6cd548cb0b5c6c3">startSubMeasure()</a>.-&mdash;.    <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a63d1c53616c602fa930f2b17b50d7604">start()</a>         .-&mdash;.
+    .----------&mdash;| M1 |----------------&mdash;&gt;| M2 |
+    |             '-&mdash;'                    '-&mdash;'
+    |               ^                       |   ^
+    |               |                       |   |
+    |               | <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a82db8e78171d1dfbe4af7fda3fe67a54">stopSubMeasure()</a>      |   |
+    |               '---------------&mdash;.    '&mdash;'
+    v                                  |    <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a6931b89f739c6f334b59e85a2b3ce5b8">stop()</a>
+ .-&mdash;.       .-&mdash;.                .-&mdash;.
+ | S1 |---&mdash;&gt;| S2 |------------&mdash;&gt;| S3 |
+ '-&mdash;'       '-&mdash;'                '-&mdash;'
+       <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a63d1c53616c602fa930f2b17b50d7604">start()</a>          <a class="el" href="classuanc_1_1util_1_1_performance_measure.html#a63d1c53616c602fa930f2b17b50d7604">start()</a>
+</pre> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a851457bc741e9f21c1e8f949fc17c2bf"></a>
 <div class="memitem">
 <div class="memproto">

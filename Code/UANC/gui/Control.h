@@ -39,9 +39,13 @@ class Control : public QCustomPlot {
    */
   void updateNavBox(QCPRange signalZoomRange);
 
-  // retrieve the left box
+  /**
+   * retrieve the left box
+   */
   double getBoxLeft();
-  // retrieve the right box
+  /**
+   * retrieve the right box
+   */
   double getBoxRight();
 
  private slots:

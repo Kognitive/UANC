@@ -31,7 +31,22 @@ Class for the performance measure of algorithms.
 
 It creates a 2 -\/ dimensional tree, where subsequent measurements are stored in the horizontal and sub-\/measures are stored in the vertical dimension. A measure main contain multiple sub-\/measure layers.
 
-\hyperlink{classuanc_1_1util_1_1_performance_measure_a7284b6620e998084b6cd548cb0b5c6c3}{start\+Sub\+Measure()}.-\/---. \hyperlink{classuanc_1_1util_1_1_performance_measure_a63d1c53616c602fa930f2b17b50d7604}{start()} .-\/---. .-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$\vert$ M1 $\vert$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$>$$\vert$ M2 $\vert$ $\vert$ \textquotesingle{}-\/---\textquotesingle{} \textquotesingle{}-\/---\textquotesingle{} $\vert$ $^\wedge$ $\vert$ $^\wedge$ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ \hyperlink{classuanc_1_1util_1_1_performance_measure_a82db8e78171d1dfbe4af7fda3fe67a54}{stop\+Sub\+Measure()} $\vert$ $\vert$ $\vert$ \textquotesingle{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---. \textquotesingle{}---\textquotesingle{} v $\vert$ \hyperlink{classuanc_1_1util_1_1_performance_measure_a6931b89f739c6f334b59e85a2b3ce5b8}{stop()} .-\/---. .-\/---. .-\/---. $\vert$ S1 $\vert$-\/-\/-\/---$>$$\vert$ S2 $\vert$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$>$$\vert$ S3 $\vert$ \textquotesingle{}-\/---\textquotesingle{} \textquotesingle{}-\/---\textquotesingle{} \textquotesingle{}-\/---\textquotesingle{} \hyperlink{classuanc_1_1util_1_1_performance_measure_a63d1c53616c602fa930f2b17b50d7604}{start()} \hyperlink{classuanc_1_1util_1_1_performance_measure_a63d1c53616c602fa930f2b17b50d7604}{start()} 
+
+\begin{DoxyPre}
+ \hyperlink{classuanc_1_1util_1_1_performance_measure_a7284b6620e998084b6cd548cb0b5c6c3}{startSubMeasure()}.----.    \hyperlink{classuanc_1_1util_1_1_performance_measure_a63d1c53616c602fa930f2b17b50d7604}{start()}         .----.
+    .-------------| M1 |------------------->| M2 |
+    |             '----'                    '----'
+    |               ^                       |   ^
+    |               |                       |   |
+    |               | \hyperlink{classuanc_1_1util_1_1_performance_measure_a82db8e78171d1dfbe4af7fda3fe67a54}{stopSubMeasure()}      |   |
+    |               '------------------.    '---'
+    v                                  |    \hyperlink{classuanc_1_1util_1_1_performance_measure_a6931b89f739c6f334b59e85a2b3ce5b8}{stop()}
+ .----.       .----.                .----.
+ | S1 |------>| S2 |--------------->| S3 |
+ '----'       '----'                '----'
+       \hyperlink{classuanc_1_1util_1_1_performance_measure_a63d1c53616c602fa930f2b17b50d7604}{start()}          \hyperlink{classuanc_1_1util_1_1_performance_measure_a63d1c53616c602fa930f2b17b50d7604}{start()}
+\end{DoxyPre}
+ 
 
 \subsection{Member Function Documentation}
 \index{uanc\+::util\+::\+Performance\+Measure@{uanc\+::util\+::\+Performance\+Measure}!get\+Root\+Measure@{get\+Root\+Measure}}

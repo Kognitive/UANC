@@ -43,7 +43,24 @@ Class for the performance measure of algorithms\&.
 .PP
 It creates a 2 - dimensional tree, where subsequent measurements are stored in the horizontal and sub-measures are stored in the vertical dimension\&. A measure main contain multiple sub-measure layers\&.
 .PP
-\fBstartSubMeasure()\fP\&.----\&. \fBstart()\fP \&.----\&. \&.-------------| M1 |------------------->| M2 | | '----' '----' | ^ | ^ | | | | | | \fBstopSubMeasure()\fP | | | '------------------\&. '---' v | \fBstop()\fP \&.----\&. \&.----\&. \&.----\&. | S1 |------>| S2 |--------------->| S3 | '----' '----' '----' \fBstart()\fP \fBstart()\fP 
+.PP
+.nf
+
+ \fBstartSubMeasure()\fP\&.----\&.    \fBstart()\fP         \&.----\&.
+    \&.-------------| M1 |------------------->| M2 |
+    |             '----'                    '----'
+    |               ^                       |   ^
+    |               |                       |   |
+    |               | \fBstopSubMeasure()\fP      |   |
+    |               '------------------\&.    '---'
+    v                                  |    \fBstop()\fP
+ \&.----\&.       \&.----\&.                \&.----\&.
+ | S1 |------>| S2 |--------------->| S3 |
+ '----'       '----'                '----'
+       \fBstart()\fP          \fBstart()\fP
+.fi
+.PP
+ 
 .SH "Member Function Documentation"
 .PP 
 .SS "template<typename durationType  = std::chrono::microseconds> const std::shared_ptr<\fBPerformanceMeasureNode\fP<durationType> > \fBuanc::util::PerformanceMeasure\fP< durationType >::getRootMeasure () const\fC [inline]\fP"
