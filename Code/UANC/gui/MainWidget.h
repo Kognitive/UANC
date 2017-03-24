@@ -11,8 +11,10 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
+#include <Code/libs/qprogressindicator/QProgressIndicator.h>
 
 #include "Code/UANC/amv/Algorithm.h"
+#include "Code/UANC/amv/AlgorithmThread.h"
 #include "Code/UANC/amv/anc/algorithm/InverseDirectAlgorithm.h"
 #include "Code/UANC/util/SignalManager.h"
 #include "PlotWidget.h"
@@ -21,6 +23,7 @@ namespace uanc {
 namespace gui {
 
 using namespace util;
+using namespace uanc::amv;
 
 class MainWidget : public QWidget {
  Q_OBJECT
@@ -66,6 +69,14 @@ class MainWidget : public QWidget {
   /** Represents a detailed tab widget. */
   QTabWidget* _detailTabWidget;
 
+  /** Holds the progress indicator. */
+  QProgressIndicator* _progressIndicator;
+
+  /** Holds the algorithm Thread. */
+  AlgorithmThread* algoThread = nullptr;
+  IAlgorithm* _algorithm = nullptr;
+  int _algorithmTabIndex = 0;
+
   /** \brief Maps gets used to save algorithms
    *
    * Basically create a vector which can hold references to the appropriate algorithms
@@ -90,9 +101,12 @@ class MainWidget : public QWidget {
    *
    * @param algorithm The algorithm to use
    */
-  int applyAlgorithm(uanc::amv::IAlgorithm &algorithm);
+  int applyAlgorithm(uanc::amv::IAlgorithm *algorithm);
 
- private slots:
+ public slots:
+
+  /** Gets called when the algorithm is finished. */
+  void algorithmFinished();
 
   /** \brief This gets fired, when the apply button is clicked
    *
