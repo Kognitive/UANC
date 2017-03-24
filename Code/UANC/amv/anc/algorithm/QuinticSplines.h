@@ -22,7 +22,7 @@ using namespace uanc::amv::anc;
 using namespace uanc::util;
 using namespace arma;
 
-class SplineInterpolation : public ANCAlgorithm<model::ANCModel> {
+class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
  public:
 
   /** \brief Returns the name of the algorithm.
@@ -31,7 +31,7 @@ class SplineInterpolation : public ANCAlgorithm<model::ANCModel> {
    *
    * @return Name of the algorithm
    */
-  std::string getName() final { return "Spline Approximation"; };
+  std::string getName() final { return "Quintic Splines"; };
 
   /** \brief Inverts the input signal.
    *
@@ -90,7 +90,7 @@ class SplineInterpolation : public ANCAlgorithm<model::ANCModel> {
    * @return The cloned algorithm.
    */
   Algorithm *clone() final {
-    return new SplineInterpolation();
+    return new QuinticSplines();
   }
 
  protected:
