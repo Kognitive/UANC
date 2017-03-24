@@ -37,6 +37,11 @@ bool EventToken::hasLastEvent(Events event) {
   return EventManager::get()->hasLastEvent(this->_tabID, event);
 }
 
+/** Can be used to delete the last event. */
+void EventToken::deleteLastEvent(Events event) {
+  EventManager::get()->deleteLastEvent(this->_tabID, event);
+}
+
 /** \brief Creates an event.
  *
  * This method simply creates a new token with the supplied index.

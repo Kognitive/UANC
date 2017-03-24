@@ -69,7 +69,7 @@ namespace gui {
    public:
 
     /** Default constructor for the signal view change bar. */
-    GlobalSettingsBar(int hasRight) : EventObserver({Events::ChangeView, Events::ChangeChannel}) {
+    GlobalSettingsBar(int hasRight) : EventObserver({Events::ChangeView, Events::ChangeChannel, Events::Scroll}) {
 
       // call init
       _id = uanc::util::GlobalSettings::get()->currentIndex;
@@ -88,6 +88,7 @@ namespace gui {
       void changedView(int index) {
         EventContainer container = EventContainer();
         container.add("Index", std::to_string(index));
+        _token->deleteLastEvent(Events::Scroll);
         _token->trigger(Events::ChangeView, container);
       };
 

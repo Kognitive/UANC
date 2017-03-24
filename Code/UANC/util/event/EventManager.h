@@ -137,6 +137,9 @@ class EventManager {
 
   bool hasLastEvent(int id, Events event);
 
+  /** Can be used to delete the last event. */
+  void deleteLastEvent(int id, Events event);
+
   /** \brief Unregister token from the event manager.
    *
    * This method takes a token and degisters it from the event manager.

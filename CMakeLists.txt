@@ -48,6 +48,12 @@ set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.
 
 add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES} Code/UANC/gui/SignalViewWidget.h Code/UANC/util/event/EventManager.h)
 
+#------------------------------------ Armadillo ------------------------------------
+
+find_package(Armadillo REQUIRED)
+include_directories(${ARMADILLO_INCLUDE_DIRS})
+target_link_libraries(UANC ${ARMADILLO_LIBRARIES})
+
 #------------------------------------- Tests ---------------------------------------
 
 #Create the test files, if Boost has been found

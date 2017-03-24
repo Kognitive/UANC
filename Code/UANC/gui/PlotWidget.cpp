@@ -200,8 +200,8 @@ void PlotWidget::saveSignal() {
     util::SignalFileActor fileActor(path);
 
     auto invertedSignal = std::shared_ptr<uanc::amv::InvertedModel>(new uanc::amv::InvertedModel());
-    invertedSignal->left_channel = _signal->left_channel;
-    invertedSignal->right_channel = _signal->right_channel;
+    invertedSignal->left_channel = _signal->inverted->left_channel;
+    invertedSignal->right_channel = _signal->inverted->right_channel;
     fileActor.saveData(invertedSignal);
   }
 }

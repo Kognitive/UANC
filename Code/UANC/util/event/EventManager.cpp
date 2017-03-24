@@ -187,6 +187,12 @@ bool EventManager::hasLastEvent(int id, Events event) {
   return cache->count(std::make_pair(id, event)) > 0;
 }
 
+/** Can be used to delete the last event. */
+void   EventManager::deleteLastEvent(int id, Events event) {
+  if (hasLastEvent(id, event)) {
+    cache->erase(std::make_pair(id, event));
+  }
+}
 }
 }
 }

@@ -43,6 +43,8 @@ class EventToken {
   /** Can be used to get the last event */
   bool hasLastEvent(Events event);
 
+  /** Can be used to delete the last event. */
+  void deleteLastEvent(Events event);
 
  private:
 

@@ -2,6 +2,7 @@
 // Created by jannewulf on 12.12.16.
 //
 
+#include <iostream>
 #include "Control.h"
 
 namespace uanc {
@@ -41,6 +42,8 @@ void Control::updateNavBox(QCPRange signalZoomRange) {
   double maxX = signalZoomRange.upper;
   _navigationBox->topLeft->setCoords(minX, _maxSignalAmplitude + 10);
   _navigationBox->bottomRight->setCoords(maxX, _minSignalAmplitude - 10);
+
+  std::cout << "Update Nav Box" << std::endl;
   replot();
 }
 
@@ -66,8 +69,22 @@ void Control::mousePressEvent(QMouseEvent *event) {
   _mousePressBoxPosLeft = getBoxLeft();
   _mousePressBoxPosRight = getBoxRight();
 
+
+  std::cout << "Mouse press event" << std::endl;
+
   if (cursorOnNavBox(event))
     _pressedOnNavBox = true;
+}
+
+void Control::mouseDoubleClickEvent(QMouseEvent *e)
+{
+  if ( e->button() == Qt::LeftButton )
+  {
+    _pressedOnNavBox= false;
+    std::cout << "Double Click Event" << std::endl;
+    if (cursorOnNavBox(e))
+      updateNavBox(QCPRange(0.0, 1.0));
+  }
 }
 
 void Control::mouseReleaseEvent(QMouseEvent *event) {
@@ -102,8 +119,20 @@ void Control::mouseMoveEvent(QMouseEvent *event) {
 }
 
 bool Control::cursorOnNavBox(QMouseEvent *event) {
+  double leftBoundary = getBoxLeft();
+  double rightBoundary = getBoxRight();
+  double threshold = 0.150204 / 2;
+
+  // assign minimum range if under threshold
+  double range = rightBoundary - leftBoundary;
+  if (range < 2 * threshold) {
+    double middle = leftBoundary + range / 2;
+    leftBoundary = middle - threshold;
+    rightBoundary = middle + threshold;
+  }
+
   double coordX = xAxis->pixelToCoord(event->x());
-  return getBoxLeft() <= coordX && coordX <= getBoxRight();
+  return leftBoundary <= coordX && coordX <= rightBoundary;
 }
 
 }
