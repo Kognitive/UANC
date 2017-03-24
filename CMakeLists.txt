@@ -45,8 +45,9 @@ set(AQUILA_TRANSFORM Code/libs/aquila/transform/FftFactory.h Code/libs/aquila/tr
 set(AQUILA_FFT Code/libs/aquila/fft/fft4g.c)
 
 set(QCUSTOMPLOT_FILES Code/libs/qplot/qcustomplot.h Code/libs/qplot/qcustomplot.cpp Code/UANC/util/SignalManager.cpp Code/UANC/util/SignalManager.h)
+set(QPROGRESSINDICATOR Code/libs/qprogressindicator/QProgressIndicator.cpp Code/libs/qprogressindicator/QProgressIndicator.h)
 
-add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES} Code/UANC/gui/SignalViewWidget.h Code/UANC/util/event/EventManager.h)
+add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUILA_FFT} ${QCUSTOMPLOT_FILES} ${QPROGRESSINDICATOR} Code/UANC/gui/SignalViewWidget.h Code/UANC/util/event/EventManager.h)
 
 #------------------------------------ Armadillo ------------------------------------
 

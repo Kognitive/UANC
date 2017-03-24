@@ -195,7 +195,7 @@ EventContainer EventManager::getLastEvent(int id, Events event) {
 
 /** \brief Checks if there was a last event
   *
-  * This method checks if there is a last for a given ID
+  * This method checks if there is a last event for a given ID
   * @param ID to check for the event
   * @param Event to check for on ID
   */
@@ -203,13 +203,12 @@ bool EventManager::hasLastEvent(int id, Events event) {
   return cache->count(std::make_pair(id, event)) > 0;
 }
 
-/** \brief Checks if there was a last event
+/** \brief Deletes the last event
   *
-  * This method checks if there is a last for a given ID
+  * This method deletes the last event for a given ID
   * @param ID to delete the event
   * @param Event to delete from ID
   */
-/** Can be used to delete the last event. */
 void   EventManager::deleteLastEvent(int id, Events event) {
   if (hasLastEvent(id, event)) {
     cache->erase(std::make_pair(id, event));
