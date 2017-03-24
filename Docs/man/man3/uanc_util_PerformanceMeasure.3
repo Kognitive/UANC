@@ -1,0 +1,97 @@
+.TH "uanc::util::PerformanceMeasure< durationType >" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::PerformanceMeasure< durationType > \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PerformanceMeasure\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "const std::shared_ptr< \fBPerformanceMeasureNode\fP< durationType > > \fBgetRootMeasure\fP () const "
+.br
+.ti -1c
+.RI "void \fBstart\fP (std::string title)"
+.br
+.ti -1c
+.RI "void \fBrestart\fP ()"
+.br
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.ti -1c
+.RI "void \fBstartSubMeasure\fP (std::string subMeasureTitle='')"
+.br
+.ti -1c
+.RI "void \fBstopSubMeasure\fP ()"
+.br
+.ti -1c
+.RI "void \fBstopAllMeasurements\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename durationType = std::chrono::microseconds>
+.br
+class uanc::util::PerformanceMeasure< durationType >"
+Class for the performance measure of algorithms\&.
+.PP
+It creates a 2 - dimensional tree, where subsequent measurements are stored in the horizontal and sub-measures are stored in the vertical dimension\&. A measure main contain multiple sub-measure layers\&.
+.PP
+.PP
+.nf
+
+ \fBstartSubMeasure()\fP\&.----\&.    \fBstart()\fP         \&.----\&.
+    \&.-------------| M1 |------------------->| M2 |
+    |             '----'                    '----'
+    |               ^                       |   ^
+    |               |                       |   |
+    |               | \fBstopSubMeasure()\fP      |   |
+    |               '------------------\&.    '---'
+    v                                  |    \fBstop()\fP
+ \&.----\&.       \&.----\&.                \&.----\&.
+ | S1 |------>| S2 |--------------->| S3 |
+ '----'       '----'                '----'
+       \fBstart()\fP          \fBstart()\fP
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename durationType  = std::chrono::microseconds> const std::shared_ptr<\fBPerformanceMeasureNode\fP<durationType> > \fBuanc::util::PerformanceMeasure\fP< durationType >::getRootMeasure () const\fC [inline]\fP"
+Returns a pointer to the root measurement node\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+The pointer to the root measurement node 
+.RE
+.PP
+
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasure\fP< durationType >::restart ()\fC [inline]\fP"
+Restarts the current measurement without creating a new measurement node\&. 
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasure\fP< durationType >::start (std::string title)\fC [inline]\fP"
+Starts a new measurement or sub-measurement\&. A new node is created, w 
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasure\fP< durationType >::startSubMeasure (std::string subMeasureTitle = \fC''\fP)\fC [inline]\fP"
+Starts a new sub-measure layer with a measure with the given title\&. The sub-measure is started immediately\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsubMeasureTitle\fP The title of the sub-measurement\&. 
+.RE
+.PP
+
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasure\fP< durationType >::stop ()\fC [inline]\fP"
+Stops the current measurement and saves its time 
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasure\fP< durationType >::stopAllMeasurements ()\fC [inline]\fP"
+Stops all running measurements and returns to the root measurement\&. 
+.SS "template<typename durationType  = std::chrono::microseconds> void \fBuanc::util::PerformanceMeasure\fP< durationType >::stopSubMeasure ()\fC [inline]\fP"
+Stops the current measurement, if running, and returns to its parent\&. The parents state is not changed If no parent measurement exists, then nothing is done\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

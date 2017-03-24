@@ -1,0 +1,102 @@
+\hypertarget{classuanc_1_1util_1_1_signal_file_actor}{}\section{uanc\+:\+:util\+:\+:Signal\+File\+Actor Class Reference}
+\label{classuanc_1_1util_1_1_signal_file_actor}\index{uanc\+::util\+::\+Signal\+File\+Actor@{uanc\+::util\+::\+Signal\+File\+Actor}}
+
+
+Basic Signal file loader class.  
+
+
+
+
+{\ttfamily \#include $<$Signal\+File\+Actor.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:util\+:\+:Signal\+File\+Actor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classuanc_1_1util_1_1_signal_file_actor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1util_1_1_signal_file_actor_a0c4e494e7e700d4e0130b56e4dc82b8f}{Signal\+File\+Actor} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Basic constructor which saves a path string internally. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{Inverted\+Model} $>$ \hyperlink{classuanc_1_1util_1_1_signal_file_actor_a2069e33e03ebc63eac2080d40f863ce3}{load\+Data} ()
+\begin{DoxyCompactList}\small\item\em This method should load the file from the plate. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1util_1_1_signal_file_actor_a77695bd57923ec24ff78ec8361bcfca2}{save\+Data} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{Inverted\+Model} $>$ source)
+\begin{DoxyCompactList}\small\item\em This method should save a file to the plate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Basic Signal file loader class. 
+
+Is derived from the file loader class itself. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{uanc\+::util\+::\+Signal\+File\+Actor@{uanc\+::util\+::\+Signal\+File\+Actor}!Signal\+File\+Actor@{Signal\+File\+Actor}}
+\index{Signal\+File\+Actor@{Signal\+File\+Actor}!uanc\+::util\+::\+Signal\+File\+Actor@{uanc\+::util\+::\+Signal\+File\+Actor}}
+\subsubsection[{\texorpdfstring{Signal\+File\+Actor(const std\+::string \&path)}{SignalFileActor(const std::string &path)}}]{\setlength{\rightskip}{0pt plus 5cm}uanc\+::util\+::\+Signal\+File\+Actor\+::\+Signal\+File\+Actor (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_signal_file_actor_a0c4e494e7e700d4e0130b56e4dc82b8f}{}\label{classuanc_1_1util_1_1_signal_file_actor_a0c4e494e7e700d4e0130b56e4dc82b8f}
+
+
+Basic constructor which saves a path string internally. 
+
+This constructor just save the passed string internally.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the acted file \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::util\+::\+Signal\+File\+Actor@{uanc\+::util\+::\+Signal\+File\+Actor}!load\+Data@{load\+Data}}
+\index{load\+Data@{load\+Data}!uanc\+::util\+::\+Signal\+File\+Actor@{uanc\+::util\+::\+Signal\+File\+Actor}}
+\subsubsection[{\texorpdfstring{load\+Data()}{loadData()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf Inverted\+Model}$>$ uanc\+::util\+::\+Signal\+File\+Actor\+::load\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1util_1_1_signal_file_actor_a2069e33e03ebc63eac2080d40f863ce3}{}\label{classuanc_1_1util_1_1_signal_file_actor_a2069e33e03ebc63eac2080d40f863ce3}
+
+
+This method should load the file from the plate. 
+
+This method should return the loaded T
+
+\begin{DoxyReturn}{Returns}
+the loaded T 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1util_1_1_file_actor_ad2db7584c9332a4d8376ccf6276ec301}{uanc\+::util\+::\+File\+Actor$<$ Inverted\+Model $>$}.
+
+\index{uanc\+::util\+::\+Signal\+File\+Actor@{uanc\+::util\+::\+Signal\+File\+Actor}!save\+Data@{save\+Data}}
+\index{save\+Data@{save\+Data}!uanc\+::util\+::\+Signal\+File\+Actor@{uanc\+::util\+::\+Signal\+File\+Actor}}
+\subsubsection[{\texorpdfstring{save\+Data(std\+::shared\+\_\+ptr$<$ Inverted\+Model $>$ source)}{saveData(std::shared_ptr< InvertedModel > source)}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::util\+::\+Signal\+File\+Actor\+::save\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Inverted\+Model} $>$}]{source}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1util_1_1_signal_file_actor_a77695bd57923ec24ff78ec8361bcfca2}{}\label{classuanc_1_1util_1_1_signal_file_actor_a77695bd57923ec24ff78ec8361bcfca2}
+
+
+This method should save a file to the plate. 
+
+This should method should save the passed T to the specified path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The source to save \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classuanc_1_1util_1_1_file_actor_aee5e36b37c46dda87f0499fc7b9e4b0d}{uanc\+::util\+::\+File\+Actor$<$ Inverted\+Model $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/\hyperlink{_signal_file_actor_8h}{Signal\+File\+Actor.\+h}\end{DoxyCompactItemize}

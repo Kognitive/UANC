@@ -1,0 +1,113 @@
+\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm}{}\section{uanc\+:\+:amv\+:\+:anc\+:\+:algorithm\+:\+:A\+N\+C\+Algorithm$<$ datamodel, viewmodel $>$ Class Template Reference}
+\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm}\index{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm$<$ datamodel, viewmodel $>$@{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm$<$ datamodel, viewmodel $>$}}
+
+
+Every algorithm used inside has to be derived by this class.  
+
+
+
+
+{\ttfamily \#include $<$A\+N\+C\+Algorithm.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:anc\+:\+:algorithm\+:\+:A\+N\+C\+Algorithm$<$ datamodel, viewmodel $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ datamodel $>$ \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_a12ce80f6746cbb440cf771fc6878f7cf}{get\+Model} ()
+\begin{DoxyCompactList}\small\item\em Gets a pointer, to access the model of the algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ viewmodel $>$ \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abe01c94fdf777d5081c54311b45341f8}{execute} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{Inverted\+Model} $>$ input) final
+\begin{DoxyCompactList}\small\item\em Executed an algorithm with the given input model. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abfdc7f14f7e41e408ee08037a839760d}{invert} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{Inverted\+Model} $>$ input)=0
+\begin{DoxyCompactList}\small\item\em Inverts the input signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename datamodel, typename viewmodel = datamodel$>$\\*
+class uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm$<$ datamodel, viewmodel $>$}
+
+Every algorithm used inside has to be derived by this class. 
+
+This represents an \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm}{A\+N\+C\+Algorithm}. So every inverting algorithm has to be derived by this. In addition one can specify the data model and the view model. If you want to use only a subset of the data you can specify a view model which is actually a parent of the data model. If there is no view model supplied, they will be handled, as if they are the same
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em datamodel} & The data model to use, has to be inherited from viewmodel \\
+\hline
+{\em viewmodel} & The view model to use, has to be inherited from A\+N\+C\+Model \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}!execute@{execute}}
+\index{execute@{execute}!uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}}
+\subsubsection[{\texorpdfstring{execute(std\+::shared\+\_\+ptr$<$ Inverted\+Model $>$ input) final}{execute(std::shared_ptr< InvertedModel > input) final}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename datamodel, typename viewmodel = datamodel$>$ std\+::shared\+\_\+ptr$<$viewmodel$>$ {\bf uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}$<$ datamodel, viewmodel $>$\+::execute (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Inverted\+Model} $>$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [protected]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abe01c94fdf777d5081c54311b45341f8}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abe01c94fdf777d5081c54311b45341f8}
+
+
+Executed an algorithm with the given input model. 
+
+This method first all gets an empty model from the deriving class. Afterwards it inverts the signal and passed back the model, which was created during the execution stage.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & The input model of the signal.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created model from the data of the inversion. 
+\end{DoxyReturn}
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}!get\+Model@{get\+Model}}
+\index{get\+Model@{get\+Model}!uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}}
+\subsubsection[{\texorpdfstring{get\+Model()}{getModel()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename datamodel, typename viewmodel = datamodel$>$ std\+::shared\+\_\+ptr$<$datamodel$>$ {\bf uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}$<$ datamodel, viewmodel $>$\+::get\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_a12ce80f6746cbb440cf771fc6878f7cf}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_a12ce80f6746cbb440cf771fc6878f7cf}
+
+
+Gets a pointer, to access the model of the algorithm. 
+
+Getter for the model used inside of the algorithm. This pointer can be modified by deriving classes to manipulate the model.
+
+\begin{DoxyReturn}{Returns}
+The pointer to the data model stored inside. 
+\end{DoxyReturn}
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}!invert@{invert}}
+\index{invert@{invert}!uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm@{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}}
+\subsubsection[{\texorpdfstring{invert(std\+::shared\+\_\+ptr$<$ Inverted\+Model $>$ input)=0}{invert(std::shared_ptr< InvertedModel > input)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename datamodel, typename viewmodel = datamodel$>$ virtual void {\bf uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm}$<$ datamodel, viewmodel $>$\+::invert (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Inverted\+Model} $>$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abfdc7f14f7e41e408ee08037a839760d}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abfdc7f14f7e41e408ee08037a839760d}
+
+
+Inverts the input signal. 
+
+This is actually the heart of an A\+NC algorithm inside of this application. It takes an input model and processes it. Besides it should save its data inside the model using \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_a12ce80f6746cbb440cf771fc6878f7cf}{get\+Model()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input model containing the original signal. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a75d38b5ce03bca80a856dfa257f590a4}{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_direct_algorithm_a4bd1bdcd128aee1f608be51660528954}{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+Direct\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_spline_interpolation_a60dcdd5acbba6fee64cf228485b81523}{uanc\+::amv\+::anc\+::algorithm\+::\+Spline\+Interpolation}, and \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_aafb6717c9cb632241b10875630970388}{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/anc/algorithm/\hyperlink{_a_n_c_algorithm_8h}{A\+N\+C\+Algorithm.\+h}\end{DoxyCompactItemize}

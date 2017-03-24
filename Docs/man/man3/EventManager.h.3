@@ -1,0 +1,58 @@
+.TH "/home/kurt/Documents/Studium/Bachelor_Praktikum/UANC/Code/UANC/util/event/EventManager.h" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/kurt/Documents/Studium/Bachelor_Praktikum/UANC/Code/UANC/util/event/EventManager.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <memory>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <unordered_map>\fP
+.br
+\fC#include 'EventToken\&.h'\fP
+.br
+\fC#include 'Events\&.h'\fP
+.br
+\fC#include 'EventObserver\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBEventIDHash\fP"
+.br
+.ti -1c
+.RI "class \fBEventIDEqual\fP"
+.br
+.ti -1c
+.RI "class \fBuanc::util::event::EventManager\fP"
+.br
+.RI "\fISimple event manager\&. \fP"
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBuanc\fP"
+.br
+.ti -1c
+.RI " \fBuanc::util\fP"
+.br
+.ti -1c
+.RI " \fBuanc::util::event\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBuanc::util::event::Cache\fP = std::unordered_map< std::pair< int, Events >, EventContainer, \fBEventIDHash\fP >"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

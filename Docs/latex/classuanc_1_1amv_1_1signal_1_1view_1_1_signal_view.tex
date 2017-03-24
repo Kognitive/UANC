@@ -1,0 +1,85 @@
+\hypertarget{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}{}\section{uanc\+:\+:amv\+:\+:signal\+:\+:view\+:\+:Signal\+View Class Reference}
+\label{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}\index{uanc\+::amv\+::signal\+::view\+::\+Signal\+View@{uanc\+::amv\+::signal\+::view\+::\+Signal\+View}}
+
+
+Represents a \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}{Signal\+View}.  
+
+
+
+
+{\ttfamily \#include $<$Signal\+View.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:signal\+:\+:view\+:\+:Signal\+View\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Widget $\ast$ \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view_a8b42dd84baf3c0730640ddb87db69735}{produce\+Widget} () final
+\begin{DoxyCompactList}\small\item\em Gets the complete widget. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view_a9c7eb492154e043e671549d2c71d94bc}{set\+Data} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{uanc\+::amv\+::\+Inverted\+Model} $>$ data) final
+\begin{DoxyCompactList}\small\item\em This method applies the model data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}{Signal\+View}. 
+
+This represents a general \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}{Signal\+View}. It operates on an \hyperlink{classuanc_1_1amv_1_1_signal_model}{Signal\+Model}. It basically shows a plot of the original signal. 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::signal\+::view\+::\+Signal\+View@{uanc\+::amv\+::signal\+::view\+::\+Signal\+View}!produce\+Widget@{produce\+Widget}}
+\index{produce\+Widget@{produce\+Widget}!uanc\+::amv\+::signal\+::view\+::\+Signal\+View@{uanc\+::amv\+::signal\+::view\+::\+Signal\+View}}
+\subsubsection[{\texorpdfstring{produce\+Widget() final}{produceWidget() final}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Widget $\ast$ uanc\+::amv\+::signal\+::view\+::\+Signal\+View\+::produce\+Widget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view_a8b42dd84baf3c0730640ddb87db69735}{}\label{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view_a8b42dd84baf3c0730640ddb87db69735}
+
+
+Gets the complete widget. 
+
+This function is used to retrieve the widget from the view. It gets used for integration the main application. It creates a Plotwidget inside of a Q\+Widget and passes this back.
+
+\begin{DoxyReturn}{Returns}
+The created widget.
+\end{DoxyReturn}
+This function is used to retrieve the widget from the view. It gets used for integration the main application. It creates a Plotwidget inside of a Q\+Widget and passes this back. Uses the singleton pattern to ensure the unique creation of the widget.
+
+\begin{DoxyReturn}{Returns}
+The created widget. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_view_ab9d06a0b43db57244868f10dae8e09e5}{uanc\+::amv\+::\+I\+Algorithm\+View}.
+
+\index{uanc\+::amv\+::signal\+::view\+::\+Signal\+View@{uanc\+::amv\+::signal\+::view\+::\+Signal\+View}!set\+Data@{set\+Data}}
+\index{set\+Data@{set\+Data}!uanc\+::amv\+::signal\+::view\+::\+Signal\+View@{uanc\+::amv\+::signal\+::view\+::\+Signal\+View}}
+\subsubsection[{\texorpdfstring{set\+Data(std\+::shared\+\_\+ptr$<$ uanc\+::amv\+::\+Inverted\+Model $>$ data) final}{setData(std::shared_ptr< uanc::amv::InvertedModel > data) final}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::signal\+::view\+::\+Signal\+View\+::set\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf uanc\+::amv\+::\+Inverted\+Model} $>$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view_a9c7eb492154e043e671549d2c71d94bc}{}\label{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view_a9c7eb492154e043e671549d2c71d94bc}
+
+
+This method applies the model data. 
+
+This method simply takes the passed data and places it inside of the view at the appropriate places.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The applied data. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_algorithm_view_ad656cf5223a66a942441ee39f44f65a3}{uanc\+::amv\+::\+Algorithm\+View$<$ uanc\+::amv\+::\+Inverted\+Model $>$}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/signal/view/\hyperlink{_signal_view_8h}{Signal\+View.\+h}\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/signal/view/\hyperlink{_signal_view_8cpp}{Signal\+View.\+cpp}\end{DoxyCompactItemize}

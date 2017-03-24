@@ -20,15 +20,40 @@ class SignalPlot : public QCustomPlot {
  Q_OBJECT
 
  public:
+    /** \brief The default Constructor
+   */
   SignalPlot(PlotWidget* parent);
 
+    /** \brief sets the data to plot the signal
+     *
+     * @param data this is the data that has to be ploted
+     */
   void setData(QCPGraphDataContainer *data);
+
+    /** \brief sets the data to plot the signal
+     *
+     * @param error this is the eroor that has to be ploted
+     */
   void setError(QCPGraphDataContainer *error);
 
+    /** \brief sets the range of the plot
+     *
+     * @param lower the lower border
+     * @param upper the upper border
+     */
   void setRange(double lower, double upper);
 
  public slots:
+    /** \brief simple set error to visible or not
+   *
+   * @param hide boolean to determine wether the error is shown or not
+   */
   void hideError(bool hide);
+
+    /** \brief simple set the YAxis to centered or not
+   *
+   * @param hide boolean to determine wether the YAxis is centered or not
+   */
   void setCenteredYAxis(bool b) {_centeredYAxis = b;};
 
  private slots:

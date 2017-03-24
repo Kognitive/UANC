@@ -1,0 +1,113 @@
+.TH "uanc::gui::SignalPlot" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::SignalPlot \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SignalPlot\&.h>\fP
+.PP
+Inherits QCustomPlot\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBhideError\fP (bool hide)"
+.br
+.RI "\fIsimple set error to visible or not \fP"
+.ti -1c
+.RI "void \fBsetCenteredYAxis\fP (bool b)"
+.br
+.RI "\fIsimple set the YAxis to centered or not \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSignalPlot\fP (\fBPlotWidget\fP *parent)"
+.br
+.RI "\fIThe default Constructor\&. \fP"
+.ti -1c
+.RI "void \fBsetData\fP (QCPGraphDataContainer *data)"
+.br
+.RI "\fIsets the data to plot the signal \fP"
+.ti -1c
+.RI "void \fBsetError\fP (QCPGraphDataContainer *error)"
+.br
+.RI "\fIsets the data to plot the signal \fP"
+.ti -1c
+.RI "void \fBsetRange\fP (double lower, double upper)"
+.br
+.RI "\fIsets the range of the plot \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::SignalPlot::SignalPlot (\fBPlotWidget\fP * parent)"
+
+.PP
+The default Constructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::gui::SignalPlot::hideError (bool hide)\fC [slot]\fP"
+
+.PP
+simple set error to visible or not 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhide\fP boolean to determine wether the error is shown or not 
+.RE
+.PP
+
+.SS "void uanc::gui::SignalPlot::setCenteredYAxis (bool b)\fC [inline]\fP, \fC [slot]\fP"
+
+.PP
+simple set the YAxis to centered or not 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhide\fP boolean to determine wether the YAxis is centered or not 
+.RE
+.PP
+
+.SS "void uanc::gui::SignalPlot::setData (QCPGraphDataContainer * data)"
+
+.PP
+sets the data to plot the signal 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP this is the data that has to be ploted 
+.RE
+.PP
+
+.SS "void uanc::gui::SignalPlot::setError (QCPGraphDataContainer * error)"
+
+.PP
+sets the data to plot the signal 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIerror\fP this is the eroor that has to be ploted 
+.RE
+.PP
+
+.SS "void uanc::gui::SignalPlot::setRange (double lower, double upper)"
+
+.PP
+sets the range of the plot 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlower\fP the lower border 
+.br
+\fIupper\fP the upper border 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

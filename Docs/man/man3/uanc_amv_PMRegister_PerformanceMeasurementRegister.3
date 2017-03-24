@@ -1,0 +1,58 @@
+.TH "uanc::amv::PMRegister::PerformanceMeasurementRegister" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::PMRegister::PerformanceMeasurementRegister \- This is an ANCModel\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PerformanceMeasurementRegister\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBstartOverallExecutionMeasurement\fP ()"
+.br
+.ti -1c
+.RI "void \fBstopOverallExecutionMeasurement\fP ()"
+.br
+.ti -1c
+.RI "void \fBregisterCustomMeasurement\fP (std::shared_ptr< \fButil::PerformanceMeasure\fP<>> measurement)"
+.br
+.ti -1c
+.RI "const std::vector< std::shared_ptr< \fButil::PerformanceMeasure\fP<> > > & \fBgetCustomMeasurements\fP () const "
+.br
+.ti -1c
+.RI "const std::shared_ptr< \fButil::PerformanceMeasure\fP<> > & \fBgetOverallMeasurement\fP () const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is an ANCModel\&. 
+
+This is the class for registering new Performance Measurements for an \fBAlgorithm\fP\&. It also contains the special default measurement which is executed for every class which inherits from ANCAlgorithm\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "const std::vector<std::shared_ptr<\fButil::PerformanceMeasure\fP<> > >& uanc::amv::PMRegister::PerformanceMeasurementRegister::getCustomMeasurements () const\fC [inline]\fP"
+Give back the actual custom measurements 
+.SS "const std::shared_ptr<\fButil::PerformanceMeasure\fP<> >& uanc::amv::PMRegister::PerformanceMeasurementRegister::getOverallMeasurement () const\fC [inline]\fP"
+Give back the overall measurment 
+.SS "void uanc::amv::PMRegister::PerformanceMeasurementRegister::registerCustomMeasurement (std::shared_ptr< \fButil::PerformanceMeasure\fP<>> measurement)"
+Registers a custom measurement\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImeasurement\fP The pointer to new measurement to register\&. 
+.RE
+.PP
+
+.SS "void uanc::amv::PMRegister::PerformanceMeasurementRegister::startOverallExecutionMeasurement ()"
+This starts the execution of the overall Execution Measurement\&. This may be only executed once\&. 
+.SS "void uanc::amv::PMRegister::PerformanceMeasurementRegister::stopOverallExecutionMeasurement ()"
+Stops the overall execution measurement, if it is running 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

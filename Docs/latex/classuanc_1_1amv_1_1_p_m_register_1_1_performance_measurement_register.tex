@@ -1,0 +1,78 @@
+\hypertarget{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register}{}\section{uanc\+:\+:amv\+:\+:P\+M\+Register\+:\+:Performance\+Measurement\+Register Class Reference}
+\label{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register}\index{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}}
+
+
+This is an A\+N\+C\+Model.  
+
+
+
+
+{\ttfamily \#include $<$Performance\+Measurement\+Register.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_af790642629d149fc257d6541e674f2e8}{start\+Overall\+Execution\+Measurement} ()
+\item 
+void \hyperlink{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a39c0be8c717c30eee29763a2e1e19848}{stop\+Overall\+Execution\+Measurement} ()
+\item 
+void \hyperlink{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_aa0950d36ffc0588844632034ebe5f473}{register\+Custom\+Measurement} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1util_1_1_performance_measure}{util\+::\+Performance\+Measure}$<$$>$$>$ measurement)
+\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1util_1_1_performance_measure}{util\+::\+Performance\+Measure}$<$$>$ $>$ $>$ \& \hyperlink{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a461a8558d8b0358de9c6b3c6e9ba7f9e}{get\+Custom\+Measurements} () const 
+\item 
+const std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1util_1_1_performance_measure}{util\+::\+Performance\+Measure}$<$$>$ $>$ \& \hyperlink{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a764cef42743ad8c1655f9975f3782ec6}{get\+Overall\+Measurement} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is an A\+N\+C\+Model. 
+
+This is the class for registering new Performance Measurements for an \hyperlink{classuanc_1_1amv_1_1_algorithm}{Algorithm}. It also contains the special default measurement which is executed for every class which inherits from A\+N\+C\+Algorithm. 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}!get\+Custom\+Measurements@{get\+Custom\+Measurements}}
+\index{get\+Custom\+Measurements@{get\+Custom\+Measurements}!uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}}
+\subsubsection[{\texorpdfstring{get\+Custom\+Measurements() const }{getCustomMeasurements() const }}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$std\+::shared\+\_\+ptr$<${\bf util\+::\+Performance\+Measure}$<$$>$ $>$ $>$\& uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register\+::get\+Custom\+Measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a461a8558d8b0358de9c6b3c6e9ba7f9e}{}\label{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a461a8558d8b0358de9c6b3c6e9ba7f9e}
+Give back the actual custom measurements \index{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}!get\+Overall\+Measurement@{get\+Overall\+Measurement}}
+\index{get\+Overall\+Measurement@{get\+Overall\+Measurement}!uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}}
+\subsubsection[{\texorpdfstring{get\+Overall\+Measurement() const }{getOverallMeasurement() const }}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::shared\+\_\+ptr$<${\bf util\+::\+Performance\+Measure}$<$$>$ $>$\& uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register\+::get\+Overall\+Measurement (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a764cef42743ad8c1655f9975f3782ec6}{}\label{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a764cef42743ad8c1655f9975f3782ec6}
+Give back the overall measurment \index{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}!register\+Custom\+Measurement@{register\+Custom\+Measurement}}
+\index{register\+Custom\+Measurement@{register\+Custom\+Measurement}!uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}}
+\subsubsection[{\texorpdfstring{register\+Custom\+Measurement(std\+::shared\+\_\+ptr$<$ util\+::\+Performance\+Measure$<$$>$$>$ measurement)}{registerCustomMeasurement(std::shared_ptr< util::PerformanceMeasure<>> measurement)}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register\+::register\+Custom\+Measurement (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf util\+::\+Performance\+Measure}$<$$>$$>$}]{measurement}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_aa0950d36ffc0588844632034ebe5f473}{}\label{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_aa0950d36ffc0588844632034ebe5f473}
+Registers a custom measurement. 
+\begin{DoxyParams}{Parameters}
+{\em measurement} & The pointer to new measurement to register. \\
+\hline
+\end{DoxyParams}
+\index{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}!start\+Overall\+Execution\+Measurement@{start\+Overall\+Execution\+Measurement}}
+\index{start\+Overall\+Execution\+Measurement@{start\+Overall\+Execution\+Measurement}!uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}}
+\subsubsection[{\texorpdfstring{start\+Overall\+Execution\+Measurement()}{startOverallExecutionMeasurement()}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register\+::start\+Overall\+Execution\+Measurement (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_af790642629d149fc257d6541e674f2e8}{}\label{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_af790642629d149fc257d6541e674f2e8}
+This starts the execution of the overall Execution Measurement. This may be only executed once. \index{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}!stop\+Overall\+Execution\+Measurement@{stop\+Overall\+Execution\+Measurement}}
+\index{stop\+Overall\+Execution\+Measurement@{stop\+Overall\+Execution\+Measurement}!uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register@{uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register}}
+\subsubsection[{\texorpdfstring{stop\+Overall\+Execution\+Measurement()}{stopOverallExecutionMeasurement()}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::\+P\+M\+Register\+::\+Performance\+Measurement\+Register\+::stop\+Overall\+Execution\+Measurement (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a39c0be8c717c30eee29763a2e1e19848}{}\label{classuanc_1_1amv_1_1_p_m_register_1_1_performance_measurement_register_a39c0be8c717c30eee29763a2e1e19848}
+Stops the overall execution measurement, if it is running 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/\hyperlink{_performance_measurement_register_8h}{Performance\+Measurement\+Register.\+h}\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/\hyperlink{_performance_measurement_register_8cpp}{Performance\+Measurement\+Register.\+cpp}\end{DoxyCompactItemize}

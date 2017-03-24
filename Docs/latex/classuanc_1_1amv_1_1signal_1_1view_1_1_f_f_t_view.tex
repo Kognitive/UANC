@@ -1,0 +1,88 @@
+\hypertarget{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view}{}\section{uanc\+:\+:amv\+:\+:signal\+:\+:view\+:\+:F\+F\+T\+View Class Reference}
+\label{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view}\index{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View@{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View}}
+
+
+Represents a \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}{Signal\+View}.  
+
+
+
+
+{\ttfamily \#include $<$F\+F\+T\+View.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:signal\+:\+:view\+:\+:F\+F\+T\+View\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Widget $\ast$ \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view_a774599a51059f878472cf72e2ce4b2b2}{produce\+Widget} () final
+\begin{DoxyCompactList}\small\item\em Gets the complete widget. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view_ae88ee6486f60d2d0a89c05f4d45546f7}{set\+Data} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1signal_1_1model_1_1_f_f_t_model}{model\+::\+F\+F\+T\+Model} $>$ data) final
+\begin{DoxyCompactList}\small\item\em This method applies the model data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}{Signal\+View}. 
+
+This represents a \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view}{Signal\+View} for F\+FT. It operates on an F\+F\+T\+Signal\+Model. It basically shows a plot of the F\+FT of the signal. 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View@{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View}!produce\+Widget@{produce\+Widget}}
+\index{produce\+Widget@{produce\+Widget}!uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View@{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View}}
+\subsubsection[{\texorpdfstring{produce\+Widget() final}{produceWidget() final}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Widget $\ast$ uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View\+::produce\+Widget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view_a774599a51059f878472cf72e2ce4b2b2}{}\label{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view_a774599a51059f878472cf72e2ce4b2b2}
+
+
+Gets the complete widget. 
+
+This function is used to retrieve the widget from the view. It gets used for integration the main application. It creates a Plotwidget inside of a Q\+Widget and passes this back.
+
+\begin{DoxyReturn}{Returns}
+The created widget.
+\end{DoxyReturn}
+This function is used to retrieve the widget from the view. It gets used for integration the main application. It creates a Plotwidget inside of a Q\+Widget and passes this back. Uses the singleton pattern to ensure the unique creation of the widget.
+
+\begin{DoxyReturn}{Returns}
+The created widget. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_view_ab9d06a0b43db57244868f10dae8e09e5}{uanc\+::amv\+::\+I\+Algorithm\+View}.
+
+\index{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View@{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View}!set\+Data@{set\+Data}}
+\index{set\+Data@{set\+Data}!uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View@{uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View}}
+\subsubsection[{\texorpdfstring{set\+Data(std\+::shared\+\_\+ptr$<$ model\+::\+F\+F\+T\+Model $>$ data) final}{setData(std::shared_ptr< model::FFTModel > data) final}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::signal\+::view\+::\+F\+F\+T\+View\+::set\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf model\+::\+F\+F\+T\+Model} $>$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [final]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view_ae88ee6486f60d2d0a89c05f4d45546f7}{}\label{classuanc_1_1amv_1_1signal_1_1view_1_1_f_f_t_view_ae88ee6486f60d2d0a89c05f4d45546f7}
+
+
+This method applies the model data. 
+
+This method simply takes the passed data and places it inside of the view.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The applied data.\\
+\hline
+\end{DoxyParams}
+This method simply takes the passed data and places it inside of the view at the appropriate places.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The applied data. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/signal/view/\hyperlink{_f_f_t_view_8h}{F\+F\+T\+View.\+h}\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/signal/view/\hyperlink{_f_f_t_view_8cpp}{F\+F\+T\+View.\+cpp}\end{DoxyCompactItemize}

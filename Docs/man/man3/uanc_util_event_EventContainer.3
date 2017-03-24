@@ -1,0 +1,74 @@
+.TH "uanc::util::event::EventContainer" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::event::EventContainer \- This is the event container\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EventContainer\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBadd\fP (std::string key, std::string value)"
+.br
+.RI "\fIAdds a key to the container\&. \fP"
+.ti -1c
+.RI "std::string \fBget\fP (std::string key)"
+.br
+.RI "\fIRetrieves a key from the internal map\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBID\fP = \-1"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is the event container\&. 
+
+This class describes the event container, in which your data gets wrapped when firing an event\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::util::event::EventContainer::add (std::string key, std::string value)\fC [inline]\fP"
+
+.PP
+Adds a key to the container\&. This function takes a key and a value and adds it internally\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP The key to add\&. 
+.br
+\fIvalue\fP The value to add\&. 
+.RE
+.PP
+
+.SS "std::string uanc::util::event::EventContainer::get (std::string key)\fC [inline]\fP"
+
+.PP
+Retrieves a key from the internal map\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP The key to retrieve\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The value matching the key 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "int uanc::util::event::EventContainer::ID = \-1"
+Holds the id for the callee\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

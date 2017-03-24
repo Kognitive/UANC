@@ -1,0 +1,56 @@
+.TH "uanc::amv::signal::view::HeatView" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::signal::view::HeatView \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <HeatView\&.h>\fP
+.PP
+Inherits \fBuanc::amv::AlgorithmView< model::SpectrogramModel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "QWidget * \fBproduceWidget\fP () final"
+.br
+.RI "\fIProduces the widget\&. \fP"
+.ti -1c
+.RI "void \fBsetData\fP (std::shared_ptr< \fBmodel::SpectrogramModel\fP > data) final"
+.br
+.RI "\fIThis method applies the model data\&. \fP"
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "QWidget* uanc::amv::signal::view::HeatView::produceWidget ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Produces the widget\&. This function is used to produce the widget from the view\&. It gets used for integration the main application
+.PP
+\fBReturns:\fP
+.RS 4
+The created widget\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::IAlgorithmView\fP\&.
+.SS "void uanc::amv::signal::view::HeatView::setData (std::shared_ptr< \fBmodel::SpectrogramModel\fP > data)\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+This method applies the model data\&. This method simply takes the passed data and places it inside of the view at the appropriate places\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP The applied data\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::AlgorithmView< model::SpectrogramModel >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

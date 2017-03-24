@@ -1,0 +1,81 @@
+.TH "uanc::gui::HeatWidget" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::HeatWidget \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <HeatWidget\&.h>\fP
+.PP
+Inherits QCustomPlot, and \fBuanc::util::event::EventObserver\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHeatWidget\fP ()"
+.br
+.RI "\fIConstructor of \fBControl\fP class\&. \fP"
+.ti -1c
+.RI "void \fBsetData\fP (std::shared_ptr< \fBSpectrogramModel\fP > data)"
+.br
+.RI "\fIchange channel to spectrogram \fP"
+.ti -1c
+.RI "void \fBconfigPlot\fP (std::shared_ptr< Aquila::Spectrogram > spectrogramm)"
+.br
+.RI "\fIplots spectogram \fP"
+.ti -1c
+.RI "void \fBtriggered\fP (\fBEvents\fP event, \fBEventContainer\fP data)"
+.br
+.RI "\fIstarts channelswitch when triggered by event \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::HeatWidget::HeatWidget ()\fC [inline]\fP"
+
+.PP
+Constructor of \fBControl\fP class\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::gui::HeatWidget::configPlot (std::shared_ptr< Aquila::Spectrogram > spectrogramm)\fC [inline]\fP"
+
+.PP
+plots spectogram configures the changes to show spectrogram
+.PP
+\fBParameters:\fP
+.RS 4
+\fIspectrogramm\fP given spectrogram 
+.RE
+.PP
+
+.SS "void uanc::gui::HeatWidget::setData (std::shared_ptr< \fBSpectrogramModel\fP > data)\fC [inline]\fP"
+
+.PP
+change channel to spectrogram 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP given spectrogram data 
+.RE
+.PP
+
+.SS "void uanc::gui::HeatWidget::triggered (\fBEvents\fP event, \fBEventContainer\fP data)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+starts channelswitch when triggered by event 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIevent\fP given event 
+.br
+\fIdata\fP given events 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::util::event::EventObserver\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

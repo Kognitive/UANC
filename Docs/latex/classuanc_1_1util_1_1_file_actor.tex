@@ -1,0 +1,127 @@
+\hypertarget{classuanc_1_1util_1_1_file_actor}{}\section{uanc\+:\+:util\+:\+:File\+Actor$<$ T $>$ Class Template Reference}
+\label{classuanc_1_1util_1_1_file_actor}\index{uanc\+::util\+::\+File\+Actor$<$ T $>$@{uanc\+::util\+::\+File\+Actor$<$ T $>$}}
+
+
+Simple \hyperlink{classuanc_1_1util_1_1_file_actor}{File\+Actor} class, which can operate on a file.  
+
+
+
+
+{\ttfamily \#include $<$File\+Actor.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1util_1_1_file_actor_a2e2312c707145e6a3d47783fb8fe9fb0}{File\+Actor} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Basic constructor which saves a path string internally. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ T $>$ \hyperlink{classuanc_1_1util_1_1_file_actor_ad2db7584c9332a4d8376ccf6276ec301}{load\+Data} ()=0
+\begin{DoxyCompactList}\small\item\em This method should load the file from the plate. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classuanc_1_1util_1_1_file_actor_aee5e36b37c46dda87f0499fc7b9e4b0d}{save\+Data} (std\+::shared\+\_\+ptr$<$ T $>$ source)=0
+\begin{DoxyCompactList}\small\item\em This method should save a file to the plate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classuanc_1_1util_1_1_file_actor_a9d2cae5553ce72cac745a46a25a946dc}{get\+Path} ()
+\begin{DoxyCompactList}\small\item\em This method returns the path to the caller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\\*
+class uanc\+::util\+::\+File\+Actor$<$ T $>$}
+
+Simple \hyperlink{classuanc_1_1util_1_1_file_actor}{File\+Actor} class, which can operate on a file. 
+
+This class can be used to write to a file and save something to that file of type S
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type of object the file actor can handle \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}!File\+Actor@{File\+Actor}}
+\index{File\+Actor@{File\+Actor}!uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}}
+\subsubsection[{\texorpdfstring{File\+Actor(const std\+::string \&path)}{FileActor(const std::string &path)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf uanc\+::util\+::\+File\+Actor}$<$ T $>$\+::{\bf File\+Actor} (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classuanc_1_1util_1_1_file_actor_a2e2312c707145e6a3d47783fb8fe9fb0}{}\label{classuanc_1_1util_1_1_file_actor_a2e2312c707145e6a3d47783fb8fe9fb0}
+
+
+Basic constructor which saves a path string internally. 
+
+This constructor just save the passed string internally.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the acted file \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}!get\+Path@{get\+Path}}
+\index{get\+Path@{get\+Path}!uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}}
+\subsubsection[{\texorpdfstring{get\+Path()}{getPath()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ std\+::string {\bf uanc\+::util\+::\+File\+Actor}$<$ T $>$\+::get\+Path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classuanc_1_1util_1_1_file_actor_a9d2cae5553ce72cac745a46a25a946dc}{}\label{classuanc_1_1util_1_1_file_actor_a9d2cae5553ce72cac745a46a25a946dc}
+
+
+This method returns the path to the caller. 
+
+This method can be used to obtain the inner saved path.
+
+\begin{DoxyReturn}{Returns}
+the path to the file 
+\end{DoxyReturn}
+\index{uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}!load\+Data@{load\+Data}}
+\index{load\+Data@{load\+Data}!uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}}
+\subsubsection[{\texorpdfstring{load\+Data()=0}{loadData()=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual std\+::shared\+\_\+ptr$<$T$>$ {\bf uanc\+::util\+::\+File\+Actor}$<$ T $>$\+::load\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1util_1_1_file_actor_ad2db7584c9332a4d8376ccf6276ec301}{}\label{classuanc_1_1util_1_1_file_actor_ad2db7584c9332a4d8376ccf6276ec301}
+
+
+This method should load the file from the plate. 
+
+This method should return the loaded T
+
+\begin{DoxyReturn}{Returns}
+the loaded T 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classuanc_1_1util_1_1_signal_file_actor_a2069e33e03ebc63eac2080d40f863ce3}{uanc\+::util\+::\+Signal\+File\+Actor}, and \hyperlink{classuanc_1_1util_1_1_dummy_actor_ae2912157674c282f5436f27ddbfcf8cc}{uanc\+::util\+::\+Dummy\+Actor}.
+
+\index{uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}!save\+Data@{save\+Data}}
+\index{save\+Data@{save\+Data}!uanc\+::util\+::\+File\+Actor@{uanc\+::util\+::\+File\+Actor}}
+\subsubsection[{\texorpdfstring{save\+Data(std\+::shared\+\_\+ptr$<$ T $>$ source)=0}{saveData(std::shared_ptr< T > source)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual void {\bf uanc\+::util\+::\+File\+Actor}$<$ T $>$\+::save\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ T $>$}]{source}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1util_1_1_file_actor_aee5e36b37c46dda87f0499fc7b9e4b0d}{}\label{classuanc_1_1util_1_1_file_actor_aee5e36b37c46dda87f0499fc7b9e4b0d}
+
+
+This method should save a file to the plate. 
+
+This should method should save the passed T to the specified path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The source to save \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classuanc_1_1util_1_1_signal_file_actor_a77695bd57923ec24ff78ec8361bcfca2}{uanc\+::util\+::\+Signal\+File\+Actor}, and \hyperlink{classuanc_1_1util_1_1_dummy_actor_a321ba3ff6c3718d56edb6efe961f8230}{uanc\+::util\+::\+Dummy\+Actor}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/util/\hyperlink{_file_actor_8h}{File\+Actor.\+h}\end{DoxyCompactItemize}

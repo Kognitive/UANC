@@ -1,0 +1,41 @@
+.TH "uanc::amv::signal::TransformationAlgorithmRegister" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::signal::TransformationAlgorithmRegister \- This class is used to retain a list of all transformation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <TransformationAlgorithmRegister\&.h>\fP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static std::shared_ptr< std::vector< \fBuanc::amv::IAlgorithm\fP * > > \fBgetTransformations\fP ()"
+.br
+.RI "\fISupply all registered transformation\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This class is used to retain a list of all transformation\&. 
+
+This class represents the extendability point for all transformations and data representations If you have implemented another representation simply register it inside of this class and it will automatically be integrated in the application\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static std::shared_ptr<std::vector<\fBuanc::amv::IAlgorithm\fP *> > uanc::amv::signal::TransformationAlgorithmRegister::getTransformations ()\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Supply all registered transformation\&. This method basically returns a list of all transformations registered inside of the application\&. To add you new implemented one, simply add it to the list at the bottom\&.
+.PP
+\fBReturns:\fP
+.RS 4
+A vector containing a prototype of all transformations\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

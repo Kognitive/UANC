@@ -1,0 +1,100 @@
+.TH "uanc::amv::signal::algorithm::IdentityTransformationAlgorithm" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::signal::algorithm::IdentityTransformationAlgorithm \- Identity transformation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <IdentityTransformationAlgorithm\&.h>\fP
+.PP
+Inherits \fBuanc::amv::signal::algorithm::SignalTransformationAlgorithm< InvertedModel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBgetName\fP () final"
+.br
+.RI "\fIReturns the name of the transformed data representation\&. \fP"
+.ti -1c
+.RI "void \fBtransform\fP (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > in) final"
+.br
+.RI "\fISimply saves the input signal to the output\&. \fP"
+.ti -1c
+.RI "\fBAlgorithm\fP * \fBclone\fP () final"
+.br
+.RI "\fIClones the current instance\&. \fP"
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAlgorithmView\fP< \fBInvertedModel\fP > * \fBconstructView\fP () final"
+.br
+.RI "\fIConstructs a view, which can handle an ANCModel\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Identity transformation\&. 
+
+This transformation basically outputs the same signal which was set as an input\&. This is neccessary for a good integration inside of the application, because we don't want to differntiate versus direct data or transformed data views\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAlgorithm\fP* uanc::amv::signal::algorithm::IdentityTransformationAlgorithm::clone ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Clones the current instance\&. This is basically the prototype pattern\&. It gets used to create an copy of the current \fBIdentityTransformationAlgorithm\fP\&. To do so it simply creates a new instance\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The cloned algorithm\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::IAlgorithm\fP\&.
+.SS "\fBAlgorithmView\fP<\fBInvertedModel\fP>* uanc::amv::signal::algorithm::IdentityTransformationAlgorithm::constructView ()\fC [inline]\fP, \fC [final]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Constructs a view, which can handle an ANCModel\&. This view basically display the standard information of the algorithm\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The created ANCView\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::Algorithm< InvertedModel >\fP\&.
+.SS "std::string uanc::amv::signal::algorithm::IdentityTransformationAlgorithm::getName ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Returns the name of the transformed data representation\&. Simply passes back the name of the data transformation
+.PP
+\fBReturns:\fP
+.RS 4
+Name of the data transformation 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::IAlgorithm\fP\&.
+.SS "void uanc::amv::signal::algorithm::IdentityTransformationAlgorithm::transform (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > in)\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Simply saves the input signal to the output\&. This method just passes back the input model signal\&. It is only needed for integration purposes\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP The input model containing the original signal\&. 
+.RE
+.PP
+
+.PP
+Implements \fBuanc::amv::signal::algorithm::SignalTransformationAlgorithm< InvertedModel >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

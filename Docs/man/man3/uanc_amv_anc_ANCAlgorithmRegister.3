@@ -1,0 +1,41 @@
+.TH "uanc::amv::anc::ANCAlgorithmRegister" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::anc::ANCAlgorithmRegister \- This class is used to retain a list of all algorithms\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ANCAlgorithmRegister\&.h>\fP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static std::shared_ptr< std::vector< \fBuanc::amv::IAlgorithm\fP * > > \fBgetAlgorithms\fP ()"
+.br
+.RI "\fISupply all registered algorithms\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This class is used to retain a list of all algorithms\&. 
+
+This class represents the extendability point for all algorithms\&. If you have implemented an algorithm simply register it inside of this class and it will automatically be integrated in the application\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static std::shared_ptr<std::vector<\fBuanc::amv::IAlgorithm\fP *> > uanc::amv::anc::ANCAlgorithmRegister::getAlgorithms ()\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Supply all registered algorithms\&. This method basically returns a list of all algorithms registered inside of the application\&. To add you new implemented one, simply add it to the list at the bottom\&.
+.PP
+\fBReturns:\fP
+.RS 4
+A vector containing a prototype of all algorithms\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

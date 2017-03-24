@@ -1,0 +1,107 @@
+.TH "uanc::util::FileActor< T >" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::util::FileActor< T > \- Simple \fBFileActor\fP class, which can operate on a file\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <FileActor\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFileActor\fP (const std::string &path)"
+.br
+.RI "\fIBasic constructor which saves a path string internally\&. \fP"
+.ti -1c
+.RI "virtual std::shared_ptr< T > \fBloadData\fP ()=0"
+.br
+.RI "\fIThis method should load the file from the plate\&. \fP"
+.ti -1c
+.RI "virtual void \fBsaveData\fP (std::shared_ptr< T > source)=0"
+.br
+.RI "\fIThis method should save a file to the plate\&. \fP"
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBgetPath\fP ()"
+.br
+.RI "\fIThis method returns the path to the caller\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class uanc::util::FileActor< T >"
+Simple \fBFileActor\fP class, which can operate on a file\&. 
+
+This class can be used to write to a file and save something to that file of type S
+.PP
+\fBTemplate Parameters:\fP
+.RS 4
+\fIT\fP the type of object the file actor can handle 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T> \fBuanc::util::FileActor\fP< T >::\fBFileActor\fP (const std::string & path)\fC [inline]\fP"
+
+.PP
+Basic constructor which saves a path string internally\&. This constructor just save the passed string internally\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP The path to the acted file 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T> std::string \fBuanc::util::FileActor\fP< T >::getPath ()\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+This method returns the path to the caller\&. This method can be used to obtain the inner saved path\&.
+.PP
+\fBReturns:\fP
+.RS 4
+the path to the file 
+.RE
+.PP
+
+.SS "template<typename T> virtual std::shared_ptr<T> \fBuanc::util::FileActor\fP< T >::loadData ()\fC [pure virtual]\fP"
+
+.PP
+This method should load the file from the plate\&. This method should return the loaded T
+.PP
+\fBReturns:\fP
+.RS 4
+the loaded T 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::util::SignalFileActor\fP, and \fBuanc::util::DummyActor\fP\&.
+.SS "template<typename T> virtual void \fBuanc::util::FileActor\fP< T >::saveData (std::shared_ptr< T > source)\fC [pure virtual]\fP"
+
+.PP
+This method should save a file to the plate\&. This should method should save the passed T to the specified path\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsource\fP The source to save 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::util::SignalFileActor\fP, and \fBuanc::util::DummyActor\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

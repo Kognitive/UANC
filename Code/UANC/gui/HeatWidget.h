@@ -40,6 +40,10 @@ class HeatWidget : public QCustomPlot, EventObserver {
   }
 
 public:
+
+    /** \brief Constructor of Control class
+   *
+   */
   HeatWidget() : EventObserver({Events::ChangeChannel}) {
 
     // add a color scale:
@@ -48,6 +52,10 @@ public:
 
   }
 
+    /** \brief change channel to spectrogram
+   *
+     * @param data given spectrogram data
+   */
   void setData(std::shared_ptr<SpectrogramModel> data) {
     _data = data;
     _initialized = true;
@@ -59,7 +67,12 @@ public:
     switchChannel(channel);
 }
 
-
+    /** \brief plots spectogram
+     *
+     * configures the changes to show spectrogram
+     *
+     * @param spectrogramm given spectrogram
+   */
   void configPlot(std::shared_ptr<Aquila::Spectrogram> spectrogramm) {
 
     // configure axis rect:// this will also allow rescaling the color scale by dragging/zooming
@@ -113,7 +126,11 @@ public:
     this->xAxis->setRange(0, nx);
     this->replot();
   }
-
+    /** \brief starts channelswitch when triggered by event
+   *
+     * @param event given event
+     * @param data given events
+   */
   void triggered(Events event, EventContainer data) {
     if (!_initialized) return;
 

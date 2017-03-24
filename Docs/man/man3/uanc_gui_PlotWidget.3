@@ -1,0 +1,148 @@
+.TH "uanc::gui::PlotWidget" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::PlotWidget \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PlotWidget\&.h>\fP
+.PP
+Inherits QWidget, and \fBuanc::util::event::EventObserver\fP\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBsaveSignal\fP ()"
+.br
+.RI "\fIsaves the signal to the fileactor \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPlotWidget\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetSignal\fP (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > \fBsignal\fP)"
+.br
+.RI "\fIThis method is for setting a Signal\&. This method is for setting a Signal\&. The Signal will immediately be plotted\&. \fP"
+.ti -1c
+.RI "void \fBsetCenteredYAxis\fP (bool b)"
+.br
+.RI "\fIThis method is for setting the YAxis This method is for setting the YAxis to true or false\&. \fP"
+.ti -1c
+.RI "const QCPRange \fBgetPlotXRange\fP () const "
+.br
+.RI "\fIReturns the current range of the x axis of the plot\&. \fP"
+.ti -1c
+.RI "void \fBplotChanged\fP ()"
+.br
+.RI "\fIThis method is for triggering the control to update because the plot changed\&. \fP"
+.ti -1c
+.RI "void \fBcontrolChanged\fP ()"
+.br
+.RI "\fIThis method is for triggering the plot to update because the state of the control changed\&. \fP"
+.ti -1c
+.RI "std::shared_ptr< \fBuanc::amv::SignalModel\fP > \fBsignal\fP ()"
+.br
+.RI "\fIConstructor for signals\&. \fP"
+.ti -1c
+.RI "std::shared_ptr< \fBuanc::amv::SignalModel\fP > \fBerrorSignal\fP ()"
+.br
+.RI "\fIsimply returns the error signal \fP"
+.ti -1c
+.RI "double \fBlastIndex\fP ()"
+.br
+.RI "\fIsimple returns the the last index \fP"
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::PlotWidget::PlotWidget ()"
+Contructor 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::gui::PlotWidget::controlChanged ()"
+
+.PP
+This method is for triggering the plot to update because the state of the control changed\&. 
+.SS "std::shared_ptr<\fBuanc::amv::SignalModel\fP> uanc::gui::PlotWidget::errorSignal ()\fC [inline]\fP"
+
+.PP
+simply returns the error signal 
+.PP
+\fBReturns:\fP
+.RS 4
+a SignalModel of the error signal 
+.RE
+.PP
+
+.SS "const QCPRange uanc::gui::PlotWidget::getPlotXRange () const"
+
+.PP
+Returns the current range of the x axis of the plot\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+Current range of the x axis of the plot\&. 
+.RE
+.PP
+
+.SS "double uanc::gui::PlotWidget::lastIndex ()\fC [inline]\fP"
+
+.PP
+simple returns the the last index 
+.PP
+\fBReturns:\fP
+.RS 4
+a double with the last index 
+.RE
+.PP
+
+.SS "void uanc::gui::PlotWidget::plotChanged ()"
+
+.PP
+This method is for triggering the control to update because the plot changed\&. 
+.SS "void uanc::gui::PlotWidget::saveSignal ()\fC [slot]\fP"
+
+.PP
+saves the signal to the fileactor 
+.SS "void uanc::gui::PlotWidget::setCenteredYAxis (bool b)\fC [inline]\fP"
+
+.PP
+This method is for setting the YAxis This method is for setting the YAxis to true or false\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIb\fP given boolean 
+.RE
+.PP
+
+.SS "void uanc::gui::PlotWidget::setSignal (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > signal)"
+
+.PP
+This method is for setting a Signal\&. This method is for setting a Signal\&. The Signal will immediately be plotted\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsignal\fP The \fBAquila::SignalSource\fP which will be plotted 
+.RE
+.PP
+
+.SS "std::shared_ptr<\fBuanc::amv::SignalModel\fP> uanc::gui::PlotWidget::signal ()\fC [inline]\fP"
+
+.PP
+Constructor for signals\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a SignalModel 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

@@ -41,16 +41,28 @@ class PerformanceMeasurementRegister {
   void registerCustomMeasurement(
       std::shared_ptr<util::PerformanceMeasure<>> measurement);
 
+  /**
+ *  Give back the actual custom measurements
+ */
   const std::vector<std::shared_ptr<util::PerformanceMeasure<> > >& getCustomMeasurements() const {
     return customMeasurements;
   }
 
+  /**
+ *  Give back the overall measurment
+ */
   const std::shared_ptr<util::PerformanceMeasure<> >& getOverallMeasurement() const {
     return overallMeasurement;
   }
 
  private:
+  /**
+   * Holds a pointer to the custom measurements
+   */
   std::vector<std::shared_ptr<util::PerformanceMeasure<>>> customMeasurements;
+  /**
+   * Holds a pointer to the overall measurement
+   */
   std::shared_ptr<util::PerformanceMeasure<>> overallMeasurement;
 
 };

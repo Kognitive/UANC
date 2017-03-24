@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['tabinrun',['tabInRun',['../namespaceuanc_1_1gui.html#a7181f128f937f0eb2f2d5204308a50bd',1,'uanc::gui']]],
+  ['tabselected',['tabSelected',['../classuanc_1_1gui_1_1_main_widget.html#a3e724b26e32f136b0e8f443075ec05e1',1,'uanc::gui::MainWidget']]],
+  ['toogleperformance',['tooglePerformance',['../classuanc_1_1gui_1_1_p_m_widget.html#a308f665936b00c8f0b84174756ffbc5b',1,'uanc::gui::PMWidget']]],
+  ['transform',['transform',['../classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm.html#a0748e30e870a462a10220cb07c784f2a',1,'uanc::amv::signal::algorithm::FFTTransformationAlgorithm::transform()'],['../classuanc_1_1amv_1_1signal_1_1algorithm_1_1_identity_transformation_algorithm.html#aac5f7f10ab44d7f8625eb5dbb72e5c44',1,'uanc::amv::signal::algorithm::IdentityTransformationAlgorithm::transform()'],['../classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm.html#a40dee2d59e84244373cacc9c472514d6',1,'uanc::amv::signal::algorithm::SignalTransformationAlgorithm::transform()'],['../classuanc_1_1amv_1_1signal_1_1algorithm_1_1_spectrogram_transformation_algorithm.html#a988bc9d4cc15eafb384ed5c81885ef43',1,'uanc::amv::signal::algorithm::SpectrogramTransformationAlgorithm::transform()']]],
+  ['transformationalgorithmregister',['TransformationAlgorithmRegister',['../classuanc_1_1amv_1_1signal_1_1_transformation_algorithm_register.html',1,'uanc::amv::signal']]],
+  ['transformationalgorithmregister_2eh',['TransformationAlgorithmRegister.h',['../_transformation_algorithm_register_8h.html',1,'']]],
+  ['trigger',['trigger',['../classuanc_1_1util_1_1event_1_1_event_token.html#a2bd43e6e227119b4b55a1a3adc7dd22c',1,'uanc::util::event::EventToken']]],
+  ['triggered',['triggered',['../classuanc_1_1gui_1_1_global_settings_bar.html#a780fabb890235753ff90c1403638c47d',1,'uanc::gui::GlobalSettingsBar::triggered()'],['../classuanc_1_1gui_1_1_heat_widget.html#afe92e65ebf7d607ef7e1d40aaaa6131a',1,'uanc::gui::HeatWidget::triggered()'],['../classuanc_1_1gui_1_1_signal_view_widget.html#a2f070824372de0e83960814229d93b46',1,'uanc::gui::SignalViewWidget::triggered()'],['../classuanc_1_1util_1_1event_1_1_event_observer.html#af1640e34db3379eaba8c817a92199807',1,'uanc::util::event::EventObserver::triggered()']]]
+];

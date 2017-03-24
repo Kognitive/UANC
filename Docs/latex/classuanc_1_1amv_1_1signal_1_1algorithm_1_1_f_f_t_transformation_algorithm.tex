@@ -1,0 +1,126 @@
+\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm}{}\section{uanc\+:\+:amv\+:\+:signal\+:\+:algorithm\+:\+:F\+F\+T\+Transformation\+Algorithm Class Reference}
+\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm}\index{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}}
+
+
+Transforms the view of a signal into Fourier space using F\+FT.  
+
+
+
+
+{\ttfamily \#include $<$F\+F\+T\+Transformation\+Algorithm.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:signal\+:\+:algorithm\+:\+:F\+F\+T\+Transformation\+Algorithm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a07338debb7f34446fba77b6982174727}{get\+Name} () final
+\begin{DoxyCompactList}\small\item\em Returns the name of the transformed data representation. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a0748e30e870a462a10220cb07c784f2a}{transform} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{uanc\+::amv\+::\+Inverted\+Model} $>$ in) final
+\begin{DoxyCompactList}\small\item\em Simply saves the input signal to the output. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1amv_1_1_algorithm}{Algorithm} $\ast$ \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a8829e808c4bd019564c9ba874e7b7bf0}{clone} () final
+\begin{DoxyCompactList}\small\item\em Clones the current instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1amv_1_1_algorithm_view}{Algorithm\+View}$<$ \hyperlink{classuanc_1_1amv_1_1signal_1_1model_1_1_f_f_t_model}{model\+::\+F\+F\+T\+Model} $>$ $\ast$ \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_aec3ff4f92dfabd6e2bce66a10ab7b569}{construct\+View} () final
+\begin{DoxyCompactList}\small\item\em Constructs a view, which can handle an Fourier\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Transforms the view of a signal into Fourier space using F\+FT. 
+
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}!clone@{clone}}
+\index{clone@{clone}!uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}}
+\subsubsection[{\texorpdfstring{clone() final}{clone() final}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Algorithm}$\ast$ uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a8829e808c4bd019564c9ba874e7b7bf0}{}\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a8829e808c4bd019564c9ba874e7b7bf0}
+
+
+Clones the current instance. 
+
+This is basically the prototype pattern. It gets used to create an copy of the current \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm}{F\+F\+T\+Transformation\+Algorithm}. To do so it simply creates a new instance.
+
+\begin{DoxyReturn}{Returns}
+The cloned algorithm. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_af6fcbfa35f460363c2cc7e6134af8dc7}{uanc\+::amv\+::\+I\+Algorithm}.
+
+\index{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}!construct\+View@{construct\+View}}
+\index{construct\+View@{construct\+View}!uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}}
+\subsubsection[{\texorpdfstring{construct\+View() final}{constructView() final}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Algorithm\+View}$<${\bf model\+::\+F\+F\+T\+Model}$>$$\ast$ uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm\+::construct\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_aec3ff4f92dfabd6e2bce66a10ab7b569}{}\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_aec3ff4f92dfabd6e2bce66a10ab7b569}
+
+
+Constructs a view, which can handle an Fourier\+Model. 
+
+This view basically display the standard information of the algorithm.
+
+\begin{DoxyReturn}{Returns}
+The created algorithm view.. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_algorithm_af5561072283ed19634893263c95a4b6e}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+F\+F\+T\+Model $>$}.
+
+\index{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}}
+\subsubsection[{\texorpdfstring{get\+Name() final}{getName() final}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a07338debb7f34446fba77b6982174727}{}\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a07338debb7f34446fba77b6982174727}
+
+
+Returns the name of the transformed data representation. 
+
+Simply passes back the name of the data transformation
+
+\begin{DoxyReturn}{Returns}
+Name of the data transformation 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_a4935ab2fdacccf7df35d6fb596075edb}{uanc\+::amv\+::\+I\+Algorithm}.
+
+\index{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}!transform@{transform}}
+\index{transform@{transform}!uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm@{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}}
+\subsubsection[{\texorpdfstring{transform(std\+::shared\+\_\+ptr$<$ uanc\+::amv\+::\+Inverted\+Model $>$ in) final}{transform(std::shared_ptr< uanc::amv::InvertedModel > in) final}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm\+::transform (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf uanc\+::amv\+::\+Inverted\+Model} $>$}]{in}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a0748e30e870a462a10220cb07c784f2a}{}\label{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a0748e30e870a462a10220cb07c784f2a}
+
+
+Simply saves the input signal to the output. 
+
+This method transforms the input signal into Fourier space and writes it into the model.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input model containing the original signal. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_signal_transformation_algorithm_a40dee2d59e84244373cacc9c472514d6}{uanc\+::amv\+::signal\+::algorithm\+::\+Signal\+Transformation\+Algorithm$<$ model\+::\+F\+F\+T\+Model $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/signal/algorithm/\hyperlink{_f_f_t_transformation_algorithm_8h}{F\+F\+T\+Transformation\+Algorithm.\+h}\end{DoxyCompactItemize}

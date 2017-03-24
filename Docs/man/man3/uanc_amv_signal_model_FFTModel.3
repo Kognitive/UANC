@@ -1,0 +1,36 @@
+.TH "uanc::amv::signal::model::FFTModel" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::signal::model::FFTModel \- This is a model for the transformation of a signal to a spectrogram representation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <FFTModel\&.h>\fP
+.PP
+Inherits \fBuanc::amv::InvertedModel\fP\&.
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::shared_ptr< \fBuanc::amv::InvertedModel\fP > \fBfftSignal\fP"
+.br
+.RI "\fIHolds the spectrum\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is a model for the transformation of a signal to a spectrogram representation\&. 
+
+It used by the FourierTransformationAlgorithm\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "std::shared_ptr<\fBuanc::amv::InvertedModel\fP> uanc::amv::signal::model::FFTModel::fftSignal"
+
+.PP
+Holds the spectrum\&. This field holds the spectrum of the original signal\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

@@ -1,0 +1,86 @@
+.TH "uanc::gui::MainWidget" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::gui::MainWidget \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <MainWidget\&.h>\fP
+.PP
+Inherits QWidget\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBalgorithmFinished\fP ()"
+.br
+.ti -1c
+.RI "void \fBapplyClicked\fP ()"
+.br
+.RI "\fIThis gets fired, when the apply button is clicked\&. \fP"
+.ti -1c
+.RI "void \fBtabSelected\fP ()"
+.br
+.RI "\fISimple signal for a differenct selected tab\&. \fP"
+.ti -1c
+.RI "void \fBwaveClosed\fP (const int &index)"
+.br
+.ti -1c
+.RI "void \fBalgorithmClosed\fP (const int &index)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMainWidget\fP ()"
+.br
+.RI "\fIThis is the main widget constructor\&. \fP"
+.ti -1c
+.RI "void \fBloadSignalSource\fP (std::shared_ptr< \fBInvertedModel\fP > signalSource)"
+.br
+.RI "\fIloads the signal source\&. \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "uanc::gui::MainWidget::MainWidget ()"
+
+.PP
+This is the main widget constructor\&. This basically initializes the gui and does some other initialization stuff\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void uanc::gui::MainWidget::algorithmClosed (const int & index)\fC [slot]\fP"
+
+.SS "void uanc::gui::MainWidget::algorithmFinished ()\fC [slot]\fP"
+Gets called when the algorithm is finished\&. 
+.SS "void uanc::gui::MainWidget::applyClicked ()\fC [slot]\fP"
+
+.PP
+This gets fired, when the apply button is clicked\&. This gets fired, when the direct inverse button is clicked\&.
+.PP
+Gets fired, whenever a user clicks on the apply button\&.
+.PP
+Gets fired, whenever a user clicks on the direct inverse button\&. 
+.SS "void uanc::gui::MainWidget::loadSignalSource (std::shared_ptr< \fBInvertedModel\fP > signalSource)"
+
+.PP
+loads the signal source\&. This method loads a signal source in the top tab view\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsignalSource\fP the signal source to load\&. 
+.RE
+.PP
+
+.SS "void uanc::gui::MainWidget::tabSelected ()\fC [slot]\fP"
+
+.PP
+Simple signal for a differenct selected tab\&. 
+.SS "void uanc::gui::MainWidget::waveClosed (const int & index)\fC [slot]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

@@ -1,0 +1,106 @@
+.TH "uanc::amv::IAlgorithm" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+uanc::amv::IAlgorithm \- General interface for any algorithm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <IAlgorithm\&.h>\fP
+.PP
+Inherited by \fBuanc::amv::Algorithm< InvertedModel >\fP, \fBuanc::amv::Algorithm< model::ANCModel >\fP, \fBuanc::amv::Algorithm< model::FFTModel >\fP, \fBuanc::amv::Algorithm< model::SpectrogramModel >\fP, \fBuanc::amv::Algorithm< viewmodel >\fP, and \fBuanc::amv::Algorithm< outmodel >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fBIAlgorithm\fP * \fBclone\fP ()=0"
+.br
+.RI "\fIClones the current instance\&. \fP"
+.ti -1c
+.RI "virtual void \fBfillView\fP ()=0"
+.br
+.RI "\fIFills the view with the data\&. \fP"
+.ti -1c
+.RI "virtual std::string \fBgetName\fP ()=0"
+.br
+.RI "\fIReturns the name of the algorithm\&. \fP"
+.ti -1c
+.RI "virtual \fBIAlgorithmView\fP * \fBgetView\fP ()=0"
+.br
+.RI "\fIGets a reference to the associated view\&. \fP"
+.ti -1c
+.RI "virtual void \fBprocess\fP (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > input)=0"
+.br
+.RI "\fIProcesses the input signal model\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+General interface for any algorithm\&. 
+
+This interface is used in the client code\&. Therefore it has no knowledge of the underlying model nor the view\&. It gets used for signal views as well as algorithm views\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBIAlgorithm\fP* uanc::amv::IAlgorithm::clone ()\fC [pure virtual]\fP"
+
+.PP
+Clones the current instance\&. This is basically the prototype pattern\&. It gets used to create an exact copy of the current instance\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The cloned algorithm\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::amv::anc::algorithm::InverseFFTAlgorithm\fP, \fBuanc::amv::signal::algorithm::FFTTransformationAlgorithm\fP, \fBuanc::amv::anc::algorithm::SplineInterpolation\fP, \fBuanc::amv::anc::algorithm::InverseDirectAlgorithm\fP, \fBuanc::amv::anc::algorithm::LinearExtrapolation\fP, \fBuanc::amv::signal::algorithm::SpectrogramTransformationAlgorithm\fP, and \fBuanc::amv::signal::algorithm::IdentityTransformationAlgorithm\fP\&.
+.SS "virtual void uanc::amv::IAlgorithm::fillView ()\fC [pure virtual]\fP"
+
+.PP
+Fills the view with the data\&. This method fills the view with some data\&. The implementation itself happens in a subclass\&. 
+.PP
+Implemented in \fBuanc::amv::Algorithm< outmodel >\fP, \fBuanc::amv::Algorithm< viewmodel >\fP, \fBuanc::amv::Algorithm< InvertedModel >\fP, \fBuanc::amv::Algorithm< model::FFTModel >\fP, \fBuanc::amv::Algorithm< model::ANCModel >\fP, and \fBuanc::amv::Algorithm< model::SpectrogramModel >\fP\&.
+.SS "virtual std::string uanc::amv::IAlgorithm::getName ()\fC [pure virtual]\fP"
+
+.PP
+Returns the name of the algorithm\&. Simply passes back the name of the algorithm\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Name of the algorithm 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::amv::anc::algorithm::InverseFFTAlgorithm\fP, \fBuanc::amv::anc::algorithm::InverseDirectAlgorithm\fP, \fBuanc::amv::signal::algorithm::IdentityTransformationAlgorithm\fP, \fBuanc::amv::signal::algorithm::FFTTransformationAlgorithm\fP, \fBuanc::amv::signal::algorithm::SpectrogramTransformationAlgorithm\fP, \fBuanc::amv::anc::algorithm::SplineInterpolation\fP, and \fBuanc::amv::anc::algorithm::LinearExtrapolation\fP\&.
+.SS "virtual \fBIAlgorithmView\fP* uanc::amv::IAlgorithm::getView ()\fC [pure virtual]\fP"
+
+.PP
+Gets a reference to the associated view\&. A view has to be created in this method, or alternatively an already created view can be returned\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The associated view\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::amv::Algorithm< outmodel >\fP, \fBuanc::amv::Algorithm< viewmodel >\fP, \fBuanc::amv::Algorithm< InvertedModel >\fP, \fBuanc::amv::Algorithm< model::FFTModel >\fP, \fBuanc::amv::Algorithm< model::ANCModel >\fP, and \fBuanc::amv::Algorithm< model::SpectrogramModel >\fP\&.
+.SS "virtual void uanc::amv::IAlgorithm::process (std::shared_ptr< \fBuanc::amv::InvertedModel\fP > input)\fC [pure virtual]\fP"
+
+.PP
+Processes the input signal model\&. This method processes the signal model passed into this function\&. There might be some created data during the processing stage\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP The input model of the signal\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBuanc::amv::Algorithm< outmodel >\fP, \fBuanc::amv::Algorithm< viewmodel >\fP, \fBuanc::amv::Algorithm< InvertedModel >\fP, \fBuanc::amv::Algorithm< model::FFTModel >\fP, \fBuanc::amv::Algorithm< model::ANCModel >\fP, and \fBuanc::amv::Algorithm< model::SpectrogramModel >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for UANC from the source code\&.

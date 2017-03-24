@@ -1,0 +1,67 @@
+\hypertarget{classuanc_1_1amv_1_1_algorithm_view}{}\section{uanc\+:\+:amv\+:\+:Algorithm\+View$<$ inmodel $>$ Class Template Reference}
+\label{classuanc_1_1amv_1_1_algorithm_view}\index{uanc\+::amv\+::\+Algorithm\+View$<$ inmodel $>$@{uanc\+::amv\+::\+Algorithm\+View$<$ inmodel $>$}}
+
+
+Basic algorithm associated view.  
+
+
+
+
+{\ttfamily \#include $<$Algorithm\+View.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:Algorithm\+View$<$ inmodel $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classuanc_1_1amv_1_1_algorithm_view}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classuanc_1_1amv_1_1_algorithm_view_ad656cf5223a66a942441ee39f44f65a3}{set\+Data} (std\+::shared\+\_\+ptr$<$ inmodel $>$ data)=0
+\begin{DoxyCompactList}\small\item\em This method applies the model data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename inmodel$>$\\*
+class uanc\+::amv\+::\+Algorithm\+View$<$ inmodel $>$}
+
+Basic algorithm associated view. 
+
+This class basically knows the underlying model due to the passed template parameter. This is essential for a cast free use inside of the application. Also it defines what models are applicable.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em inmodel} & The type of data the model can handle. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::\+Algorithm\+View@{uanc\+::amv\+::\+Algorithm\+View}!set\+Data@{set\+Data}}
+\index{set\+Data@{set\+Data}!uanc\+::amv\+::\+Algorithm\+View@{uanc\+::amv\+::\+Algorithm\+View}}
+\subsubsection[{\texorpdfstring{set\+Data(std\+::shared\+\_\+ptr$<$ inmodel $>$ data)=0}{setData(std::shared_ptr< inmodel > data)=0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename inmodel$>$ virtual void {\bf uanc\+::amv\+::\+Algorithm\+View}$<$ inmodel $>$\+::set\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ inmodel $>$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1_algorithm_view_ad656cf5223a66a942441ee39f44f65a3}{}\label{classuanc_1_1amv_1_1_algorithm_view_ad656cf5223a66a942441ee39f44f65a3}
+
+
+This method applies the model data. 
+
+This method simply takes the passed data and places it inside of the view at the appropriate places.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The applied data. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1anc_1_1view_1_1_p_m_view_a6d87a1d7753d1bc76ac7fba5fa03e1d5}{uanc\+::amv\+::anc\+::view\+::\+P\+M\+View}, \hyperlink{classuanc_1_1amv_1_1anc_1_1view_1_1_a_n_c_view_ac9ca194090e787bbe03bb9aec74a7bf4}{uanc\+::amv\+::anc\+::view\+::\+A\+N\+C\+View}, \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_signal_view_a9c7eb492154e043e671549d2c71d94bc}{uanc\+::amv\+::signal\+::view\+::\+Signal\+View}, and \hyperlink{classuanc_1_1amv_1_1signal_1_1view_1_1_heat_view_a0c6ded83c8aefdf05ff1abd8344763df}{uanc\+::amv\+::signal\+::view\+::\+Heat\+View}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/\hyperlink{_algorithm_view_8h}{Algorithm\+View.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,140 @@
+\hypertarget{classuanc_1_1amv_1_1_i_algorithm}{}\section{uanc\+:\+:amv\+:\+:I\+Algorithm Class Reference}
+\label{classuanc_1_1amv_1_1_i_algorithm}\index{uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}}
+
+
+General interface for any algorithm.  
+
+
+
+
+{\ttfamily \#include $<$I\+Algorithm.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:I\+Algorithm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.429942cm]{classuanc_1_1amv_1_1_i_algorithm}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classuanc_1_1amv_1_1_i_algorithm}{I\+Algorithm} $\ast$ \hyperlink{classuanc_1_1amv_1_1_i_algorithm_af6fcbfa35f460363c2cc7e6134af8dc7}{clone} ()=0
+\begin{DoxyCompactList}\small\item\em Clones the current instance. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classuanc_1_1amv_1_1_i_algorithm_a6f71d353db186306f5d4e191f0c15cc4}{fill\+View} ()=0
+\begin{DoxyCompactList}\small\item\em Fills the view with the data. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{classuanc_1_1amv_1_1_i_algorithm_a4935ab2fdacccf7df35d6fb596075edb}{get\+Name} ()=0
+\begin{DoxyCompactList}\small\item\em Returns the name of the algorithm. \end{DoxyCompactList}\item 
+virtual \hyperlink{classuanc_1_1amv_1_1_i_algorithm_view}{I\+Algorithm\+View} $\ast$ \hyperlink{classuanc_1_1amv_1_1_i_algorithm_ab1806c419a1e73adc149b7fb187d23d7}{get\+View} ()=0
+\begin{DoxyCompactList}\small\item\em Gets a reference to the associated view. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classuanc_1_1amv_1_1_i_algorithm_a14dd1e42a421c48b8874e42933daa0b9}{process} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{uanc\+::amv\+::\+Inverted\+Model} $>$ input)=0
+\begin{DoxyCompactList}\small\item\em Processes the input signal model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+General interface for any algorithm. 
+
+This interface is used in the client code. Therefore it has no knowledge of the underlying model nor the view. It gets used for signal views as well as algorithm views. 
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}!clone@{clone}}
+\index{clone@{clone}!uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}}
+\subsubsection[{\texorpdfstring{clone()=0}{clone()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\+Algorithm}$\ast$ uanc\+::amv\+::\+I\+Algorithm\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1_i_algorithm_af6fcbfa35f460363c2cc7e6134af8dc7}{}\label{classuanc_1_1amv_1_1_i_algorithm_af6fcbfa35f460363c2cc7e6134af8dc7}
+
+
+Clones the current instance. 
+
+This is basically the prototype pattern. It gets used to create an exact copy of the current instance.
+
+\begin{DoxyReturn}{Returns}
+The cloned algorithm. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_abb8ee8a2ba58c14cf2a138657f3cc211}{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a8829e808c4bd019564c9ba874e7b7bf0}{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_spline_interpolation_a43063277ff720c71b932ee29673b568f}{uanc\+::amv\+::anc\+::algorithm\+::\+Spline\+Interpolation}, \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_direct_algorithm_adce538c00ba00237ba29d725abaae764}{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+Direct\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_adbd3916228ea66603c4c5362f3392548}{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}, \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_spectrogram_transformation_algorithm_a6efc3617627883a6d2acc52e582dd5a3}{uanc\+::amv\+::signal\+::algorithm\+::\+Spectrogram\+Transformation\+Algorithm}, and \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_identity_transformation_algorithm_a863e785131c7e4f7d41d403a7fb4526d}{uanc\+::amv\+::signal\+::algorithm\+::\+Identity\+Transformation\+Algorithm}.
+
+\index{uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}!fill\+View@{fill\+View}}
+\index{fill\+View@{fill\+View}!uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}}
+\subsubsection[{\texorpdfstring{fill\+View()=0}{fillView()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void uanc\+::amv\+::\+I\+Algorithm\+::fill\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1_i_algorithm_a6f71d353db186306f5d4e191f0c15cc4}{}\label{classuanc_1_1amv_1_1_i_algorithm_a6f71d353db186306f5d4e191f0c15cc4}
+
+
+Fills the view with the data. 
+
+This method fills the view with some data. The implementation itself happens in a subclass. 
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1_algorithm_ab85377888f8a0a242803e8ec0dc31db6}{uanc\+::amv\+::\+Algorithm$<$ outmodel $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_ab85377888f8a0a242803e8ec0dc31db6}{uanc\+::amv\+::\+Algorithm$<$ viewmodel $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_ab85377888f8a0a242803e8ec0dc31db6}{uanc\+::amv\+::\+Algorithm$<$ Inverted\+Model $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_ab85377888f8a0a242803e8ec0dc31db6}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+F\+F\+T\+Model $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_ab85377888f8a0a242803e8ec0dc31db6}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+A\+N\+C\+Model $>$}, and \hyperlink{classuanc_1_1amv_1_1_algorithm_ab85377888f8a0a242803e8ec0dc31db6}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+Spectrogram\+Model $>$}.
+
+\index{uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}}
+\subsubsection[{\texorpdfstring{get\+Name()=0}{getName()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string uanc\+::amv\+::\+I\+Algorithm\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1_i_algorithm_a4935ab2fdacccf7df35d6fb596075edb}{}\label{classuanc_1_1amv_1_1_i_algorithm_a4935ab2fdacccf7df35d6fb596075edb}
+
+
+Returns the name of the algorithm. 
+
+Simply passes back the name of the algorithm.
+
+\begin{DoxyReturn}{Returns}
+Name of the algorithm 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm_a7f412ced258f067f47e865608de16cd6}{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+F\+F\+T\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_direct_algorithm_af7933bf4a0ad32c58688d8d74c6f2487}{uanc\+::amv\+::anc\+::algorithm\+::\+Inverse\+Direct\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_identity_transformation_algorithm_ad79e871df8798749358bd3f64cd6a4f1}{uanc\+::amv\+::signal\+::algorithm\+::\+Identity\+Transformation\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_f_f_t_transformation_algorithm_a07338debb7f34446fba77b6982174727}{uanc\+::amv\+::signal\+::algorithm\+::\+F\+F\+T\+Transformation\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1signal_1_1algorithm_1_1_spectrogram_transformation_algorithm_ab3f352205061c1b6aaa87c6e7c3dbece}{uanc\+::amv\+::signal\+::algorithm\+::\+Spectrogram\+Transformation\+Algorithm}, \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_spline_interpolation_a1a26a15fbebb957e8a9b404a19ed41fb}{uanc\+::amv\+::anc\+::algorithm\+::\+Spline\+Interpolation}, and \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_afc4328260d3f9c7d8a9be50df5a30e50}{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}.
+
+\index{uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}!get\+View@{get\+View}}
+\index{get\+View@{get\+View}!uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}}
+\subsubsection[{\texorpdfstring{get\+View()=0}{getView()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\+Algorithm\+View}$\ast$ uanc\+::amv\+::\+I\+Algorithm\+::get\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1_i_algorithm_ab1806c419a1e73adc149b7fb187d23d7}{}\label{classuanc_1_1amv_1_1_i_algorithm_ab1806c419a1e73adc149b7fb187d23d7}
+
+
+Gets a reference to the associated view. 
+
+A view has to be created in this method, or alternatively an already created view can be returned.
+
+\begin{DoxyReturn}{Returns}
+The associated view. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1_algorithm_af0fb55f30a278f0f44427ff690c96fc7}{uanc\+::amv\+::\+Algorithm$<$ outmodel $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_af0fb55f30a278f0f44427ff690c96fc7}{uanc\+::amv\+::\+Algorithm$<$ viewmodel $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_af0fb55f30a278f0f44427ff690c96fc7}{uanc\+::amv\+::\+Algorithm$<$ Inverted\+Model $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_af0fb55f30a278f0f44427ff690c96fc7}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+F\+F\+T\+Model $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_af0fb55f30a278f0f44427ff690c96fc7}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+A\+N\+C\+Model $>$}, and \hyperlink{classuanc_1_1amv_1_1_algorithm_af0fb55f30a278f0f44427ff690c96fc7}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+Spectrogram\+Model $>$}.
+
+\index{uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}!process@{process}}
+\index{process@{process}!uanc\+::amv\+::\+I\+Algorithm@{uanc\+::amv\+::\+I\+Algorithm}}
+\subsubsection[{\texorpdfstring{process(std\+::shared\+\_\+ptr$<$ uanc\+::amv\+::\+Inverted\+Model $>$ input)=0}{process(std::shared_ptr< uanc::amv::InvertedModel > input)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void uanc\+::amv\+::\+I\+Algorithm\+::process (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf uanc\+::amv\+::\+Inverted\+Model} $>$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classuanc_1_1amv_1_1_i_algorithm_a14dd1e42a421c48b8874e42933daa0b9}{}\label{classuanc_1_1amv_1_1_i_algorithm_a14dd1e42a421c48b8874e42933daa0b9}
+
+
+Processes the input signal model. 
+
+This method processes the signal model passed into this function. There might be some created data during the processing stage.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & The input model of the signal. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classuanc_1_1amv_1_1_algorithm_a0af524c2f170204c5c60b2561f286570}{uanc\+::amv\+::\+Algorithm$<$ outmodel $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_a0af524c2f170204c5c60b2561f286570}{uanc\+::amv\+::\+Algorithm$<$ viewmodel $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_a0af524c2f170204c5c60b2561f286570}{uanc\+::amv\+::\+Algorithm$<$ Inverted\+Model $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_a0af524c2f170204c5c60b2561f286570}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+F\+F\+T\+Model $>$}, \hyperlink{classuanc_1_1amv_1_1_algorithm_a0af524c2f170204c5c60b2561f286570}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+A\+N\+C\+Model $>$}, and \hyperlink{classuanc_1_1amv_1_1_algorithm_a0af524c2f170204c5c60b2561f286570}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+Spectrogram\+Model $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/\hyperlink{_i_algorithm_8h}{I\+Algorithm.\+h}\end{DoxyCompactItemize}

@@ -91,14 +91,26 @@ class EventManager {
    */
   static EventManager* _instance;
 
+  /**
+    * Holds an unordered map over all events (Event, id(=vector<int>))
+    */
   std::unique_ptr<std::unordered_map<Events, std::vector<int>*>> _eventMapping;
+  /**
+   * Holds an unordered map over all IDs (ID, events(=vector<Events>))
+   */
   std::unique_ptr<std::unordered_map<int, std::vector<Events>*>> _idEventMapping;
+  /**
+   * Holds an unorderd map over all IDs and EventObserver
+   */
   std::unique_ptr<std::unordered_map<int, EventObserver*>> _idMapping;
 
   // init counter for id to zero
   int _idCounter = 0;
 
-  // Simple cache for the last event
+  /**
+   * Simple cache for the last event
+   */
+
   std::unique_ptr<Cache> cache;
 
   /** True, iff the event manger was already destroyed. */
@@ -133,11 +145,29 @@ class EventManager {
    */
   void subscribe(Events event, EventToken *token);
 
+
+/** \brief Return the last event
+  *
+  * This method returns the last event for a given id
+  * @param ID to check for the event
+  * @param Event to check for on ID
+  */
   EventContainer getLastEvent(int id, Events event);
 
+  /** \brief Checks if there was a last event
+  *
+  * This method checks if there is a last event for a given ID
+  * @param ID to check for the event
+  * @param Event to check for on ID
+  */
   bool hasLastEvent(int id, Events event);
 
-  /** Can be used to delete the last event. */
+  /** \brief Deletes the last event
+   *
+   * This method deletes the last event for a given ID
+   * @param ID to delete the event
+   * @param Event to delete from ID
+   */
   void deleteLastEvent(int id, Events event);
 
   /** \brief Unregister token from the event manager.

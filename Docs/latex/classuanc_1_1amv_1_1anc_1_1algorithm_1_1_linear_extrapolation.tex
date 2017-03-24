@@ -1,0 +1,116 @@
+\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation}{}\section{uanc\+:\+:amv\+:\+:anc\+:\+:algorithm\+:\+:Linear\+Extrapolation Class Reference}
+\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation}\index{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}}
+
+
+{\ttfamily \#include $<$Linear\+Extrapolation.\+h$>$}
+
+Inheritance diagram for uanc\+:\+:amv\+:\+:anc\+:\+:algorithm\+:\+:Linear\+Extrapolation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_afc4328260d3f9c7d8a9be50df5a30e50}{get\+Name} () final
+\begin{DoxyCompactList}\small\item\em Returns the name of the algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_aafb6717c9cb632241b10875630970388}{invert} (std\+::shared\+\_\+ptr$<$ \hyperlink{classuanc_1_1amv_1_1_inverted_model}{Inverted\+Model} $>$ in) final
+\begin{DoxyCompactList}\small\item\em Inverts the input signal. \end{DoxyCompactList}\item 
+\hyperlink{classuanc_1_1amv_1_1_algorithm}{Algorithm} $\ast$ \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_adbd3916228ea66603c4c5362f3392548}{clone} () final
+\begin{DoxyCompactList}\small\item\em Clones the current instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classuanc_1_1amv_1_1_algorithm_view}{Algorithm\+View}$<$ \hyperlink{classuanc_1_1amv_1_1anc_1_1model_1_1_a_n_c_model}{model\+::\+A\+N\+C\+Model} $>$ $\ast$ \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_a5cd4a27f8c92ab3f95f59cc8be260161}{construct\+View} () final
+\begin{DoxyCompactList}\small\item\em Constructs a view, which can handle an A\+N\+C\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}!clone@{clone}}
+\index{clone@{clone}!uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}}
+\subsubsection[{\texorpdfstring{clone() final}{clone() final}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Algorithm}$\ast$ uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_adbd3916228ea66603c4c5362f3392548}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_adbd3916228ea66603c4c5362f3392548}
+
+
+Clones the current instance. 
+
+This is basically the prototype pattern. It gets used to create an copy of the current \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_direct_algorithm}{Inverse\+Direct\+Algorithm}. To do so it simply creates a new instance.
+
+\begin{DoxyReturn}{Returns}
+The cloned algorithm. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_af6fcbfa35f460363c2cc7e6134af8dc7}{uanc\+::amv\+::\+I\+Algorithm}.
+
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}!construct\+View@{construct\+View}}
+\index{construct\+View@{construct\+View}!uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}}
+\subsubsection[{\texorpdfstring{construct\+View() final}{constructView() final}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Algorithm\+View}$<${\bf model\+::\+A\+N\+C\+Model}$>$$\ast$ uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation\+::construct\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_a5cd4a27f8c92ab3f95f59cc8be260161}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_a5cd4a27f8c92ab3f95f59cc8be260161}
+
+
+Constructs a view, which can handle an A\+N\+C\+Model. 
+
+This view basically display the standard information of the algorithm.
+
+\begin{DoxyReturn}{Returns}
+The created A\+N\+C\+View. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_algorithm_af5561072283ed19634893263c95a4b6e}{uanc\+::amv\+::\+Algorithm$<$ model\+::\+A\+N\+C\+Model $>$}.
+
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}}
+\subsubsection[{\texorpdfstring{get\+Name() final}{getName() final}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_afc4328260d3f9c7d8a9be50df5a30e50}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_afc4328260d3f9c7d8a9be50df5a30e50}
+
+
+Returns the name of the algorithm. 
+
+Simply passes back the name of the algorithm.
+
+\begin{DoxyReturn}{Returns}
+Name of the algorithm 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1_i_algorithm_a4935ab2fdacccf7df35d6fb596075edb}{uanc\+::amv\+::\+I\+Algorithm}.
+
+\index{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}!invert@{invert}}
+\index{invert@{invert}!uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation@{uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation}}
+\subsubsection[{\texorpdfstring{invert(std\+::shared\+\_\+ptr$<$ Inverted\+Model $>$ in) final}{invert(std::shared_ptr< InvertedModel > in) final}}]{\setlength{\rightskip}{0pt plus 5cm}void uanc\+::amv\+::anc\+::algorithm\+::\+Linear\+Extrapolation\+::invert (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Inverted\+Model} $>$}]{in}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}}\hypertarget{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_aafb6717c9cb632241b10875630970388}{}\label{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation_aafb6717c9cb632241b10875630970388}
+
+
+Inverts the input signal. 
+
+This is actually the heart of an A\+NC algorithm inside of this application. It takes an input model and processes it. Besides it should save its data inside the model using \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_a12ce80f6746cbb440cf771fc6878f7cf}{get\+Model()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input model containing the original signal. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classuanc_1_1amv_1_1anc_1_1algorithm_1_1_a_n_c_algorithm_abfdc7f14f7e41e408ee08037a839760d}{uanc\+::amv\+::anc\+::algorithm\+::\+A\+N\+C\+Algorithm$<$ model\+::\+A\+N\+C\+Model $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kurt/\+Documents/\+Studium/\+Bachelor\+\_\+\+Praktikum/\+U\+A\+N\+C/\+Code/\+U\+A\+N\+C/amv/anc/algorithm/\hyperlink{_linear_extrapolation_8h}{Linear\+Extrapolation.\+h}\end{DoxyCompactItemize}
