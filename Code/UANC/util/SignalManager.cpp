@@ -96,6 +96,7 @@ void SignalManager::eraseSignal(int index){
       this->signalsMap.erase(i);
       this->signalsMap.insert(std::make_pair(i,sig));
     }
+    this->signalsMap.erase(this->signalCounter);
     this->signalCounter = this->signalCounter - 1;
   }
 }
