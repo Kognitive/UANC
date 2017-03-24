@@ -127,9 +127,6 @@ signals:
   QGroupBox* RecentlyUsedGroupBox;
   QVBoxLayout* verticalLayout_10;
   QComboBox* recentlyUsedCombo;
-  QGroupBox* importGroupBox;
-  QVBoxLayout* verticalLayout_7;
-  QCheckBox* normalizeCheckBox;
   QGroupBox* actionsGroupBox;
   QHBoxLayout* actonLayout;
   QPushButton* importButton;

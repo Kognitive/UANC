@@ -129,20 +129,6 @@ void ImportWindow::setupGUI() {
 
   mainWidgetVerticalLayout->addWidget(&*RecentlyUsedGroupBox);
 
-  importGroupBox = new QGroupBox();
-  mainWidgetVerticalLayout->addWidget(importGroupBox);
-  importGroupBox->setObjectName(QString::fromUtf8("importGroupBox"));
-  verticalLayout_7 = new QVBoxLayout(&*importGroupBox);
-  verticalLayout_7->setSpacing(6);
-  verticalLayout_7->setContentsMargins(11, 11, 11, 11);
-  verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-  normalizeCheckBox = new QCheckBox(&*importGroupBox);
-  normalizeCheckBox->setObjectName(QString::fromUtf8("normalizeCheckBox"));
-
-  verticalLayout_7->addWidget(&*normalizeCheckBox);
-
-  mainWidgetVerticalLayout->addWidget(&*importGroupBox);
-
   //Layout for Cancel and Import button
   actionsGroupBox = new QGroupBox();
   mainWidgetVerticalLayout->addWidget(actionsGroupBox);
@@ -183,14 +169,6 @@ void ImportWindow::setupGUI() {
   filesGroupBox->setTitle(QApplication::translate("MainWindow", "Files", 0));
   RecentlyUsedGroupBox->setTitle(
       QApplication::translate("MainWindow", "Recently used", 0));
-  importGroupBox->setTitle(
-      QApplication::translate("MainWindow", "Import Options", 0));
-  normalizeCheckBox->setToolTip(
-      QApplication::translate("MainWindow", "Normalize", 0));
-  normalizeCheckBox->setStatusTip(
-      QApplication::translate("MainWindow", "Normalize the amplitude to 1", 0));
-  normalizeCheckBox->setText(
-      QApplication::translate("MainWindow", "Normalize Input", 0));
   actionsGroupBox->setTitle(
       QApplication::translate("MainWindow", "Actions", 0));
 
