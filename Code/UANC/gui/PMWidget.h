@@ -54,7 +54,9 @@ class PMWidget : public QWidget {
   bool performanceShown = false;
 
  public slots:
-
+    /** \brief simple hides or shows the performance measurement
+     *
+     */
   void tooglePerformance();
 };
 

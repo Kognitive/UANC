@@ -38,6 +38,11 @@ class PlotWidget : public QWidget, public EventObserver {
   void
   setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal);
 
+    /** \brief This method is for setting the YAxis
+     * This method is for setting the YAxis to true or false
+   *
+   * @param b given boolean
+   */
   void setCenteredYAxis(bool b) {_centeredYAxis = b;};
   /** \brief Returns the current range of the x axis of the plot.
    *
@@ -58,11 +63,24 @@ class PlotWidget : public QWidget, public EventObserver {
   void
   controlChanged();
 
+    /** \brief Constructor for signals
+   *
+   * @return a SignalModel
+   */
   std::shared_ptr<uanc::amv::SignalModel>
   signal() { return _signal; }
+
+/** \brief simply returns the error signal
+   *
+   * @return a SignalModel of the error signal
+   */
   std::shared_ptr<uanc::amv::SignalModel>
   errorSignal() { return _errorSignal; }
 
+    /** \brief simple returns the the last index
+   *
+   * @return a double with the last index
+   */
   double
   lastIndex() { return _lastIndex; }
 
@@ -118,6 +136,9 @@ class PlotWidget : public QWidget, public EventObserver {
 
   void switchChannel(int channel);
 
+    /** \brief saves the signal to the fileactor
+   *
+   */
  public slots:
   void saveSignal();
 };

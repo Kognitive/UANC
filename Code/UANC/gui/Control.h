@@ -25,11 +25,23 @@ class Control : public QCustomPlot {
    */
   Control(PlotWidget* parent);
 
+/** \brief rescales the axes for the data
+     *         rescales the axis to a given minimum and maximum of a data
+     * @param *data this is the data that has to be rescaled
+     * @param maxDataValue this is the maximum value in the data
+     * @param minDataValue this is the minimum value in the data
+     */
   void setData(QCPGraphDataContainer *data, double maxDataValue, double minDataValue);
 
+   /** \brief updates navigation box
+   *         updates navigation box after zoom
+   * @param signalZoomRange the range of the zoomed signal
+   */
   void updateNavBox(QCPRange signalZoomRange);
 
+  // retrieve the left box
   double getBoxLeft();
+  // retrieve the right box
   double getBoxRight();
 
  private slots:
