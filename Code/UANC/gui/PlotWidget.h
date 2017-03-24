@@ -83,6 +83,9 @@ class PlotWidget : public QWidget, public EventObserver {
    */
   bool _chkShown = false;
 
+  /** This variable states, wether this widget was initialized already */
+  bool _initialized = false;
+
   bool _centeredYAxis = true;
   QVBoxLayout *_layout;
 

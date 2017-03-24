@@ -47,6 +47,8 @@ void PlotWidget::initialize() {
 void PlotWidget::setSignal(std::shared_ptr<uanc::amv::InvertedModel> signal) {
   // save pointer to signal in member
   _signal = signal;
+  _initialized = true;
+
   if (signal->inverted && !_chkShown) {
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->addWidget(_chkBoxShowError);
@@ -95,6 +97,9 @@ void PlotWidget::controlChanged() {
 }
 
 void PlotWidget::triggered(Events event, EventContainer data) {
+  // Return when not initialized
+  if (!_initialized) return;
+
   if (event == Events::Scroll) {
     double lower = std::stod(data.get("lower"));
     double upper = std::stod(data.get("upper"));

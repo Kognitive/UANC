@@ -107,9 +107,9 @@ class SplineInterpolation : public ANCAlgorithm<model::ANCModel> {
 
  private:
 
-
-  const size_t POLYNOM_DEGREE = 3;
-  const size_t COMBINESAMPLES = 100;
+  // Settings for this algorithm.
+  static const size_t POLYNOM_DEGREE = 5;
+  static const size_t SAMPLE_BUNCH = 10;
 
   /** \brief This function computes a approximated inverted signal of the input signal.
    *
@@ -119,171 +119,131 @@ class SplineInterpolation : public ANCAlgorithm<model::ANCModel> {
   Aquila::SignalSource *approximate(const Aquila::SignalSource *signal) {
 
     // calculate widht between
-    const double widthBetween = 1. / signal->getSampleFrequency();
+    const double widthBetween = 1;
+    const double normalization = 1;
 
     // reserve vector for result
     std::vector<double> result(signal->getSamplesCount());
 
-    // iterate over all samples, with the given window size.
-    size_t i = 0;
-    size_t last = i;
-    int straight_counter = 0;
-    bool first = true;
+      if (signal->getSamplesCount() > 0) {
 
+        // first of all do some preprocessing, i.e check if the sample count
+        // divisible by the bunch size
+        size_t remaining = signal->getSamplesCount() % SAMPLE_BUNCH;
+        size_t last = signal->getSamplesCount() - remaining - SAMPLE_BUNCH;
 
-    int state = 0;
-    int counter = 0;
-    int dcounter = 0;
-    std::list<size_t> indices;
+        // set the start derivative
+        double derivative[] = {0, (signal->sample(1) - signal->sample(0)) / normalization};
+        double secDerivative[] = {0, (signal->sample(2) - signal->sample(1)) / normalization - derivative[1]};
 
-    // start with the pair
-    indices.push_back(0);
+        // iterate over all samples
+        for (size_t i = 0; i < last; i += SAMPLE_BUNCH) {
 
-    while (i < signal->getSamplesCount() - 1) {
+          // get start and end.
+          size_t start = i;
+          size_t end = i + SAMPLE_BUNCH;
 
-      dcounter++;
+          // first of estimate the derivatives and shift
+          // one forward.
+          derivative[0] = derivative[1];
+          secDerivative[0] = secDerivative[1];
+          derivative[1] = (signal->sample(end) - signal->sample(end - 2)) / (2 * normalization);
+          secDerivative[1] = (signal->sample(end + 1) - 2 * signal->sample(end) - 2 * signal->sample(end - 2)
+              - signal->sample(end - 3)) / (2 * normalization);
 
-      // simplw state machine to count local optima and turn points
-      switch (state) {
-
-        // Case for going up
-        case 0:
-
-          if (signal->sample(i) == signal->sample(i+1)) state = 1;
-          if (signal->sample(i) > signal->sample(i+1)) state = 2;
-          break;
-
-          // When you got up
-        case 1:
-
-          if (signal->sample(i) < signal->sample(i+1)) {
-            state = 0;
-            counter += 2;
-          }
-          else if (signal->sample(i) > signal->sample(i+1)) {
-            state = 2;
-            counter += 1;
-          }
-          break;
-
-          // When you go down
-        case 2:
-
-          if (signal->sample(i) == signal->sample(i+1)) state = 3;
-          else if (signal->sample(i) < signal->sample(i+1)) state = 0;
-          break;
-
-        case 3:
-
-          // When you got down
-          if (signal->sample(i) < signal->sample(i+1)) {
-            state = 0;
-            counter += 1;
-          }
-          else if (signal->sample(i) > signal->sample(i+1)) {
-            state = 2;
-            counter += 2;
-          }
-          break;
-      }
-
-      // if you reached the approximation range of a polynomial
-      if (dcounter >= POLYNOM_DEGREE - 1) {
-        dcounter = 0;
-        indices.push_back(i);
-      }
-
-      i++;
-    }
-
-    // start with the pair
-    indices.push_back(signal->getSamplesCount() - 1);
-
-    // iterate over all pairs of indices.
-    for (auto current = indices.begin(), nxt = next(current); nxt != indices.end(); current = nxt, nxt = next(nxt)) {
-      // std::cout << (*nxt - *current) << " Samples" << std::endl;
-      auto alpha = optimalAlpha(*current, *nxt - 1, *nxt - *current, signal, widthBetween);
-
-      // fill in the values
-      for (size_t k = *current; k < *nxt; k++) {
-        double x = widthBetween * k;
-        double c = 1;
-        double y = 0;
-        for (int i = 0; i < POLYNOM_DEGREE; i++) {
-          y -= c * alpha(i);
-          c *= x;
+          // fill samples
+          fillSamples(start, end, derivative, secDerivative, widthBetween, signal, &result);
         }
-        result[k] = y;
-      }
-    }
 
+        // get start and end.
+        size_t first = last;
+        last = first + remaining;
+
+        // first of estimate the derivatives and shift
+        // one forward.
+        derivative[0] = derivative[1];
+        secDerivative[0] = secDerivative[1];
+        derivative[1] = (signal->sample(last - 1) - signal->sample(last - 2)) / normalization;
+        secDerivative[1] = derivative[1] - (signal->sample(last - 2) - signal->sample(last - 3)) / normalization;
+
+        // fill samples
+        fillSamples(first, last, derivative, secDerivative, widthBetween, signal, &result);
+      }
 
     Aquila::SignalSource* approxInvSignal = new Aquila::SignalSource(result, signal->getSampleFrequency());
     return approxInvSignal;
   }
 
-  colvec optimalAlpha(size_t min, size_t max, size_t samples, const Aquila::SignalSource *signal, double widthBetween) {
+  void fillSamples(size_t start, size_t end, double* derivative, double* secDerivative, double widthBetween, const Aquila::SignalSource *signal, std::vector<double>* result) {
 
-    // create t
-    colvec t(4);
-    t[0] = signal->sample(min);
-    t[1] = signal->sample(max);
+    // gain best alpha
+    vec::fixed<POLYNOM_DEGREE+1> alpha;
+    alpha = optimalAlpha(start, end, widthBetween, derivative, secDerivative, signal, alpha);
 
-    // estimate derivative using forward differences
-    t[2] = (signal->sample(min + 1) - signal->sample(min));
-    t[3] = (signal->sample(max) - signal->sample(max - 1));
-
-    // generate P
-    mat P(4,POLYNOM_DEGREE);
-    P = fillWithPolynomial(0, widthBetween * min, P);
-    P = fillWithPolynomial(1, widthBetween * max, P);
-    P = fillWithDerivative(2, widthBetween * min, P);
-    P = fillWithDerivative(3, widthBetween * max, P);
-
-    // calculate pseudo inverse
-    auto alpha = pinv(P) * t;
-
-    // calculate K
-    mat K(samples, POLYNOM_DEGREE);
-    colvec Y(samples);
-
-    // iterate and fill
-    for (size_t k = min; k <= max; k++) {
-      K = fillWithPolynomial((int) (k - min), widthBetween * k, K);
-      Y[k - min] = signal->sample(k);
+    // fill in the values
+    for (size_t k = start; k < end; k++) {
+      double x = widthBetween * k;
+      double c = 1;
+      double y = 0;
+      for (int l = 0; l < POLYNOM_DEGREE; l++) {
+        y -= c * alpha(l);
+        c *= x;
+      }
+      (*result)[k] = y;
     }
-
-    // find nullspace of P and KB Pseudoinverse
-    mat B = null(P, 0);
-    mat KB = K * B;
-    mat KBP = pinv(K * B);
-
-    // calculate optimal alpha parameters
-    mat BKBP = B * KBP;
-    mat right = K * alpha;
-    mat rightMult = Y - right;
-    mat compRight = BKBP * rightMult;
-    colvec alphaStar = alpha + compRight;
-    return alphaStar;
   }
 
-    mat& fillWithPolynomial(int row, double x, mat &matrix) {
+  colvec &optimalAlpha(const size_t start, const size_t end, double sampleDistance,
+                       double* derivative, double* secDerivative,
+                       const Aquila::SignalSource *signal, colvec &out) {
+
+    // calculate distance
+    const size_t distance = end - start;
+
+    // create fixed t
+    colvec::fixed<6> t;
+
+    // place start values
+    t[0] = signal->sample(start);
+    t[1] = signal->sample(end - 1);
+
+    // place derivatives
+    t[2] = derivative[0];
+    t[3] = derivative[1];
+
+    // place secondDerivatives
+    t[4] = secDerivative[0];
+    t[5] = secDerivative[1];
+
+    // generate P
+    mat::fixed<6, POLYNOM_DEGREE + 1> P;
+    P = fillWithPolynomial(0, sampleDistance * start, P);
+    P = fillWithPolynomial(1, sampleDistance * (end - 1), P);
+    P = fillWithDerivative(2, sampleDistance * start, P);
+    P = fillWithDerivative(3, sampleDistance * (end - 1), P);
+    P = fillWithSecDerivative(4, sampleDistance * start, P);
+    P = fillWithSecDerivative(5, sampleDistance * (end - 1), P);
+
+    // calculate pseudo inverse
+    out = pinv(P) * t;
+    return out;
+  }
+
+  mat& fillWithPolynomial(int row, double x, mat &matrix) {
     double c = 1;
     for (int i = 0; i < POLYNOM_DEGREE; i++) {
       matrix(row, i) = c;
       c *= x;
     }
-      return matrix;
+    return matrix;
   }
 
   mat& fillWithDerivative(int row, double x, mat &matrix) {
-    int cLeft = 0;
-    double cRight = 0;
 
     // create first field
-    matrix(row,0) = cLeft * cRight;
-    cLeft = 1;
-    cRight = 1;
+    matrix(row,0) = 0;
+    int cLeft = 1;
+    double cRight = 1;
 
     // create rest
     for (int i = 1; i < POLYNOM_DEGREE; i++) {
@@ -291,6 +251,27 @@ class SplineInterpolation : public ANCAlgorithm<model::ANCModel> {
       cLeft++;
       cRight *= x;
     }
+
+    return matrix;
+  }
+
+  mat& fillWithSecDerivative(int row, double x, mat &matrix) {
+
+    // set two zero values
+    matrix(row,0) = 0;
+    matrix(row,1) = 0;
+
+    // counter for x
+    double cRight = 1;
+    int cLeft = 2;
+
+    // create rest
+    for (int i = 1; i < POLYNOM_DEGREE; i++) {
+      matrix(row,i) = cLeft * (cLeft - 1) * cRight;
+      cLeft++;
+      cRight *= x;
+    }
+
     return matrix;
   }
 

@@ -64,10 +64,12 @@ class SignalViewWidget : public QWidget, public EventObserver {
 
     // finally fill in the data
     registeredViews->at(currentSelected)->fillView();
+    signalSet = true;
   }
 
   // Gets called when the event is triggered
   void triggered(Events event, EventContainer data) final {
+    if (!signalSet) return;
 
     // retrieve fields from container.
     auto strIndex = data.get("Index");

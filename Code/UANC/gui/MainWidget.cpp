@@ -139,7 +139,7 @@ void MainWidget::algorithmFinished() {
 
   // show loading badge
   this->_progressIndicator->hide();
-  this->_progressIndicator->stopAnimation();
+  // this->_progressIndicator->stopAnimation();
   this->_buttonApply->show();
 }
 

@@ -25,6 +25,10 @@ class HeatWidget : public QCustomPlot, EventObserver {
  private:
   std::shared_ptr<SpectrogramModel> _data;
 
+  /** Holds whether the widget was initialized, in the sense, that the data
+   * was set already and is now saved inside.
+   */
+  bool _initialized = false;
   QCPColorScale *_colorScale;
 
   void switchChannel(int channel) {
@@ -46,7 +50,7 @@ public:
 
   void setData(std::shared_ptr<SpectrogramModel> data) {
     _data = data;
-
+    _initialized = true;
     int channel = 0;
     if (_token->hasLastEvent(Events::ChangeChannel)) {
       channel = atoi(_token->getLastEvent(Events::ChangeChannel).get("Index").c_str());
@@ -111,6 +115,8 @@ public:
   }
 
   void triggered(Events event, EventContainer data) {
+    if (!_initialized) return;
+
     if (event == Events::ChangeChannel) {
       int index = atoi(data.get("Index").c_str());
       switchChannel(index);
