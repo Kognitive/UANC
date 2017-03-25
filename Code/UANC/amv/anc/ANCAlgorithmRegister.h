@@ -10,6 +10,7 @@
 #include "Code/UANC/amv/anc/algorithm/InverseDirectAlgorithm.h"
 #include "Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h"
 #include "Code/UANC/amv/anc/algorithm/LinearExtrapolation.h"
+#include "Code/UANC/amv/anc/algorithm/LocallyWeightedRegression.h"
 #include "Code/UANC/amv/anc/algorithm/QuinticSplines.h"
 #include "Code/UANC/amv/anc/algorithm/PolynomialRegression.h"
 
@@ -50,6 +51,7 @@ class ANCAlgorithmRegister {
     lst->push_back(new LinearExtrapolation());
     lst->push_back(new QuinticSplines());
     lst->push_back(new PolynomialRegression());
+    lst->push_back(new LocallyWeightedRegression());
 
     // --------------------------------------
 
