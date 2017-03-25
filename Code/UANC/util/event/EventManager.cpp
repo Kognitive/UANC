@@ -27,7 +27,7 @@ EventManager::EventManager() {
       new std::unordered_map<Events, std::vector<int> *>()
   );
 
-  // Creaate empty id mapping
+  // Create empty id mapping
   _idMapping = std::unique_ptr<std::unordered_map<int, EventObserver *>>(
       new std::unordered_map<int, EventObserver *>()
   );
