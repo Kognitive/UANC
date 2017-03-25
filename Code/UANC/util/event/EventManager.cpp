@@ -23,8 +23,8 @@ EventManager* EventManager::_instance;
 EventManager::EventManager() {
 
   // Create the two mappings.
-  _eventMapping = std::unique_ptr<std::unordered_map<Events, std::vector<int> *>>(
-      new std::unordered_map<Events, std::vector<int> *>()
+  _eventMapping = std::unique_ptr<std::unordered_map<Events, std::vector<int> *, EventHash, EventEqual>>(
+      new std::unordered_map<Events, std::vector<int> *, EventHash, EventEqual>()
   );
 
   // Creaate empty id mapping
