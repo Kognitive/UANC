@@ -2,8 +2,8 @@
 // Created by markus on 12.03.17.
 //
 
-#ifndef UANC_SPLINES_H
-#define UANC_SPLINES_H
+#ifndef UANC_POLYNOMIALREGRESSION_H
+#define UANC_POLYNOMIALREGRESSION_H
 
 #include <Code/UANC/amv/anc/model/ANCModel.h>
 #include <Code/UANC/amv/Algorithm.h>
@@ -22,7 +22,7 @@ using namespace uanc::amv::anc;
 using namespace uanc::util;
 using namespace arma;
 
-class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
+class PolynomialRegression : public ANCAlgorithm<model::ANCModel> {
  public:
 
   /** \brief Returns the name of the algorithm.
@@ -31,7 +31,7 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
    *
    * @return Name of the algorithm
    */
-  std::string getName() final { return "Quintic Splines"; };
+  std::string getName() final { return "Polynomial Regression"; };
 
   /** \brief Inverts the input signal.
    *
@@ -90,7 +90,7 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
    * @return The cloned algorithm.
    */
   Algorithm *clone() final {
-    return new QuinticSplines();
+    return new PolynomialRegression();
   }
 
  protected:
@@ -108,8 +108,8 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
  private:
 
   // Settings for this algorithm.
-  static const size_t POLYNOM_DEGREE = 5;
-  static const size_t SAMPLE_BUNCH = 10;
+  static const size_t POLYNOM_DEGREE = 11;
+  static const size_t SAMPLE_BUNCH = 20;
 
   /** \brief This function computes a approximated inverted signal of the input signal.
    *
@@ -125,50 +125,50 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
     // reserve vector for result
     std::vector<double> result(signal->getSamplesCount());
 
-      if (signal->getSamplesCount() > 0) {
+    if (signal->getSamplesCount() > 0) {
 
-        // first of all do some preprocessing, i.e check if the sample count
-        // divisible by the bunch size
-        size_t remaining = signal->getSamplesCount() % SAMPLE_BUNCH;
-        size_t last = signal->getSamplesCount() - remaining - SAMPLE_BUNCH;
+      // first of all do some preprocessing, i.e check if the sample count
+      // divisible by the bunch size
+      size_t remaining = signal->getSamplesCount() % SAMPLE_BUNCH;
+      size_t last = signal->getSamplesCount() - remaining - SAMPLE_BUNCH;
 
-        // set the start derivative
-        double derivative[] = {0, (signal->sample(1) - signal->sample(0)) / normalization};
-        double secDerivative[] = {0, (signal->sample(2) - signal->sample(1)) / normalization - derivative[1]};
+      // set the start derivative
+      double derivative[] = {0, (signal->sample(1) - signal->sample(0)) / normalization};
+      double secDerivative[] = {0, (signal->sample(2) - signal->sample(1)) / normalization - derivative[1]};
 
-        // iterate over all samples
-        for (size_t i = 0; i < last; i += SAMPLE_BUNCH) {
-
-          // get start and end.
-          size_t start = i;
-          size_t end = i + SAMPLE_BUNCH;
-
-          // first of estimate the derivatives and shift
-          // one forward.
-          derivative[0] = derivative[1];
-          secDerivative[0] = secDerivative[1];
-          derivative[1] = (signal->sample(end) - signal->sample(end - 2)) / (2 * normalization);
-          secDerivative[1] = (signal->sample(end + 1) - 2 * signal->sample(end) - 2 * signal->sample(end - 2)
-              - signal->sample(end - 3)) / (2 * normalization);
-
-          // fill samples
-          fillSamples(start, end, derivative, secDerivative, widthBetween, signal, &result);
-        }
+      // iterate over all samples
+      for (size_t i = 0; i < last; i += SAMPLE_BUNCH) {
 
         // get start and end.
-        size_t first = last;
-        last = first + remaining;
+        size_t start = i;
+        size_t end = i + SAMPLE_BUNCH;
 
         // first of estimate the derivatives and shift
         // one forward.
         derivative[0] = derivative[1];
         secDerivative[0] = secDerivative[1];
-        derivative[1] = (signal->sample(last - 1) - signal->sample(last - 2)) / normalization;
-        secDerivative[1] = derivative[1] - (signal->sample(last - 2) - signal->sample(last - 3)) / normalization;
+        derivative[1] = (signal->sample(end) - signal->sample(end - 2)) / (2 * normalization);
+        secDerivative[1] = (signal->sample(end + 1) - 2 * signal->sample(end) - 2 * signal->sample(end - 2)
+            - signal->sample(end - 3)) / (2 * normalization);
 
         // fill samples
-        fillSamples(first, last, derivative, secDerivative, widthBetween, signal, &result);
+        fillSamples(start, end, derivative, secDerivative, widthBetween, signal, &result);
       }
+
+      // get start and end.
+      size_t first = last;
+      last = first + remaining;
+
+      // first of estimate the derivatives and shift
+      // one forward.
+      derivative[0] = derivative[1];
+      secDerivative[0] = secDerivative[1];
+      derivative[1] = (signal->sample(last - 1) - signal->sample(last - 2)) / normalization;
+      secDerivative[1] = derivative[1] - (signal->sample(last - 2) - signal->sample(last - 3)) / normalization;
+
+      // fill samples
+      fillSamples(first, last, derivative, secDerivative, widthBetween, signal, &result);
+    }
 
     Aquila::SignalSource* approxInvSignal = new Aquila::SignalSource(result, signal->getSampleFrequency());
     return approxInvSignal;
@@ -177,7 +177,7 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
   void fillSamples(size_t start, size_t end, double* derivative, double* secDerivative, double widthBetween, const Aquila::SignalSource *signal, std::vector<double>* result) {
 
     // gain best alpha
-    vec::fixed<6> alpha;
+    vec::fixed<POLYNOM_DEGREE + 1> alpha;
     alpha = optimalAlpha(start, end, widthBetween, derivative, secDerivative, signal, alpha);
 
     // fill in the values
@@ -185,7 +185,7 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
       double x = widthBetween * k;
       double c = 1;
       double y = 0;
-      for (int l = 0; l < 5 + 1; l++) {
+      for (size_t l = 0; l < POLYNOM_DEGREE + 1; l++) {
         y -= c * alpha(l);
         c *= x;
       }
@@ -196,6 +196,9 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
   colvec &optimalAlpha(const size_t start, const size_t end, double sampleDistance,
                        double* derivative, double* secDerivative,
                        const Aquila::SignalSource *signal, colvec &out) {
+
+    // calculate distance
+    const size_t distance = end - start;
 
     // create fixed t
     colvec::fixed<6> t;
@@ -213,7 +216,7 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
     t[5] = secDerivative[1];
 
     // generate P
-    mat::fixed<6, 6> P;
+    mat::fixed<6, POLYNOM_DEGREE + 1> P;
     P = fillWithPolynomial(0, sampleDistance * start, P);
     P = fillWithPolynomial(1, sampleDistance * (end - 1), P);
     P = fillWithDerivative(2, sampleDistance * start, P);
@@ -223,12 +226,34 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
 
     // calculate pseudo inverse
     out = pinv(P) * t;
+
+    // calculate K
+    mat K(distance, POLYNOM_DEGREE + 1);
+    colvec Y(distance);
+
+    // iterate and fill
+    for (size_t k = start; k < end; k++) {
+      K = fillWithPolynomial((int) (k - start), sampleDistance * k, K);
+      Y[k - start] = signal->sample(k);
+    }
+
+    // find nullspace of P and KB Pseudoinverse
+    mat B = null(P, 0);
+    mat KB = K * B;
+    mat KBP = pinv(K * B);
+
+    // calculate optimal alpha parameters
+    mat BKBP = B * KBP;
+    mat right = K * out;
+    mat rightMult = Y - right;
+    mat compRight = BKBP * rightMult;
+    out = out + compRight;
     return out;
   }
 
   mat& fillWithPolynomial(int row, double x, mat &matrix) {
     double c = 1;
-    for (int i = 0; i < 6; i++) {
+    for (size_t i = 0; i < POLYNOM_DEGREE + 1; i++) {
       matrix(row, i) = c;
       c *= x;
     }
@@ -243,7 +268,7 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
     double cRight = 1;
 
     // create rest
-    for (int i = 1; i < 6; i++) {
+    for (size_t i = 1; i < POLYNOM_DEGREE + 1; i++) {
       matrix(row,i) = cLeft * cRight;
       cLeft++;
       cRight *= x;
@@ -263,7 +288,7 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
     int cLeft = 2;
 
     // create rest
-    for (int i = 2; i < 6; i++) {
+    for (size_t i = 2; i < POLYNOM_DEGREE + 1; i++) {
       matrix(row,i) = cLeft * (cLeft - 1) * cRight;
       cLeft++;
       cRight *= x;
@@ -278,4 +303,4 @@ class QuinticSplines : public ANCAlgorithm<model::ANCModel> {
 }
 }
 
-#endif //UANC_SPLINES_H
+#endif //UANC_POLYNOMIALREGRESSION_H

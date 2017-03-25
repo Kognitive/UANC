@@ -1,7 +1,7 @@
 
 #include <Code/UANC/gui/MainWindow.h>
 #include <Code/UANC/util/GlobalSettings.h>
-#include <Code/UANC/util/Tests/EpsilonTests.h>
+#include <Code/UANC/util/tests/EpsilonTests.h>
 
 
 using namespace uanc::gui;

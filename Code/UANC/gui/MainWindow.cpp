@@ -133,7 +133,7 @@ MainWindow* MainWindow::get() {
  */
         void MainWindow::about() {
             QMessageBox::about(this, "About", "Antischall Ver. 1.1.7 \n "
-                    "Developpers: \n"
+                    "Developers: \n"
                     "\t Daniel José Ceballos Jung \n"
                     "\t Janne Wulf \n"
                     "\t Markus Semmler \n"

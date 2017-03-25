@@ -137,7 +137,7 @@ void SignalPlot::setExtremeValues() {
   QCPGraphData newDatapoint;
   // get all extreme values (via state machine)
   int state = 0;
-  for (size_t i = 1; i < data->size(); ++i) {
+  for (auto i = 1; i < data->size(); ++i) {
     switch (state) {
       case 0 : {
         // canidate for new maximum

@@ -71,7 +71,7 @@ void EpsilonTests::run(std::string path) {
                 QString algoString = QString::fromStdString(algorithmList->at(algoIt)->getName());
                 QString fileString = QString::fromStdString(signalString->toStdString());
                 std::cout << "\t Algorithm: " << algoString.toStdString() <<
-                          "With e~N(" + std::to_string(avgMy) << "," << std::to_string(deviation) << ")" << std::endl;
+                          " --> Where estimated gaussian of the error is N(" + std::to_string(avgMy) << "," << std::to_string(deviation) << ")" << std::endl;
             }
             catch (...) {
                 QString algoString = QString::fromStdString(algorithmList->at(algoIt)->getName());

@@ -11,6 +11,7 @@
 #include "Code/UANC/amv/anc/algorithm/InverseFFTAlgorithm.h"
 #include "Code/UANC/amv/anc/algorithm/LinearExtrapolation.h"
 #include "Code/UANC/amv/anc/algorithm/QuinticSplines.h"
+#include "Code/UANC/amv/anc/algorithm/PolynomialRegression.h"
 
 namespace uanc {
 namespace amv {
@@ -48,6 +49,7 @@ class ANCAlgorithmRegister {
     lst->push_back(new InverseFFTAlgorithm());
     lst->push_back(new LinearExtrapolation());
     lst->push_back(new QuinticSplines());
+    lst->push_back(new PolynomialRegression());
 
     // --------------------------------------
 

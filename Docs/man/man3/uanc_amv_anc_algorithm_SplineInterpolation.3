@@ -1,13 +1,13 @@
-.TH "uanc::amv::anc::algorithm::SplineInterpolation" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.TH "uanc::amv::anc::algorithm::QuinticSplines" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-uanc::amv::anc::algorithm::SplineInterpolation \- 
+uanc::amv::anc::algorithm::QuinticSplines \-
 .SH SYNOPSIS
 .br
 .PP
 .PP
-\fC#include <SplineInterpolation\&.h>\fP
+\fC#include <QuinticSplines\&.h>\fP
 .PP
 Inherits \fBuanc::amv::anc::algorithm::ANCAlgorithm< model::ANCModel >\fP\&.
 .SS "Public Member Functions"
@@ -36,7 +36,7 @@ Inherits \fBuanc::amv::anc::algorithm::ANCAlgorithm< model::ANCModel >\fP\&.
 .in -1c
 .SH "Member Function Documentation"
 .PP 
-.SS "\fBAlgorithm\fP* uanc::amv::anc::algorithm::SplineInterpolation::clone ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+.SS "\fBAlgorithm\fP* uanc::amv::anc::algorithm::QuinticSplines::clone ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
 
 .PP
 Clones the current instance\&. This is basically the prototype pattern\&. It gets used to create an copy of the current \fBInverseDirectAlgorithm\fP\&. To do so it simply creates a new instance\&.
@@ -49,7 +49,7 @@ The cloned algorithm\&.
 
 .PP
 Implements \fBuanc::amv::IAlgorithm\fP\&.
-.SS "\fBAlgorithmView\fP<\fBmodel::ANCModel\fP>* uanc::amv::anc::algorithm::SplineInterpolation::constructView ()\fC [inline]\fP, \fC [final]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+.SS "\fBAlgorithmView\fP<\fBmodel::ANCModel\fP>* uanc::amv::anc::algorithm::QuinticSplines::constructView ()\fC [inline]\fP, \fC [final]\fP, \fC [protected]\fP, \fC [virtual]\fP"
 
 .PP
 Constructs a view, which can handle an ANCModel\&. This view basically display the standard information of the algorithm\&.
@@ -62,7 +62,7 @@ The created ANCView\&.
 
 .PP
 Implements \fBuanc::amv::Algorithm< model::ANCModel >\fP\&.
-.SS "std::string uanc::amv::anc::algorithm::SplineInterpolation::getName ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+.SS "std::string uanc::amv::anc::algorithm::QuinticSplines::getName ()\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
 
 .PP
 Returns the name of the algorithm\&. Simply passes back the name of the algorithm\&.
@@ -75,7 +75,7 @@ Name of the algorithm
 
 .PP
 Implements \fBuanc::amv::IAlgorithm\fP\&.
-.SS "void uanc::amv::anc::algorithm::SplineInterpolation::invert (std::shared_ptr< \fBInvertedModel\fP > in)\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
+.SS "void uanc::amv::anc::algorithm::QuinticSplines::invert (std::shared_ptr< \fBInvertedModel\fP > in)\fC [inline]\fP, \fC [final]\fP, \fC [virtual]\fP"
 
 .PP
 Inverts the input signal\&. This is actually the heart of an ANC algorithm inside of this application\&. It takes an input model and processes it\&. Besides it should save its data inside the model using \fBgetModel()\fP\&.
