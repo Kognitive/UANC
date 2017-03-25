@@ -274,6 +274,7 @@ void MainWidget::waveClosed(const int &index) {
   tabInRun = true;
   // Removes the tab at position index from this stack of widgets.
   // The page widget itself is not deleted.
+  delete this->_tabWidget->currentWidget();
   this->_tabWidget->removeTab(index);
   tabInRun = false;
 

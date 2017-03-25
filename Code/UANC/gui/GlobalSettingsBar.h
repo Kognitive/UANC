@@ -77,6 +77,12 @@ namespace gui {
       init(hasRight);
     }
 
+    ~GlobalSettingsBar() {
+      _token->deleteLastEvent(Events::ChangeView);
+      _token->deleteLastEvent(Events::ChangeChannel);
+      _token->deleteLastEvent(Events::Scroll);
+    }
+
     /** This method gets called when one of the events was triggered. */
     void triggered(Events event, EventContainer data) final {
 
