@@ -14,6 +14,25 @@
 #include "EventObserver.h"
 
 
+struct EventHash {
+ public:
+  template <typename T>
+  std::size_t operator()(const T &x) const
+  {
+    return static_cast<std::size_t>(x);
+  }
+};
+
+class EventEqual
+{
+ public:
+  template <typename T>
+  bool operator() (T const& t1, T const& t2) const
+  {
+    return t1 == t2;
+  }
+};
+
 struct EventIDHash {
  public:
   template <typename T, typename U>
@@ -94,7 +113,7 @@ class EventManager {
   /**
     * Holds an unordered map over all events (Event, id(=vector<int>))
     */
-  std::unique_ptr<std::unordered_map<Events, std::vector<int>*>> _eventMapping;
+  std::unique_ptr<std::unordered_map<Events, std::vector<int>*, EventHash, EventEqual>> _eventMapping;
   /**
    * Holds an unordered map over all IDs (ID, events(=vector<Events>))
    */
