@@ -22,7 +22,7 @@ Otherwise generate the makefiles using cd Bin
 
 Then build the application using       make [-j X]
 
-For windows:
+For Windows:
 	
 Install MSVC 2013 e.g. https://www.microsoft.com/de-de/download/details.aspx?id=44914
 Other MSVC versions and 
@@ -34,5 +34,8 @@ Set the CMAKE_PREFIX_PATH to the QT installation folder: E.g. set (CMAKE_PREFIX_
 Change the Armadillo inculde directory if necessary: target_include_directories(UANC  PUBLIC "C:/Program Files/armadillo/include")
 Configure the UANC Project using CMake GUI and generate the MSVC project files. 
 Build the UANC target in the MSVC.
+The UANC can be deployed using the QT Windows Deployment Tool windeployqt.
 
 The documentation can be generated after generating the makefile with CMake on all systems by using the make target doc. The Linter can be run with python by using the target stylecheck.
+
+
