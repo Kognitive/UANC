@@ -7,5 +7,7 @@ var searchData=
   ['linearextrapolation',['LinearExtrapolation',['../classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation.html',1,'uanc::amv::anc::algorithm']]],
   ['linearextrapolation_2eh',['LinearExtrapolation.h',['../_linear_extrapolation_8h.html',1,'']]],
   ['loaddata',['loadData',['../classuanc_1_1util_1_1_dummy_actor.html#ae2912157674c282f5436f27ddbfcf8cc',1,'uanc::util::DummyActor::loadData()'],['../classuanc_1_1util_1_1_file_actor.html#ad2db7584c9332a4d8376ccf6276ec301',1,'uanc::util::FileActor::loadData()'],['../classuanc_1_1util_1_1_signal_file_actor.html#a2069e33e03ebc63eac2080d40f863ce3',1,'uanc::util::SignalFileActor::loadData()']]],
-  ['loadsignalsource',['loadSignalSource',['../classuanc_1_1gui_1_1_main_widget.html#a5de87dc6cfeb353120647948893431a9',1,'uanc::gui::MainWidget']]]
+  ['loadsignalsource',['loadSignalSource',['../classuanc_1_1gui_1_1_main_widget.html#a5de87dc6cfeb353120647948893431a9',1,'uanc::gui::MainWidget']]],
+  ['locallyweightedregression',['LocallyWeightedRegression',['../classuanc_1_1amv_1_1anc_1_1algorithm_1_1_locally_weighted_regression.html',1,'uanc::amv::anc::algorithm']]],
+  ['locallyweightedregression_2eh',['LocallyWeightedRegression.h',['../_locally_weighted_regression_8h.html',1,'']]]
 ];

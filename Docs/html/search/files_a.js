@@ -11,5 +11,6 @@ var searchData=
   ['pmview_2ecpp',['PMView.cpp',['../_p_m_view_8cpp.html',1,'']]],
   ['pmview_2eh',['PMView.h',['../_p_m_view_8h.html',1,'']]],
   ['pmwidget_2ecpp',['PMWidget.cpp',['../_p_m_widget_8cpp.html',1,'']]],
-  ['pmwidget_2eh',['PMWidget.h',['../_p_m_widget_8h.html',1,'']]]
+  ['pmwidget_2eh',['PMWidget.h',['../_p_m_widget_8h.html',1,'']]],
+  ['polynomialregression_2eh',['PolynomialRegression.h',['../_polynomial_regression_8h.html',1,'']]]
 ];

@@ -1,7 +1,7 @@
 var dir_04bef2aa695901f2222a4b29d2fb3b77 =
 [
     [ "event", "dir_645a92eab3c1f9b369457d56420f4d39.html", "dir_645a92eab3c1f9b369457d56420f4d39" ],
-    [ "Tests", "dir_3ccafcc6e5e0aba2c0d731ee9028250c.html", "dir_3ccafcc6e5e0aba2c0d731ee9028250c" ],
+    [ "tests", "dir_e8371b18a85f794a2fc8449709c48d5c.html", "dir_e8371b18a85f794a2fc8449709c48d5c" ],
     [ "tools", "dir_98e85eba9d905674aaaf5d74d02cba46.html", "dir_98e85eba9d905674aaaf5d74d02cba46" ],
     [ "DialogUtil.h", "_dialog_util_8h.html", [
       [ "DialogUtil", "classuanc_1_1util_1_1_dialog_util.html", "classuanc_1_1util_1_1_dialog_util" ]

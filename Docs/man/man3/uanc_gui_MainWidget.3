@@ -1,4 +1,4 @@
-.TH "uanc::gui::MainWidget" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.TH "uanc::gui::MainWidget" 3 "Sun Mar 26 2017" "Version 0.1" "UANC" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -27,9 +27,11 @@ Inherits QWidget\&.
 .ti -1c
 .RI "void \fBwaveClosed\fP (const int &index)"
 .br
+.RI "\fIThis gets fired, when a wave tab is closed\&. \fP"
 .ti -1c
 .RI "void \fBalgorithmClosed\fP (const int &index)"
 .br
+.RI "\fIThis gets fired, when a algorithm tab is closed\&. \fP"
 .in -1c
 .SS "Public Member Functions"
 
@@ -53,6 +55,8 @@ This is the main widget constructor\&. This basically initializes the gui and do
 .PP 
 .SS "void uanc::gui::MainWidget::algorithmClosed (const int & index)\fC [slot]\fP"
 
+.PP
+This gets fired, when a algorithm tab is closed\&. This gets fired, when a algorithm tab is closed\&. 
 .SS "void uanc::gui::MainWidget::algorithmFinished ()\fC [slot]\fP"
 Gets called when the algorithm is finished\&. 
 .SS "void uanc::gui::MainWidget::applyClicked ()\fC [slot]\fP"
@@ -80,6 +84,8 @@ loads the signal source\&. This method loads a signal source in the top tab view
 Simple signal for a differenct selected tab\&. 
 .SS "void uanc::gui::MainWidget::waveClosed (const int & index)\fC [slot]\fP"
 
+.PP
+This gets fired, when a wave tab is closed\&. This gets fired, when a wave tab is closed\&. 
 
 .SH "Author"
 .PP 

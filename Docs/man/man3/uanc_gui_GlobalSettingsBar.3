@@ -1,4 +1,4 @@
-.TH "uanc::gui::GlobalSettingsBar" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.TH "uanc::gui::GlobalSettingsBar" 3 "Sun Mar 26 2017" "Version 0.1" "UANC" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -24,6 +24,9 @@ Inherits QWidget, and \fBuanc::util::event::EventObserver\fP\&.
 .RI "\fBGlobalSettingsBar\fP (int hasRight)"
 .br
 .ti -1c
+.RI "\fB~GlobalSettingsBar\fP ()"
+.br
+.ti -1c
 .RI "void \fBtriggered\fP (\fBEvents\fP event, \fBEventContainer\fP data) final"
 .br
 .ti -1c
@@ -38,6 +41,8 @@ This class represents the global settings bar\&. It fires an event so that all v
 .PP 
 .SS "uanc::gui::GlobalSettingsBar::GlobalSettingsBar (int hasRight)\fC [inline]\fP"
 Default constructor for the signal view change bar\&. 
+.SS "uanc::gui::GlobalSettingsBar::~GlobalSettingsBar ()\fC [inline]\fP"
+
 .SH "Member Function Documentation"
 .PP 
 .SS "void uanc::gui::GlobalSettingsBar::changedChannel (int index)\fC [inline]\fP"

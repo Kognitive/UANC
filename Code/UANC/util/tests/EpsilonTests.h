@@ -8,12 +8,17 @@
 
 class EpsilonTests {
 public:
-    /**
- * Contructor
+/** \brief This class can be used to check all algorithm
+ *
+ * Gives a statistic for each algorithm.
  */
     EpsilonTests();
 
-    //Test if average error is smaler than epsilon
+
+  /** \brief This methode runs all algorithm
+ *
+ * Runs all algorithm and test if average error is smaler than epsilon
+ */
     void run(std::string path);
 };
 

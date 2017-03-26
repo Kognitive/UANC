@@ -4,6 +4,8 @@ var hierarchy =
     [ "uanc::util::DialogUtil", "classuanc_1_1util_1_1_dialog_util.html", null ],
     [ "EpsilonTests", "class_epsilon_tests.html", null ],
     [ "uanc::util::event::EventContainer", "classuanc_1_1util_1_1event_1_1_event_container.html", null ],
+    [ "EventEqual", "class_event_equal.html", null ],
+    [ "EventHash", "struct_event_hash.html", null ],
     [ "EventIDEqual", "class_event_i_d_equal.html", null ],
     [ "EventIDHash", "struct_event_i_d_hash.html", null ],
     [ "uanc::util::event::EventManager", "classuanc_1_1util_1_1event_1_1_event_manager.html", null ],
@@ -33,7 +35,9 @@ var hierarchy =
           [ "uanc::amv::anc::algorithm::InverseDirectAlgorithm", "classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_direct_algorithm.html", null ],
           [ "uanc::amv::anc::algorithm::InverseFFTAlgorithm", "classuanc_1_1amv_1_1anc_1_1algorithm_1_1_inverse_f_f_t_algorithm.html", null ],
           [ "uanc::amv::anc::algorithm::LinearExtrapolation", "classuanc_1_1amv_1_1anc_1_1algorithm_1_1_linear_extrapolation.html", null ],
-          [ "uanc::amv::anc::algorithm::SplineInterpolation", "classuanc_1_1amv_1_1anc_1_1algorithm_1_1_spline_interpolation.html", null ]
+          [ "uanc::amv::anc::algorithm::LocallyWeightedRegression", "classuanc_1_1amv_1_1anc_1_1algorithm_1_1_locally_weighted_regression.html", null ],
+          [ "uanc::amv::anc::algorithm::PolynomialRegression", "classuanc_1_1amv_1_1anc_1_1algorithm_1_1_polynomial_regression.html", null ],
+          [ "uanc::amv::anc::algorithm::QuinticSplines", "classuanc_1_1amv_1_1anc_1_1algorithm_1_1_quintic_splines.html", null ]
         ] ]
       ] ],
       [ "uanc::amv::Algorithm< model::FFTModel >", "classuanc_1_1amv_1_1_algorithm.html", [

@@ -1,4 +1,4 @@
-.TH "uanc::amv::IAlgorithm" 3 "Fri Mar 24 2017" "Version 0.1" "UANC" \" -*- nroff -*-
+.TH "uanc::amv::IAlgorithm" 3 "Sun Mar 26 2017" "Version 0.1" "UANC" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -54,7 +54,7 @@ The cloned algorithm\&.
 .PP
 
 .PP
-Implemented in \fBuanc::amv::anc::algorithm::InverseFFTAlgorithm\fP, \fBuanc::amv::signal::algorithm::FFTTransformationAlgorithm\fP, \fBuanc::amv::anc::algorithm::QuinticSplines\fP, \fBuanc::amv::anc::algorithm::InverseDirectAlgorithm\fP, \fBuanc::amv::anc::algorithm::LinearExtrapolation\fP, \fBuanc::amv::signal::algorithm::SpectrogramTransformationAlgorithm\fP, and \fBuanc::amv::signal::algorithm::IdentityTransformationAlgorithm\fP\&.
+Implemented in \fBuanc::amv::anc::algorithm::InverseFFTAlgorithm\fP, \fBuanc::amv::signal::algorithm::FFTTransformationAlgorithm\fP, \fBuanc::amv::anc::algorithm::LocallyWeightedRegression\fP, \fBuanc::amv::anc::algorithm::PolynomialRegression\fP, \fBuanc::amv::anc::algorithm::QuinticSplines\fP, \fBuanc::amv::anc::algorithm::InverseDirectAlgorithm\fP, \fBuanc::amv::anc::algorithm::LinearExtrapolation\fP, \fBuanc::amv::signal::algorithm::SpectrogramTransformationAlgorithm\fP, and \fBuanc::amv::signal::algorithm::IdentityTransformationAlgorithm\fP\&.
 .SS "virtual void uanc::amv::IAlgorithm::fillView ()\fC [pure virtual]\fP"
 
 .PP
@@ -73,7 +73,7 @@ Name of the algorithm
 .PP
 
 .PP
-Implemented in \fBuanc::amv::anc::algorithm::InverseFFTAlgorithm\fP, \fBuanc::amv::anc::algorithm::InverseDirectAlgorithm\fP, \fBuanc::amv::signal::algorithm::IdentityTransformationAlgorithm\fP, \fBuanc::amv::signal::algorithm::FFTTransformationAlgorithm\fP, \fBuanc::amv::signal::algorithm::SpectrogramTransformationAlgorithm\fP, \fBuanc::amv::anc::algorithm::QuinticSplines\fP, and \fBuanc::amv::anc::algorithm::LinearExtrapolation\fP\&.
+Implemented in \fBuanc::amv::anc::algorithm::InverseFFTAlgorithm\fP, \fBuanc::amv::anc::algorithm::InverseDirectAlgorithm\fP, \fBuanc::amv::signal::algorithm::IdentityTransformationAlgorithm\fP, \fBuanc::amv::signal::algorithm::FFTTransformationAlgorithm\fP, \fBuanc::amv::signal::algorithm::SpectrogramTransformationAlgorithm\fP, \fBuanc::amv::anc::algorithm::LocallyWeightedRegression\fP, \fBuanc::amv::anc::algorithm::PolynomialRegression\fP, \fBuanc::amv::anc::algorithm::QuinticSplines\fP, and \fBuanc::amv::anc::algorithm::LinearExtrapolation\fP\&.
 .SS "virtual \fBIAlgorithmView\fP* uanc::amv::IAlgorithm::getView ()\fC [pure virtual]\fP"
 
 .PP

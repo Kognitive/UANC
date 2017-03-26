@@ -74,7 +74,9 @@ class MainWidget : public QWidget {
 
   /** Holds the algorithm Thread. */
   AlgorithmThread* algoThread = nullptr;
+  /** Holds the algorithm */
   IAlgorithm* _algorithm = nullptr;
+  /** Holds the tab index of the algorithm. */
   int _algorithmTabIndex = 0;
 
   /** \brief Maps gets used to save algorithms
@@ -119,8 +121,16 @@ class MainWidget : public QWidget {
 
   // Definition for the tab control at the top as well as the bottom.
 
+  /** \brief This gets fired, when a wave tab is closed
+ *
+ * This gets fired, when a wave tab is closed.
+ */
   void waveClosed(const int &index);
 
+  /** \brief This gets fired, when a algorithm tab is closed
+*
+* This gets fired, when a algorithm tab is closed.
+*/
   void algorithmClosed(const int &index);
 };
 
