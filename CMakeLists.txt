@@ -4,8 +4,7 @@ project(UANC)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -msse2")
-set (CMAKE_PREFIX_PATH ${CMAKE_MODULE_PATH} "/opt/Qt5.8.0/5.8/gcc_64/lib/cmake")
-
+#set (CMAKE_PREFIX_PATH ${CMAKE_MODULE_PATH} "C:/Qt/5.8/msvc2013_64/lib/cmake")
 
 # apply some settings to generate output in Bin folder
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/Bin)
@@ -53,6 +52,9 @@ add_executable(UANC ${SOURCE_FILES} ${AQUILA_SOURCE} ${AQUILA_TRANSFORM} ${AQUIL
 
 find_package(Armadillo REQUIRED)
 include_directories(${ARMADILLO_INCLUDE_DIRS})
+if(WIN32) # Check if we are on Windows
+	target_include_directories(UANC  PUBLIC "C:/Program Files/armadillo/include")
+endif(WIN32)
 target_link_libraries(UANC ${ARMADILLO_LIBRARIES})
 
 #------------------------------------- Tests ---------------------------------------
@@ -72,11 +74,14 @@ if(Qt5Test_FOUND)
 		target_link_libraries(${testName} ${Boost_LIBRARIES})
 		#Move the testbins to Bin/testbin
 		set_target_properties(${testName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin)
-
 		target_link_libraries(${testName} ${Qt5Widgets_LIBRARIES})
 		target_link_libraries(${testName} ${Qt5PrintSupport_LIBRARIES})
 		target_link_libraries(${testName} ${Qt5Network_LIBRARIES})
 		target_link_libraries(${testName} ${Qt5Test_LIBRARIES})
+		target_link_libraries(${testName} ${ARMADILLO_LIBRARIES})
+		if(WIN32)
+			target_include_directories(${testName}  PUBLIC "C:/Program Files/armadillo/include")
+		endif(WIN32)
 		target_link_libraries(${testName} ${Qt5DataVisualization_LIBRARIES})
 		#Add the test to the test target, assumed no arguments are needed
 		add_test(NAME ${testName}   WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/testbin COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/testBin ${testName})

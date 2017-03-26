@@ -186,7 +186,7 @@ class PolynomialRegression : public ANCAlgorithm<model::ANCModel> {
       double c = 1;
       double y = 0;
       for (size_t l = 0; l < POLYNOM_DEGREE + 1; l++) {
-        y -= c * alpha(l);
+		  y -= c * alpha.at(l);
         c *= x;
       }
       (*result)[k] = y;
