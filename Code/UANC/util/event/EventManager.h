@@ -1,34 +1,43 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UANC_EVENTMANAGER_H
-#define UANC_EVENTMANAGER_H
+#ifndef CODE_UANC_UTIL_EVENT_EVENTMANAGER_H_
+#define CODE_UANC_UTIL_EVENT_EVENTMANAGER_H_
 
 #include <memory>
+#include <utility>
 #include <vector>
 #include <unordered_map>
 #include "EventToken.h"
 #include "Events.h"
 #include "EventObserver.h"
 
-
 struct EventHash {
  public:
   template <typename T>
-  std::size_t operator()(const T &x) const
-  {
+  std::size_t operator()(const T &x) const {
     return static_cast<std::size_t>(x);
   }
 };
 
-class EventEqual
-{
+class EventEqual {
  public:
   template <typename T>
-  bool operator() (T const& t1, T const& t2) const
-  {
+  bool operator() (T const& t1, T const& t2) const {
     return t1 == t2;
   }
 };
@@ -36,19 +45,8 @@ class EventEqual
 struct EventIDHash {
  public:
   template <typename T, typename U>
-  std::size_t operator()(const std::pair<T, U> &x) const
-  {
+  std::size_t operator()(const std::pair<T, U> &x) const {
     return std::hash<T>()(x.first) ^ static_cast<std::size_t>(x.second);
-  }
-};
-
-class EventIDEqual
-{
- public:
-  template <typename T, typename U>
-  bool operator() (std::pair<T, U> const& t1, std::pair<T, U> const& t2) const
-  {
-    return t1.first == t2.first && t1.second == t2.second;
   }
 };
 
@@ -59,7 +57,8 @@ namespace event {
 class EventToken;
 class EventObserver;
 
-using Cache = std::unordered_map<std::pair<int, Events>, EventContainer, EventIDHash>;
+using Cache = std::unordered_map<std::pair<int, Events>,
+                                EventContainer, EventIDHash>;
 
 /** \brief Simple event manager.
  *
@@ -67,13 +66,11 @@ using Cache = std::unordered_map<std::pair<int, Events>, EventContainer, EventID
  * from all classes which are friends of this one.
  */
 class EventManager {
-
   // Add the Event Publisher as friend.
   friend class EventToken;
   friend class EventObserver;
 
  public:
-
   /** \brief Basic destructor.
    *
    * This deconstructore destroys the registered instance.
@@ -84,7 +81,6 @@ class EventManager {
   static void destroy();
 
  private:
-
   /** Simple debug flag. */
   const bool DEBUG = true;
 
@@ -111,13 +107,18 @@ class EventManager {
   static EventManager* _instance;
 
   /**
-    * Holds an unordered map over all events (Event, id(=vector<int>))
+    * Holds an unordered map over all events
+    * (Event, id(=vector<int>))
     */
-  std::unique_ptr<std::unordered_map<Events, std::vector<int>*, EventHash, EventEqual>> _eventMapping;
+  std::unique_ptr<std::unordered_map<Events, std::vector<int>*,
+                                     EventHash, EventEqual>> _eventMapping;
+
   /**
-   * Holds an unordered map over all IDs (ID, events(=vector<Events>))
+   * Holds an unordered map over all IDs
+   * (ID, events(=vector<Events>))
    */
-  std::unique_ptr<std::unordered_map<int, std::vector<Events>*>> _idEventMapping;
+  std::unique_ptr<std::unordered_map<int, std::vector<Events>*>>
+      _idEventMapping;
   /**
    * Holds an unorderd map over all IDs and EventObserver
    */
@@ -196,8 +197,9 @@ class EventManager {
    */
   void unregister(int tokenid);
 };
-}
-}
-}
 
-#endif //UANC_EVENTMANAGER_H
+}  // namespace event
+}  // namespace util
+}  // namespace uanc
+
+#endif  // CODE_UANC_UTIL_EVENT_EVENTMANAGER_H_

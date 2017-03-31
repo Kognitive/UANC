@@ -1,21 +1,34 @@
-//
-// Created by janne on 12.03.17.
-//
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
 
-#ifndef UANC_LINEAREXTRAPOLATION_H
-#define UANC_LINEAREXTRAPOLATION_H
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef CODE_UANC_AMV_ANC_ALGORITHM_LINEAREXTRAPOLATION_H_
+#define CODE_UANC_AMV_ANC_ALGORITHM_LINEAREXTRAPOLATION_H_
+
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace uanc {
 namespace amv {
 namespace anc {
 namespace algorithm {
 
-using namespace uanc::amv::anc;
-using namespace uanc::util;
-
 class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
  public:
-
   /** \brief Returns the name of the algorithm.
    *
    * Simply passes back the name of the algorithm.
@@ -33,8 +46,8 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
    * @param input The input model containing the original signal.
    */
   void invert(std::shared_ptr<InvertedModel> in) final {
-
-      std::shared_ptr <PerformanceMeasure<>> measurement(new PerformanceMeasure<>());
+      std::shared_ptr <uanc::util::PerformanceMeasure<>>
+          measurement(new uanc::util::PerformanceMeasure<>());
 
       // Start measurement for the inversion
       measurement->start(this->getName());
@@ -50,7 +63,7 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
 
       this->getModel()->left_channel = in->left_channel;
 
-      // ------------------------------- RIGHT CHANNEL ----------------------------------
+      // ------------------------------- RIGHT CHANNEL --------------
 
       measurement->startSubMeasure("Transformation & Inversion Right");
 
@@ -64,7 +77,8 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
       std::shared_ptr <Aquila::SignalSource> outr(invertedApproximatedr);
 
       this->getModel()->right_channel = in->right_channel;
-      this->getModel()->inverted = std::shared_ptr<InvertedModel>(new InvertedModel);
+      this->getModel()->inverted = std::shared_ptr<InvertedModel>(
+          new InvertedModel);
 
 
       this->getModel()->inverted->left_channel = out;
@@ -84,7 +98,6 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
   }
 
  protected:
-
   /** \brief Constructs a view, which can handle an ANCModel.
    *
    * This view basically display the standard information of the algorithm.
@@ -113,24 +126,26 @@ class LinearExtrapolation : public ANCAlgorithm<model::ANCModel> {
       double slope;
       for (unsigned int i = 0; i < signal->getSamplesCount(); ++i) {
           if (i % _extrapolationFactor == 0) {
-              slope = (i == signal->getSamplesCount() - 1) ? 0.0 : signal->sample(i + 1) - signal->sample(i);
+              slope = (i == signal->getSamplesCount() - 1)
+                      ? 0.0
+                      : signal->sample(i + 1) - signal->sample(i);
               approxInvSamples[i] = - signal->sample(i);
-          }
-          else {
+          } else {
               approxInvSamples[i] = - (signal->sample(i - 1) + slope);
           }
       }
 
-      Aquila::SignalSource* approxInvSignal = new Aquila::SignalSource(approxInvSamples, signal->getSampleFrequency());
+      Aquila::SignalSource* approxInvSignal =
+          new Aquila::SignalSource(approxInvSamples,
+                                   signal->getSampleFrequency());
 
       return approxInvSignal;
   }
-
 };
-}
-}
-}
-}
 
+}  // namespace algorithm
+}  // namespace anc
+}  // namespace amv
+}  // namespace uanc
 
-#endif //UANC_LINEAREXTRAPOLATION_H
+#endif  // CODE_UANC_AMV_ANC_ALGORITHM_LINEAREXTRAPOLATION_H_

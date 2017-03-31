@@ -1,18 +1,30 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UANC_MAINWIDGET_H
-#define UANC_MAINWIDGET_H
-
-#include <memory>
+#ifndef CODE_UANC_GUI_MAINWIDGET_H_
+#define CODE_UANC_GUI_MAINWIDGET_H_
 
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
-#include <Code/libs/qprogressindicator/QProgressIndicator.h>
-
+#include <map>
+#include <memory>
+#include <vector>
+#include "Code/libs/qprogressindicator/QProgressIndicator.h"
 #include "Code/UANC/amv/Algorithm.h"
 #include "Code/UANC/amv/AlgorithmThread.h"
 #include "Code/UANC/amv/anc/algorithm/InverseDirectAlgorithm.h"
@@ -22,11 +34,8 @@
 namespace uanc {
 namespace gui {
 
-using namespace util;
-using namespace uanc::amv;
-
 class MainWidget : public QWidget {
- Q_OBJECT
+Q_OBJECT
 
  public:
   /** \brief This is the main widget constructor.
@@ -44,12 +53,15 @@ class MainWidget : public QWidget {
   void loadSignalSource(std::shared_ptr<InvertedModel> signalSource);
 
  private:
-
   /** This represents a mapping between the views and
   std::map<int, std::shared_ptr<std::vector<std::shared_ptr<QWidget>>>> _waveViewMapping;
 
   This represents a map between the waves and the algorithms . */
-  std::map<int, std::shared_ptr<std::vector<std::shared_ptr<uanc::amv::IAlgorithm>>>> _waveAlgorithMapping;
+  std::map<int,
+           std::shared_ptr<
+               std::vector<
+                   std::shared_ptr<
+                       uanc::amv::IAlgorithm>>>> _waveAlgorithMapping;
 
   /** \brief Holds the apply button
    *
@@ -103,9 +115,7 @@ class MainWidget : public QWidget {
    *
    * @param algorithm The algorithm to use
    */
-  int applyAlgorithm(uanc::amv::IAlgorithm *algorithm);
-
- public slots:
+  int applyAlgorithm(uanc::amv::IAlgorithm *algorithm); public slots:
 
   /** Gets called when the algorithm is finished. */
   void algorithmFinished();
@@ -134,6 +144,7 @@ class MainWidget : public QWidget {
   void algorithmClosed(const int &index);
 };
 
-}
-}
-#endif //UANC_MAINWIDGET_H
+}  // namespace gui
+}  // namespace uanc
+
+#endif  // CODE_UANC_GUI_MAINWIDGET_H_

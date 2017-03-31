@@ -1,10 +1,21 @@
-//
-// Created by daniel on 28.01.17.
-//
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
 
-#include <Code/UANC/gui/PlotWidget.h>
-#include <Code/UANC/gui/PMWidget.h>
-#include "PMView.h"
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "Code/UANC/amv/anc/view/PMView.h"
 #include "Code/UANC/util/GlobalSettings.h"
 
 namespace uanc {
@@ -22,10 +33,13 @@ namespace view {
  * @return The created widget.
  */
 QWidget *PMView::produceWidget() {
-
   // create the widgets for the view
-  this->_signalViewWidget = std::unique_ptr<uanc::gui::SignalViewWidget>(new uanc::gui::SignalViewWidget(uanc::util::GlobalSettings::get()->currentIndex));
-  this->_treeview = std::unique_ptr<uanc::gui::PMWidget>(new uanc::gui::PMWidget());
+  this->_signalViewWidget =
+      std::unique_ptr<uanc::gui::SignalViewWidget>(
+          new uanc::gui::SignalViewWidget(
+              uanc::util::GlobalSettings::get()->currentIndex));
+  this->_treeview = std::unique_ptr<uanc::gui::PMWidget>(
+      new uanc::gui::PMWidget());
 
   // set horizontal layout (splitter)
   this->_layout =  new QHBoxLayout;
@@ -51,7 +65,7 @@ void PMView::setData(std::shared_ptr<model::ANCModel> signalData) {
   this->_treeview->setData(signalData->defaultRegister.getCustomMeasurements());
 }
 
-}
-}
-}
-}
+}  // namespace view
+}  // namespace anc
+}  // namespace amv
+}  // namespace uanc

@@ -1,9 +1,22 @@
-//
-// Created by markus on 12.03.17.
-//
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
 
-#ifndef UANC_POLYNOMIALREGRESSION_H
-#define UANC_POLYNOMIALREGRESSION_H
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef CODE_UANC_AMV_ANC_ALGORITHM_POLYNOMIALREGRESSION_H_
+#define CODE_UANC_AMV_ANC_ALGORITHM_POLYNOMIALREGRESSION_H_
 
 #include <Code/UANC/amv/anc/model/ANCModel.h>
 #include <Code/UANC/amv/Algorithm.h>
@@ -17,10 +30,6 @@ namespace uanc {
 namespace amv {
 namespace anc {
 namespace algorithm {
-
-using namespace uanc::amv::anc;
-using namespace uanc::util;
-using namespace arma;
 
 class PolynomialRegression : public ANCAlgorithm<model::ANCModel> {
  public:
@@ -303,4 +312,4 @@ class PolynomialRegression : public ANCAlgorithm<model::ANCModel> {
 }
 }
 
-#endif //UANC_POLYNOMIALREGRESSION_H
+#endif //CODE_UANC_AMV_ANC_ALGORITHM_POLYNOMIALREGRESSION_H_

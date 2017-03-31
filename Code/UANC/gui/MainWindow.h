@@ -1,19 +1,31 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef CODE_UANC_GUI_MAINWINDOW_H_
 #define CODE_UANC_GUI_MAINWINDOW_H_
 
-#include <string>
-
 #include <QApplication>
 #include<QMenuBar>
 #include <QtWidgets/QMainWindow>
-#include <memory>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
+#include <string>
+#include <memory>
+#include <vector>
 
 #include "MainWidget.h"
 #include "Code/libs/aquila/source/SignalSource.h"
@@ -31,9 +43,7 @@ class ImportWindow;
  * functionality of a basic QMainWindow
  */
 class MainWindow : public QMainWindow {
-
  protected:
-
   /** \brief This method executes all necessary actions when the main application is closed
    *
    * It executes all necessary actions when the main application is closed
@@ -41,7 +51,6 @@ class MainWindow : public QMainWindow {
   void closeEvent(QCloseEvent *);
 
  public:
-
   /** \brief Hol a reference to the main window.
    *
    * Uses a classical singleton pattern to give back exactly the same copy of the main window.
@@ -52,7 +61,6 @@ class MainWindow : public QMainWindow {
   static MainWindow* get();
 
  private:
-
   /** \brief Holds the main widget of the main window.
    *
    * This field holds the main widget of the main widget. In detail
@@ -108,11 +116,7 @@ class MainWindow : public QMainWindow {
    */
   void makeMenu();
 
-            void about();
-
-
-  /** These simply are the actions taken when you click inside of the menu */
- private slots:
+  void about(); public slots:
 
   /** \brief Loads a file from plate and displays it inside of the gui.
    *
@@ -126,9 +130,9 @@ class MainWindow : public QMainWindow {
    *  @param: The indices of the imported signals that have been selected.
    */
   void showImportedSignals(std::vector<int> loadedIndices);
-
 };
 
-}
-}
-#endif //CODE_UANC_GUI_MAINWINDOW_H
+}  // namespace gui
+}  // namespace uanc
+
+#endif  // CODE_UANC_GUI_MAINWINDOW_H_

@@ -1,12 +1,25 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UANC_ANCALGORITHM_H
-#define UANC_ANCALGORITHM_H
+#ifndef CODE_UANC_AMV_ANC_ALGORITHM_ANCALGORITHM_H_
+#define CODE_UANC_AMV_ANC_ALGORITHM_ANCALGORITHM_H_
 
-#include <Code/UANC/amv/Algorithm.h>
+#include <memory>
+#include "Code/UANC/amv/Algorithm.h"
 
 namespace uanc {
 namespace amv {
@@ -26,13 +39,13 @@ namespace algorithm {
  */
 template<typename datamodel, typename viewmodel = datamodel>
 class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
-
   // check if the models are correct and applicable.
-  static_assert(std::is_base_of<viewmodel, datamodel>::value, "The data model has to be derived from the view model.");
-  static_assert(std::is_base_of<model::ANCModel, viewmodel>::value, "The view model has to be derived from ANCModel.");
+  static_assert(std::is_base_of<viewmodel, datamodel>::value,
+                "The data model has to be derived from the view model.");
+  static_assert(std::is_base_of<model::ANCModel, viewmodel>::value,
+                "The view model has to be derived from ANCModel.");
 
-  public:
-
+ public:
     /** \brief Gets a pointer, to access the model of the algorithm.
      *
      * Getter for the model used inside of the algorithm. This pointer
@@ -45,7 +58,6 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
     }
 
  protected:
-
   /** \brief Executed an algorithm with the given input model.
    *
    * This method first all gets an empty model from the deriving class. Afterwards it
@@ -55,9 +67,11 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
    *
    * \return The created model from the data of the inversion.
    */
-  std::shared_ptr<viewmodel> execute(std::shared_ptr<InvertedModel> input) final {
+  std::shared_ptr<viewmodel>
+  execute(std::shared_ptr<InvertedModel> input) final {
     this->model = std::shared_ptr<datamodel>(new viewmodel());
-    auto castedModel = static_cast<std::shared_ptr<model::ANCModel>>(this->model);
+    auto castedModel =
+        static_cast<std::shared_ptr<model::ANCModel>>(this->model);
     castedModel->defaultRegister.startOverallExecutionMeasurement();
     this->invert(input);
     castedModel->defaultRegister.stopOverallExecutionMeasurement();
@@ -75,7 +89,6 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
   virtual void invert(std::shared_ptr<InvertedModel> input) = 0;
 
  private:
-
   /** \brief Field for the model.
    *
    * This field gets used to save a reference to the used model. This is passed
@@ -84,9 +97,9 @@ class ANCAlgorithm : public uanc::amv::Algorithm<viewmodel> {
   std::shared_ptr<datamodel> model;
 };
 
-}
-}
-}
-}
+}  // namespace algorithm
+}  // namespace anc
+}  // namespace amv
+}  // namespace uanc
 
-#endif //UANC_ANCALGORITHM_H
+#endif  // CODE_UANC_AMV_ANC_ALGORITHM_ANCALGORITHM_H_

@@ -1,13 +1,27 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UANC_IALGORITHM_H
-#define UANC_IALGORITHM_H
+#ifndef CODE_UANC_AMV_IALGORITHM_H_
+#define CODE_UANC_AMV_IALGORITHM_H_
 
-#include <Code/UANC/amv/anc/model/ANCModel.h>
+#include <memory>
+#include <string>
 #include "IAlgorithmView.h"
+#include "Code/UANC/amv/anc/model/ANCModel.h"
 
 namespace uanc {
 namespace amv {
@@ -19,9 +33,7 @@ namespace amv {
  * for signal views as well as algorithm views.
  */
 class IAlgorithm {
-
  public:
-
   /** \brief Clones the current instance.
    *
    * This is basically the prototype pattern. It gets used to create
@@ -64,7 +76,7 @@ class IAlgorithm {
    */
   virtual void process(std::shared_ptr<uanc::amv::InvertedModel> input) = 0;
 };
-}
-}
+}  // namespace amv
+}  // namespace uanc
 
-#endif //UANC_IALGORITHM_H
+#endif  // CODE_UANC_AMV_IALGORITHM_H_

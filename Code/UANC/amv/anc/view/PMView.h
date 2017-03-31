@@ -1,18 +1,31 @@
-//
-// Created by daniel on 28.01.17.
-//
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
 
-#ifndef UANC_PMVIEW_H
-#define UANC_PMVIEW_H
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
 
-#include <memory>
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef CODE_UANC_AMV_ANC_VIEW_PMVIEW_H_
+#define CODE_UANC_AMV_ANC_VIEW_PMVIEW_H_
+
 #include <QtWidgets/QWidget>
-#include <Code/UANC/amv/InvertedModel.h>
-#include <Code/UANC/amv/AlgorithmView.h>
-#include <Code/UANC/util/tools/Path.h>
-#include <Code/UANC/gui/PMWidget.h>
-#include <Code/UANC/amv/anc/model/ANCModel.h>
-#include <Code/UANC/gui/SignalViewWidget.h>
+#include <memory>
+#include "Code/UANC/amv/InvertedModel.h"
+#include "Code/UANC/amv/AlgorithmView.h"
+#include "Code/UANC/util/tools/Path.h"
+#include "Code/UANC/gui/PMWidget.h"
+#include "Code/UANC/amv/anc/model/ANCModel.h"
+#include "Code/UANC/gui/SignalViewWidget.h"
 
 namespace uanc {
 namespace amv {
@@ -26,9 +39,7 @@ namespace view {
  * It is a specialization of the more general AlgorithmView.
  */
 class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
-
  public:
-
   /** \brief Gets the complete widget.
    *
    * This function is used to retrieve the widget from the view. It gets
@@ -49,17 +60,16 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
   void setData(std::shared_ptr<model::ANCModel> signalData) final;
 
  private:
-
   /** \brief Holds a reference to the plot widget used inside.
    *
    * This field holds a unique reference to the internally used signal view widget.
    */
   std::unique_ptr<uanc::gui::SignalViewWidget> _signalViewWidget;
 
-/** \brief Holds a reference to the tree view used inside.
- *
- * This field holds a unique reference to the internally used tree view.
- */
+  /** \brief Holds a reference to the tree view used inside.
+   *
+   * This field holds a unique reference to the internally used tree view.
+   */
   std::unique_ptr<uanc::gui::PMWidget> _treeview;
 
   /** \brief This represents a weak pointer to the constructed QSplitter.
@@ -69,8 +79,9 @@ class PMView : public uanc::amv::AlgorithmView<model::ANCModel> {
   QHBoxLayout *_layout = nullptr;
 };
 
-}
-}
-}
-}
-#endif //UANC_PMVIEW_H
+}  // namespace view
+}  // namespace anc
+}  // namespace amv
+}  // namespace uanc
+
+#endif  // CODE_UANC_AMV_ANC_VIEW_PMVIEW_H_

@@ -1,12 +1,26 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UANC_EVENTCONTAINER_H
-#define UANC_EVENTCONTAINER_H
+#ifndef CODE_UANC_UTIL_EVENT_EVENTCONTAINER_H_
+#define CODE_UANC_UTIL_EVENT_EVENTCONTAINER_H_
 
+#include <string>
 #include <map>
+#include <utility>
 
 namespace uanc {
 namespace util {
@@ -18,9 +32,7 @@ namespace event {
  * your data gets wrapped when firing an event.
  */
 class EventContainer {
-
  private:
-
   /** \brief Holds a map for the properties.
    *
    * This mapping holds a string to string mapping for the properties
@@ -29,7 +41,6 @@ class EventContainer {
   std::map<std::string, std::string> properties;
 
  public:
-
   /** Holds the id for the callee. */
   int ID = -1;
 
@@ -53,8 +64,9 @@ class EventContainer {
     return this->properties.at(key);
   }
 };
-}
-}
-}
 
-#endif //UANC_EVENTCONTAINER_H
+}  // namespace event
+}  // namespace util
+}  // namespace uanc
+
+#endif  // CODE_UANC_UTIL_EVENT_EVENTCONTAINER_H_

@@ -1,12 +1,25 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UANC_EVENTTOKEN_H
-#define UANC_EVENTTOKEN_H
+#ifndef CODE_UANC_UTIL_EVENT_EVENTTOKEN_H_
+#define CODE_UANC_UTIL_EVENT_EVENTTOKEN_H_
 
 #include <memory>
+#include <vector>
 #include "Events.h"
 #include "EventContainer.h"
 #include "EventManager.h"
@@ -21,7 +34,6 @@ namespace event {
  * Every instance will be handled as a unqiue one.
  */
 class EventToken {
-
   // Add the Event Manager as friend.
   friend class EventManager;
   friend class EventObserver;
@@ -47,7 +59,6 @@ class EventToken {
   void deleteLastEvent(Events event);
 
  private:
-
   /** \brief Current Index.
    *
    * This index is used to store the index of this token. The same
@@ -68,7 +79,7 @@ class EventToken {
    *
    * @param index The unqiue index of this token.
    */
-  EventToken(int index);
+  explicit EventToken(int index);
 
   /** \brief Creates an event.
    *
@@ -92,8 +103,8 @@ class EventToken {
   /** Destruct Event Token. */
   void destruct();
 };
-}
-}
-}
+}  // namespace event
+}  // namespace util
+}  // namespace uanc
 
-#endif //UANC_EVENTTOKEN_H
+#endif  // CODE_UANC_UTIL_EVENT_EVENTTOKEN_H_

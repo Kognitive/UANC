@@ -1,9 +1,11 @@
-//
-// Created by markus on 23.03.17.
-//
+/*
+ * Copyright 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ */
 
-#ifndef UANC_HEATWIDGET_H
-#define UANC_HEATWIDGET_H
+#ifndef CODE_UANC_GUI_HEATWIDGET_H_
+#define CODE_UANC_GUI_HEATWIDGET_H_
 
 #include <Code/libs/qplot/qcustomplot.h>
 #include <Code/UANC/util/event/EventObserver.h>
@@ -11,19 +13,20 @@
 #include <Code/libs/aquila/functions.h>
 #include <Code/UANC/util/event/Events.h>
 #include <Code/UANC/util/event/EventContainer.h>
+#include <memory>
 #include <iostream>
-namespace uanc
-{
+
+namespace uanc {
 namespace gui {
 
-using namespace uanc::util::event;
-using namespace uanc::amv::signal::model;
-
-class HeatWidget : public QCustomPlot, EventObserver {
-
-
+/** \brief Represents a heat widget.
+ *
+ * This class can be used as heat widget, to display a
+ * spectrogram. */
+class HeatWidget : public QCustomPlot, util::event::EventObserver {
  private:
-  std::shared_ptr<SpectrogramModel> _data;
+  /** Holds the spectrogram model */
+  std::shared_ptr<uanc::amv::signal::model::SpectrogramModel> _data;
 
   /** Holds whether the widget was initialized, in the sense, that the data
    * was set already and is now saved inside.
@@ -39,29 +42,29 @@ class HeatWidget : public QCustomPlot, EventObserver {
     }
   }
 
-public:
-
+ public:
     /** \brief Constructor of Control class
    *
    */
-  HeatWidget() : EventObserver({Events::ChangeChannel}) {
-
+  HeatWidget() : EventObserver({util::event::Events::ChangeChannel}) {
     // add a color scale:
     _colorScale = new QCPColorScale(this);
     this->plotLayout()->addElement(0, 1, _colorScale);
-
   }
 
     /** \brief change channel to spectrogram
    *
      * @param data given spectrogram data
    */
-  void setData(std::shared_ptr<SpectrogramModel> data) {
+  void setData(std::shared_ptr<
+        uanc::amv::signal::model::SpectrogramModel> data) {
     _data = data;
     _initialized = true;
     int channel = 0;
-    if (_token->hasLastEvent(Events::ChangeChannel)) {
-      channel = atoi(_token->getLastEvent(Events::ChangeChannel).get("Index").c_str());
+    if (_token->hasLastEvent(util::event::Events::ChangeChannel)) {
+      channel = atoi(
+          _token->getLastEvent(util::event::Events::ChangeChannel)
+              .get("Index").c_str());
     }
 
     switchChannel(channel);
@@ -73,9 +76,11 @@ public:
      *
      * @param spectrogramm given spectrogram
    */
-  void configPlot(std::shared_ptr<Aquila::Spectrogram> spectrogramm) {
-
-    // configure axis rect:// this will also allow rescaling the color scale by dragging/zooming
+  void configPlot(
+        std::shared_ptr<Aquila::Spectrogram> spectrogramm) {
+    // configure axis rect:
+    // this will also allow rescaling the
+    // color scale by dragging/zooming
     this->xAxis->setLabel("Frames");
     this->yAxis->setLabel("Frequency");
 
@@ -83,18 +88,22 @@ public:
     QCPColorMap *colorMap = new QCPColorMap(this->xAxis, this->yAxis);
     int nx = spectrogramm->getFrameCount();
     int ny = spectrogramm->getSpectrumSize();
-    colorMap->data()->setSize(nx, ny / 2); // we want the color map to have nx * ny data points
-    colorMap->data()->setRange(QCPRange(0, nx), QCPRange(0, ny / 2)); // and span the coordinate range -4..4 in both key (x) and value (y) dimensions
 
-    // now we assign some data, by accessing the QCPColorMapData instance of the color map:
+    // we want the color map to have nx * ny data points
+    colorMap->data()->setSize(nx, ny / 2);
+
+    // and span the coordinate range -4..4
+    // in both key (x) and value (y) dimensions
+    colorMap->data()->setRange(QCPRange(0, nx), QCPRange(0, ny / 2));
+
+    // now we assign some data, by accessing
+    // the QCPColorMapData instance of the color map:
     double rx, ry, rz;
 
-    //Iterate over all frames
-    for (std::size_t x = 0; x < spectrogramm->getFrameCount(); ++x)
-    {
+    // Iterate over all frames
+    for (std::size_t x = 0; x < spectrogramm->getFrameCount(); ++x) {
       // output only half of the spectrogram, below Nyquist frequency
-      for (std::size_t y = 0; y < spectrogramm->getSpectrumSize() / 2; ++y)
-      {
+      for (std::size_t y = 0; y < spectrogramm->getSpectrumSize() / 2; ++y) {
         colorMap->data()->cellToCoord(x, y, &rx, &ry);
         Aquila::ComplexType point = spectrogramm->getPoint(x, y);
         rz = Aquila::dB(point);
@@ -103,19 +112,27 @@ public:
     }
 
     // add it to the right of the main axis rect
-    _colorScale->setType(QCPAxis::atRight); // scale shall be vertical bar with tick/axis labels right (actually atRight is already the default)
-    colorMap->setColorScale(_colorScale); // associate the color map with the color scale
+    // scale shall be vertical bar with tick
+    // axis labels right (actually atRight is already the default)
+    _colorScale->setType(QCPAxis::atRight);
+
+    // associate the color map with the color scale
+    colorMap->setColorScale(_colorScale);
     _colorScale->axis()->setLabel("Spektrogramm");
 
     // set the color gradient of the color map to one of the presets:
     colorMap->setGradient(QCPColorGradient::gpSpectrum);
-    // we could have also created a QCPColorGradient instance and added own colors to
-    // the gradient, see the documentation of QCPColorGradient for what's possible.
+    // we could have also created a
+    // QCPColorGradient instance and added own colors to
+    // the gradient, see the documentation
+    // of QCPColorGradient for what's possible.
 
-    // rescale the data dimension (color) such that all data points lie in the span visualized by the color gradient:
+    // rescale the data dimension (color) such that
+    // all data points lie in the span visualized by the color gradient:
     colorMap->rescaleDataRange();
 
-    // make sure the axis rect and color scale synchronize their bottom and top margins (so they line up):
+    // make sure the axis rect and color scale
+    // synchronize their bottom and top margins (so they line up):
     QCPMarginGroup *marginGroup = new QCPMarginGroup(this);
     this->axisRect()->setMarginGroup(QCP::msBottom|QCP::msTop, marginGroup);
     _colorScale->setMarginGroup(QCP::msBottom|QCP::msTop, marginGroup);
@@ -131,16 +148,17 @@ public:
      * @param event given event
      * @param data given events
    */
-  void triggered(Events event, EventContainer data) {
+  void triggered(util::event::Events event, util::event::EventContainer data) {
     if (!_initialized) return;
 
-    if (event == Events::ChangeChannel) {
+    if (event == util::event::Events::ChangeChannel) {
       int index = atoi(data.get("Index").c_str());
       switchChannel(index);
     }
   }
 };
-}
-}
 
-#endif //UANC_HEATWIDGET_H
+}  // namespace gui
+}  // namespace uanc
+
+#endif  // CODE_UANC_GUI_HEATWIDGET_H_

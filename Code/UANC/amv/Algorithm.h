@@ -1,11 +1,24 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UANC_ALGORITHM_H
-#define UANC_ALGORITHM_H
+#ifndef CODE_UANC_AMV_ALGORITHM_H_
+#define CODE_UANC_AMV_ALGORITHM_H_
 
+#include <memory>
 #include "IAlgorithm.h"
 #include "AlgorithmView.h"
 
@@ -21,12 +34,11 @@ namespace amv {
  */
 template<class outmodel>
 class Algorithm : public IAlgorithm {
-
   // Static check, whether the correct model is used.
-  static_assert(std::is_base_of<InvertedModel, outmodel>::value, "You have to use a SignalModel in any Algorithm.");
+  static_assert(std::is_base_of<InvertedModel, outmodel>::value,
+                "You have to use a SignalModel in any Algorithm.");
 
  public:
-
   /** \brief Fills the view with the data.
    *
    * This method fills the view with some data. It basically checks, if the algorithm was already
@@ -34,14 +46,16 @@ class Algorithm : public IAlgorithm {
    * of the view.
    */
   void fillView() final {
-
     // Do some error checks
     if (!this->executed) {
-      throw new std::runtime_error("Algorithm was not executed. You have to call process(SignalModel) first.");
+      throw new std::runtime_error("Algorithm was not "
+                                       "executed. You have to call "
+                                       "process(SignalModel) first.");
     }
 
     if (this->_builtView == nullptr) {
-      throw new std::runtime_error("View was not built. You have to call getView() first.");
+      throw new std::runtime_error("View was not built. "
+                                       "You have to call getView() first.");
     }
 
     // simply apply the inmodel to the view
@@ -72,7 +86,6 @@ class Algorithm : public IAlgorithm {
    * \param[in] input The input model of the signal.
    */
   void process(std::shared_ptr<uanc::amv::InvertedModel> input) final {
-
     // check if the algorithm was executed before
     if (!executed) {
       this->_builtModel = this->execute(input);
@@ -82,7 +95,6 @@ class Algorithm : public IAlgorithm {
   }
 
  protected:
-
   /** \brief Executed an algorithm with the given input model.
    *
    * This method must be implemented by deriving algorithms, and should execute the
@@ -92,10 +104,10 @@ class Algorithm : public IAlgorithm {
    *
    * \return The created model from the data of the algorithm execution.
    */
-  virtual std::shared_ptr<outmodel> execute(std::shared_ptr<uanc::amv::InvertedModel> input) = 0;
+  virtual std::shared_ptr<outmodel>
+  execute(std::shared_ptr<uanc::amv::InvertedModel> input) = 0;
 
  private:
-
   /** \brief True, iff algorithm was executed.
    *
    * This flag gets used inside of the class to determine whether the
@@ -117,7 +129,6 @@ class Algorithm : public IAlgorithm {
   std::shared_ptr<outmodel> _builtModel = nullptr;
 
  protected:
-
   /** \brief Constructs a view, which can handle the outmode of the algorithm.
    *
    * The view should be created inside of this function. Remember, that the view
@@ -129,7 +140,7 @@ class Algorithm : public IAlgorithm {
   virtual AlgorithmView<outmodel> *constructView() = 0;
 };
 
-}
-}
+}  // namespace amv
+}  // namespace uanc
 
-#endif //UANC_ALGORITHM_H
+#endif  // CODE_UANC_AMV_ALGORITHM_H_

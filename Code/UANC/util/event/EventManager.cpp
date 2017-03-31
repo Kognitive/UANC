@@ -1,10 +1,26 @@
-/*
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE.txt', which is part of this source code package.
+/* Simplified ANC Model, only targets inversion, but can be extended. University project.
+ *  Copyright (C) 2017 Danielle Ceballos, Janne Wulf, Markus Semmler, Roman Rempel, Vladimir Roskin.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <iostream>
-#include "EventManager.h"
+#include <memory>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+#include "Code/UANC/util/event/EventManager.h"
 
 namespace uanc {
 namespace util {
@@ -21,25 +37,23 @@ EventManager* EventManager::_instance;
  * This constructor fills the internal list with an initial value.
  */
 EventManager::EventManager() {
-
   // Create the two mappings.
-  _eventMapping = std::unique_ptr<std::unordered_map<Events, std::vector<int> *, EventHash, EventEqual>>(
-      new std::unordered_map<Events, std::vector<int> *, EventHash, EventEqual>()
-  );
+  _eventMapping = std::unique_ptr<
+      std::unordered_map<Events, std::vector<int> *, EventHash, EventEqual>>(
+      new std::unordered_map<Events, std::vector<int> *,
+                             EventHash, EventEqual>());
 
   // Create empty id mapping
   _idMapping = std::unique_ptr<std::unordered_map<int, EventObserver *>>(
-      new std::unordered_map<int, EventObserver *>()
-  );
+      new std::unordered_map<int, EventObserver *>());
 
   // create empty start mapping
-  _idEventMapping = std::unique_ptr<std::unordered_map<int, std::vector<Events> *>>(
-      new std::unordered_map<int, std::vector<Events > *>()
-  );
+  _idEventMapping = std::unique_ptr<
+      std::unordered_map<int, std::vector<Events> *>>(
+      new std::unordered_map<int, std::vector<Events > *>());
 
   cache = std::unique_ptr<Cache>(
-     new Cache()
-  );
+     new Cache());
 }
 
 /** \brief Basic destructor.
@@ -81,7 +95,6 @@ void EventManager::destroy() {
  * @return The unique event publisher neccessary to publish messages.
  */
 EventToken* EventManager::listen(EventObserver *observer) {
-
   // Basically increase the id counter by one
   this->_idCounter++;
 
@@ -107,7 +120,8 @@ EventToken* EventManager::listen(EventObserver *observer) {
  * @param event The event to trigger.
  * @param data The data to supply for this trigger.
  */
-void EventManager::trigger(EventToken *publisher, Events event, EventContainer data) {
+void EventManager::trigger(EventToken *publisher,
+                           Events event, EventContainer data) {
   // basically get the vector of all observer ids
   auto vec = this->_eventMapping->at(event);
 
@@ -120,8 +134,9 @@ void EventManager::trigger(EventToken *publisher, Events event, EventContainer d
   cache->insert(std::make_pair(std::make_pair(data.ID, event), data));
 
 
-  // Now iterate overall values of the vector and initiate the events to the clients
-  for (auto const &id: *vec) {
+  // Now iterate overall values of the vector and
+  // initiate the events to the clients
+  for (auto const &id : *vec) {
     if (id != publisher->_index) {
       auto observer = this->_idMapping->at(id);
       if (observer->_token->_tabID == data.ID) observer->triggered(event, data);
@@ -138,7 +153,6 @@ void EventManager::trigger(EventToken *publisher, Events event, EventContainer d
    * @param token The token to register.
    */
 void EventManager::subscribe(Events event, EventToken *token) {
-
   // reserve pointer
   std::vector<int> *pointer;
 
@@ -214,6 +228,7 @@ void   EventManager::deleteLastEvent(int id, Events event) {
     cache->erase(std::make_pair(id, event));
   }
 }
-}
-}
-}
+}  // namespace event
+}  // namespace util
+}  // namespace uanc
+
